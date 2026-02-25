@@ -2269,7 +2269,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el c-el-img" id="el-d262-weather-img" onclick="selEl(event,'el-d262-weather-img')" style="padding:0;height:280px">
                 <div class="c-el-overlay"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none" alt="sunny sky">
+                <img id="cimg-el-d262-weather-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='280' viewBox='0 0 300 280'%3E%3Crect fill='%23f0f0f5' width='300' height='280'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none" alt="image placeholder">
               </div>
             </div>
           </div>
@@ -7888,6 +7888,7 @@ Object.keys(S.bindings).forEach(bkey => {
 });
 refreshAllPills();
 document.getElementById('cimg-el-weather-img').src = IMG_PLACEHOLDER;
+document.getElementById('cimg-el-d262-weather-img').src = IMG_PLACEHOLDER;
 updateInspectorToggle();
 initElementDrag();
 
