@@ -182,9 +182,11 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .msb.bound .msb-pill .el-bind-sec:hover{opacity:1;background:rgba(0,0,0,.04)}
 .msb.bound .msb-pill .el-bind-ctx:hover{background:rgba(0,0,0,.04)}
 .msb-view-sel{position:absolute;top:0;right:14px;transform:translateY(-50%);display:flex;align-items:center;gap:0;background:#fff;border:1px solid var(--b2);border-radius:20px;overflow:hidden;z-index:10;pointer-events:auto;white-space:nowrap;font-family:'DM Mono',monospace;opacity:0;transition:opacity .15s}
-.msb:not(.bound) .msb-view-sel{display:none}
-.msb.bound:hover .msb-view-sel{opacity:1}
-.msb.bound.sel .msb-view-sel{opacity:1}
+.msb:not(.bound):not(.msb-disconnected) .msb-view-sel{display:none}
+.msb.bound:hover .msb-view-sel,.msb.msb-disconnected:hover .msb-view-sel{opacity:1}
+.msb.bound.sel .msb-view-sel,.msb.msb-disconnected.sel .msb-view-sel{opacity:1}
+.msb.msb-disconnected{border-color:var(--b2);border-style:dashed}
+.msb.msb-disconnected.sel{border-color:var(--t3);box-shadow:0 0 0 3px var(--b2)}
 .msb-view-btn{padding:2px 9px;font-size:9px;font-family:'DM Mono',monospace;cursor:pointer;color:var(--t3);transition:.15s;border:none;background:none;font-weight:600}
 .msb-view-btn:hover{color:var(--t1);background:rgba(0,0,0,.04)}
 .msb-view-btn.active{background:var(--acc);color:#fff;font-weight:700}
@@ -1214,13 +1216,13 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <span class="src-tag" id="src-el-temp"></span>
               <span class="val" id="v-el-temp">24°C</span>
             </div>
-            <!-- Condition - bound to weatherLabel() -->
+            <!-- Condition - bound to twoValuesConcat() -->
             <div class="c-el c-el-text bound" id="el-cond" onclick="selEl(event,'el-cond')">
               <div class="c-el-overlay"></div>
-            <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">⚡ myFunctions · weatherLabel</div></div>
+            <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">⚡ myFunctions · twoValuesConcat</div></div>
               <div class="bound-dot"></div>
               <span class="src-tag" id="src-el-cond"></span>
-              <span class="val" id="v-el-cond">☀️ Tel Aviv · Sunny</span>
+              <span class="val" id="v-el-cond">Tel Aviv · Sunny</span>
             </div>
           </div>
         </div>
@@ -1531,9 +1533,9 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
           <div class="c-el-overlay" style="border-radius:12px"></div>
           <div class="ctx-pill msb-pill" id="pill-msb-articles"></div>
           <div class="msb-view-sel" id="msb-view-sel">
-            <button class="msb-view-btn" data-view="loading" onclick="switchMsbView(event,'loading')">Loading</button>
-            <button class="msb-view-btn" data-view="empty" onclick="switchMsbView(event,'empty')">Empty</button>
-            <button class="msb-view-btn active" data-view="hasItems" onclick="switchMsbView(event,'hasItems')">Has Items</button>
+            <button class="msb-view-btn" data-view="loading" onclick="switchMsbView(event,'loading')">loading</button>
+            <button class="msb-view-btn" data-view="empty" onclick="switchMsbView(event,'empty')">empty</button>
+            <button class="msb-view-btn active" data-view="hasItems" onclick="switchMsbView(event,'hasItems')">hasItems</button>
           </div>
           <div class="msb-body">
             <!-- Unbound View (no Active State binding) -->
@@ -2015,6 +2017,7 @@ const CTX_DEFS = [
   { id:'cms-articles', name:'CMS · Articles', icon:'📚', type:'list', source:'CMS', group:'CMS',
     fields:[
       {name:'itemsStatus', type:'states', sample:'"hasItems"', enumValues:['loading','empty','hasItems']},
+      {name:'loadState', type:'states', sample:'"ready"', enumValues:['loading','ready']},
       {name:'items',       type:'array',   sample:'[{title, author, …}]', itemFields:[
         {name:'title',       type:'string',  sample:'"Article Title"'},
         {name:'author',      type:'string',  sample:'"Jane Doe"'},
@@ -2224,6 +2227,18 @@ const CTX_DEFS = [
 ];
 
 const FN_LIBS = [
+  { id:'lib-my-functions', name:'myFunctions', icon:'⚡', description:'Custom formatters & helpers',
+    functions:[
+      {name:'twoValuesConcat()', type:'string', sample:'"text · text"', template:'{text1} · {text2}', description:'Concatenates two text values with a separator',
+        params:[
+          {name:'text1', type:'string', description:'First text value', default:'text'},
+          {name:'text2', type:'string', description:'Second text value', default:'text'},
+        ]},
+      {name:'greetUser()', type:'string', sample:'"👋 Hello, Dana!"', template:'👋 Hello, {name}!', description:'Creates a personalized greeting',
+        params:[
+          {name:'name', type:'string', description:'User display name', default:'text'},
+        ]},
+    ]},
   { id:'lib-formatting', name:'Formatting', icon:'🔤', description:'Date, number & text formatting',
     functions:[
       {name:'formatDate()',   type:'string',  sample:'"Feb 22, 2026"',  description:'Formats a date value'},
@@ -2249,18 +2264,6 @@ const FN_LIBS = [
       {name:'isEmail()',      type:'boolean', sample:'true',            description:'Validates email format'},
       {name:'isRequired()',   type:'boolean', sample:'false',           description:'Checks if value exists'},
       {name:'minLength()',    type:'boolean', sample:'true',            description:'Checks minimum length'},
-    ]},
-  { id:'lib-my-functions', name:'myFunctions', icon:'⚡', description:'Custom formatters & helpers',
-    functions:[
-      {name:'weatherLabel()', type:'string', sample:'"☀️ Tel Aviv · Sunny"', template:'☀️ {city} · {condition}', description:'Combines city and condition into a styled weather label',
-        params:[
-          {name:'city',      type:'string', description:'The city name', default:'text'},
-          {name:'condition', type:'string', description:'Weather condition text', default:'text'},
-        ]},
-      {name:'greetUser()', type:'string', sample:'"👋 Hello, Dana!"', template:'👋 Hello, {name}!', description:'Creates a personalized greeting',
-        params:[
-          {name:'name', type:'string', description:'User display name', default:'text'},
-        ]},
     ]},
 ];
 
@@ -2480,9 +2483,9 @@ const EL_DEFS = {
   'msb-articles':      {name:'Multi-State Container', type:'MultiStateBox', section:'sec-msb', isMultiState:true,
     stateBinding: {ctxId:'cms-articles', fieldName:'itemsStatus'},
     views: [
-      {id:'loading',  name:'Loading',   enumValues:['loading']},
-      {id:'empty',    name:'Empty',     enumValues:['empty']},
-      {id:'hasItems', name:'Has Items', enumValues:['hasItems']},
+      {id:'loading',  name:'State 1', enumValues:['loading']},
+      {id:'empty',    name:'State 2', enumValues:['empty']},
+      {id:'hasItems', name:'State 3', enumValues:['hasItems']},
     ],
     activeView:'hasItems',
     props:[{k:'Active State',t:'states'}]},
@@ -2558,11 +2561,11 @@ const S = {
     'el-city|Value':      {ctxId:'weather',          fieldName:'city',        sample:'"Tel Aviv"'},
     'el-temp|Value':      {ctxId:'weather',          fieldName:'temperature', sample:'"24°C"'},
     'el-countdown|Value': {ctxId:'custom-countdown', fieldName:'timeLeft',    sample:'"20:45:11"'},
-    'el-cond|Value': {ctxId:'lib-my-functions', fieldName:'weatherLabel', sample:'"☀️ Tel Aviv · Sunny"', fnHasParams:true,
-      fnTemplate:'☀️ {city} · {condition}',
-      fnParams:[{name:'city',type:'string',description:'The city name'},{name:'condition',type:'string',description:'Weather condition text'}]},
-    'el-cond|Value|param:city': {ctxId:'weather', fieldName:'city', sample:'"Tel Aviv"'},
-    'el-cond|Value|param:condition': {static:true, value:'Sunny'},
+    'el-cond|Value': {ctxId:'lib-my-functions', fieldName:'twoValuesConcat', sample:'"text · text"', fnHasParams:true,
+      fnTemplate:'{text1} · {text2}',
+      fnParams:[{name:'text1',type:'string',description:'First text value'},{name:'text2',type:'string',description:'Second text value'}]},
+    'el-cond|Value|param:text1': {ctxId:'weather', fieldName:'city', sample:'"Tel Aviv"'},
+    'el-cond|Value|param:text2': {static:true, value:'Sunny'},
     'el-rel-title|Value':    {ctxId:'stores-current-item', fieldName:'name',        sample:'"Sunny Day Tee"'},
     'el-rel-desc|Value':     {ctxId:'stores-current-item', fieldName:'description', sample:'"Classic cotton tee…"'},
     'el-rel-img|Source':     {ctxId:'stores-current-item', fieldName:'image',       sample:'[img url]'},
@@ -2831,37 +2834,55 @@ function renderSettings() {
     const activeView = def.activeView || views[0]?.id;
     const isActiveDd = S.dd.open && S.dd.elId === S.sel && S.dd.propKey === 'Active State';
     const advancedOn = def._advancedMapping;
+    const hasViews = views.length > 0;
+    const isBound = !!b;
 
-    const stateCards = views.map(v => {
+    const stateCards = views.map((v, idx) => {
       const isActive = v.id === activeView;
-      const sharedCount = v.enumValues.length;
-      const disabled = sharedCount === 0;
-      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:.12s;${disabled ? 'opacity:.4;border:1px dashed var(--b2);background:none' : isActive ? 'background:var(--acc-d);border:1px solid var(--acc)' : 'background:var(--sur2);border:1px solid var(--b1)'}" onclick="switchMsbView(event,'${v.id}')">
+      const mappedStates = v.enumValues || [];
+      const disabled = isBound && mappedStates.length === 0;
+      const sharedCount = mappedStates.length;
+      const displayName = isBound && sharedCount > 0 ? mappedStates[0].charAt(0).toUpperCase() + mappedStates[0].slice(1) : v.name;
+      const canDelete = disabled || !isBound;
+      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:.12s;${disabled ? 'opacity:.5;border:1px dashed var(--b2);background:none' : isActive ? 'background:var(--acc-d);border:1px solid var(--acc)' : 'background:var(--sur2);border:1px solid var(--b1)'}" onclick="switchMsbView(event,'${v.id}')">
         <span style="font-size:10px;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t3)'}">◫</span>
         <div style="flex:1;min-width:0">
           <div style="display:flex;align-items:center;gap:6px">
-            <span style="font-size:12px;font-weight:${isActive && !disabled ? '600' : '400'};color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'}${disabled ? ';text-decoration:line-through' : ''}">${v.name}</span>
-            ${sharedCount > 1 ? '<span class="type-badge" style="font-size:8px;background:var(--yel);color:#000">joined</span>' : ''}
-            ${disabled ? '<span style="font-size:9px;color:var(--t3);font-family:\'DM Mono\',monospace">unused</span>' : ''}
+            <span style="font-size:12px;font-weight:${isActive && !disabled ? '600' : '400'};color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'}${disabled ? ';text-decoration:line-through' : ''}">${displayName}</span>
+            ${isBound && sharedCount > 1 ? '<span class="type-badge" style="font-size:8px;background:var(--yel);color:#000">joined</span>' : ''}
+            ${disabled ? '<span style="font-size:9px;color:var(--t3);font-family:\'DM Mono\',monospace">unmapped</span>' : ''}
           </div>
         </div>
         ${isActive && !disabled ? '<span style="font-size:9px;color:var(--acc);font-family:\'DM Mono\',monospace">editing</span>' : ''}
+        ${canDelete && views.length > 1 ? `<span style="font-size:10px;color:var(--t3);cursor:pointer;padding:2px 4px;border-radius:4px;transition:.12s" onmouseover="this.style.color='var(--err,#e84393)';this.style.background='var(--err-d,#fce4ec)'" onmouseout="this.style.color='var(--t3)';this.style.background=''" onclick="deleteMsbView(event,'${v.id}')">✕</span>` : ''}
       </div>`;
     }).join('');
 
     const joinViewCards = advancedOn ? views.map(v => {
-      const disabled = v.enumValues.length === 0;
-      const availableToAdd = enumVals.filter(val => !v.enumValues.includes(val));
-      const chips = v.enumValues.map(val =>
-        `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:var(--acc-d);border:1px solid var(--acc);border-radius:10px;font-size:10px;color:var(--acc);font-family:'DM Mono',monospace">${val}${v.enumValues.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
+      const mapped = v.enumValues || [];
+      const disabled = mapped.length === 0;
+      const chips = mapped.map(val =>
+        `<span draggable="true" ondragstart="msbDragStart(event,'${val}')" style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:var(--acc-d);border:1px solid var(--acc);border-radius:10px;font-size:10px;color:var(--acc);font-family:'DM Mono',monospace;cursor:grab">${val}${mapped.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
       ).join('');
-      return `<div style="padding:6px 8px;border:1px ${disabled ? 'dashed var(--b2)' : 'solid var(--b1)'};border-radius:6px;background:${disabled ? 'none' : 'var(--sur2)'};${disabled ? 'opacity:.45' : ''}">
-        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : 'var(--t1)'};margin-bottom:4px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace">unused — design preserved</span>' : ''}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${chips}${availableToAdd.length && !disabled ? `<span style="display:inline-flex;align-items:center;gap:2px;padding:2px 8px;border:1px dashed var(--b2);border-radius:10px;font-size:10px;color:var(--t3);cursor:pointer;position:relative" onclick="msbShowAssign(event,'${v.id}')">+ add</span>` : ''}${disabled ? `<span style="display:inline-flex;align-items:center;gap:2px;padding:2px 8px;border:1px dashed var(--b2);border-radius:10px;font-size:10px;color:var(--t3);cursor:pointer" onclick="msbShowAssign(event,'${v.id}')">+ restore</span>` : ''}</div>
+      return `<div class="msb-drop-zone" data-view-id="${v.id}" ondragover="msbDragOver(event)" ondragleave="msbDragLeave(event)" ondrop="msbDrop(event,'${v.id}')" style="padding:8px 10px;border:2px ${disabled ? 'dashed color-mix(in srgb, var(--acc) 25%, var(--b2))' : 'solid var(--b1)'};border-radius:8px;background:${disabled ? 'color-mix(in srgb, var(--acc) 3%, var(--sur))' : 'var(--sur2)'};transition:border-color .15s,background .15s,opacity .15s">
+        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : 'var(--t1)'};margin-bottom:${disabled ? '0' : '4'}px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:color-mix(in srgb, var(--acc) 50%, var(--t3))">drag a state here</span>' : ''}</div>
+        ${chips ? `<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${chips}</div>` : ''}
       </div>`;
     }).join('') : '';
 
+    let disconnectedBanner = '';
+    if (!isBound && hasViews) {
+      disconnectedBanner = `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:color-mix(in srgb, var(--yel) 12%, var(--sur));border:1px solid color-mix(in srgb, var(--yel) 30%, var(--b1));border-radius:8px;margin-bottom:8px">
+        <span style="font-size:14px">⚠️</span>
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:500;color:var(--t1)">Not connected to data</div>
+          <div style="font-size:10px;color:var(--t3);line-height:1.4">Views won't switch automatically. Connect a states field to activate.</div>
+        </div>
+      </div>`;
+    }
+
     return `<div class="ps"><div class="ps-lbl">Active State</div>
+      ${disconnectedBanner}
       <div class="prop-wrap">
         <div class="prop-key" style="font-size:11px;color:var(--t2);padding:0 2px">Active State</div>
         <div class="prop-row ${b?'bound':''} ${isActiveDd?'active-bind':''}">
@@ -2883,13 +2904,13 @@ function renderSettings() {
         </div>
       </div>
     </div>
-    ${b && enumVals.length ? `<div class="ps"><div class="ps-lbl">States</div>
-      <div style="font-size:10px;color:var(--t3);line-height:1.4;padding:0 0 6px">Click to switch view on canvas.</div>
+    ${hasViews ? `<div class="ps"><div class="ps-lbl">Views</div>
+      <div style="font-size:10px;color:var(--t3);line-height:1.4;padding:0 0 6px">${isBound ? 'Click to switch view on canvas. Each view is mapped to a data state.' : 'Your designs are preserved. Click to preview each view.'}</div>
       <div style="display:flex;flex-direction:column;gap:4px">
         ${stateCards}
       </div>
-    </div>
-    <div class="ps"><div class="ps-lbl" style="display:flex;align-items:center;justify-content:space-between">
+    </div>` : ''}
+    ${isBound && enumVals.length ? `<div class="ps"><div class="ps-lbl" style="display:flex;align-items:center;justify-content:space-between">
       Join States
       <div class="tog ${advancedOn?'on':''}" onclick="toggleMsbAdvanced(event)"></div>
     </div>
@@ -3128,13 +3149,12 @@ function unbind(elId, propKey, e) {
 
     showConfirm(
       'Disconnect data',
-      `Disconnect "${ctxLabel}" from this Multi-State Box?\n\nThe container will revert to its unbound state and views will no longer switch based on data.`,
+      `Disconnect "${ctxLabel}" from this Multi-State Box?\n\nViews won't switch automatically, but your designs are preserved.`,
       'Disconnect',
       function() {
         delete S.bindings[bkey];
         applyBindingToCanvas(elId, propKey, null);
-        toast('Binding removed');
-        updatePropRowDOM(elId, propKey);
+        toast('Disconnected — designs preserved');
         refreshMsbState();
         renderBody();
       }
@@ -4349,6 +4369,14 @@ function createDroppedComponent(type) {
 
   S.ctxMap[secId] = S.ctxMap[secId] || [];
 
+  EL_DEFS[secId] = {name:'Section', type:'Section', isContainer:true, props:[]};
+
+  if (type === 'repeater') {
+    EL_DEFS[compId] = {name:'Repeater', type:'Repeater', section:secId, isRepeater:true, props:[{k:'Items',t:'list'}]};
+  } else if (type === 'multistatebox') {
+    EL_DEFS[compId] = {name:'Multi-State Box', type:'MultiStateBox', section:secId, isMultiState:true, props:[{k:'Active State',t:'states'}]};
+  }
+
   return sec;
 }
 
@@ -4857,7 +4885,38 @@ function confirmBind(e) {
   closeDd();
   toast(`✓ ${propKey} → ${ctx.name} · ${fieldName}`, true);
   updatePropRowDOM(elId, propKey);
-  if (def?.isMultiState) { refreshMsbState(); renderBody(); }
+  if (def?.isMultiState) {
+    const statesField = ctx.fields.find(f => f.name === fieldName && (f.type === 'enum' || f.type === 'states'));
+    const newEnumVals = statesField?.enumValues || [];
+    const existingViews = def.views || [];
+    if (existingViews.length > 0) {
+      const usedVals = new Set();
+      existingViews.forEach(v => { v.enumValues = []; });
+      existingViews.forEach(v => {
+        const nameMatch = newEnumVals.find(val => val.toLowerCase() === v.id.toLowerCase() && !usedVals.has(val));
+        if (nameMatch) { v.enumValues = [nameMatch]; usedVals.add(nameMatch); }
+      });
+      const unmapped = newEnumVals.filter(val => !usedVals.has(val));
+      let unmappedIdx = 0;
+      existingViews.forEach(v => {
+        if (v.enumValues.length === 0 && unmappedIdx < unmapped.length) {
+          v.enumValues = [unmapped[unmappedIdx]]; usedVals.add(unmapped[unmappedIdx]); unmappedIdx++;
+        }
+      });
+    } else {
+      def.views = newEnumVals.map(val => ({
+        id: val,
+        name: val.charAt(0).toUpperCase() + val.slice(1),
+        enumValues: [val]
+      }));
+    }
+    if (!def.views.find(v => v.id === def.activeView && (v.enumValues||[]).length > 0)) {
+      const firstActive = def.views.find(v => (v.enumValues||[]).length > 0);
+      if (firstActive) def.activeView = firstActive.id;
+    }
+    def._advancedMapping = false;
+    refreshMsbState(); refreshMsbCanvasButtons(); renderBody();
+  }
 }
 
 function applyBindingToCanvas(elId, propKey, field, ctxId) {
@@ -5400,6 +5459,7 @@ function confirmCtx() {
   ].filter(Boolean).join(' · ');
 
   closeModal();
+  refreshRepeaterSkeletons();
   if (msg) toast(msg, added.length > 0);
   if (S.sel) renderBody();
 }
@@ -5786,6 +5846,78 @@ function msbAssign(e, viewId, val) {
   toast(`✓ "${val}" → ${view.name}`, true);
 }
 
+function msbDragStart(e, val) {
+  e.dataTransfer.setData('text/plain', val);
+  e.dataTransfer.effectAllowed = 'move';
+  e.target.style.opacity = '.4';
+  setTimeout(() => {
+    document.querySelectorAll('.msb-drop-zone').forEach(z => {
+      z.style.borderColor = 'color-mix(in srgb, var(--acc) 40%, var(--b1))';
+    });
+  }, 0);
+}
+
+function msbDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.style.borderColor = 'var(--acc)';
+  e.currentTarget.style.borderStyle = 'solid';
+  e.currentTarget.style.background = 'color-mix(in srgb, var(--acc) 10%, var(--sur))';
+  e.currentTarget.style.opacity = '1';
+}
+
+function msbDragLeave(e) {
+  e.currentTarget.style.borderColor = '';
+  e.currentTarget.style.borderStyle = '';
+  e.currentTarget.style.background = '';
+  e.currentTarget.style.opacity = '';
+}
+
+function msbDrop(e, targetViewId) {
+  e.preventDefault();
+  const val = e.dataTransfer.getData('text/plain');
+  if (!val) return;
+  const def = EL_DEFS['msb-articles'];
+  if (!def) return;
+  def.views.forEach(v => { v.enumValues = (v.enumValues || []).filter(ev => ev !== val); });
+  const target = def.views.find(v => v.id === targetViewId);
+  if (target) target.enumValues.push(val);
+  document.querySelectorAll('.msb-drop-zone').forEach(z => { z.style.borderColor = ''; z.style.background = ''; z.style.opacity = ''; });
+  def.activeView = targetViewId;
+  document.querySelectorAll('#msb-articles .msb-view').forEach(v => v.classList.remove('active'));
+  const viewEl = document.getElementById('msb-view-' + targetViewId);
+  if (viewEl) { viewEl.style.display = ''; viewEl.classList.add('active'); }
+  refreshMsbCanvasButtons();
+  renderBody();
+  renderTree();
+  const label = val.charAt(0).toUpperCase() + val.slice(1);
+  toast(`✓ "${label}" → ${target.name}`, true);
+}
+
+function deleteMsbView(e, viewId) {
+  e.stopPropagation();
+  const def = EL_DEFS['msb-articles'];
+  if (!def || !def.views || def.views.length <= 1) return;
+  const view = def.views.find(v => v.id === viewId);
+  if (!view) return;
+  const viewName = view.name;
+  def.views = def.views.filter(v => v.id !== viewId);
+  const domView = document.getElementById('msb-view-' + viewId);
+  if (domView) domView.style.display = 'none';
+  if (def.activeView === viewId) {
+    const firstActive = def.views.find(v => (v.enumValues || []).length > 0) || def.views[0];
+    def.activeView = firstActive.id;
+    document.querySelectorAll('#msb-articles .msb-view').forEach(v => v.classList.remove('active'));
+    const newActiveEl = document.getElementById('msb-view-' + firstActive.id);
+    if (newActiveEl) { newActiveEl.style.display = ''; newActiveEl.classList.add('active'); }
+  }
+  def.views.forEach((v, i) => { v.name = 'State ' + (i + 1); });
+  refreshMsbCanvasButtons();
+  renderBody();
+  renderTree();
+  toast(`Removed view "${viewName}"`);
+}
+
 function msbResetJoins(e) {
   e.stopPropagation();
   const def = EL_DEFS['msb-articles'];
@@ -5795,13 +5927,23 @@ function msbResetJoins(e) {
   const ctx = b ? findSource(b.ctxId) : null;
   const ctxField = ctx ? ctx.fields.find(f => f.name === b.fieldName && (f.type === 'enum' || f.type === 'states')) : null;
   const enumVals = ctxField?.enumValues || [];
-  def.views = enumVals.map(val => ({
-    id: val,
-    name: val === 'hasItems' ? 'Has Items' : val.charAt(0).toUpperCase() + val.slice(1),
-    enumValues: [val]
-  }));
-  if (!def.views.find(v => v.id === def.activeView)) {
-    def.activeView = def.views[0]?.id;
+  const views = def.views || [];
+  const usedVals = new Set();
+  views.forEach(v => { v.enumValues = []; });
+  views.forEach(v => {
+    const nameMatch = enumVals.find(val => val.toLowerCase() === v.id.toLowerCase() && !usedVals.has(val));
+    if (nameMatch) { v.enumValues = [nameMatch]; usedVals.add(nameMatch); }
+  });
+  const unmapped = enumVals.filter(val => !usedVals.has(val));
+  let unmappedIdx = 0;
+  views.forEach(v => {
+    if (v.enumValues.length === 0 && unmappedIdx < unmapped.length) {
+      v.enumValues = [unmapped[unmappedIdx]]; usedVals.add(unmapped[unmappedIdx]); unmappedIdx++;
+    }
+  });
+  if (!views.find(v => v.id === def.activeView && v.enumValues.length > 0)) {
+    const firstActive = views.find(v => v.enumValues.length > 0);
+    if (firstActive) def.activeView = firstActive.id;
   }
   refreshMsbCanvasButtons();
   renderBody();
@@ -5824,10 +5966,13 @@ function refreshMsbCanvasButtons() {
   if (!viewSel) return;
   const views = def.views || [];
   const activeView = def.activeView;
+  const isBound = !!S.bindings['msb-articles|Active State'];
   viewSel.innerHTML = views.map(v => {
-    const disabled = v.enumValues.length === 0;
+    const mapped = v.enumValues || [];
+    const disabled = isBound && mapped.length === 0;
     const active = v.id === activeView;
-    return `<button class="msb-view-btn ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}" data-view="${v.id}" onclick="switchMsbView(event,'${v.id}')"${disabled ? ' title="No state mapped — won\'t show at runtime"' : ''}>${v.name}</button>`;
+    const label = isBound && mapped.length > 0 ? mapped[0].charAt(0).toUpperCase() + mapped[0].slice(1) : v.name;
+    return `<button class="msb-view-btn ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}" data-view="${v.id}" onclick="switchMsbView(event,'${v.id}')"${disabled ? ' title="Unmapped — won\'t show at runtime"' : ''}>${label}</button>`;
   }).join('');
 }
 
@@ -5841,9 +5986,11 @@ function refreshMsbState() {
   if (!msbEl) return;
   const viewSel = document.getElementById('msb-view-sel');
   const pill = document.getElementById('pill-' + msbId);
+  const hasViews = def.views && def.views.length > 0;
 
   if (isBound) {
     msbEl.classList.add('bound');
+    msbEl.classList.remove('msb-disconnected');
     if (viewSel) viewSel.style.display = '';
     if (pill) {
       const b = S.bindings[bkey];
@@ -5854,8 +6001,18 @@ function refreshMsbState() {
     document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
     const activeEl = document.getElementById('msb-view-' + def.activeView);
     if (activeEl) activeEl.classList.add('active');
+  } else if (hasViews) {
+    msbEl.classList.remove('bound');
+    msbEl.classList.add('msb-disconnected');
+    if (viewSel) viewSel.style.display = '';
+    if (pill) pill.innerHTML = '';
+    refreshMsbCanvasButtons();
+    document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
+    const activeEl = document.getElementById('msb-view-' + def.activeView);
+    if (activeEl) activeEl.classList.add('active');
   } else {
     msbEl.classList.remove('bound');
+    msbEl.classList.remove('msb-disconnected');
     if (viewSel) viewSel.style.display = 'none';
     if (pill) pill.innerHTML = '';
     document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
