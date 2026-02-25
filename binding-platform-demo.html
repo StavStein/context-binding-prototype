@@ -2986,9 +2986,9 @@ const EL_DEFS = {
   'msb-articles':      {name:'Multi-State Container', type:'MultiStateBox', section:'sec-msb', isMultiState:true,
     stateBinding: {ctxId:'cms-articles', fieldName:'itemsStatus'},
     views: [
-      {id:'loading',  name:'Loading',   enumValues:['loading']},
-      {id:'empty',    name:'Empty',     enumValues:['empty']},
-      {id:'hasItems', name:'Has Items', enumValues:['hasItems']},
+      {id:'loading',  name:'State 1', enumValues:['loading']},
+      {id:'empty',    name:'State 2', enumValues:['empty']},
+      {id:'hasItems', name:'State 3', enumValues:['hasItems']},
     ],
     activeView:'hasItems',
     props:[{k:'Active State',t:'states'}]},
@@ -3797,15 +3797,16 @@ function renderSettings() {
       </div>`;
     }).join('');
 
-    const joinViewCards = views.map(v => {
+    const joinViewCards = views.map((v, idx) => {
       const mapped = isBound ? (v.enumValues || []) : [];
       const disabled = isBound && mapped.length === 0;
       const isActive = v.id === activeView;
+      const serialName = 'State ' + (idx + 1);
       const chips = mapped.map(val =>
-        `<span draggable="true" ondragstart="msbDragStart(event,'${val}')" style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:${isActive ? 'var(--acc)' : 'var(--acc-d)'};border:1px solid var(--acc);border-radius:10px;font-size:10px;color:${isActive ? '#fff' : 'var(--acc)'};font-family:'DM Mono',monospace;cursor:grab"><svg width="6" height="10" viewBox="0 0 6 10" style="opacity:.5;flex-shrink:0"><circle cx="1.5" cy="1.5" r="1" fill="currentColor"/><circle cx="4.5" cy="1.5" r="1" fill="currentColor"/><circle cx="1.5" cy="5" r="1" fill="currentColor"/><circle cx="4.5" cy="5" r="1" fill="currentColor"/><circle cx="1.5" cy="8.5" r="1" fill="currentColor"/><circle cx="4.5" cy="8.5" r="1" fill="currentColor"/></svg>${val}${mapped.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
+        `<span draggable="true" ondragstart="msbDragStart(event,'${val}')" style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:${isActive ? 'var(--acc)' : 'var(--acc-d)'};border:1px solid var(--acc);border-radius:10px;font-size:10px;color:${isActive ? '#fff' : 'var(--acc)'};font-family:'DM Mono',monospace;cursor:grab">${val}${mapped.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
       ).join('');
-      return `<div class="msb-drop-zone" data-view-id="${v.id}" onclick="switchMsbView(event,'${v.id}')" ondragover="msbDragOver(event)" ondragleave="msbDragLeave(event)" ondrop="msbDrop(event,'${v.id}')" style="padding:8px 10px;border:2px ${disabled ? 'dashed color-mix(in srgb, var(--acc) 25%, var(--b2))' : isActive ? 'solid var(--acc)' : 'solid var(--b1)'};border-radius:8px;background:${disabled ? 'color-mix(in srgb, var(--acc) 3%, var(--sur))' : isActive ? 'var(--acc-d)' : 'var(--sur2)'};cursor:pointer;transition:border-color .15s,background .15s,opacity .15s">
-        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'};margin-bottom:${disabled ? '0' : chips ? '4' : '0'}px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${isActive && !disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:var(--acc)">editing</span>' : ''}${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:color-mix(in srgb, var(--acc) 50%, var(--t3))">won\'t be triggered · drag a state here</span>' : ''}</div>
+      return `<div class="msb-drop-zone" data-view-id="${v.id}" ondragover="msbDragOver(event)" ondragleave="msbDragLeave(event)" ondrop="msbDrop(event,'${v.id}')" style="padding:8px 10px;border:2px ${disabled ? 'dashed color-mix(in srgb, var(--acc) 25%, var(--b2))' : isActive ? 'solid var(--acc)' : 'solid var(--b1)'};border-radius:8px;background:${disabled ? 'color-mix(in srgb, var(--acc) 3%, var(--sur))' : isActive ? 'var(--acc-d)' : 'var(--sur2)'};cursor:pointer;transition:border-color .15s,background .15s,opacity .15s" onclick="switchMsbView(event,'${v.id}')">
+        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'};margin-bottom:${chips ? '4' : '0'}px;display:flex;align-items:center;gap:6px">◫ ${serialName} ${isActive && !disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:var(--acc)">editing</span>' : ''}${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:color-mix(in srgb, var(--acc) 50%, var(--t3))">won\'t be triggered · drag a state here</span>' : ''}</div>
         ${chips ? `<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${chips}</div>` : ''}
       </div>`;
     }).join('');
@@ -5826,11 +5827,7 @@ function confirmBind(e) {
       }
       unmappedIdx++;
     }
-    existingViews.forEach((v, i) => {
-      v.name = v.enumValues.length > 0
-        ? v.enumValues[0].charAt(0).toUpperCase() + v.enumValues[0].slice(1)
-        : 'State ' + (i + 1);
-    });
+    existingViews.forEach((v, i) => { v.name = 'State ' + (i + 1); });
     if (!existingViews.find(v => v.id === def.activeView && v.enumValues.length > 0)) {
       const firstActive = existingViews.find(v => v.enumValues.length > 0);
       if (firstActive) def.activeView = firstActive.id;
@@ -6745,7 +6742,7 @@ function msbUnassign(e, viewId, val) {
   } else {
     const emptyView = def.views.find(v => v.enumValues.length === 0);
     if (emptyView) { emptyView.enumValues.push(val); }
-    else { def.views.push({id: val, name: val === 'hasItems' ? 'Has Items' : val.charAt(0).toUpperCase() + val.slice(1), enumValues: [val]}); }
+    else { def.views.push({id: val, name: 'State ' + (def.views.length + 1), enumValues: [val]}); }
   }
   refreshMsbCanvasButtons();
   renderBody();
@@ -6844,11 +6841,6 @@ function msbDrop(e, targetViewId) {
   def.views.forEach(v => { v.enumValues = (v.enumValues || []).filter(ev => ev !== val); });
   const target = def.views.find(v => v.id === targetViewId);
   if (target) target.enumValues.push(val);
-  def.views.forEach((v, i) => {
-    v.name = v.enumValues.length > 0
-      ? v.enumValues[0].charAt(0).toUpperCase() + v.enumValues[0].slice(1)
-      : 'State ' + (i + 1);
-  });
   document.querySelectorAll('.msb-drop-zone').forEach(z => { z.style.borderColor = ''; z.style.background = ''; z.style.opacity = ''; });
   def.activeView = targetViewId;
   document.querySelectorAll('#msb-articles .msb-view').forEach(v => v.classList.remove('active'));
@@ -6857,8 +6849,8 @@ function msbDrop(e, targetViewId) {
   refreshMsbCanvasButtons();
   renderBody();
   renderTree();
-  const label = val.charAt(0).toUpperCase() + val.slice(1);
-  toast(`✓ "${label}" → ${target.name}`, true);
+  const targetIdx = def.views.indexOf(target) + 1;
+  toast(`✓ "${val}" → State ${targetIdx}`, true);
 }
 
 function deleteMsbView(e, viewId) {
@@ -6908,11 +6900,7 @@ function msbResetJoins(e) {
       v.enumValues = [unmappedVals[idx]]; usedVals.add(unmappedVals[idx]); idx++;
     }
   });
-  views.forEach((v, i) => {
-    v.name = v.enumValues.length > 0
-      ? v.enumValues[0].charAt(0).toUpperCase() + v.enumValues[0].slice(1)
-      : 'State ' + (i + 1);
-  });
+  views.forEach((v, i) => { v.name = 'State ' + (i + 1); });
   if (!views.find(v => v.id === def.activeView && v.enumValues.length > 0)) {
     const firstActive = views.find(v => v.enumValues.length > 0);
     if (firstActive) def.activeView = firstActive.id;
@@ -6939,11 +6927,11 @@ function refreshMsbCanvasButtons() {
   const views = def.views || [];
   const activeView = def.activeView;
   const isBound = !!S.bindings['msb-articles|Active State'];
-  viewSel.innerHTML = views.map(v => {
+  viewSel.innerHTML = views.map((v, idx) => {
     const mapped = v.enumValues || [];
     const disabled = isBound && mapped.length === 0;
     const active = v.id === activeView;
-    const label = isBound && mapped.length > 0 ? mapped[0].charAt(0).toUpperCase() + mapped[0].slice(1) : v.name;
+    const label = isBound && mapped.length > 0 ? mapped[0].charAt(0).toUpperCase() + mapped[0].slice(1) : 'State ' + (idx + 1);
     return `<button class="msb-view-btn ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}" data-view="${v.id}" onclick="switchMsbView(event,'${v.id}')"${disabled ? ' title="Won\'t be triggered — no state mapped"' : ''}>${label}</button>`;
   }).join('');
 }
