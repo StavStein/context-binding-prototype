@@ -130,19 +130,104 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .add-el-item-desc{font-size:10px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .add-el-drag-ghost{position:fixed;pointer-events:none;z-index:9999;padding:8px 14px;background:var(--acc);color:#fff;border-radius:8px;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px #0003;opacity:.9;white-space:nowrap}
 .canvas-drop-indicator{position:absolute;left:0;right:0;height:3px;background:var(--acc);border-radius:2px;z-index:100;pointer-events:none;display:none}
+.c-el.bound[draggable="true"]{cursor:grab}
+.c-el.bound[draggable="true"]:active{cursor:grabbing}
+.c-el[draggable="true"]{cursor:grab}
+.c-el[draggable="true"]:active{cursor:grabbing}
+.c-section:not(.has-ctx).el-drop-target-empty{outline:2px dashed #e84393;outline-offset:-2px;background:color-mix(in srgb, #e84393 5%, transparent)}
+.c-section:not(.has-ctx).el-drop-target-empty .s-body{pointer-events:none}
+.c-section.el-drop-target{outline:2px dashed #e84393;outline-offset:-2px;background:color-mix(in srgb, #e84393 5%, transparent)}
+.c-section.el-drop-target .s-body{pointer-events:none}
+.el-drag-ghost{position:fixed;pointer-events:none;z-index:9999;padding:6px 12px;background:#e84393;color:#fff;border-radius:8px;font-size:11px;font-weight:500;font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px #0003;opacity:.9;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.toast-undo{display:inline;margin-left:8px;color:var(--acc);text-decoration:underline;cursor:pointer;font-weight:600}
 .ctx-menu{display:none;position:fixed;z-index:9999;background:var(--sur);border:1px solid var(--b2);border-radius:8px;box-shadow:0 8px 30px #0003;padding:4px 0;min-width:140px;font-family:'DM Sans',sans-serif}
 .ctx-menu.open{display:block}
 .ctx-menu-item{padding:7px 14px;font-size:12px;color:var(--t2);cursor:pointer;display:flex;align-items:center;gap:8px;transition:.1s}
 .ctx-menu-item:hover{background:var(--sur2);color:var(--t1)}
 .ctx-menu-item.danger{color:#e84393}
 .ctx-menu-item.danger:hover{background:#fce4ec;color:#e84393}
+.ctx-menu-item.spec{color:var(--acc)}
+.ctx-menu-item.spec:hover{background:var(--acc-d);color:var(--acc)}
+.ctx-menu-sep{height:1px;background:var(--b1);margin:4px 0}
+.et-btn.product-mode-active{background:linear-gradient(135deg,#7c3aed20,#3b82f620);color:#7c3aed;border:1px solid #7c3aed40;position:relative}
+.et-btn.product-mode-active::after{content:'';position:absolute;top:3px;right:3px;width:6px;height:6px;background:#7c3aed;border-radius:50%;box-shadow:0 0 6px #7c3aed80}
+html.dark .et-btn.product-mode-active{color:#a78bfa}
+html.dark .et-btn.product-mode-active::after{background:#a78bfa;box-shadow:0 0 6px #a78bfa80}
+body.product-mode .c-el:hover,body.product-mode .c-section:hover{outline:2px dashed #7c3aed40;outline-offset:-1px;cursor:help}
+.spec-page{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9000;background:var(--bg);overflow-y:auto}
+.spec-page.active{display:block}
+.spec-topbar{position:sticky;top:0;z-index:10;background:var(--sur);border-bottom:1px solid var(--b1);padding:10px 24px;display:flex;align-items:center;gap:12px}
+.spec-back-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:1px solid var(--b2);background:transparent;color:var(--t2);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:.15s}
+.spec-back-btn:hover{background:var(--sur2);color:var(--t1);border-color:var(--b3)}
+.spec-back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.spec-topbar-title{font-size:13px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:8px}
+.spec-topbar-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:linear-gradient(135deg,#7c3aed20,#3b82f620);color:#7c3aed;font-weight:600;letter-spacing:.3px}
+.spec-topbar-element{display:flex;align-items:center;gap:8px;margin-left:auto;padding:4px 12px;background:var(--sur2);border:1px solid var(--b1);border-radius:8px;font-size:11px;color:var(--t2)}
+.spec-topbar-element-icon{font-size:14px;color:var(--t3)}
+.spec-topbar-element-name{font-weight:600;color:var(--t1)}
+.spec-topbar-element-type{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace}
+.spec-topbar-element-binding{display:flex;align-items:center;gap:4px;padding:2px 6px;background:var(--grn-d);border:1px solid var(--grn-b);border-radius:6px;font-size:10px;font-family:'DM Mono',monospace;color:var(--grn)}
+.spec-body{max-width:780px;margin:0 auto;padding:40px 32px 80px}
+.spec-hero{margin-bottom:36px}
+.spec-hero h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--t1);margin-bottom:8px}
+.spec-hero-sub{font-size:13px;color:var(--t3);line-height:1.6}
+.spec-meta{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap}
+.spec-meta-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3);padding:4px 10px;background:var(--sur);border:1px solid var(--b1);border-radius:6px}
+.spec-section{margin-bottom:32px}
+.spec-section-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:8px}
+.spec-text{font-size:13px;line-height:1.8;color:var(--t2);margin-bottom:12px}
+.spec-list{list-style:none;padding:0;margin:0 0 12px}
+.spec-list li{position:relative;padding:8px 12px 8px 28px;font-size:12px;line-height:1.7;color:var(--t2);border-left:2px solid var(--b1);margin-bottom:2px;transition:.15s}
+.spec-list li:hover{background:var(--sur);border-left-color:var(--acc)}
+.spec-list li::before{content:'→';position:absolute;left:10px;color:var(--acc);font-weight:600}
+.spec-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}
+.spec-table th{text-align:left;padding:8px 12px;background:var(--sur2);color:var(--t1);font-weight:600;border:1px solid var(--b1);font-size:11px;text-transform:uppercase;letter-spacing:.3px}
+.spec-table td{padding:8px 12px;border:1px solid var(--b1);color:var(--t2);line-height:1.6;vertical-align:top}
+.spec-table tr:hover td{background:var(--sur)}
+.spec-code{font-family:'DM Mono',monospace;font-size:11px;background:var(--sur2);padding:2px 6px;border-radius:4px;color:var(--acc)}
+.spec-note{padding:12px 16px;background:var(--acc-d);border:1px solid var(--acc-b);border-radius:8px;font-size:12px;line-height:1.7;color:var(--t2);margin:12px 0;display:flex;gap:10px}
+.spec-note-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.spec-wireframe{border:1px solid var(--b1);border-radius:10px;overflow:hidden;margin:16px 0;background:var(--sur)}
+.spec-wireframe-label{font-size:10px;font-weight:600;color:var(--t3);padding:8px 14px;background:var(--sur2);border-bottom:1px solid var(--b1);text-transform:uppercase;letter-spacing:.5px}
+.spec-wireframe-body{padding:20px;display:flex;justify-content:center}
+.spec-wireframe-body img,.spec-wireframe-body svg{max-width:100%;border-radius:6px}
+.spec-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.spec-flow-step{padding:6px 12px;background:var(--sur);border:1px solid var(--b1);border-radius:6px;font-size:11px;color:var(--t2);font-weight:500}
+.spec-flow-arrow{color:var(--t3);font-size:14px}
+.spec-status{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.spec-status.implemented{background:#d946a812;color:#d946a8}
+.spec-status.in-progress{background:#d9770612;color:#d97706}
+.spec-status.planned{background:#3b82f612;color:#3b82f6}
+.spec-demo-wrap{border:1px solid var(--b1);border-radius:12px;overflow:hidden;margin:16px 0;background:var(--sur)}
+.spec-demo-label{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:600;color:var(--t3);padding:8px 14px;background:var(--sur2);border-bottom:1px solid var(--b1);text-transform:uppercase;letter-spacing:.5px}
+.spec-demo-badge{font-size:9px;padding:2px 8px;border-radius:10px;background:#22c55e18;color:#22c55e;font-weight:600;letter-spacing:.3px;display:flex;align-items:center;gap:4px}
+.spec-demo-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#22c55e;animation:spec-pulse 1.5s ease-in-out infinite}
+@keyframes spec-pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.spec-demo-body{padding:24px;display:flex;justify-content:center;background:var(--bg);position:relative;min-height:340px}
+.spec-demo-canvas{position:relative;width:460px}
+.spec-demo-step{position:absolute;opacity:0;transition:opacity .4s ease}
+.spec-demo-step.active{opacity:1}
+.spec-demo-timeline{display:flex;align-items:center;gap:0;padding:10px 14px;border-top:1px solid var(--b1);background:var(--sur2)}
+.spec-demo-dot{width:8px;height:8px;border-radius:50%;background:var(--b2);cursor:pointer;transition:.2s;flex-shrink:0}
+.spec-demo-dot.active{background:var(--acc);box-shadow:0 0 8px var(--acc-b)}
+.spec-demo-dot.done{background:var(--grn)}
+.spec-demo-line{flex:1;height:2px;background:var(--b1)}
+.spec-demo-line.done{background:var(--grn)}
+.spec-demo-caption{padding:8px 14px;font-size:11px;color:var(--t2);text-align:center;border-top:1px solid var(--b1);min-height:34px;display:flex;align-items:center;justify-content:center;gap:6px}
+.spec-demo-caption b{color:var(--t1)}
+.spec-demo-controls{display:flex;align-items:center;gap:8px;padding:8px 14px;border-top:1px solid var(--b1);justify-content:center}
+.spec-demo-btn{padding:4px 14px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;transition:.15s;display:flex;align-items:center;gap:4px}
+.spec-demo-btn:hover{background:var(--sur);color:var(--t1);border-color:var(--b3)}
+.spec-demo-btn.playing{background:var(--acc-d);color:var(--acc);border-color:var(--acc-b)}
 .tb-ai-btn{padding:4px 10px;border-radius:6px;border:1px solid var(--acc-b);background:var(--acc-d);color:var(--acc);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:500;transition:.15s;display:flex;align-items:center;gap:4px}
 .tb-ai-btn:hover{background:var(--acc-b)}
 .tb-ai-btn.active{background:var(--acc);color:#fff;border-color:var(--acc)}
 
 /* CANVAS */
 .canvas{flex:1;position:relative;overflow:auto;padding:20px;display:flex;justify-content:center;align-items:flex-start;
-  background:radial-gradient(ellipse 700px 400px at 25% 70%,#7c6fff09,transparent),var(--bg)}
+  background:radial-gradient(ellipse 700px 400px at 25% 70%,#7c6fff09,transparent),var(--bg);transition:padding-right .25s}
+.canvas.inspector-open{padding-right:calc(var(--panel) + 20px)}
+.canvas.panning{cursor:grabbing!important;user-select:none}
 .canvas-grid{position:absolute;inset:0;
   background-image:linear-gradient(var(--b1) 1px,transparent 1px),linear-gradient(90deg,var(--b1) 1px,transparent 1px);
   background-size:24px 24px;opacity:.55;pointer-events:none;z-index:0}
@@ -170,17 +255,35 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .msb.bound{border-color:var(--acc)}
 .msb.bound:hover{border-color:color-mix(in srgb, var(--acc) 80%, transparent)}
 .msb.bound.sel{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-d)}
-.msb-header{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--b1);font-size:11px;font-family:'DM Mono',monospace}
-.msb-icon{font-size:14px}
-.msb-label{font-weight:600;color:var(--acc)}
-.msb-binding{font-size:10px;color:var(--t3)}
-.msb-view-sel{margin-left:auto;display:flex;align-items:center;gap:0;background:var(--sur2);border-radius:6px;border:1px solid var(--b1);overflow:hidden}
-.msb-view-btn{padding:4px 10px;font-size:10px;font-family:'DM Mono',monospace;cursor:pointer;color:var(--t3);transition:.12s;border:none;background:none}
-.msb-view-btn:hover{color:var(--t1);background:var(--b1)}
-.msb-view-btn.active{background:var(--acc);color:#fff;font-weight:600}
+.msb-header{display:none}
+.msb-pill{position:absolute;top:0;left:10px;transform:translateY(-50%);height:auto;overflow:hidden;font-size:8px;padding:0;pointer-events:auto;cursor:pointer;border-radius:20px;white-space:nowrap;max-width:320px;display:none;align-items:center;z-index:10}
+.msb.bound .msb-pill{display:flex;opacity:0;transition:opacity .15s}
+.msb.bound:hover .msb-pill{opacity:1}
+.msb.bound.sel .msb-pill{opacity:1}
+.msb.bound:not(.sel) .msb-pill{background:var(--sur);border:1px solid var(--acc);color:var(--acc)}
+.msb.bound:not(.sel) .msb-pill .el-bind-sep{background:var(--acc);opacity:.3}
+.msb.bound:not(.sel) .msb-pill .el-bind-sec{opacity:.65}
+.msb.bound:not(.sel) .msb-pill .el-bind-sec:hover{opacity:1;background:rgba(108,92,231,.1)}
+.msb.bound:not(.sel) .msb-pill .el-bind-ctx:hover{background:rgba(108,92,231,.1)}
+.msb.bound.sel .msb-pill{background:var(--acc);color:#fff}
+.msb.bound.sel .msb-pill .el-bind-sep{background:#fff;opacity:.3}
+.msb.bound.sel .msb-pill .el-bind-sec{opacity:.8}
+.msb.bound.sel .msb-pill .el-bind-sec:hover{opacity:1;background:rgba(255,255,255,.15)}
+.msb.bound.sel .msb-pill .el-bind-ctx:hover{background:rgba(255,255,255,.15)}
+.msb-view-sel{position:absolute;top:0;right:10px;transform:translateY(-50%);display:none;align-items:center;gap:0;background:var(--sur);border-radius:20px;overflow:hidden;z-index:10;pointer-events:auto;font-size:8px;border:1px solid var(--acc)}
+.msb.bound .msb-view-sel{display:flex;opacity:0;transition:opacity .15s}
+.msb.bound:hover .msb-view-sel{opacity:1}
+.msb.bound.sel .msb-view-sel{opacity:1}
+.msb.bound.sel .msb-view-sel{background:var(--acc);border-color:var(--acc)}
+.msb-view-btn{padding:2px 8px;font-size:8px;font-family:'DM Mono',monospace;cursor:pointer;color:var(--acc);transition:.12s;border:none;background:none;opacity:.65}
+.msb-view-btn:hover{opacity:1;background:rgba(108,92,231,.1)}
+.msb-view-btn.active{background:var(--acc);color:#fff;font-weight:600;opacity:1}
+.msb.bound.sel .msb-view-btn{color:rgba(255,255,255,.7)}
+.msb.bound.sel .msb-view-btn:hover{color:#fff;background:rgba(255,255,255,.15)}
+.msb.bound.sel .msb-view-btn.active{background:#fff;color:var(--acc)}
 .msb-view-btn.disabled{opacity:.35;text-decoration:line-through;pointer-events:auto}
 .msb-view-btn.disabled.active{background:var(--t3);opacity:.5;text-decoration:line-through}
-.msb-body{min-height:400px;padding:28px;position:relative}
+.msb-body{min-height:400px;padding:28px;padding-top:36px;position:relative}
 .msb-view{display:none}
 .msb-view.active{display:block}
 
@@ -269,9 +372,10 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .c-el:hover .c-el-overlay{opacity:1}
 .c-el.sel .c-el-overlay{opacity:1;border-color:var(--acc)}
 .c-el.bound .c-el-overlay{border-color:var(--grn)}
+.c-el.bound.sel .c-el-overlay{opacity:1;border-color:#e84393}
 .c-el-img.sel,.c-el-img.sel:hover{outline:2px solid var(--acc);outline-offset:-2px}
 .c-el-img.bound{outline:1.5px solid var(--grn-b);outline-offset:-1px}
-.c-el-img.bound.sel{outline:2px solid var(--acc);outline-offset:-2px}
+.c-el-img.bound.sel{outline:2px solid #e84393;outline-offset:-2px}
 
 .c-el-overlay{position:absolute;inset:0;border:1.5px solid transparent;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .15s}
 .c-el.sel .c-el-overlay{opacity:1}
@@ -285,12 +389,16 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .el-type-tag{background:var(--sur);border:1px solid var(--b2);color:var(--t3);
   font-family:'DM Mono',monospace;font-size:9px;font-weight:500;
   padding:1px 7px;border-radius:10px;white-space:nowrap;line-height:1.6;
-  display:flex;align-items:center;gap:4px}
+  display:flex;align-items:center;gap:4px;pointer-events:auto;cursor:pointer}
 .c-el.sel .el-type-tag{background:var(--sur2);border-color:var(--acc-b);color:var(--acc)}
 .c-el.bound .el-type-tag{border-color:var(--grn-b);color:var(--grn)}
-.c-el.bound.sel .el-type-tag{border-color:var(--acc-b);color:var(--acc)}
+.c-el.bound.sel .el-type-tag{border-color:#f8a4c8;color:#e84393}
 .el-type-tag .el-bound-indicator{display:none;width:10px;height:10px;flex-shrink:0}
 .c-el.bound .el-type-tag .el-bound-indicator{display:block}
+.type-tag-label,.type-tag-bind-icon{cursor:pointer;border-radius:4px;transition:background .12s}
+.type-tag-label:hover{opacity:.7}
+.type-tag-bind-icon:hover{opacity:.7}
+.type-tag-bind-icon{display:flex;align-items:center}
 .el-bind-tag{display:none}
 .el-bind-sec,.el-bind-ctx{padding:2px 7px;display:inline-block;transition:.12s}
 .el-bind-sec{border-radius:10px 0 0 10px;opacity:.65;font-weight:700}
@@ -397,7 +505,7 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .img-ctrl-unbind:hover{color:var(--red)}
 
 /* ── RIGHT PANEL */
-.rp{width:var(--panel);background:var(--sur);border-left:1px solid var(--b1);display:none;flex-direction:column;overflow:hidden;position:absolute;right:0;top:0;bottom:0;z-index:1000;box-shadow:-4px 0 12px rgba(0,0,0,.15)}
+.rp{width:var(--panel);background:var(--sur);border-left:1px solid var(--b1);display:none;flex-direction:column;overflow:hidden;position:fixed;right:0;top:var(--top);bottom:0;z-index:1000;box-shadow:-4px 0 12px rgba(0,0,0,.15)}
 .rp.open{display:flex}
 
 .rp-head{padding:12px 14px 10px;border-bottom:1px solid var(--b1)}
@@ -508,6 +616,26 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .bind-btn.bound{color:var(--grn);border-color:var(--grn-b);background:var(--grn-d)}
 .bind-btn svg{width:12px;height:12px;pointer-events:none}
 
+/* ── FUNCTION PARAMS (sub-properties) */
+.fn-params{margin-top:2px;padding:4px 0 0 12px;border-left:2px solid color-mix(in srgb, var(--acc) 30%, var(--b1))}
+.fn-params-header{display:flex;align-items:center;gap:4px;margin-bottom:5px}
+.fn-params-label{font-size:9px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.fn-param-wrap{margin-bottom:4px}
+.fn-param-wrap:last-child{margin-bottom:0}
+.fn-param-key{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;margin-bottom:2px}
+.fn-param-row{display:flex;align-items:stretch;border:1px solid var(--b1);border-radius:6px;overflow:hidden;transition:border-color .15s;background:var(--sur)}
+.fn-param-row:hover{border-color:var(--b3)}
+.fn-param-row.bound{border-color:var(--grn-b);background:var(--grn-d)}
+.fn-param-row.active-bind{border-color:var(--acc);background:var(--acc-d)}
+.fn-param-row .prop-main{flex:1;min-width:0;padding:3px 8px}
+.fn-param-row .prop-bound-chip{display:none}
+.fn-param-row.bound .prop-bound-chip{display:flex}
+.fn-param-row .bind-btn{width:24px;border-left:1px solid var(--b1)}
+.fn-param-row.bound .bind-btn{color:var(--grn);border-color:var(--grn-b)}
+.fn-param-input{width:100%;border:none;outline:none;background:transparent;font-size:11px;font-family:'DM Sans',sans-serif;color:var(--t1);padding:2px 0}
+.fn-param-input::placeholder{color:var(--t3);font-style:italic;font-size:10px}
+.fn-param-input.has-value{color:var(--t1)}
+
 /* ── DROPDOWN */
 .dd{position:fixed;z-index:1100;background:var(--sur2);border:1px solid var(--b2);border-radius:10px;width:260px;box-shadow:0 12px 40px #00000070;display:none;overflow:hidden}
 .dd.open{display:block;animation:pop .14s ease}
@@ -534,17 +662,24 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .dd-sel-trigger.has-val.green{color:var(--grn);font-family:'DM Mono',monospace;font-size:11px}
 .dd-sel-chevron{margin-left:auto;color:var(--t3);font-size:10px;transition:transform .15s}
 .dd-sel-box.open .dd-sel-chevron{transform:rotate(180deg)}
-.dd-sel-dropdown{display:none;border-top:1px solid var(--b1);max-height:160px;overflow-y:auto}
+.dd-sel-dropdown{display:none;border-top:1px solid var(--b1);max-height:240px;overflow-y:auto}
 .dd-sel-box.open .dd-sel-dropdown{display:block}
 .dd-sel-search{display:block;width:calc(100% - 16px);margin:6px 8px 2px;background:var(--sur2);border:1px solid var(--b2);border-radius:5px;padding:4px 8px;font-size:11px;color:var(--t1);font-family:'DM Sans',sans-serif;outline:none}
 .dd-sel-search:focus{border-color:var(--acc)}
-.dd-sel-item{padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .1s;font-size:12px}
+.dd-src-section{padding:0}
+.dd-src-header{display:flex;align-items:center;gap:6px;padding:8px 10px 4px;font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.6px;font-weight:500;position:sticky;top:0;background:var(--sur3);z-index:1}
+.dd-src-header svg{width:10px;height:10px;opacity:.5;flex-shrink:0}
+.dd-src-header .dd-src-count{margin-left:auto;font-size:8px;min-width:14px;height:14px;display:flex;align-items:center;justify-content:center;border-radius:7px;background:var(--b1);color:var(--t3);font-weight:600}
+.dd-src-divider{height:1px;background:var(--b1);margin:2px 0}
+.dd-sel-item{padding:7px 10px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;font-size:12px;border-radius:4px;margin:1px 4px}
 .dd-sel-item:hover{background:var(--sur2)}
 .dd-sel-item.sel{background:var(--acc-d);color:var(--acc)}
-.dd-sel-item-sub{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace}
+.dd-sel-item-name{font-size:12px;font-weight:500;color:var(--t1);line-height:1.3}
+.dd-sel-item.sel .dd-sel-item-name{color:var(--acc)}
+.dd-sel-item-sub{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;line-height:1.3;margin-top:1px}
 .dd-sel-item.sel .dd-sel-item-sub{color:var(--acc);opacity:.6}
-.dd-sel-tag{margin-left:auto;font-size:9px;padding:1px 4px;border-radius:3px;background:var(--sur3);color:var(--t3);font-family:'DM Mono',monospace;flex-shrink:0}
-.dd-sel-item.sel .dd-sel-tag{background:var(--acc-d);color:var(--acc)}
+.dd-sel-tag{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--sur2);color:var(--t3);font-family:'DM Mono',monospace;flex-shrink:0;border:1px solid var(--b1)}
+.dd-sel-item.sel .dd-sel-tag{background:var(--acc-d);color:var(--acc);border-color:var(--acc-b)}
 .dd-sel-item.dim{opacity:.4}
 
 .dd-confirm{display:none;margin:0 12px 10px;padding:7px;background:var(--acc);border:none;border-radius:6px;color:#fff;font-size:12px;font-weight:500;cursor:pointer;width:calc(100% - 24px);font-family:'DM Sans',sans-serif;transition:background .15s}
@@ -705,30 +840,30 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 /* Context picker modal */
 .modal-overlay{position:fixed;inset:0;background:#00000075;z-index:1200;display:none;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal-box{background:var(--sur2);border:1px solid var(--b2);border-radius:12px;width:340px;overflow:hidden;box-shadow:0 20px 80px #00000080;animation:pop .18s ease}
-.modal-head{padding:13px 16px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1)}
+.modal-box{background:var(--sur2);border:1px solid var(--b2);border-radius:14px;width:360px;overflow:hidden;box-shadow:0 20px 80px #00000080;animation:pop .18s ease}
+.modal-head{padding:14px 16px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1)}
 .modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px}
 .modal-x{cursor:pointer;color:var(--t3);font-size:16px}
 .modal-x:hover{color:var(--t1)}
-.modal-list{padding:10px;display:flex;flex-direction:column;gap:4px;max-height:360px;overflow-y:auto}
-.modal-group-label{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;padding:8px 4px 4px;margin-top:4px;font-family:'DM Mono',monospace}
-.modal-group-label:first-child{margin-top:0;padding-top:4px}
-.modal-app-label{font-size:11px;font-weight:600;color:var(--t2);padding:6px 4px 2px;margin-top:2px}
-.modal-create-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;border:1px dashed var(--b2);cursor:pointer;transition:.15s;color:var(--acc);font-size:12px;font-weight:500}
-.modal-create-btn:hover{background:var(--acc-d);border-color:var(--acc)}
-.modal-item{padding:9px 12px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;transition:.15s;display:flex;align-items:center;gap:10px}
-.modal-item:hover{background:var(--sur3);border-color:var(--b2)}
-.modal-item.sel{border-color:var(--acc);background:var(--acc-d)}
-.modal-item.attached{border-color:var(--grn-b);background:var(--grn-d)}
-.modal-item.attached.sel{border-color:var(--red);background:#ff6b6b15}
-.modal-check{width:16px;height:16px;border-radius:4px;border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;margin-left:auto}
-.modal-item.attached .modal-check{background:var(--grn);border-color:var(--grn);color:#071a12}
+.modal-list{padding:6px 8px;display:flex;flex-direction:column;gap:0;max-height:400px;overflow-y:auto}
+.modal-divider{height:1px;min-height:1px;flex-shrink:0;background:var(--b2);margin:8px 10px}
+.modal-group-label,.modal-app-label{font-size:11px;font-weight:600;color:var(--t3);padding:14px 10px 6px;letter-spacing:.06em;text-transform:uppercase}
+.modal-group-label:first-child,.modal-app-label:first-child{padding-top:8px}
+.modal-create-btn{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;border:none;cursor:pointer;transition:.15s;color:var(--acc);font-size:13px;font-weight:500;background:transparent}
+.modal-create-btn:hover{background:var(--acc-d)}
+.modal-item{padding:10px 10px;border-radius:8px;border:none;cursor:pointer;transition:background .12s;display:flex;align-items:center;gap:10px}
+.modal-item:hover{background:var(--sur3)}
+.modal-item.sel{background:var(--acc-d)}
+.modal-item.attached{background:var(--acc-d)}
+.modal-item.attached.sel{background:#ff6b6b15}
+.modal-check{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--b2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;margin-left:auto;transition:.12s}
+.modal-item.attached .modal-check{background:var(--acc);border-color:var(--acc);color:#fff}
 .modal-item.attached.sel .modal-check{background:var(--red);border-color:var(--red);color:#fff}
 .modal-item-icon{font-size:18px}
-.modal-item-name{font-weight:500;font-size:13px}
-.modal-item-sub{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;margin-top:1px}
-.modal-foot{padding:9px 10px;border-top:1px solid var(--b1);display:flex;gap:6px}
-.modal-btn{flex:1;padding:8px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:none;transition:.15s}
+.modal-item-name{font-weight:500;font-size:14px}
+.modal-item-sub{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;margin-top:2px}
+.modal-foot{padding:10px 12px;border-top:1px solid var(--b1);display:flex;gap:8px}
+.modal-btn{flex:1;padding:9px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:none;transition:.15s}
 .modal-cancel{background:var(--sur3);color:var(--t2)}
 .modal-ok{background:var(--acc);color:#fff;opacity:.5;pointer-events:none}
 .modal-ok.ready{opacity:1;pointer-events:all}
@@ -749,8 +884,8 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .tp-dot{width:5px;height:5px;border-radius:50%;background:var(--grn);opacity:.5;flex-shrink:0}
 
 /* Toast */
-.toast{position:fixed;bottom:18px;right:18px;background:var(--sur2);border:1px solid var(--b2);border-radius:8px;padding:8px 14px;font-size:12px;z-index:1400;display:flex;align-items:center;gap:6px;opacity:0;transform:translateY(6px);transition:.22s;pointer-events:none}
-.toast.show{opacity:1;transform:none}
+.toast{position:fixed;bottom:18px;right:18px;background:var(--sur2);border:1px solid var(--b2);border-radius:8px;padding:8px 14px;font-size:12px;z-index:1400;display:flex;align-items:center;gap:6px;opacity:0;transform:translateY(6px);transition:.22s;pointer-events:none;max-width:460px}
+.toast.show{opacity:1;transform:none;pointer-events:auto}
 .toast.ok{border-color:var(--grn-b);color:var(--grn)}
 
 /* Action Bar */
@@ -838,6 +973,10 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .et-panel-bind:hover{color:var(--acc);border-color:var(--acc-b);background:var(--acc-d)}
 .et-panel-bind.bound{color:var(--grn);border-color:var(--grn-b);background:var(--grn-d)}
 .et-panel-bind svg{width:14px;height:14px;pointer-events:none}
+.et-panel-params-link{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:6px;font-size:10px;font-family:'DM Mono',monospace;color:var(--acc);cursor:pointer;transition:background .12s;margin-top:-4px}
+.et-panel-params-link:hover{background:var(--acc-d)}
+.et-panel-params-link .et-params-count{font-weight:700}
+.et-panel-params-link .et-params-arrow{margin-left:auto;font-size:9px;opacity:.6}
 
 /* Inspector Toggle (floating right) */
 .inspector-toggle{position:fixed;right:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;background:var(--sur);border:1px solid var(--b1);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:box-shadow .15s,border-color .15s,right .25s;color:var(--t1)}
@@ -932,6 +1071,123 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .ctx-cfg-select:focus{border-color:var(--acc)}
 .ctx-cfg-toggle{display:flex;gap:2px}
 .ctx-cfg-toggle .seg-b{padding:4px 10px}
+
+/* Add Field modal */
+.af-overlay{position:fixed;inset:0;background:#00000060;z-index:800;display:none;align-items:center;justify-content:center}
+.af-overlay.open{display:flex}
+.af-box{background:#fff;border:1px solid #e0e0e0;border-radius:14px;width:380px;box-shadow:0 24px 80px #00000018;animation:pop .18s ease;overflow:hidden}
+.af-head{padding:16px 20px 12px;display:flex;align-items:flex-start;justify-content:space-between}
+.af-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#1a1a1a}
+.af-head-actions{display:flex;align-items:center;gap:8px}
+.af-help{width:22px;height:22px;border-radius:50%;border:1px solid #d0d0d0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:#888}
+.af-help:hover{border-color:#999;color:#333}
+.af-close{width:22px;height:22px;border-radius:50%;border:1px solid #d0d0d0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;color:#888;background:none}
+.af-close:hover{border-color:#999;color:#333}
+.af-subtitle{padding:0 20px 16px;font-size:12px;color:#666;line-height:1.5}
+.af-subtitle b{color:#1a1a1a;font-weight:600}
+.af-body{padding:0 20px 20px;display:flex;flex-direction:column;gap:16px}
+.af-label{font-size:11px;color:#555;font-weight:500;margin-bottom:5px}
+.af-select-wrap{position:relative}
+.af-select{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #d0d0d0;background:#fff;color:#1a1a1a;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color .15s;box-sizing:border-box}
+.af-select:hover{border-color:#aaa}
+.af-select.open{border-color:#3b5bdb;border-radius:8px 8px 0 0}
+.af-select-icon{font-size:14px;flex-shrink:0}
+.af-select-chevron{margin-left:auto;font-size:10px;color:#999;transition:transform .15s}
+.af-select.open .af-select-chevron{transform:rotate(180deg)}
+.af-dropdown{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #3b5bdb;border-top:1px solid #eee;border-radius:0 0 8px 8px;z-index:10;overflow:hidden;box-sizing:border-box}
+.af-select.open+.af-dropdown{display:block}
+.af-dropdown-item{padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13px;color:#1a1a1a;transition:background .1s}
+.af-dropdown-item:hover{background:#f5f5f5}
+.af-dropdown-item.sel{background:#eef1fb;color:#3b5bdb}
+.af-dropdown-icon{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.af-input-wrap{display:flex;flex-direction:column}
+.af-input-label{font-size:11px;color:#555;font-weight:500;margin-bottom:5px;display:flex;align-items:center;gap:3px}
+.af-input-label .af-required{color:#e03131;font-weight:700}
+.af-input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #d0d0d0;background:#fff;color:#1a1a1a;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;box-sizing:border-box}
+.af-input:focus{border-color:#3b5bdb}
+.af-input::placeholder{color:#aaa}
+.af-checkbox-row{display:flex;align-items:flex-start;gap:8px;padding:2px 0}
+.af-checkbox{width:18px;height:18px;border-radius:4px;border:2px solid #3b5bdb;background:#3b5bdb;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;transition:.15s}
+.af-checkbox.off{background:transparent;border-color:#ccc}
+.af-checkbox-check{color:#fff;font-size:11px;font-weight:700}
+.af-checkbox.off .af-checkbox-check{display:none}
+.af-checkbox-text{font-size:12px;color:#555;line-height:1.5}
+.af-checkbox-text b{color:#1a1a1a;font-weight:600}
+.af-foot{padding:12px 20px 16px;display:flex;justify-content:flex-end;gap:8px}
+.af-btn{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:none;transition:.15s}
+.af-btn-cancel{background:transparent;color:#555;border:1px solid #d0d0d0}
+.af-btn-cancel:hover{background:#f5f5f5}
+.af-btn-add{background:#3b5bdb;color:#fff}
+.af-btn-add:hover{filter:brightness(1.1)}
+.af-btn-add:disabled{opacity:.5;cursor:not-allowed;filter:none}
+
+/* Empty field warning on canvas elements */
+.c-el.empty-field{opacity:.7;position:relative}
+.c-el.empty-field .el-bind-tag{border-color:#e67700;color:#e67700;display:flex}
+.c-el.empty-field .el-type-tag{display:inline-block}
+.empty-field-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a1a1a;color:#ddd;border-radius:10px;padding:14px 16px;width:250px;font-size:12px;line-height:1.6;z-index:100;pointer-events:none;box-shadow:0 8px 30px #00000060}
+.empty-field-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1a1a1a}
+.empty-field-tooltip b{color:#fff;font-weight:600}
+.empty-field-tooltip u{text-decoration:underline;text-underline-offset:2px}
+.c-el.empty-field:hover .empty-field-tooltip{display:block}
+
+/* + Add field link in context card */
+.ctx-add-field-btn{display:flex;align-items:center;gap:4px;padding:5px 0 2px;font-size:10px;color:var(--acc);cursor:pointer;font-family:'DM Mono',monospace;transition:.15s;opacity:.7}
+.ctx-add-field-btn:hover{opacity:1}
+.ctx-add-field-btn svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+/* + Add field link in dd field dropdown */
+.dd-add-field-btn{display:none;padding:8px 12px;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:var(--acc);font-weight:500;border-top:1px solid var(--b1);transition:background .1s;background:var(--sur3)}
+.dd-sel-box.open .dd-add-field-btn{display:flex}
+.dd-add-field-btn:hover{background:var(--acc-d)}
+.dd-add-field-btn svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+/* Code panel — light mode (One Light) */
+.code-panel-overlay{position:fixed;inset:0;top:44px;z-index:500;display:none;background:var(--sur)}
+.code-panel-overlay.open{display:flex}
+.code-panel{flex:1;display:flex;flex-direction:column;background:#fafafa;color:#383a42;font-family:'DM Mono',monospace;font-size:12px;overflow:hidden}
+.code-panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #e0e0e0;background:#f0f0f2}
+.code-panel-tabs{display:flex;gap:0}
+.code-panel-tab{padding:7px 14px;font-size:11px;color:#999;cursor:pointer;border-bottom:2px solid transparent;transition:.12s}
+.code-panel-tab:hover{color:#383a42}
+.code-panel-tab.active{color:#4078f2;border-bottom-color:#4078f2}
+.code-panel-close{padding:4px 8px;cursor:pointer;color:#999;font-size:14px;border-radius:4px;transition:.12s}
+.code-panel-close:hover{color:#383a42;background:#e0e0e0}
+.code-panel-body{flex:1;overflow:auto;padding:0}
+.code-panel-gutter{display:flex}
+.code-line-nums{padding:12px 0;text-align:right;color:#b0b0b0;font-size:11px;line-height:1.7;user-select:none;padding-right:12px;padding-left:16px;border-right:1px solid #e0e0e0;flex-shrink:0}
+.code-line-nums div{padding:0 4px}
+.code-lines{flex:1;padding:12px 16px;font-size:11px;line-height:1.7;overflow-x:auto;white-space:pre}
+.code-lines .hl-kw{color:#a626a4}
+.code-lines .hl-fn{color:#4078f2}
+.code-lines .hl-str{color:#50a14f}
+.code-lines .hl-num{color:#c18401}
+.code-lines .hl-cm{color:#a0a1a7;font-style:italic}
+.code-lines .hl-ty{color:#c18401}
+.code-lines .hl-op{color:#0184bc}
+.code-lines .hl-br{color:#383a42}
+.code-lines .hl-prop{color:#e45649}
+.code-highlight-line{background:#f0f0f0;display:block;margin:0 -16px;padding:0 16px;border-left:3px solid #c18401}
+
+/* Code panel — dark mode (Catppuccin Mocha) */
+html.dark .code-panel{background:#1e1e2e;color:#cdd6f4}
+html.dark .code-panel-header{border-bottom-color:#313244;background:#181825}
+html.dark .code-panel-tab{color:#6c7086}
+html.dark .code-panel-tab:hover{color:#cdd6f4}
+html.dark .code-panel-tab.active{color:#89b4fa;border-bottom-color:#89b4fa}
+html.dark .code-panel-close{color:#6c7086}
+html.dark .code-panel-close:hover{color:#cdd6f4;background:#313244}
+html.dark .code-line-nums{color:#45475a;border-right-color:#313244}
+html.dark .code-lines .hl-kw{color:#cba6f7}
+html.dark .code-lines .hl-fn{color:#89b4fa}
+html.dark .code-lines .hl-str{color:#a6e3a1}
+html.dark .code-lines .hl-num{color:#fab387}
+html.dark .code-lines .hl-cm{color:#6c7086}
+html.dark .code-lines .hl-ty{color:#f9e2af}
+html.dark .code-lines .hl-op{color:#89dceb}
+html.dark .code-lines .hl-br{color:#cdd6f4}
+html.dark .code-lines .hl-prop{color:#cdd6f4}
+html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
 </style>
 </head>
 <body>
@@ -943,13 +1199,14 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
     </div>
     <div class="sep"></div>
     <div class="page-sel-wrap">
-      <div class="page-sel" onclick="togglePagesPanel(event)"><span class="page-sel-name">📄 Homepage</span> <span class="page-sel-chevron">▾</span></div>
+      <div class="page-sel" onclick="togglePagesPanel(event)"><span class="page-sel-name">📄 Demo 26.2</span> <span class="page-sel-chevron">▾</span></div>
       <div class="pages-panel" id="pages-panel">
-        <div class="pp-item active" onclick="selectPage(this,'Homepage')">📄 Home</div>
+        <div class="pp-item" onclick="selectPage(this,'Homepage')">📄 Home</div>
         <div class="pp-item" onclick="selectPage(this,'Items (List)')">📄 Items (List)</div>
         <div class="pp-item" onclick="selectPage(this,'Repeater Usecases')">📄 Repeater Usecases</div>
         <div class="pp-item" onclick="selectPage(this,'Multi-State Box')">◫ Multi-State Box</div>
         <div class="pp-item" onclick="selectPage(this,'Demo')">📄 Demo</div>
+        <div class="pp-item active" onclick="selectPage(this,'Demo 26.2')">📄 Demo 26.2</div>
         <div class="pp-group">Item Pages (Dynamic)</div>
         <div class="pp-sub" onclick="selectPage(this,'Product Item')">🛒 Product Item</div>
         <div class="pp-manage">Manage Pages</div>
@@ -957,8 +1214,8 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
     </div>
     <div class="sep"></div>
     <div class="tb-tabs">
-      <div class="tb-tab active">Design</div>
-      <div class="tb-tab">Code</div>
+      <div class="tb-tab active" onclick="closeCodePanel()">Design</div>
+      <div class="tb-tab" onclick="openCodeTab()">Code</div>
     </div>
     <div class="sep"></div>
     <button class="tb-ai-btn" id="ai-toggle" onclick="toggleAiPanel()" title="Toggle AI panel">✦ AI</button>
@@ -984,6 +1241,26 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
     </button>
     <button class="btn-upgrade">Upgrade</button>
     <button class="btn-pub">Publish</button>
+  </div>
+</div>
+
+<!-- CODE PANEL -->
+<div class="code-panel-overlay" id="code-panel-overlay">
+  <div class="code-panel">
+    <div class="code-panel-header">
+      <div class="code-panel-tabs">
+        <div class="code-panel-tab active">Page Code</div>
+        <div class="code-panel-tab">Site Code</div>
+        <div class="code-panel-tab">Packages</div>
+      </div>
+      <div class="code-panel-close" onclick="closeCodePanel()">✕</div>
+    </div>
+    <div class="code-panel-body">
+      <div class="code-panel-gutter">
+        <div class="code-line-nums" id="code-line-nums"></div>
+        <div class="code-lines" id="code-lines"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1061,6 +1338,9 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
       <button class="et-btn" title="Comments">
         <svg viewBox="0 0 20 20"><path d="M3 3h14v10H8l-4 4v-4H3z" rx="2"/></svg>
       </button>
+      <button class="et-btn" id="product-mode-btn" title="Product Mode" onclick="toggleProductMode()">
+        <svg viewBox="0 0 20 20"><path d="M4 4h12v2H4z"/><path d="M4 8h8v1.5H4z"/><path d="M4 11.5h10v1.5H4z"/><path d="M4 15h6v1.5H4z"/><rect x="14" y="10" width="4" height="6" rx="1" fill="currentColor" opacity=".3"/><path d="M15 11.5h2M15 13h2"/></svg>
+      </button>
       <button class="et-btn" title="Help">
         <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M8 7.5a2.5 2.5 0 0 1 4 2c0 1.5-2 2-2 3"/><circle cx="10" cy="14.5" r=".5" fill="currentColor" stroke="none"/></svg>
       </button>
@@ -1094,7 +1374,7 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
   <!-- CANVAS -->
   <div class="canvas" id="canvas" onclick="canvasClick(event)">
     <div class="canvas-grid"></div>
-    <div class="canvas-inner">
+    <div class="canvas-inner hidden-page">
 
       <!-- Section: Hero -->
       <div class="c-section has-ctx" id="sec-hero" onclick="selEl(event,'sec-hero')">
@@ -1200,13 +1480,13 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
               <span class="src-tag" id="src-el-temp"></span>
               <span class="val" id="v-el-temp">24°C</span>
             </div>
-            <!-- Condition - not bound yet -->
-            <div class="c-el c-el-text" id="el-cond" onclick="selEl(event,'el-cond')">
+            <!-- Condition - bound to weatherLabel function -->
+            <div class="c-el c-el-text bound" id="el-cond" onclick="selEl(event,'el-cond')">
               <div class="c-el-overlay"></div>
-            <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+            <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">⚡ myFunctions · weatherLabel</div></div>
               <div class="bound-dot"></div>
               <span class="src-tag" id="src-el-cond"></span>
-              <span class="val static" id="v-el-cond">This is a Title</span>
+              <span class="val" id="v-el-cond">☀️ Tel Aviv · Sunny</span>
             </div>
           </div>
         </div>
@@ -1522,15 +1802,16 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
         </div>
         <div class="msb bound" id="msb-articles" onclick="selEl(event,'msb-articles')" style="margin:12px 24px 24px">
           <div class="c-el-overlay" style="border-radius:12px"></div>
+          <div class="msb-pill" id="pill-msb-articles"></div>
+          <div class="msb-view-sel" id="msb-view-sel">
+            <button class="msb-view-btn" data-view="loading" onclick="switchMsbView(event,'loading')">Loading</button>
+            <button class="msb-view-btn" data-view="empty" onclick="switchMsbView(event,'empty')">Empty</button>
+            <button class="msb-view-btn active" data-view="hasItems" onclick="switchMsbView(event,'hasItems')">Has Items</button>
+          </div>
           <div class="msb-header">
             <span class="msb-icon">◫</span>
             <span class="msb-label">Multi-State</span>
             <span class="msb-binding">📚 Articles · itemsStatus</span>
-            <div class="msb-view-sel" id="msb-view-sel">
-              <button class="msb-view-btn" data-view="loading" onclick="switchMsbView(event,'loading')">Loading</button>
-              <button class="msb-view-btn" data-view="empty" onclick="switchMsbView(event,'empty')">Empty</button>
-              <button class="msb-view-btn active" data-view="hasItems" onclick="switchMsbView(event,'hasItems')">Has Items</button>
-            </div>
           </div>
           <div class="msb-body">
             <!-- Unbound View (no Active State binding) -->
@@ -1889,7 +2170,6 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
           </div>
 
           <div style="display:flex;gap:20px;justify-content:center">
-
             <!-- Member 1 -->
             <div style="flex:1;max-width:280px">
               <div class="c-el bound" id="el-demo-member-img-1" onclick="selEl(event,'el-demo-member-img-1')" style="cursor:pointer;position:relative;border-radius:8px;overflow:hidden">
@@ -1915,7 +2195,6 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
                 </div>
               </div>
             </div>
-
             <!-- Member 2 -->
             <div style="flex:1;max-width:280px">
               <div class="c-el bound" id="el-demo-member-img-2" onclick="selEl(event,'el-demo-member-img-2')" style="cursor:pointer;position:relative;border-radius:8px;overflow:hidden">
@@ -1941,7 +2220,6 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
                 </div>
               </div>
             </div>
-
             <!-- Member 3 -->
             <div style="flex:1;max-width:280px">
               <div class="c-el bound" id="el-demo-member-img-3" onclick="selEl(event,'el-demo-member-img-3')" style="cursor:pointer;position:relative;border-radius:8px;overflow:hidden">
@@ -1967,7 +2245,6 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -1980,6 +2257,75 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 
     </div>
 
+    <!-- DEMO 26.2 PAGE -->
+    <div class="canvas-inner" id="demo262-page">
+
+      <!-- Section: Weather (connected to Weather App) -->
+      <div class="c-section has-ctx" id="sec-d262-weather" onclick="selEl(event,'sec-d262-weather')">
+        <div class="ctx-pill" id="pill-sec-d262-weather"></div>
+        <div class="s-body" style="padding-top:20px">
+          <div class="c-row" style="align-items:stretch;padding-top:8px;margin-top:-8px">
+            <div style="flex:1;overflow:visible">
+              <div class="c-el c-el-img" id="el-d262-weather-img" onclick="selEl(event,'el-d262-weather-img')" style="padding:0;height:280px">
+                <div class="c-el-overlay"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
+                <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none" alt="sunny sky">
+              </div>
+            </div>
+          </div>
+          <div class="c-el c-el-text bound" id="el-d262-city" onclick="selEl(event,'el-d262-city')">
+            <div class="c-el-overlay"></div>
+            <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+            <div class="bound-dot"></div>
+            <span class="val" id="v-el-d262-city">Tel Aviv</span>
+          </div>
+          <div class="c-row">
+            <div class="c-el c-el-text bound" id="el-d262-temp" onclick="selEl(event,'el-d262-temp')">
+              <div class="c-el-overlay"></div>
+              <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+              <div class="bound-dot"></div>
+              <span class="val" id="v-el-d262-temp">24°C</span>
+            </div>
+            <div class="c-el c-el-text" id="el-d262-cond" onclick="selEl(event,'el-d262-cond')">
+              <div class="c-el-overlay"></div>
+              <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+              <span class="val" id="v-el-d262-cond">Sunny</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Empty 1 -->
+      <div class="c-section" id="sec-d262-empty1" onclick="selEl(event,'sec-d262-empty1')">
+        <div class="ctx-pill" id="pill-sec-d262-empty1"></div>
+        <div class="s-body" style="min-height:400px"></div>
+      </div>
+
+      <!-- Section: Empty 2 -->
+      <div class="c-section" id="sec-d262-empty2" onclick="selEl(event,'sec-d262-empty2')">
+        <div class="ctx-pill" id="pill-sec-d262-empty2"></div>
+        <div class="s-body" style="min-height:400px"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SPEC PAGE OVERLAY -->
+  <div class="spec-page" id="spec-page">
+    <div class="spec-topbar">
+      <button class="spec-back-btn" onclick="closeSpecPage()">
+        <svg viewBox="0 0 16 16"><polyline points="10 2 4 8 10 14"/></svg>
+        Back to Prototype
+      </button>
+      <div style="width:1px;height:18px;background:var(--b2)"></div>
+      <div class="spec-topbar-title">
+        <span id="spec-topbar-name">Product Specification</span>
+        <span class="spec-topbar-badge">SPEC</span>
+      </div>
+      <div class="spec-topbar-element" id="spec-topbar-element" style="display:none"></div>
+    </div>
+    <div class="spec-body" id="spec-body"></div>
   </div>
 
   <!-- RIGHT PANEL -->
@@ -2007,6 +2353,61 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
     <div class="modal-foot">
       <button class="modal-btn modal-cancel" onclick="closeModal()">Cancel</button>
       <button class="modal-btn modal-ok ready" id="modal-ok" onclick="confirmCtx()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD FIELD MODAL -->
+<div class="af-overlay" id="af-modal" onclick="if(event.target===this)closeAddFieldModal()">
+  <div class="af-box">
+    <div class="af-head">
+      <div class="af-title">Add a new field</div>
+      <div class="af-head-actions">
+        <div class="af-help" title="Help">?</div>
+        <div class="af-close" onclick="closeAddFieldModal()">✕</div>
+      </div>
+    </div>
+    <div class="af-subtitle" id="af-subtitle">Add a blank field to the <b id="af-ctx-name">—</b> collection. You can add content later.</div>
+    <div class="af-body">
+      <div>
+        <div class="af-label">Choose field type</div>
+        <div class="af-select-wrap">
+          <div class="af-select" id="af-type-select" onclick="toggleAfTypeDropdown()">
+            <span class="af-select-icon" id="af-type-icon">T</span>
+            <span id="af-type-label">Text</span>
+            <span class="af-select-chevron">▾</span>
+          </div>
+          <div class="af-dropdown" id="af-type-dropdown">
+            <div class="af-dropdown-item sel" onclick="selectAfType('string','Text','T')"><span class="af-dropdown-icon" style="font-weight:700;font-family:serif">T</span> Text</div>
+            <div class="af-dropdown-item" onclick="selectAfType('url','URL','🔗')"><span class="af-dropdown-icon">🔗</span> URL</div>
+            <div class="af-dropdown-item" onclick="selectAfType('number','Numbers','#')"><span class="af-dropdown-icon" style="font-weight:700;font-family:'DM Mono',monospace">#</span> Numbers</div>
+            <div class="af-dropdown-item" onclick="selectAfType('image','Image','🖼')"><span class="af-dropdown-icon">🖼</span> Image</div>
+          </div>
+        </div>
+      </div>
+      <div class="af-input-wrap">
+        <div class="af-input-label">Name this field <span class="af-required">*</span></div>
+        <input class="af-input" id="af-field-name" placeholder="New text" oninput="onAfNameInput()">
+      </div>
+      <div>
+        <div class="af-label" id="af-checkbox-label">Add a <b>Text</b> element to the list?</div>
+        <div class="af-checkbox-row">
+          <div class="af-checkbox" id="af-add-el-check" onclick="toggleAfCheckbox()">
+            <span class="af-checkbox-check">✓</span>
+          </div>
+          <div class="af-checkbox-text">Show this field's content by adding an element to the list.</div>
+        </div>
+        <div class="af-checkbox-row" style="margin-top:6px">
+          <div class="af-checkbox" id="af-dummy-check" onclick="toggleAfDummyCheckbox()">
+            <span class="af-checkbox-check">✓</span>
+          </div>
+          <div class="af-checkbox-text">Populate sample data for all items.</div>
+        </div>
+      </div>
+    </div>
+    <div class="af-foot">
+      <button class="af-btn af-btn-cancel" onclick="closeAddFieldModal()">Cancel</button>
+      <button class="af-btn af-btn-add" id="af-btn-add" onclick="confirmAddField()">Add field</button>
     </div>
   </div>
 </div>
@@ -2065,7 +2466,7 @@ const CTX_DEFS = [
       {name:'windSpeed',   type:'number',  sample:'"14 km/h"'},
       {name:'formattedTemperature', type:'string', sample:'"24°C · feels 26°C"'},
       {name:'isCold',              type:'boolean', sample:'false'},
-      {name:'icon',        type:'image',   sample:'[img url]'},
+      {name:'weatherImage', type:'image',   sample:'[img url]'},
       {name:'link',        type:'url',     sample:'"https://weather.com/tel-aviv"'},
     ],
     contextActions:[
@@ -2137,9 +2538,30 @@ const CTX_DEFS = [
       {name:'tagline', type:'string', sample:'"Weaving words into wonders"'},
       {name:'image',   type:'image',  sample:'[img url]'},
     ],
-    contextActions:[],
-    metadata:[],
-    config:[]},
+    itemActions:[
+      {name:'navigateToItem', label:'Navigate to item page', icon:''},
+      {name:'openInEditor',   label:'Open in editor',        icon:''},
+      {name:'shareItem',      label:'Share item',             icon:''},
+    ],
+    contextActions:[
+      {name:'applyFilters',  label:'Apply filters',   icon:''},
+      {name:'resetFilters',  label:'Reset filters',   icon:''},
+      {name:'sort',          label:'Sort',             icon:''},
+      {name:'loadMore',      label:'Load more',        icon:''},
+      {name:'refresh',       label:'Refresh data',     icon:''},
+    ],
+    metadata:[
+      {name:'totalCount',    label:'Total items',        type:'number',  sample:'3'},
+      {name:'currentCount',  label:'Items on page',      type:'number',  sample:'3'},
+      {name:'currentPage',   label:'Current page',       type:'number',  sample:'1'},
+      {name:'hasNextPage',   label:'Has next page',      type:'boolean', sample:'false'},
+      {name:'isLoading',     label:'Is loading',         type:'boolean', sample:'false'},
+      {name:'activeFilters', label:'Active filter count', type:'number',  sample:'0'},
+    ],
+    config:[
+      {key:'pageSize', label:'Page size', input:'select', options:['5','10','20']},
+      {key:'sort', label:'Sort by', input:'select', options:['Name (A-Z)','Name (Z-A)','Newest first','Manual']},
+    ]},
   { id:'stores-current-item', name:'Current Item', icon:'', type:'page', source:'Wix Stores', group:'Apps',
     isDynamicPageCtx: true,
     fields:[
@@ -2330,6 +2752,18 @@ const FN_LIBS = [
       {name:'isRequired()',   type:'boolean', sample:'false',           description:'Checks if value exists'},
       {name:'minLength()',    type:'boolean', sample:'true',            description:'Checks minimum length'},
     ]},
+  { id:'lib-my-functions', name:'myFunctions', icon:'⚡', description:'Custom formatters & helpers',
+    functions:[
+      {name:'weatherLabel()', type:'string', sample:'"☀️ Tel Aviv · Sunny"', template:'☀️ {city} · {condition}', description:'Combines city and condition into a styled weather label',
+        params:[
+          {name:'city',      type:'string', description:'The city name', default:'text'},
+          {name:'condition', type:'string', description:'Weather condition text', default:'text'},
+        ]},
+      {name:'greetUser()', type:'string', sample:'"👋 Hello, Dana!"', template:'👋 Hello, {name}!', description:'Creates a personalized greeting',
+        params:[
+          {name:'name', type:'string', description:'User display name', default:'text'},
+        ]},
+    ]},
 ];
 
 const FN_DEFS = FN_LIBS.flatMap(lib =>
@@ -2340,7 +2774,8 @@ const FN_DEFS = FN_LIBS.flatMap(lib =>
     type: 'function',
     source: lib.name,
     libId: lib.id,
-    fields: [{ name: fn.name.replace('()',''), type: fn.type, sample: fn.sample }],
+    params: fn.params || null,
+    fields: [{ name: fn.name.replace('()',''), type: fn.type, sample: fn.sample, template: fn.template || null, params: fn.params || null }],
   }))
 );
 
@@ -2463,7 +2898,9 @@ function findFnLib(id) {
       name: fn.name,
       type: fn.type,
       sample: fn.sample,
-      description: fn.description
+      description: fn.description,
+      template: fn.template || null,
+      params: fn.params || null
     }))
   };
 }
@@ -2587,8 +3024,8 @@ const EL_DEFS = {
   'el-ruc-tag-val-3':    {name:'Tag Value',     type:'Text', section:'sec-ruc-tags', repTemplate:'el-ruc-tag-val', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-ruc-tag-val-4':    {name:'Tag Value',     type:'Text', section:'sec-ruc-tags', repTemplate:'el-ruc-tag-val', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   // Demo page
-  'sec-demo-team':       {name:'Section · Team',   type:'Section', isContainer:true, page:'demo', props:[]},
   'sec-demo-empty':      {name:'Section · Empty',  type:'Section', isContainer:true, page:'demo', props:[]},
+  'sec-demo-team':       {name:'Section · Team',   type:'Section', isContainer:true, page:'demo', props:[]},
   'el-demo-team-title':  {name:'Team Title',       type:'Text',    section:'sec-demo-team', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-demo-team-subtitle':{name:'Team Subtitle',   type:'Text',    section:'sec-demo-team', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-demo-member-img-1': {name:'Member Image',    type:'Image',   section:'sec-demo-team', props:[{k:'Source',t:'image'},{k:'Alt Text',t:'string'},{k:'Visible',t:'boolean'}]},
@@ -2603,6 +3040,13 @@ const EL_DEFS = {
   'el-demo-member-tag-1': {name:'Member Tagline',  type:'Text',    section:'sec-demo-team', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-demo-member-tag-2': {name:'Member Tagline',  type:'Text',    section:'sec-demo-team', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-demo-member-tag-3': {name:'Member Tagline',  type:'Text',    section:'sec-demo-team', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'sec-d262-weather':    {name:'Section · Weather', type:'Section', isContainer:true, page:'demo262', props:[]},
+  'sec-d262-empty1':     {name:'Section · Empty',   type:'Section', isContainer:true, page:'demo262', props:[]},
+  'sec-d262-empty2':     {name:'Section · Empty',   type:'Section', isContainer:true, page:'demo262', props:[]},
+  'el-d262-weather-img': {name:'Weather Image',     type:'Image',   section:'sec-d262-weather', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-d262-city':        {name:'City',              type:'Text',    section:'sec-d262-weather', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-d262-temp':        {name:'Temperature',       type:'Text',    section:'sec-d262-weather', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-d262-cond':        {name:'Condition',          type:'Text',    section:'sec-d262-weather', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
 
 };
 
@@ -2625,6 +3069,9 @@ const S = {
     'sec-ruc-tags':     ['cms-articles'],
     'sec-demo-team':    ['cms-my-team'],
     'sec-demo-empty':   [],
+    'sec-d262-weather': ['weather'],
+    'sec-d262-empty1':  [],
+    'sec-d262-empty2':  [],
   },
   primaryCtx: {
     'page-rel-detail': ['stores-current-item'],
@@ -2643,6 +3090,11 @@ const S = {
     'el-city|Link':       {ctxId:'weather',          fieldName:'link',        sample:'"https://weather.com/tel-aviv"'},
     'el-temp|Value':      {ctxId:'weather',          fieldName:'temperature', sample:'"24°C"'},
     'el-countdown|Value': {ctxId:'custom-countdown', fieldName:'timeLeft',    sample:'"20:45:11"'},
+    'el-cond|Value': {ctxId:'lib-my-functions', fieldName:'weatherLabel', sample:'"☀️ Tel Aviv · Sunny"', fnHasParams:true,
+      fnTemplate:'☀️ {city} · {condition}',
+      fnParams:[{name:'city',type:'string',description:'The city name'},{name:'condition',type:'string',description:'Weather condition text'}]},
+    'el-cond|Value|param:city': {ctxId:'weather', fieldName:'city', sample:'"Tel Aviv"'},
+    'el-cond|Value|param:condition': {static:true, value:'Sunny'},
     'el-rel-title|Value':    {ctxId:'stores-current-item', fieldName:'name',        sample:'"Sunny Day Tee"'},
     'el-rel-desc|Value':     {ctxId:'stores-current-item', fieldName:'description', sample:'"Classic cotton tee…"'},
     'el-rel-img|Source':     {ctxId:'stores-current-item', fieldName:'image',       sample:'[img url]'},
@@ -2679,6 +3131,8 @@ const S = {
     'el-demo-member-tag-1|Value':  {ctxId:'cms-my-team', fieldName:'tagline', sample:'"Weaving words into wonders"'},
     'el-demo-member-tag-2|Value':  {ctxId:'cms-my-team', fieldName:'tagline', sample:'"Decoding the data jungle"'},
     'el-demo-member-tag-3|Value':  {ctxId:'cms-my-team', fieldName:'tagline', sample:'"Ruling the social realm"'},
+    'el-d262-city|Value':          {ctxId:'weather', fieldName:'city',        sample:'"Tel Aviv"'},
+    'el-d262-temp|Value':          {ctxId:'weather', fieldName:'temperature', sample:'"24°C"'},
   },
   // static typed values per element+prop
   staticValues: {
@@ -2688,10 +3142,14 @@ const S = {
     'el-art-title|Value':  'Article Title',
     'el-art-author|Value': 'Author name',
   },
-  dd: {open:false, elId:null, propKey:null, step:'source', srcId:null, fieldName:null},
+  dd: {open:false, elId:null, propKey:null, paramName:null, step:'source', srcId:null, fieldName:null},
   modal: {target:null, selId:null},
   ctxSettingsView: null,
-  currentPage: 'Homepage',
+  productMode: false,
+  specPageOpen: false,
+  specPageId: null,
+  preSpecPage: null,
+  currentPage: 'Demo 26.2',
   currentItemIdx: 0,
   sortRules: [],
   filterRules: [],
@@ -2740,39 +3198,30 @@ function navToPageCtx(pageId) {
   toast('Viewing page-level context');
 }
 
-function elPillNavDesign(elId) {
-  event.stopPropagation();
+function elPillNavDesign(e, elId) {
+  e.stopPropagation();
   S.sel = elId;
   S.ctxSettingsView = null;
+  S.inspectorOpen = true;
   document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
   const n = document.getElementById(elId);
   if (n) n.classList.add('sel');
   S.tab = 'design';
   renderRP();
+  renderActionBar();
 }
 
-function elPillNavCtx(elId) {
-  event.stopPropagation();
-  const def = EL_DEFS[elId];
-  if (def?.isRepeater) {
-    S.sel = elId;
-    S.ctxSettingsView = null;
-    document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
-    const n = document.getElementById(elId);
-    if (n) n.classList.add('sel');
-    S.tab = 'settings';
-    renderRP();
-    return;
-  }
-  const sectionId = def?.section || def?.parentPage || elId;
-  S.sel = sectionId;
+function elPillNavCtx(e, elId) {
+  e.stopPropagation();
+  S.sel = elId;
   S.ctxSettingsView = null;
+  S.inspectorOpen = true;
   document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
-  const n = document.getElementById(sectionId);
+  const n = document.getElementById(elId);
   if (n) n.classList.add('sel');
   S.tab = 'settings';
-  S.openCats.context = true;
   renderRP();
+  renderActionBar();
 }
 
 function buildBindTagHTML(elId, ctxLabel) {
@@ -2811,7 +3260,7 @@ function updateInspectorToggle() {
 
 function renderActionBar() {
   const bar = document.getElementById('action-bar');
-  if (!S.sel) { bar.classList.remove('open'); updateInspectorToggle(); return; }
+  if (!S.sel || S.inspectorOpen) { bar.classList.remove('open'); updateInspectorToggle(); return; }
   const def = EL_DEFS[S.sel];
   if (!def) { bar.classList.remove('open'); updateInspectorToggle(); return; }
   const actions = ACTION_BAR_CONFIG[def.type];
@@ -2842,6 +3291,7 @@ function renderActionBar() {
   bar.classList.add('open');
   updateInspectorToggle();
 }
+
 
 function exitTextEditing() {
   const prev = document.querySelector('.val[contenteditable="true"]');
@@ -2907,6 +3357,19 @@ function renderEtPanel() {
       </div>
     </div>
   </div>`;
+
+  if (valueBind?.fnHasParams && valueBind.fnParams) {
+    const paramCount = valueBind.fnParams.length;
+    const bkey = elId + '|Value';
+    const filledCount = valueBind.fnParams.filter(p => S.bindings[`${bkey}|param:${p.name}`]).length;
+    const allFilled = filledCount === paramCount;
+    html += `<div class="et-panel-params-link" onclick="actionSettings()" style="${allFilled ? 'color:var(--grn)' : ''}">
+      <span>⚡</span>
+      <span class="et-params-count">${paramCount} parameter${paramCount > 1 ? 's' : ''}</span>
+      <span>·</span>
+      <span>Configure →</span>
+    </div>`;
+  }
 
   document.getElementById('et-panel-body').innerHTML = html;
 }
@@ -3106,7 +3569,8 @@ function toggleInspector() {
 function renderRP() {
   const rpEl = document.getElementById('rp');
   const rp = document.getElementById('rp-inner');
-  if (!S.inspectorOpen) { rpEl.classList.remove('open'); rp.innerHTML = ''; return; }
+  const canvasEl = document.getElementById('canvas');
+  if (!S.inspectorOpen) { rpEl.classList.remove('open'); if (window._resetCanvasPan) window._resetCanvasPan(); rp.innerHTML = ''; return; }
   if (!S.sel) {
     rpEl.classList.add('open');
     rp.innerHTML = `<div id="rp-body" style="display:flex;align-items:center;justify-content:center;height:100%;padding:32px">
@@ -3306,36 +3770,56 @@ function renderSettings() {
     const isActiveDd = S.dd.open && S.dd.elId === S.sel && S.dd.propKey === 'Active State';
     const advancedOn = def._advancedMapping;
 
-    const stateCards = views.map(v => {
+    const hasViews = views.length > 0;
+    const isBound = !!b;
+
+    const stateCards = views.map((v, idx) => {
       const isActive = v.id === activeView;
-      const sharedCount = v.enumValues.length;
-      const disabled = sharedCount === 0;
-      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:.12s;${disabled ? 'opacity:.4;border:1px dashed var(--b2);background:none' : isActive ? 'background:var(--acc-d);border:1px solid var(--acc)' : 'background:var(--sur2);border:1px solid var(--b1)'}" onclick="switchMsbView(event,'${v.id}')">
+      const mappedStates = v.enumValues || [];
+      const disabled = isBound && mappedStates.length === 0;
+      const sharedCount = mappedStates.length;
+      const displayName = isBound && sharedCount > 0 ? mappedStates[0].charAt(0).toUpperCase() + mappedStates[0].slice(1) : v.name;
+      const canDelete = disabled || !isBound;
+      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:.12s;${disabled ? 'opacity:.5;border:1px dashed var(--b2);background:none' : isActive ? 'background:var(--acc-d);border:1px solid var(--acc)' : 'background:var(--sur2);border:1px solid var(--b1)'}" onclick="switchMsbView(event,'${v.id}')">
         <span style="font-size:10px;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t3)'}">◫</span>
         <div style="flex:1;min-width:0">
           <div style="display:flex;align-items:center;gap:6px">
-            <span style="font-size:12px;font-weight:${isActive && !disabled ? '600' : '400'};color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'}${disabled ? ';text-decoration:line-through' : ''}">${v.name}</span>
-            ${sharedCount > 1 ? '<span class="type-badge" style="font-size:8px;background:var(--yel);color:#000">joined</span>' : ''}
-            ${disabled ? '<span style="font-size:9px;color:var(--t3);font-family:\'DM Mono\',monospace">unused</span>' : ''}
+            <span style="font-size:12px;font-weight:${isActive && !disabled ? '600' : '400'};color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'}${disabled ? ';text-decoration:line-through' : ''}">${displayName}</span>
+            ${isBound && sharedCount > 1 ? '<span class="type-badge" style="font-size:8px;background:var(--yel);color:#000">joined</span>' : ''}
+            ${disabled ? '<span style="font-size:9px;color:var(--t3);font-family:\'DM Mono\',monospace">unmapped</span>' : ''}
           </div>
         </div>
         ${isActive && !disabled ? '<span style="font-size:9px;color:var(--acc);font-family:\'DM Mono\',monospace">editing</span>' : ''}
+        ${canDelete && views.length > 1 ? `<span style="font-size:10px;color:var(--t3);cursor:pointer;padding:2px 4px;border-radius:4px;transition:.12s" onmouseover="this.style.color='var(--err,#e84393)';this.style.background='var(--err-d,#fce4ec)'" onmouseout="this.style.color='var(--t3)';this.style.background=''" onclick="deleteMsbView(event,'${v.id}')">✕</span>` : ''}
       </div>`;
     }).join('');
 
-    const joinViewCards = advancedOn ? views.map(v => {
-      const disabled = v.enumValues.length === 0;
-      const availableToAdd = enumVals.filter(val => !v.enumValues.includes(val));
-      const chips = v.enumValues.map(val =>
-        `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:var(--acc-d);border:1px solid var(--acc);border-radius:10px;font-size:10px;color:var(--acc);font-family:'DM Mono',monospace">${val}${v.enumValues.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
+    const joinViewCards = views.map(v => {
+      const mapped = v.enumValues || [];
+      const disabled = isBound && mapped.length === 0;
+      const isActive = v.id === activeView;
+      const chips = mapped.map(val =>
+        `<span draggable="true" ondragstart="msbDragStart(event,'${val}')" style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:${isActive ? 'var(--acc)' : 'var(--acc-d)'};border:1px solid var(--acc);border-radius:10px;font-size:10px;color:${isActive ? '#fff' : 'var(--acc)'};font-family:'DM Mono',monospace;cursor:grab"><svg width="6" height="10" viewBox="0 0 6 10" style="opacity:.5;flex-shrink:0"><circle cx="1.5" cy="1.5" r="1" fill="currentColor"/><circle cx="4.5" cy="1.5" r="1" fill="currentColor"/><circle cx="1.5" cy="5" r="1" fill="currentColor"/><circle cx="4.5" cy="5" r="1" fill="currentColor"/><circle cx="1.5" cy="8.5" r="1" fill="currentColor"/><circle cx="4.5" cy="8.5" r="1" fill="currentColor"/></svg>${val}${mapped.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
       ).join('');
-      return `<div style="padding:6px 8px;border:1px ${disabled ? 'dashed var(--b2)' : 'solid var(--b1)'};border-radius:6px;background:${disabled ? 'none' : 'var(--sur2)'};${disabled ? 'opacity:.45' : ''}">
-        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : 'var(--t1)'};margin-bottom:4px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace">unused — design preserved</span>' : ''}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${chips}${availableToAdd.length && !disabled ? `<span style="display:inline-flex;align-items:center;gap:2px;padding:2px 8px;border:1px dashed var(--b2);border-radius:10px;font-size:10px;color:var(--t3);cursor:pointer;position:relative" onclick="msbShowAssign(event,'${v.id}')">+ add</span>` : ''}${disabled ? `<span style="display:inline-flex;align-items:center;gap:2px;padding:2px 8px;border:1px dashed var(--b2);border-radius:10px;font-size:10px;color:var(--t3);cursor:pointer" onclick="msbShowAssign(event,'${v.id}')">+ restore</span>` : ''}</div>
+      return `<div class="msb-drop-zone" data-view-id="${v.id}" onclick="switchMsbView(event,'${v.id}')" ondragover="msbDragOver(event)" ondragleave="msbDragLeave(event)" ondrop="msbDrop(event,'${v.id}')" style="padding:8px 10px;border:2px ${disabled ? 'dashed color-mix(in srgb, var(--acc) 25%, var(--b2))' : isActive ? 'solid var(--acc)' : 'solid var(--b1)'};border-radius:8px;background:${disabled ? 'color-mix(in srgb, var(--acc) 3%, var(--sur))' : isActive ? 'var(--acc-d)' : 'var(--sur2)'};cursor:pointer;transition:border-color .15s,background .15s,opacity .15s">
+        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'};margin-bottom:${disabled ? '0' : '4'}px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${isActive && !disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:var(--acc)">editing</span>' : ''}${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:color-mix(in srgb, var(--acc) 50%, var(--t3))">drag a state here</span>' : ''}</div>
+        ${chips ? `<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${chips}</div>` : ''}
       </div>`;
-    }).join('') : '';
+    }).join('');
+
+    let disconnectedBanner = '';
+    if (!isBound && hasViews) {
+      disconnectedBanner = `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:color-mix(in srgb, var(--yel) 12%, var(--sur));border:1px solid color-mix(in srgb, var(--yel) 30%, var(--b1));border-radius:8px;margin-bottom:8px">
+        <span style="font-size:14px">⚠️</span>
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:500;color:var(--t1)">Not connected to data</div>
+          <div style="font-size:10px;color:var(--t3);line-height:1.4">Views won't switch automatically. Connect a states field to activate.</div>
+        </div>
+      </div>`;
+    }
 
     return `<div class="ps"><div class="ps-lbl">Active State</div>
+      ${disconnectedBanner}
       <div class="prop-wrap">
         <div class="prop-key" style="font-size:11px;color:var(--t2);padding:0 2px">Active State</div>
         <div class="prop-row ${b?'bound':''} ${isActiveDd?'active-bind':''}">
@@ -3346,10 +3830,10 @@ function renderSettings() {
                     <span class="prop-bound-ctx" onclick="navToSectionCtx('${S.sel}',event)">${ctx.icon} ${ctx.name}</span>
                     <span class="prop-bound-field">${b.fieldName}<span class="chip-x" onclick="unbind('${S.sel}','Active State',event)">✕</span></span>
                   </div>`
-                : `<span style="font-size:11px;color:var(--t3);font-style:italic">Connect to an enum field →</span>`}
+                : `<span style="font-size:11px;color:var(--t3);font-style:italic">Connect to a states field →</span>`}
             </div>
           </div>
-          <div class="bind-btn" onclick="openDd(event,'${S.sel}','Active State')" title="Connect to context enum">
+          <div class="bind-btn" onclick="openDd(event,'${S.sel}','Active State')" title="Connect to states field">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/>
             </svg>
@@ -3357,19 +3841,10 @@ function renderSettings() {
         </div>
       </div>
     </div>
-    ${b && enumVals.length ? `<div class="ps"><div class="ps-lbl">States</div>
-      <div style="font-size:10px;color:var(--t3);line-height:1.4;padding:0 0 6px">Click to switch view on canvas.</div>
-      <div style="display:flex;flex-direction:column;gap:4px">
-        ${stateCards}
-      </div>
-    </div>
-    <div class="ps"><div class="ps-lbl" style="display:flex;align-items:center;justify-content:space-between">
-      Join States
-      <div class="tog ${advancedOn?'on':''}" onclick="toggleMsbAdvanced(event)"></div>
-    </div>
-      <div style="font-size:10px;color:var(--t3);line-height:1.4;padding:2px 0 ${advancedOn ? '6' : '0'}px">Some states look the same? Group them into one view.</div>
-      ${advancedOn ? `<div style="display:flex;flex-direction:column;gap:6px">${joinViewCards}</div>
-      ${views.length < enumVals.length ? `<div style="text-align:center;padding:6px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer;text-decoration:underline" onclick="msbResetJoins(event)">Reset — undo all joins</span></div>` : ''}` : ''}
+    ${hasViews ? `<div class="ps"><div class="ps-lbl">States</div>
+      <div style="font-size:10px;color:var(--t3);line-height:1.4;padding:2px 0 6px">${isBound ? 'Click to switch view on canvas. Drag states between views to group them.' : 'Your designs are preserved. Click to preview each view.'}</div>
+      <div style="display:flex;flex-direction:column;gap:6px">${joinViewCards}</div>
+      ${isBound && views.length < enumVals.length ? `<div style="text-align:center;padding:6px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer;text-decoration:underline" onclick="msbResetJoins(event)">Reset — undo all joins</span></div>` : ''}
     </div>` : ''}`;
   }
   if (def.isRepItem) {
@@ -3405,11 +3880,13 @@ function renderSettingsWithCategories(def, propsHtml, visHtml) {
   let html = '';
 
   if (showCtx) {
+    const ctxTarget = (def.isMultiState) ? def.section : S.sel;
+    const ctxCount = (S.ctxMap[ctxTarget] || []).length;
     const ctxContent = S.ctxSettingsView ? renderCtxSettings(S.ctxSettingsView) : renderCtxList();
     html += `<div class="rp-cat ${S.openCats.context ? 'open' : ''}" id="rp-cat-context">
       <div class="rp-cat-head" onclick="toggleCat('context')">
         <span class="rp-cat-chevron">›</span>
-        <span class="rp-cat-title">Context</span>
+        <span class="rp-cat-title">Context${ctxCount ? ' (' + ctxCount + ')' : ''}</span>
       </div>
       <div class="rp-cat-body" style="padding:0">${ctxContent}</div>
     </div>`;
@@ -3459,6 +3936,8 @@ function renderPropRow(elId, prop) {
     return renderImgPropRow(elId, prop.k, isBound, isActiveDd, ctx, b);
   }
 
+  const fnParamsHtml = (isBound && b.fnHasParams && b.fnParams) ? renderFnParams(elId, prop.k, b) : '';
+
   return `<div class="prop-wrap" id="pr-${elId}-${prop.k.replace(/\s/g,'_')}">
     <div class="prop-key">${prop.k}</div>
     <div class="prop-row-wrap">
@@ -3480,6 +3959,51 @@ function renderPropRow(elId, prop) {
         </svg>
       </div>
     </div>
+    ${fnParamsHtml}
+  </div>`;
+}
+
+function renderFnParams(elId, propKey, binding) {
+  const params = binding.fnParams || [];
+  if (!params.length) return '';
+  const paramRows = params.map(p => {
+    const paramBKey = `${elId}|${propKey}|param:${p.name}`;
+    const pb = S.bindings[paramBKey];
+    const isBoundCtx = pb && !pb.static;
+    const isStatic = pb && pb.static;
+    const pCtx = isBoundCtx ? findSource(pb.ctxId) : null;
+    const isParamActiveDd = S.dd.open && S.dd.elId === elId && S.dd.propKey === propKey && S.dd.paramName === p.name;
+    const staticVal = isStatic ? pb.value.replace(/"/g,'&quot;') : '';
+    let innerHtml;
+    if (isBoundCtx && pCtx) {
+      innerHtml = `<div class="prop-bound-chip prop-bound-detail" style="display:flex">
+        <span class="prop-bound-ctx" onclick="navToSectionCtx('${elId}',event)">${pCtx.icon} ${pCtx.name}</span>
+        <span class="prop-bound-field">${pb.fieldName}<span class="chip-x" onclick="unbindParam('${elId}','${propKey}','${p.name}',event)">✕</span></span>
+      </div>`;
+    } else {
+      innerHtml = `<input class="fn-param-input${isStatic ? ' has-value' : ''}" type="text" value="${staticVal}" placeholder="Type value or connect →" oninput="setParamStatic('${elId}','${propKey}','${p.name}',this.value)" onblur="onParamBlur('${elId}','${propKey}')" onkeydown="if(event.key==='Enter'){this.blur()}" />`;
+    }
+    return `<div class="fn-param-wrap" id="pr-${elId}-${propKey.replace(/\s/g,'_')}-param-${p.name}">
+      <div class="fn-param-key">${p.name}</div>
+      <div class="fn-param-row ${isBoundCtx?'bound':''} ${isParamActiveDd?'active-bind':''}">
+        <div class="prop-main">
+          <div class="prop-val">
+            ${innerHtml}
+          </div>
+        </div>
+        <div class="bind-btn" onclick="openParamDd(event,'${elId}','${propKey}','${p.name}')" title="Connect parameter">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  return `<div class="fn-params">
+    <div class="fn-params-header">
+      <span class="fn-params-label">Parameters</span>
+    </div>
+    ${paramRows}
   </div>`;
 }
 
@@ -3575,12 +4099,62 @@ function updateCanvasStatic(elId, propKey, val) {
 function unbind(elId, propKey, e) {
   e.stopPropagation();
   const bkey = `${elId}|${propKey}`;
+  const oldBinding = S.bindings[bkey];
+  if (oldBinding?.fnHasParams && oldBinding.fnParams) {
+    oldBinding.fnParams.forEach(p => delete S.bindings[`${bkey}|param:${p.name}`]);
+  }
   delete S.bindings[bkey];
   applyBindingToCanvas(elId, propKey, null);
   toast('Binding removed');
   updatePropRowDOM(elId, propKey);
   const def = EL_DEFS[elId];
   if (def?.isMultiState) { refreshMsbState(); renderBody(); }
+}
+
+function unbindParam(elId, propKey, paramName, e) {
+  e.stopPropagation();
+  const paramBKey = `${elId}|${propKey}|param:${paramName}`;
+  delete S.bindings[paramBKey];
+  toast(`Parameter ${paramName} disconnected`);
+  updateFnCanvasPreview(elId, propKey);
+  updatePropRowDOM(elId, propKey);
+}
+
+function setParamStatic(elId, propKey, paramName, value) {
+  const paramBKey = `${elId}|${propKey}|param:${paramName}`;
+  if (!value) {
+    delete S.bindings[paramBKey];
+  } else {
+    S.bindings[paramBKey] = {static: true, value: value};
+  }
+  updateFnCanvasPreview(elId, propKey);
+}
+function onParamBlur(elId, propKey) {
+  updateFnCanvasPreview(elId, propKey);
+}
+
+function updateFnCanvasPreview(elId, propKey) {
+  const bkey = `${elId}|${propKey}`;
+  const b = S.bindings[bkey];
+  if (!b || !b.fnHasParams || !b.fnParams) return;
+  const valEl = document.getElementById('v-' + elId);
+  if (!valEl) return;
+  const template = b.fnTemplate;
+  if (!template) return;
+  let text = template;
+  let allFilled = true;
+  b.fnParams.forEach(p => {
+    const pb = S.bindings[`${bkey}|param:${p.name}`];
+    if (pb && pb.static) {
+      text = text.replace(`{${p.name}}`, pb.value);
+    } else if (pb && pb.ctxId) {
+      text = text.replace(`{${p.name}}`, (pb.sample || '').replace(/^"|"$/g, ''));
+    } else {
+      text = text.replace(`{${p.name}}`, '___');
+      allFilled = false;
+    }
+  });
+  valEl.textContent = text;
 }
 
 /* ── CONTEXT TAB ── */
@@ -3685,10 +4259,10 @@ function getCtxPillText(sectionId) {
   const firstName = getCtxDisplayName(displayIds[0], sectionId);
   const ctxLabel = first.icon + ' ' + firstName + (displayIds.length > 1 ? ' +' + (displayIds.length - 1) : '');
   const tooltip = `${label} · ${ctxLabel.replace(/"/g, '&quot;')}`;
-  return `<div class="ctx-bind-icon" onclick="event.stopPropagation();pillNavCtx('${sectionId}')" title="${tooltip}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l-1.2 1.2a2.5 2.5 0 0 1-3.6-3.4L6.4 2.6a2.5 2.5 0 0 1 3.5 0l.1.1"/><path d="M6 10l1.2-1.2a2.5 2.5 0 0 1 3.6 3.4l-1.2 1.2a2.5 2.5 0 0 1-3.5 0l-.1-.1"/></svg></div>`;
+  return `<div class="ctx-bind-icon" onclick="event.stopPropagation();pillNavCtx('${sectionId}')" title="${tooltip}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg></div>`;
 }
 
-const CTX_PILL_EMPTY_ICON = `<div class="ctx-bind-icon" onclick="event.stopPropagation();pillNavCtx(this.closest('.c-section,.c-page').id)" title="Connect data"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l-1.2 1.2a2.5 2.5 0 0 1-3.6-3.4L6.4 2.6a2.5 2.5 0 0 1 3.5 0l.1.1"/><path d="M6 10l1.2-1.2a2.5 2.5 0 0 1 3.6 3.4l-1.2 1.2a2.5 2.5 0 0 1-3.5 0l-.1-.1"/></svg></div>`;
+const CTX_PILL_EMPTY_ICON = `<div class="ctx-bind-icon" onclick="event.stopPropagation();pillNavCtx(this.closest('.c-section,.c-page').id)" title="Connect data"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg></div>`;
 
 function refreshAllPills() {
   Object.keys(S.ctxMap).forEach(secId => {
@@ -3701,7 +4275,7 @@ function refreshAllPills() {
       if (pill) pill.innerHTML = pillText;
     } else {
       sec.classList.remove('has-ctx');
-      if (pill) pill.innerHTML = CTX_PILL_EMPTY_ICON;
+      if (pill) pill.innerHTML = '';
     }
   });
   // Refresh repeater pills
@@ -3719,6 +4293,23 @@ function refreshAllPills() {
       pill.innerHTML = '';
     }
   });
+  // Refresh MSB pills
+  Object.keys(EL_DEFS).forEach(id => {
+    const def = EL_DEFS[id];
+    if (!def.isMultiState) return;
+    const pill = document.getElementById('pill-' + id);
+    if (!pill) return;
+    const bkey = id + '|Active State';
+    const binding = S.bindings[bkey];
+    if (binding) {
+      const ctx = findSource(binding.ctxId);
+      const ctxLabel = ctx ? `Connected · ${binding.fieldName}` : binding.fieldName;
+      const bindIcon = `<svg class="el-bind-icon" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l-1.2 1.2a2.5 2.5 0 0 1-3.6-3.4L6.4 2.6a2.5 2.5 0 0 1 3.5 0l.1.1"/><path d="M6 10l1.2-1.2a2.5 2.5 0 0 1 3.6 3.4l-1.2 1.2a2.5 2.5 0 0 1-3.5 0l-.1-.1"/></svg>`;
+      pill.innerHTML = `<span class="el-bind-sec" onclick="event.stopPropagation();elPillNavDesign(event,'${id}')">Multi-State</span><span class="el-bind-sep"></span><span class="el-bind-ctx" onclick="event.stopPropagation();elPillNavCtx(event,'${id}')">${bindIcon} ${ctxLabel}</span>`;
+    } else {
+      pill.innerHTML = '';
+    }
+  });
   refreshElementBindTags();
   refreshRepeaterSkeletons();
 }
@@ -3728,12 +4319,13 @@ function refreshElementBindTags() {
   document.querySelectorAll('.c-el').forEach(domEl => {
     const typeTag = domEl.querySelector('.el-type-tag');
     if (!typeTag) return;
-    const def = EL_DEFS[domEl.id];
+    const elId = domEl.id;
+    const def = EL_DEFS[elId];
     const typeName = def ? def.type : 'Element';
     if (domEl.classList.contains('bound')) {
-      typeTag.innerHTML = typeName + bindIconSvg;
+      typeTag.innerHTML = `<span class="type-tag-label" onclick="elPillNavDesign(event,'${elId}')">${typeName}</span><span class="type-tag-bind-icon" onclick="elPillNavCtx(event,'${elId}')">${bindIconSvg}</span>`;
     } else {
-      typeTag.textContent = typeName;
+      typeTag.innerHTML = `<span class="type-tag-label" onclick="elPillNavDesign(event,'${elId}')">${typeName}</span>`;
     }
   });
 }
@@ -3885,7 +4477,7 @@ function renderCtxFields(c, sectionId) {
     </div>
   </div>` : '';
 
-  const ctxActionsHtml = c.contextActions ? `<div class="ctx-fields-section">
+  const ctxActionsHtml = (c.contextActions && c.contextActions.length) ? `<div class="ctx-fields-section">
     <div class="ctx-fields-section-head" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.ctx-expand-chevron').classList.toggle('open')">
       <span>${isList ? 'Context actions' : 'Actions'}</span><span class="ctx-expand-chevron">›</span>
     </div>
@@ -3894,7 +4486,7 @@ function renderCtxFields(c, sectionId) {
     </div>
   </div>` : '';
 
-  const metadataHtml = c.metadata ? `<div class="ctx-fields-section">
+  const metadataHtml = (c.metadata && c.metadata.length) ? `<div class="ctx-fields-section">
     <div class="ctx-fields-section-head" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.ctx-expand-chevron').classList.toggle('open')">
       <span>Metadata</span><span class="ctx-expand-chevron">›</span>
     </div>
@@ -3903,7 +4495,13 @@ function renderCtxFields(c, sectionId) {
     </div>
   </div>` : '';
 
+  const canAddFields = c.source === 'CMS' || c.source === 'Custom Code';
+  const addFieldBtn = canAddFields
+    ? `<div class="ctx-add-field-btn" onclick="event.stopPropagation();openAddFieldModal('${c.id}')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add field</div>`
+    : '';
+
   return `${rows}
+    ${addFieldBtn}
     ${itemActionsHtml}
     ${ctxActionsHtml}
     ${metadataHtml}
@@ -4128,6 +4726,13 @@ function renderCtxList() {
     }
   });
 
+  const ctxGroupOrder = ['CMS', 'Custom', 'Apps', 'System'];
+  ownCtxs.sort((a, b) => {
+    const ai = ctxGroupOrder.indexOf(a.group || 'Other');
+    const bi = ctxGroupOrder.indexOf(b.group || 'Other');
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
+
   const showSplit = inheritedCtxs.length > 0;
 
   const renderCtxCard = (c) => {
@@ -4145,7 +4750,7 @@ function renderCtxList() {
       return `
       <div class="ctx-group">
         <div class="ctx-card${primary ? ' primary' : ''}${isUnconfigured ? ' unconfigured' : ''}">
-          <div class="ctx-card-name">${c.customCode ? '<span style="font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;color:var(--yel)">&lt;/&gt;</span>' : c.icon} ${getCtxDisplayName(c.id, S.sel)} <span class="type-badge ${c.type==='list'?'tb-list':'tb-obj'}">${c.type}</span>${c.customCode ? '<span class="type-badge" style="background:var(--yel);color:#fff;opacity:.8">Custom</span>' : ''}${primary && isPage ? '<span class="type-badge" style="background:var(--b2);color:var(--t2)">Page</span>' : ''}${isUnconfigured ? '<span class="type-badge" style="background:var(--yel);color:#000;font-weight:600">New</span>' : ''}</div>
+          <div class="ctx-card-name">${c.customCode ? '<span style="font-family:\'DM Mono\',monospace;font-size:11px;font-weight:700;color:var(--yel)">&lt;/&gt;</span> ' : c.icon ? c.icon + ' ' : ''}${getCtxDisplayName(c.id, S.sel)} <span class="type-badge ${c.type==='list'?'tb-list':'tb-obj'}">${c.type}</span>${primary && isPage ? '<span class="type-badge" style="background:var(--b2);color:var(--t2)">Page</span>' : ''}${isUnconfigured ? '<span class="type-badge" style="background:var(--yel);color:#000;font-weight:600">New</span>' : ''}</div>
           <div class="ctx-card-src">from ${c.source}</div>
           ${primary && isPage ? '<div class="ctx-card-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Comes with this page</div>' : ''}
           ${isUnconfigured ? '<div class="ctx-card-lock" style="color:var(--yel);font-style:normal"><svg viewBox="0 0 24 24" style="stroke:var(--yel)"><path d="M12 9v4"/><circle cx="12" cy="16" r="0.5"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg> Configure settings to use as binding source</div>' : ''}
@@ -4207,7 +4812,73 @@ function openCodeEditor(e, ctxId) {
   if (e) e.stopPropagation();
   document.querySelectorAll('.ctx-card-dropdown.open').forEach(d => d.classList.remove('open'));
   const ctx = findSource(ctxId);
-  toast(`Opening code editor for ${ctx ? ctx.name : ctxId}…`);
+  if (!ctx) return;
+
+  const tabs = document.querySelectorAll('.tb-tabs .tb-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  if (tabs[1]) tabs[1].classList.add('active');
+
+  const code = [
+    {text: `<span class="hl-cm">// ${ctx.name} — Custom Context Definition</span>`},
+    {text: `<span class="hl-cm">// Source: ${ctx.source}</span>`},
+    {text: ''},
+    {text: `<span class="hl-kw">import</span> { <span class="hl-fn">createContext</span> } <span class="hl-kw">from</span> <span class="hl-str">'@wix/context-api'</span>;`},
+    {text: ''},
+    {text: `<span class="hl-cm">// Field type definitions</span>`},
+    {text: `<span class="hl-kw">interface</span> <span class="hl-ty">${ctx.name.replace(/[^a-zA-Z0-9]/g,'')}Fields</span> {`},
+    ...ctx.fields.map(f => {
+      const typeMap = {string:'string', number:'number', boolean:'boolean', image:'string', dateTime:'string', enum:'string', url:'string', array:'Array&lt;any&gt;', object:'Record&lt;string, any&gt;'};
+      const tsType = typeMap[f.type] || 'any';
+      return {text: `  ${f.name}<span class="hl-op">:</span> <span class="hl-ty">${tsType}</span>;`, highlight: f.empty};
+    }),
+    {text: '}'},
+    {text: ''},
+    {text: `<span class="hl-cm">// Create and export the context</span>`},
+    {text: `<span class="hl-kw">export const</span> <span class="hl-fn">${ctx.id.replace(/-/g,'_')}</span> = <span class="hl-fn">createContext</span>&lt;<span class="hl-ty">${ctx.name.replace(/[^a-zA-Z0-9]/g,'')}Fields</span>&gt;({`},
+    {text: `  <span class="hl-prop">name</span><span class="hl-op">:</span> <span class="hl-str">'${ctx.name}'</span>,`},
+    {text: `  <span class="hl-prop">type</span><span class="hl-op">:</span> <span class="hl-str">'${ctx.type}'</span>,`},
+    {text: '});'},
+    {text: ''},
+    {text: `<span class="hl-cm">// Provide data to the context</span>`},
+    {text: `${ctx.id.replace(/-/g,'_')}.<span class="hl-fn">setData</span>({`},
+    ...ctx.fields.map((f, i) => {
+      const comma = i < ctx.fields.length - 1 ? ',' : '';
+      return {text: `  <span class="hl-prop">${f.name}</span><span class="hl-op">:</span> <span class="hl-str">${f.sample.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>${comma}`, highlight: f.empty};
+    }),
+    {text: '});'},
+  ];
+
+  const lineNums = code.map((_, i) => `<div>${i + 1}</div>`).join('');
+  const codeHtml = code.map(line =>
+    line.highlight
+      ? `<span class="code-highlight-line">${line.text}  <span class="hl-cm">← new field</span></span>`
+      : line.text
+  ).join('\n');
+
+  document.getElementById('code-line-nums').innerHTML = lineNums;
+  document.getElementById('code-lines').innerHTML = codeHtml;
+  document.getElementById('code-panel-overlay').classList.add('open');
+}
+
+function closeCodePanel() {
+  document.getElementById('code-panel-overlay').classList.remove('open');
+  const tabs = document.querySelectorAll('.tb-tabs .tb-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  if (tabs[0]) tabs[0].classList.add('active');
+}
+
+function openCodeTab() {
+  const customCtx = CTX_DEFS.find(c => c.customCode);
+  if (customCtx) {
+    openCodeEditor(null, customCtx.id);
+  } else {
+    const tabs = document.querySelectorAll('.tb-tabs .tb-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    if (tabs[1]) tabs[1].classList.add('active');
+    document.getElementById('code-panel-overlay').classList.add('open');
+    document.getElementById('code-line-nums').innerHTML = '<div>1</div><div>2</div><div>3</div>';
+    document.getElementById('code-lines').innerHTML = '<span class="hl-cm">// No custom code contexts defined</span>\n<span class="hl-cm">// Add a Custom Code context to see code here</span>\n';
+  }
 }
 
 function closeCtxSettings() {
@@ -4304,16 +4975,18 @@ function selectPage(el, name) {
   document.querySelector('.page-sel').innerHTML = `<span class="page-sel-name">${pageIcon} ${name}</span> <span class="page-sel-chevron">▾</span>`;
   document.getElementById('pages-panel').classList.remove('open');
 
-  const homePage = document.querySelector('.canvas-inner');
+  const homePage = document.querySelector('.canvas-inner:not(#demo-page):not(#demo262-page)');
   const itemsPage = document.getElementById('items-page');
   const itemRelPage = document.getElementById('item-relationship-page');
   const rucPage = document.getElementById('repeater-usecases-page');
   const msbPage = document.getElementById('msb-page');
   const demoPage = document.getElementById('demo-page');
+  const demo262Page = document.getElementById('demo262-page');
   S.currentPage = name;
 
   homePage.classList.add('hidden-page');
   demoPage.classList.add('hidden-page');
+  demo262Page.classList.add('hidden-page');
   itemsPage.classList.remove('active-page');
   itemRelPage.classList.remove('active-page');
   rucPage.classList.remove('active-page');
@@ -4331,6 +5004,8 @@ function selectPage(el, name) {
     msbPage.classList.add('active-page');
   } else if (name === 'Demo') {
     demoPage.classList.remove('hidden-page');
+  } else if (name === 'Demo 26.2') {
+    demo262Page.classList.remove('hidden-page');
   } else {
     homePage.classList.remove('hidden-page');
   }
@@ -4476,6 +5151,214 @@ function cleanUpDrag() {
 
 document.addEventListener('dragend', cleanUpDrag);
 
+/* ── ELEMENT DRAG BETWEEN SECTIONS (context promotion) ── */
+let _elDragId = null;
+let _elDragGhost = null;
+let _elDragSrcSection = null;
+
+function initElementDrag() {
+  document.querySelectorAll('.c-el.bound').forEach(el => {
+    if (el.closest('.c-repeater')) return;
+    el.setAttribute('draggable', 'true');
+    el.addEventListener('dragstart', onElDragStart);
+  });
+  document.querySelectorAll('.c-section.has-ctx').forEach(sec => {
+    sec.querySelectorAll('.c-el:not(.bound)').forEach(el => {
+      if (el.closest('.c-repeater')) return;
+      el.setAttribute('draggable', 'true');
+      el.addEventListener('dragstart', onElDragStart);
+    });
+  });
+  document.querySelectorAll('.c-section').forEach(sec => {
+    sec.addEventListener('dragover', onSectionDragOver);
+    sec.addEventListener('dragleave', onSectionDragLeave);
+    sec.addEventListener('drop', onSectionDrop);
+  });
+}
+
+function onElDragStart(e) {
+  const el = e.target.closest('.c-el');
+  if (!el) return;
+  const parentSection = el.closest('.c-section');
+  if (!parentSection) return;
+  _elDragId = el.id;
+  _elDragSrcSection = parentSection.id;
+  e.dataTransfer.setData('application/element-id', el.id);
+  e.dataTransfer.effectAllowed = 'move';
+  e.stopPropagation();
+
+  const def = EL_DEFS[el.id];
+  const label = def ? def.name : el.id;
+  _elDragGhost = document.createElement('div');
+  _elDragGhost.className = 'el-drag-ghost';
+  _elDragGhost.textContent = label;
+  document.body.appendChild(_elDragGhost);
+  e.dataTransfer.setDragImage(_elDragGhost, 0, 0);
+
+  setTimeout(() => { el.style.opacity = '.3'; }, 0);
+}
+
+function onSectionDragOver(e) {
+  if (!_elDragId) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const sec = e.currentTarget;
+  const srcSection = _elDragSrcSection || (EL_DEFS[_elDragId] && EL_DEFS[_elDragId].section);
+  if (sec.id === srcSection) return;
+  const targetHasCtx = (S.ctxMap[sec.id] || []).length > 0;
+  if (!targetHasCtx) {
+    sec.classList.add('el-drop-target-empty');
+  }
+  sec.classList.add('el-drop-target');
+}
+
+function onSectionDragLeave(e) {
+  e.currentTarget.classList.remove('el-drop-target');
+  e.currentTarget.classList.remove('el-drop-target-empty');
+}
+
+function onSectionDrop(e) {
+  if (!_elDragId) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const targetSec = e.currentTarget;
+  targetSec.classList.remove('el-drop-target');
+  targetSec.classList.remove('el-drop-target-empty');
+
+  const elId = _elDragId;
+  const el = document.getElementById(elId);
+  const def = EL_DEFS[elId];
+  if (!el || !def) return;
+
+  const srcSectionId = _elDragSrcSection || def.section;
+  const targetSectionId = targetSec.id;
+  if (srcSectionId === targetSectionId) return;
+
+  const bindings = Object.keys(S.bindings).filter(k => k.startsWith(elId + '|'));
+  const boundCtxIds = [...new Set(bindings.map(k => S.bindings[k].ctxId).filter(Boolean))];
+
+  const targetCtxIds = S.ctxMap[targetSectionId] || [];
+
+  let ctxIdsToPromote = boundCtxIds.filter(id => !targetCtxIds.includes(id));
+
+  const targetIsEmpty = targetCtxIds.length === 0;
+  if (targetIsEmpty) {
+    const srcCtxIds = S.ctxMap[srcSectionId] || [];
+    srcCtxIds.forEach(id => {
+      if (!ctxIdsToPromote.includes(id)) {
+        ctxIdsToPromote.push(id);
+      }
+    });
+  }
+
+  const promoted = [];
+  if (ctxIdsToPromote.length > 0) {
+    const canvasInner = targetSec.closest('.canvas-inner') || targetSec.closest('.items-page') || targetSec.closest('.item-detail-page');
+    const pageSections = canvasInner ? [...canvasInner.querySelectorAll('.c-section')].map(s => s.id) : [srcSectionId, targetSectionId];
+
+    ctxIdsToPromote.forEach(ctxId => {
+      const ctx = findSource(ctxId);
+      if (!ctx) return;
+      pageSections.forEach(secId => {
+        if (!S.ctxMap[secId]) S.ctxMap[secId] = [];
+        if (!S.ctxMap[secId].includes(ctxId)) {
+          S.ctxMap[secId].push(ctxId);
+        }
+      });
+      promoted.push(ctx.name);
+    });
+  }
+
+  const prevSection = def.section;
+  def.section = targetSectionId;
+
+  const targetBody = targetSec.querySelector('.s-body');
+  if (targetBody) {
+    targetBody.appendChild(el);
+  }
+
+  el.style.opacity = '';
+  cleanUpElDrag();
+  refreshAllPills();
+  reinitElementDrag();
+  renderTree();
+  if (S.sel === elId) renderRP();
+
+  if (promoted.length > 0) {
+    const ctxNames = promoted.join(', ');
+    const t = document.getElementById('toast');
+    t.innerHTML = `Moved to ${EL_DEFS[targetSectionId]?.name || targetSectionId}. "${ctxNames}" promoted to page level. <span class="toast-undo" onclick="undoElMove('${elId}','${prevSection}','${targetSectionId}',${JSON.stringify(ctxIdsToPromote).replace(/"/g,'&quot;')})">Undo</span>`;
+    t.className = 'toast show ok';
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.classList.remove('show'), 5000);
+  } else {
+    toast(`Moved to ${EL_DEFS[targetSectionId]?.name || targetSectionId}`, true);
+  }
+}
+
+function undoElMove(elId, prevSection, curSection, promotedCtxIds) {
+  const el = document.getElementById(elId);
+  const def = EL_DEFS[elId];
+  if (!el || !def) return;
+
+  def.section = prevSection;
+  const prevBody = document.getElementById(prevSection)?.querySelector('.s-body');
+  if (prevBody) prevBody.appendChild(el);
+
+  const canvasInner = el.closest('.canvas-inner') || el.closest('.items-page');
+  const pageSections = canvasInner ? [...canvasInner.querySelectorAll('.c-section')].map(s => s.id) : [];
+
+  promotedCtxIds.forEach(ctxId => {
+    pageSections.forEach(secId => {
+      if (secId === prevSection) return;
+      const arr = S.ctxMap[secId];
+      if (arr) {
+        const idx = arr.indexOf(ctxId);
+        if (idx >= 0) arr.splice(idx, 1);
+      }
+    });
+  });
+
+  refreshAllPills();
+  reinitElementDrag();
+  renderTree();
+  if (S.sel === elId) renderRP();
+  toast('Move undone', true);
+}
+
+function cleanUpElDrag() {
+  if (_elDragGhost) { _elDragGhost.remove(); _elDragGhost = null; }
+  if (_elDragId) {
+    const el = document.getElementById(_elDragId);
+    if (el) el.style.opacity = '';
+  }
+  _elDragId = null;
+  _elDragSrcSection = null;
+  document.querySelectorAll('.el-drop-target').forEach(s => s.classList.remove('el-drop-target'));
+  document.querySelectorAll('.el-drop-target-empty').forEach(s => s.classList.remove('el-drop-target-empty'));
+}
+
+function reinitElementDrag() {
+  document.querySelectorAll('.c-el[draggable="true"]').forEach(el => {
+    el.removeAttribute('draggable');
+    el.removeEventListener('dragstart', onElDragStart);
+  });
+  document.querySelectorAll('.c-el.bound').forEach(el => {
+    if (el.closest('.c-repeater')) return;
+    el.setAttribute('draggable', 'true');
+    el.addEventListener('dragstart', onElDragStart);
+  });
+  document.querySelectorAll('.c-section.has-ctx').forEach(sec => {
+    sec.querySelectorAll('.c-el:not(.bound)').forEach(el => {
+      if (el.closest('.c-repeater')) return;
+      el.setAttribute('draggable', 'true');
+      el.addEventListener('dragstart', onElDragStart);
+    });
+  });
+}
+
+document.addEventListener('dragend', () => { cleanUpElDrag(); });
+
 function addComponentToCanvas(type) {
   const canvasInner = getActiveCanvasInner();
   if (!canvasInner) return;
@@ -4576,11 +5459,36 @@ function createDroppedComponent(type) {
 
 /* ── RIGHT-CLICK CONTEXT MENU ── */
 let _ctxMenuTarget = null;
+let _ctxMenuSpecId = null;
 
 document.addEventListener('contextmenu', function(e) {
-  const dropped = e.target.closest('[id^="sec-new-"]');
   const menu = document.getElementById('canvas-ctx-menu');
-  if (dropped) {
+  const specItem = document.getElementById('ctx-menu-spec');
+  const specSep = document.getElementById('ctx-menu-spec-sep');
+  const dropped = e.target.closest('[id^="sec-new-"]');
+  const canvasEl = e.target.closest('.c-el, .c-section');
+
+  _ctxMenuSpecId = null;
+  specItem.style.display = 'none';
+  specSep.style.display = 'none';
+
+  const ddPanel = e.target.closest('#dd, .dd');
+
+  if (S.productMode && (canvasEl || ddPanel)) {
+    e.preventDefault();
+    _ctxMenuTarget = null;
+    const targetId = ddPanel ? 'dd' : (canvasEl ? canvasEl.id : null);
+    const specId = targetId ? getSpecIdForElement(targetId) : null;
+    if (specId) {
+      _ctxMenuSpecId = specId;
+      specItem.style.display = '';
+      specSep.style.display = dropped ? '' : 'none';
+    }
+    if (!specId && !dropped) return;
+    menu.style.left = e.clientX + 'px';
+    menu.style.top = e.clientY + 'px';
+    menu.classList.add('open');
+  } else if (dropped) {
     e.preventDefault();
     _ctxMenuTarget = dropped;
     menu.style.left = e.clientX + 'px';
@@ -4613,7 +5521,7 @@ function openDd(e, elId, propKey) {
   const existingBinding = S.bindings[elId + '|' + propKey];
   const preSrc = existingBinding ? existingBinding.ctxId : null;
   const preField = existingBinding ? existingBinding.fieldName : null;
-  S.dd = {open:true, elId, propKey, step:'source', srcId:preSrc, fieldName:preField, openPanel: preSrc && preField ? null : (preSrc ? 'field' : 'src')};
+  S.dd = {open:true, elId, propKey, paramName:null, step:'source', srcId:preSrc, fieldName:preField, openPanel: preSrc && preField ? null : (preSrc ? 'field' : null)};
   const rect = e.currentTarget.getBoundingClientRect();
   const dd = document.getElementById('dd');
   const panelLeft = window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--panel'));
@@ -4632,23 +5540,47 @@ function openDd(e, elId, propKey) {
   });
   document.getElementById('dd-title').textContent = `Connect · ${propKey}`;
   renderDd();
-  // just highlight the active row without re-rendering the whole panel
-  document.querySelectorAll('.prop-row').forEach(r => r.classList.remove('active-bind'));
+  document.querySelectorAll('.prop-row,.fn-param-row').forEach(r => r.classList.remove('active-bind'));
   const rowId = `pr-${elId}-${propKey.replace(/\s/g,'_')}`;
   document.getElementById(rowId)?.classList.add('active-bind');
+}
+
+function openParamDd(e, elId, propKey, paramName) {
+  e.stopPropagation();
+  const paramBKey = `${elId}|${propKey}|param:${paramName}`;
+  const existingBinding = S.bindings[paramBKey];
+  const preSrc = existingBinding ? existingBinding.ctxId : null;
+  const preField = existingBinding ? existingBinding.fieldName : null;
+  S.dd = {open:true, elId, propKey, paramName, step:'source', srcId:preSrc, fieldName:preField, openPanel: preSrc && preField ? null : (preSrc ? 'field' : null)};
+  const rect = e.currentTarget.getBoundingClientRect();
+  const dd = document.getElementById('dd');
+  const panelLeft = window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--panel'));
+  dd.style.left = Math.max(8, panelLeft - 260) + 'px';
+  dd.style.top = (rect.bottom + 5) + 'px';
+  dd.classList.add('open');
+  document.getElementById('dd-title').textContent = `Connect · ${paramName}`;
+  renderDd();
+  document.querySelectorAll('.prop-row,.fn-param-row').forEach(r => r.classList.remove('active-bind'));
+  const rowId = `pr-${elId}-${propKey.replace(/\s/g,'_')}-param-${paramName}`;
+  document.getElementById(rowId)?.querySelector('.fn-param-row')?.classList.add('active-bind');
 }
 
 function closeDd() {
   S.dd.open = false;
   S.dd.openPanel = null;
+  S.dd.paramName = null;
   document.getElementById('dd').classList.remove('open');
-  // remove highlight without full re-render
-  document.querySelectorAll('.prop-row').forEach(r => r.classList.remove('active-bind'));
+  document.querySelectorAll('.prop-row,.fn-param-row').forEach(r => r.classList.remove('active-bind'));
 }
 
 function renderDd() {
   const body = document.getElementById('dd-body');
   const elId = S.dd.elId, propKey = S.dd.propKey;
+
+  if (S.dd.paramName) {
+    renderDdParam(body, elId, propKey, S.dd.paramName);
+    return;
+  }
 
   // Special case: Repeater "Items" binding — select the context itself (no field step)
   if (propKey === 'Items') {
@@ -4678,9 +5610,8 @@ function renderDd() {
     ? `<div class="dd-notice" style="padding:8px 12px;line-height:1.6">⚠ No context on parent section.<br>Select the section → Settings → Context → Add Context.</div>`
     : available.map(ctx => `
         <div class="dd-sel-item ${srcId===ctx.id?'sel':''}" onclick="ddSelSource(event,'${ctx.id}')">
-          <span style="font-size:13px">${ctx.icon}</span>
           <div style="flex:1;min-width:0">
-            <div>${ctx.name}</div>
+            <div class="dd-sel-item-name">${ctx.name}</div>
             <div class="dd-sel-item-sub">${ctx.source} · ${ctx.type}</div>
           </div>
         </div>`).join('');
@@ -4688,17 +5619,21 @@ function renderDd() {
   // Function library items
   const fnLibItems = FN_LIBS.map(lib => `
         <div class="dd-sel-item ${srcId===lib.id?'sel':''}" onclick="ddSelSource(event,'${lib.id}')">
-          <span style="font-size:13px">${lib.icon}</span>
           <div style="flex:1;min-width:0">
-            <div>${lib.name}</div>
+            <div class="dd-sel-item-name">${lib.name}</div>
             <div class="dd-sel-item-sub">${lib.functions.length} functions · ${lib.description}</div>
           </div>
         </div>`).join('');
 
-  const srcItems = `<div style="padding:4px 10px 2px;font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;padding-top:4px">CONTEXTS</div>`
-    + ctxItems
-    + `<div style="padding:4px 10px 2px;font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;border-top:1px solid var(--b1);margin-top:4px;padding-top:8px">FUNCTION LIBRARIES</div>`
-    + fnLibItems;
+  const srcItems = `<div class="dd-src-section">
+      <div class="dd-src-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg> Data Sources <span class="dd-src-count">${available.length}</span></div>
+      ${ctxItems}
+    </div>
+    <div class="dd-src-divider"></div>
+    <div class="dd-src-section">
+      <div class="dd-src-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg> Functions <span class="dd-src-count">${FN_LIBS.length}</span></div>
+      ${fnLibItems}
+    </div>`;
 
   // Field items — check for scoped context (nested repeater)
   const isVisibleProp = propKey === 'Visible';
@@ -4743,6 +5678,11 @@ function renderDd() {
           <span class="dd-sel-tag">${f.type}</span>
         </div>`).join('');
 
+  const ddCanAddField = selectedCtx && (selectedCtx.source === 'CMS' || selectedCtx.source === 'Custom Code') && !isSelectedFn;
+  const ddAddFieldBtn = ddCanAddField
+    ? `<div class="dd-add-field-btn" onclick="event.stopPropagation();openAddFieldModal('${srcId}')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add field</div>`
+    : '';
+
   body.innerHTML = `
     ${hasOutOfScope ? `<div class="dd-notice">⚠ No context on parent — showing page contexts</div>` : ''}
     <div class="dd-selectors">
@@ -4767,7 +5707,7 @@ function renderDd() {
             ${fieldName ? `<span>${isSelectedFn ? '<span style="font-family:\'DM Mono\',monospace;font-size:11px">' + fieldName + '</span>' : fieldName}</span>` : `<span style="color:var(--t3)">${srcId ? (isSelectedFn ? 'Select function…' : 'Select…') :'Pick source first'}</span>`}
             <span class="dd-sel-chevron">▾</span>
           </div>
-          <div class="dd-sel-dropdown">${fieldItems}</div>
+          <div class="dd-sel-dropdown">${fieldItems}${ddAddFieldBtn}</div>
         </div>
       </div>
     </div>
@@ -4812,16 +5752,41 @@ function confirmBind(e) {
   const ctx = findSource(srcId);
   const field = ctx.fields.find(f=>f.name===fieldName);
   const bkey = `${elId}|${propKey}`;
-  S.bindings[bkey] = {ctxId:srcId, fieldName, sample:field.sample};
+  const bindingData = {ctxId:srcId, fieldName, sample:field.sample};
+  if (field.params) {
+    bindingData.fnHasParams = true;
+    bindingData.fnParams = field.params;
+    if (field.template) bindingData.fnTemplate = field.template;
+  }
+  S.bindings[bkey] = bindingData;
+  if (field.params) {
+    field.params.forEach(p => {
+      if (p.default) {
+        S.bindings[`${bkey}|param:${p.name}`] = {static: true, value: p.default};
+      }
+    });
+  }
   applyBindingToCanvas(elId, propKey, field, srcId);
-  // if this is a repeater template element, propagate to all sibling items
+  if (field.params && field.template) {
+    updateFnCanvasPreview(elId, propKey);
+  }
   const def = EL_DEFS[elId];
   if (def?.repTemplate) {
     applyRepBindingToAll(def.repTemplate, propKey, field, srcId);
   }
   closeDd();
-  toast(`✓ ${propKey} → ${ctx.name} · ${fieldName} (all items)`, true);
-  updatePropRowDOM(elId, propKey);
+  toast(`✓ ${propKey} → ${ctx.name} · ${fieldName}`, true);
+  if (field.params) {
+    closeEtPanel();
+    S.inspectorOpen = true;
+    S.tab = 'settings';
+    S.openCats.properties = true;
+    renderRP();
+    renderActionBar();
+  } else {
+    updatePropRowDOM(elId, propKey);
+  }
+  renderEtPanel();
   if (def?.isMultiState) { refreshMsbState(); renderBody(); }
 }
 
@@ -5006,9 +5971,9 @@ function renderModalList() {
       const ctx = findSource(ctxId);
       if (!ctx) return '';
       const alreadyPending = pending.includes(ctxId);
-      return `<div class="modal-item${alreadyPending ? ' attached' : ''}" style="border:1px dashed var(--acc);border-radius:8px;margin-bottom:8px;background:var(--acc-d)" onclick="restoreInheritedCtx('${ctxId}')">
+      return `<div class="modal-item${alreadyPending ? ' attached' : ''}" style="border:1px dashed var(--acc);margin-bottom:4px;background:var(--acc-d)" onclick="restoreInheritedCtx('${ctxId}')">
         <div style="flex:1;min-width:0">
-          <div class="modal-item-name" style="display:flex;align-items:center;gap:4px">${ctx.name}<span style="font-size:9px;color:var(--acc);margin-left:4px">Restore page context</span></div>
+          <div class="modal-item-name">${ctx.name}<span style="font-size:10px;color:var(--acc);margin-left:6px;font-weight:400">Restore page context</span></div>
           <div class="modal-item-sub">${ctx.type}</div>
         </div>
         <div class="modal-check">${alreadyPending ? '✓' : ''}</div>
@@ -5035,12 +6000,12 @@ function renderModalList() {
     const keeping    = isAttached && isPending;
     const cls        = (keeping || willAdd) ? 'attached' : '';
     const checkIcon  = (keeping || willAdd) ? '✓' : '';
-    const badge      = isPrimary  ? `<span style="font-size:9px;color:var(--t3);margin-left:4px">🔒 Page context</span>`
-                     : willRemove ? `<span style="font-size:9px;color:var(--red);margin-left:4px">✕ Remove</span>`
+    const badge      = isPrimary  ? `<span style="font-size:10px;color:var(--t3);margin-left:6px;font-weight:400">Page context</span>`
+                     : willRemove ? `<span style="font-size:10px;color:var(--red);margin-left:6px;font-weight:400">Remove</span>`
                      : '';
-    return `<div class="modal-item ${cls}${isPrimary ? ' locked' : ''}" id="mi-${ctx.id}" onclick="${isPrimary ? '' : `toggleModalCtx('${ctx.id}')`}" style="${isPrimary ? 'opacity:.7;cursor:default' : ''}">
+    return `<div class="modal-item ${cls}${isPrimary ? ' locked' : ''}" id="mi-${ctx.id}" onclick="${isPrimary ? '' : `toggleModalCtx('${ctx.id}')`}" style="${isPrimary ? 'opacity:.6;cursor:default' : ''}">
       <div style="flex:1;min-width:0">
-        <div class="modal-item-name" style="display:flex;align-items:center;gap:4px">${ctx.name}${badge}</div>
+        <div class="modal-item-name">${ctx.name}${badge}</div>
         <div class="modal-item-sub">${ctx.type}</div>
       </div>
       <div class="modal-check">${isPrimary ? '🔒' : checkIcon}</div>
@@ -5048,13 +6013,12 @@ function renderModalList() {
   };
 
   let groupedHtml = '';
-  groupOrder.forEach(g => {
-    const items = grouped[g];
-    if (!items || items.length === 0) return;
+  const renderedGroups = groupOrder.filter(g => grouped[g] && grouped[g].length > 0);
+  renderedGroups.forEach((g, gi) => {
     if (g !== 'Apps') groupedHtml += `<div class="modal-group-label">${g}</div>`;
     if (g === 'Apps') {
       const appsBySource = {};
-      items.forEach(ctx => {
+      grouped[g].forEach(ctx => {
         const appName = ctx.source || 'Other';
         if (!appsBySource[appName]) appsBySource[appName] = [];
         appsBySource[appName].push(ctx);
@@ -5064,13 +6028,16 @@ function renderModalList() {
         groupedHtml += appsBySource[appName].map(renderItem).join('');
       });
     } else {
-      groupedHtml += items.map(renderItem).join('');
+      groupedHtml += grouped[g].map(renderItem).join('');
     }
     if (g === 'CMS') {
       groupedHtml += `<div class="modal-create-btn" onclick="toast('Create new CMS collection…')">+ New collection</div>`;
     }
     if (g === 'Custom') {
       groupedHtml += `<div class="modal-create-btn" onclick="toast('Create new custom context…')">+ New custom context</div>`;
+    }
+    if (gi < renderedGroups.length - 1) {
+      groupedHtml += `<div class="modal-divider"></div>`;
     }
   });
 
@@ -5101,6 +6068,198 @@ function restoreInheritedCtx(ctxId) {
 }
 
 function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+/* ── ADD FIELD MODAL ── */
+const AF_TYPES = [
+  {type:'string',  label:'Text',    icon:'T',  iconStyle:'font-weight:700;font-family:serif'},
+  {type:'url',     label:'URL',     icon:'🔗', iconStyle:''},
+  {type:'number',  label:'Numbers', icon:'#',  iconStyle:'font-weight:700;font-family:\'DM Mono\',monospace'},
+  {type:'image',   label:'Image',   icon:'🖼', iconStyle:''},
+];
+S.addField = {ctxId:null, fieldType:'string', fieldLabel:'Text', fieldIcon:'T', fieldName:'', addElement:true, addDummyData:true, dropdownOpen:false};
+
+function openAddFieldModal(ctxId) {
+  const ctx = findSource(ctxId);
+  if (!ctx) return;
+  if (ctx.customCode) {
+    openCodeEditor(null, ctxId);
+    return;
+  }
+  S.addField = {ctxId, fieldType:'string', fieldLabel:'Text', fieldIcon:'T', fieldName:'', addElement:true, addDummyData:true, dropdownOpen:false};
+  document.getElementById('af-ctx-name').textContent = ctx.name;
+  document.getElementById('af-type-icon').textContent = 'T';
+  document.getElementById('af-type-icon').style = 'font-weight:700;font-family:serif';
+  document.getElementById('af-type-label').textContent = 'Text';
+  document.getElementById('af-field-name').value = '';
+  document.getElementById('af-field-name').placeholder = 'New text';
+  document.getElementById('af-checkbox-label').innerHTML = 'Add a <b>Text</b> element to the list?';
+  const check = document.getElementById('af-add-el-check');
+  check.classList.remove('off');
+  check.querySelector('.af-checkbox-check').style.display = '';
+  const dummyCheck = document.getElementById('af-dummy-check');
+  dummyCheck.classList.remove('off');
+  document.getElementById('af-btn-add').disabled = false;
+  document.getElementById('af-type-select').classList.remove('open');
+  document.getElementById('af-modal').classList.add('open');
+}
+
+function closeAddFieldModal() {
+  document.getElementById('af-modal').classList.remove('open');
+  S.addField.dropdownOpen = false;
+}
+
+function toggleAfTypeDropdown() {
+  S.addField.dropdownOpen = !S.addField.dropdownOpen;
+  const sel = document.getElementById('af-type-select');
+  sel.classList.toggle('open', S.addField.dropdownOpen);
+}
+
+function selectAfType(type, label, icon) {
+  const t = AF_TYPES.find(t => t.type === type);
+  S.addField.fieldType = type;
+  S.addField.fieldLabel = label;
+  S.addField.fieldIcon = icon;
+  S.addField.dropdownOpen = false;
+  document.getElementById('af-type-select').classList.remove('open');
+  document.getElementById('af-type-icon').textContent = icon;
+  document.getElementById('af-type-icon').style = t ? t.iconStyle : '';
+  document.getElementById('af-type-label').textContent = label;
+  document.getElementById('af-field-name').placeholder = 'New ' + label.toLowerCase();
+  document.getElementById('af-checkbox-label').innerHTML = `Add a <b>${label}</b> element to the list?`;
+  const items = document.querySelectorAll('#af-type-dropdown .af-dropdown-item');
+  items.forEach(item => item.classList.remove('sel'));
+  const idx = AF_TYPES.findIndex(t => t.type === type);
+  if (items[idx]) items[idx].classList.add('sel');
+}
+
+function toggleAfCheckbox() {
+  S.addField.addElement = !S.addField.addElement;
+  const check = document.getElementById('af-add-el-check');
+  check.classList.toggle('off', !S.addField.addElement);
+}
+
+function toggleAfDummyCheckbox() {
+  S.addField.addDummyData = !S.addField.addDummyData;
+  const check = document.getElementById('af-dummy-check');
+  check.classList.toggle('off', !S.addField.addDummyData);
+}
+
+function onAfNameInput() {
+  const val = document.getElementById('af-field-name').value.trim();
+  S.addField.fieldName = val;
+}
+
+function generateDummySamples(fieldType, fieldName) {
+  const n = fieldName.toLowerCase();
+  if (fieldType === 'string') {
+    if (n.includes('title') || n.includes('heading') || n.includes('name') && !n.includes('user') && !n.includes('author'))
+      return ['"Getting Started Guide"', '"Advanced Techniques"', '"Best Practices"'];
+    if (n.includes('author') || n.includes('user') || n.includes('creator') || n.includes('writer'))
+      return ['"Sarah Chen"', '"Mark Rivera"', '"Jane Doe"'];
+    if (n.includes('desc') || n.includes('summary') || n.includes('excerpt') || n.includes('body') || n.includes('bio'))
+      return ['"A quick overview of the topic"', '"Deep dive into the details"', '"Practical tips and tricks"'];
+    if (n.includes('cat') || n.includes('tag') || n.includes('label') || n.includes('genre'))
+      return ['"Tech"', '"Design"', '"Product"'];
+    if (n.includes('status')) return ['"Active"', '"Pending"', '"Completed"'];
+    if (n.includes('email')) return ['"sarah@example.com"', '"mark@example.com"', '"jane@example.com"'];
+    if (n.includes('date') || n.includes('time') || n.includes('published'))
+      return ['"Jan 15, 2025"', '"Feb 22, 2025"', '"Mar 10, 2025"'];
+    return ['"Sample ' + fieldName + ' A"', '"Sample ' + fieldName + ' B"', '"Sample ' + fieldName + ' C"'];
+  }
+  if (fieldType === 'number') {
+    if (n.includes('price') || n.includes('cost') || n.includes('amount')) return ['"$29.99"', '"$49.99"', '"$19.99"'];
+    if (n.includes('time') || n.includes('min') || n.includes('duration')) return ['"5 min"', '"8 min"', '"3 min"'];
+    if (n.includes('count') || n.includes('qty') || n.includes('quantity')) return ['"12"', '"8"', '"24"'];
+    if (n.includes('rating') || n.includes('score')) return ['"4.5"', '"3.8"', '"4.9"'];
+    return ['"42"', '"128"', '"7"'];
+  }
+  if (fieldType === 'url') return ['"https://example.com/page-1"', '"https://example.com/page-2"', '"https://example.com/page-3"'];
+  if (fieldType === 'image') return ['[img url]', '[img url]', '[img url]'];
+  return ['"Value 1"', '"Value 2"', '"Value 3"'];
+}
+
+function confirmAddField() {
+  const {ctxId, fieldType, fieldLabel, fieldName, addElement, addDummyData} = S.addField;
+  const ctx = findSource(ctxId);
+  if (!ctx) return;
+
+  const name = fieldName || ('New ' + fieldLabel.toLowerCase());
+  const emptyMap = {string:'"…"', url:'"https://…"', number:'"0"', image:'[img url]'};
+  const dummySamples = addDummyData ? generateDummySamples(fieldType, name) : null;
+  const sample = dummySamples ? dummySamples[0] : (emptyMap[fieldType] || '"…"');
+
+  if (ctx.fields.find(f => f.name === name)) {
+    toast('A field with this name already exists');
+    return;
+  }
+
+  ctx.fields.push({name, type: fieldType, sample, empty: !addDummyData, dummySamples: dummySamples || null});
+  closeAddFieldModal();
+  toast(`✓ Added "${name}" field to ${ctx.name}`, true);
+
+  if (addElement && S.sel) {
+    addFieldElement(ctxId, name);
+  }
+
+  if (addDummyData) {
+    populateDummyDataInRepeaters(ctxId, name, fieldType, dummySamples);
+  }
+
+  renderRP();
+  if (S.dd && S.dd.srcId === ctxId) renderDd();
+}
+
+function populateDummyDataInRepeaters(ctxId, fieldName, fieldType, samples) {
+  if (!samples) return;
+  Object.keys(EL_DEFS).forEach(elId => {
+    const def = EL_DEFS[elId];
+    if (!def || !def.isRepeater) return;
+    const bkey = elId + '|Items';
+    const binding = S.bindings[bkey];
+    if (!binding || binding.ctxId !== ctxId) return;
+
+    const repEl = document.getElementById(elId);
+    if (!repEl) return;
+    const items = repEl.querySelectorAll('.rep-item');
+
+    items.forEach((item, idx) => {
+      const sampleVal = samples[idx % samples.length];
+      const valText = sampleVal.replace(/^"|"$/g, '');
+      const elSuffix = Date.now() + '-' + idx;
+      const newElId = 'el-dyn-' + fieldName.replace(/\s+/g, '-') + '-' + elSuffix;
+      const ctx = findSource(ctxId);
+      const ctxIcon = ctx ? ctx.icon : '📄';
+      const ctxName = ctx ? ctx.name : ctxId;
+
+      const newEl = document.createElement('div');
+      newEl.className = 'c-el bound';
+      newEl.id = newElId;
+      newEl.setAttribute('onclick', `selEl(event,'${newElId}')`);
+      newEl.style.cursor = 'pointer';
+      newEl.style.marginTop = '4px';
+
+      if (fieldType === 'image') {
+        newEl.className = 'c-el c-el-img bound';
+        newEl.style.cssText = 'padding:0;height:60px;margin-top:4px;cursor:pointer';
+        newEl.innerHTML = '<div class="c-el-overlay" style="border-radius:4px"></div>'
+          + '<div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">' + ctxIcon + ' ' + ctxName + ' · ' + fieldName + '</div></div>'
+          + '<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--b1),var(--b2));display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:11px;font-family:\'DM Mono\',monospace;border-radius:4px">' + fieldName + '</div>';
+      } else {
+        newEl.innerHTML = '<div class="c-el-overlay" style="border-radius:4px"></div>'
+          + '<div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">' + ctxIcon + ' ' + ctxName + ' · ' + fieldName + '</div></div>'
+          + '<div style="font-size:12px;color:var(--t3)">' + valText + '</div>';
+      }
+
+      item.appendChild(newEl);
+
+      EL_DEFS[newElId] = {
+        name: fieldName, type: fieldType === 'image' ? 'Image' : 'Text',
+        section: def.section, props: [{k:'Value',t:fieldType === 'image' ? 'image' : 'string'},{k:'Visible',t:'boolean'}]
+      };
+      S.bindings[newElId + '|Value'] = {ctxId, fieldName, sample: sampleVal};
+    });
+  });
+}
 
 function confirmCtx() {
   const {target, pending} = S.modal;
@@ -5441,8 +6600,10 @@ function renderTree() {
   const isConcept = S.currentPage === 'Product Item';
   const isRuc = S.currentPage === 'Repeater Usecases';
   const isMsb = S.currentPage === 'Multi-State Box';
-  const sections = isItemsList ? ['sec-items'] : isConcept ? ['sec-rel-product','sec-rel-locations'] : isRuc ? ['sec-ruc-articles','sec-ruc-tags'] : isMsb ? ['sec-msb'] : ['sec-hero','sec-weather','sec-articles'];
-  const pageLabel = isItemsList ? 'Items (List)' : isConcept ? 'Product Item' : isRuc ? 'Repeater Usecases' : isMsb ? 'Multi-State Box' : 'Home Page';
+  const isDemo = S.currentPage === 'Demo';
+  const isDemo262 = S.currentPage === 'Demo 26.2';
+  const sections = isItemsList ? ['sec-items'] : isConcept ? ['sec-rel-product','sec-rel-locations'] : isRuc ? ['sec-ruc-articles','sec-ruc-tags'] : isMsb ? ['sec-msb'] : isDemo ? ['sec-demo-team','sec-demo-empty'] : isDemo262 ? ['sec-d262-weather','sec-d262-empty1','sec-d262-empty2'] : ['sec-hero','sec-weather','sec-articles'];
+  const pageLabel = isItemsList ? 'Items (List)' : isConcept ? 'Product Item' : isRuc ? 'Repeater Usecases' : isMsb ? 'Multi-State Box' : isDemo ? 'Demo' : isDemo262 ? 'Demo 26.2' : 'Home Page';
   const pageIcon = isConcept ? '🛒' : '📄';
 
   const hasDynamicPage = isConcept;
@@ -5588,6 +6749,78 @@ function msbAssign(e, viewId, val) {
   toast(`✓ "${val}" → ${view.name}`, true);
 }
 
+function msbDragStart(e, val) {
+  e.dataTransfer.setData('text/plain', val);
+  e.dataTransfer.effectAllowed = 'move';
+  e.target.style.opacity = '.4';
+  setTimeout(() => {
+    document.querySelectorAll('.msb-drop-zone').forEach(z => {
+      z.style.borderColor = 'color-mix(in srgb, var(--acc) 40%, var(--b1))';
+    });
+  }, 0);
+}
+
+function msbDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.style.borderColor = 'var(--acc)';
+  e.currentTarget.style.borderStyle = 'solid';
+  e.currentTarget.style.background = 'color-mix(in srgb, var(--acc) 10%, var(--sur))';
+  e.currentTarget.style.opacity = '1';
+}
+
+function msbDragLeave(e) {
+  e.currentTarget.style.borderColor = '';
+  e.currentTarget.style.borderStyle = '';
+  e.currentTarget.style.background = '';
+  e.currentTarget.style.opacity = '';
+}
+
+function msbDrop(e, targetViewId) {
+  e.preventDefault();
+  const val = e.dataTransfer.getData('text/plain');
+  if (!val) return;
+  const def = EL_DEFS['msb-articles'];
+  if (!def) return;
+  def.views.forEach(v => { v.enumValues = (v.enumValues || []).filter(ev => ev !== val); });
+  const target = def.views.find(v => v.id === targetViewId);
+  if (target) target.enumValues.push(val);
+  document.querySelectorAll('.msb-drop-zone').forEach(z => { z.style.borderColor = ''; z.style.background = ''; z.style.opacity = ''; });
+  def.activeView = targetViewId;
+  document.querySelectorAll('#msb-articles .msb-view').forEach(v => v.classList.remove('active'));
+  const viewEl = document.getElementById('msb-view-' + targetViewId);
+  if (viewEl) { viewEl.style.display = ''; viewEl.classList.add('active'); }
+  refreshMsbCanvasButtons();
+  renderBody();
+  renderTree();
+  const label = val.charAt(0).toUpperCase() + val.slice(1);
+  toast(`✓ "${label}" → ${target.name}`, true);
+}
+
+function deleteMsbView(e, viewId) {
+  e.stopPropagation();
+  const def = EL_DEFS['msb-articles'];
+  if (!def || !def.views || def.views.length <= 1) return;
+  const view = def.views.find(v => v.id === viewId);
+  if (!view) return;
+  const viewName = view.name;
+  def.views = def.views.filter(v => v.id !== viewId);
+  const domView = document.getElementById('msb-view-' + viewId);
+  if (domView) domView.style.display = 'none';
+  if (def.activeView === viewId) {
+    const firstActive = def.views.find(v => (v.enumValues || []).length > 0) || def.views[0];
+    def.activeView = firstActive.id;
+    document.querySelectorAll('#msb-articles .msb-view').forEach(v => v.classList.remove('active'));
+    const newActiveEl = document.getElementById('msb-view-' + firstActive.id);
+    if (newActiveEl) { newActiveEl.style.display = ''; newActiveEl.classList.add('active'); }
+  }
+  def.views.forEach((v, i) => { v.name = 'State ' + (i + 1); });
+  refreshMsbCanvasButtons();
+  renderBody();
+  renderTree();
+  toast(`Removed view "${viewName}"`);
+}
+
 function msbResetJoins(e) {
   e.stopPropagation();
   const def = EL_DEFS['msb-articles'];
@@ -5641,28 +6874,618 @@ function refreshMsbState() {
   const isBound = !!S.bindings[bkey];
   const msbEl = document.getElementById(msbId);
   if (!msbEl) return;
-  const viewSel = document.getElementById('msb-view-sel');
-  const bindingLabel = msbEl.querySelector('.msb-binding');
 
   if (isBound) {
     msbEl.classList.add('bound');
-    if (viewSel) viewSel.style.display = '';
-    if (bindingLabel) {
-      const b = S.bindings[bkey];
-      const ctx = findSource(b.ctxId);
-      bindingLabel.textContent = (ctx ? 'Connected' : '') + ' · ' + b.fieldName;
-    }
     document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
     const activeEl = document.getElementById('msb-view-' + def.activeView);
     if (activeEl) activeEl.classList.add('active');
   } else {
     msbEl.classList.remove('bound');
-    if (viewSel) viewSel.style.display = 'none';
-    if (bindingLabel) bindingLabel.textContent = '— not connected';
     document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
     const unboundEl = document.getElementById('msb-view-unbound');
     if (unboundEl) unboundEl.classList.add('active');
   }
+  refreshAllPills();
+}
+
+/* ── PRODUCT MODE & SPEC PAGES ── */
+
+const PRODUCT_SPECS = {
+  'connect-value-panel': {
+    title: 'Connect · Value Panel',
+    component: 'Binding Dropdown (#dd)',
+    status: 'implemented',
+    owner: 'Context Binding Team',
+    lastUpdated: 'Feb 2026',
+    version: '2.0',
+    sections: [
+      {
+        title: '📌 Overview',
+        type: 'text',
+        content: `The <b>Connect · Value Panel</b> is the core binding interface that allows users to connect any element property to a data source field. It appears as a floating dropdown positioned near the property row in the inspector, and provides a guided two-step flow: <b>Select Source → Select Field → Confirm Bind</b>.`
+      },
+      {
+        title: '🎯 Purpose & Goals',
+        type: 'list',
+        items: [
+          'Enable users to visually bind element properties (text value, image source, visibility, etc.) to context data fields without writing code',
+          'Provide a clear, step-by-step flow that prevents invalid bindings through type compatibility checks',
+          'Support both <b>data contexts</b> (CMS collections, APIs, custom datasets) and <b>function libraries</b> (formatters, transformers) as binding sources',
+          'Handle nested scoping automatically when elements are inside repeaters — only showing fields from the correct scope level',
+          'Give immediate visual feedback on the canvas when a binding is confirmed (bound indicator, sample data preview)'
+        ]
+      },
+      {
+        title: '🏗️ Architecture & Structure',
+        type: 'html',
+        content: `<div class="spec-wireframe">
+          <div class="spec-wireframe-label">Component Structure</div>
+          <div class="spec-wireframe-body">
+            <svg viewBox="0 0 380 280" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px">
+              <rect x="1" y="1" width="378" height="278" rx="10" stroke="#c8c8d8" stroke-width="1" fill="#f8f8fc"/>
+              <rect x="1" y="1" width="378" height="34" rx="10" fill="#eeeef5"/>
+              <rect x="1" y="25" width="378" height="10" fill="#eeeef5"/>
+              <text x="16" y="22" font-size="11" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Connect · Value</text>
+              <text x="352" y="22" font-size="13" font-family="DM Sans" fill="#8888a8">✕</text>
+              <text x="16" y="56" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT SOURCE</text>
+              <rect x="12" y="62" width="356" height="32" rx="6" stroke="#c8c8d8" fill="white"/>
+              <text x="22" y="82" font-size="11" font-family="DM Sans" fill="#4a4a6a">☁️ Weather App</text>
+              <text x="340" y="82" font-size="9" fill="#8888a8">▾</text>
+              <text x="16" y="116" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT FIELD</text>
+              <rect x="12" y="122" width="356" height="32" rx="6" stroke="#3b82f6" stroke-width="1.5" fill="#3b82f608"/>
+              <text x="22" y="142" font-size="11" font-family="DM Sans" fill="#3b82f6">temperature</text>
+              <text x="340" y="142" font-size="9" fill="#8888a8">▾</text>
+              <rect x="12" y="170" width="356" height="32" rx="6" fill="#3b82f6"/>
+              <text x="140" y="190" font-size="11" font-family="DM Sans" fill="white" font-weight="500">✓ Bind · temperature</text>
+              <rect x="12" y="215" width="356" height="50" rx="6" fill="#f0f0f5" stroke="#e0e0ea"/>
+              <text x="22" y="234" font-size="9" font-family="DM Mono" fill="#8888a8">PREVIEW</text>
+              <text x="22" y="252" font-size="11" font-family="DM Sans" fill="#4a4a6a">"24°C"</text>
+            </svg>
+          </div>
+        </div>`
+      },
+      {
+        title: '⚡ User Flow',
+        type: 'flow',
+        steps: ['Click ⚡ on property row', 'Panel opens near property', 'Select source context', 'Source dropdown closes, field opens', 'Select compatible field', 'Click "Bind" to confirm', 'Canvas updates with bound data']
+      },
+      {
+        title: '🎬 Happy Flow Demo',
+        type: 'html',
+        content: `<div class="spec-text">Interactive walkthrough of the complete binding flow — from clicking the connect icon to seeing bound data on the canvas.</div>
+        <div class="spec-demo-wrap" id="spec-demo">
+          <div class="spec-demo-label">
+            <span>Happy Flow Walkthrough</span>
+            <span class="spec-demo-badge">ANIMATED</span>
+          </div>
+          <div class="spec-demo-body">
+            <div class="spec-demo-canvas" id="spec-demo-canvas"></div>
+          </div>
+          <div class="spec-demo-caption" id="spec-demo-caption">Click Play to start the walkthrough</div>
+          <div class="spec-demo-timeline" id="spec-demo-timeline"></div>
+          <div class="spec-demo-controls">
+            <button class="spec-demo-btn" onclick="specDemoPrev()">← Prev</button>
+            <button class="spec-demo-btn" id="spec-demo-play-btn" onclick="specDemoTogglePlay()">▶ Play</button>
+            <button class="spec-demo-btn" onclick="specDemoNext()">Next →</button>
+          </div>
+        </div>`
+      },
+      {
+        title: '📐 Functional Requirements',
+        type: 'table',
+        headers: ['Requirement', 'Description', 'Status'],
+        rows: [
+          ['Two-step selection', 'Source dropdown → Field dropdown. Selecting a source auto-opens the field list.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Type compatibility', 'Field list filters to only show fields whose type is compatible with the property being bound (e.g., Image prop only shows image fields).', '<span class="spec-status implemented">Implemented</span>'],
+          ['Scoped context (repeaters)', 'When an element is inside a repeater, the panel automatically scopes fields to the repeated item level, with a visual breadcrumb showing the scope path.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Function libraries', 'Sources include both data contexts and function libraries (formatters). Functions have parameter configuration after binding.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Out-of-scope fallback', 'If no context exists on the parent section, page-level contexts are shown with a warning notice.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Pre-selection memory', 'If the property is already bound, opening the panel pre-selects the current source and field.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Auto-select single source', 'When only one context is available, it is auto-selected to save the user a click.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Confirm binding', 'The "Bind" button only activates when both source and field are selected. Clicking it writes to the binding map and updates the canvas.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Keyboard shortcut', 'Pressing Escape closes the panel without binding.', '<span class="spec-status planned">Planned</span>'],
+          ['Search/filter fields', 'A search input in the field dropdown to filter long field lists.', '<span class="spec-status planned">Planned</span>']
+        ]
+      },
+      {
+        title: '🔌 Data Model',
+        type: 'html',
+        content: `<div class="spec-text">The panel reads from and writes to the global state <span class="spec-code">S.dd</span> object and the <span class="spec-code">S.bindings</span> map.</div>
+        <table class="spec-table">
+          <tr><th>State Key</th><th>Type</th><th>Description</th></tr>
+          <tr><td><span class="spec-code">S.dd.open</span></td><td>boolean</td><td>Whether the panel is currently visible</td></tr>
+          <tr><td><span class="spec-code">S.dd.elId</span></td><td>string</td><td>The element ID being bound</td></tr>
+          <tr><td><span class="spec-code">S.dd.propKey</span></td><td>string</td><td>The property key being bound (e.g., "Value", "Source")</td></tr>
+          <tr><td><span class="spec-code">S.dd.srcId</span></td><td>string | null</td><td>Currently selected source context ID</td></tr>
+          <tr><td><span class="spec-code">S.dd.fieldName</span></td><td>string | null</td><td>Currently selected field name</td></tr>
+          <tr><td><span class="spec-code">S.dd.openPanel</span></td><td>'src' | 'field' | null</td><td>Which dropdown is currently expanded</td></tr>
+          <tr><td><span class="spec-code">S.bindings[key]</span></td><td>object</td><td>Final binding record: <span class="spec-code">{ctxId, fieldName, sample}</span></td></tr>
+        </table>`
+      },
+      {
+        title: '📏 Layout & Positioning',
+        type: 'html',
+        content: `<div class="spec-note"><span class="spec-note-icon">📐</span><div>The panel is positioned dynamically. It anchors to the left edge of the right inspector panel minus the panel width (260px), ensuring it sits adjacent to the property row that triggered it. Vertical position is set to <span class="spec-code">top: 0</span> to align with the canvas top.</div></div>
+        <table class="spec-table">
+          <tr><th>Property</th><th>Value</th></tr>
+          <tr><td>Width</td><td>260px (fixed)</td></tr>
+          <tr><td>Max height</td><td>Viewport height minus padding</td></tr>
+          <tr><td>Position</td><td>Fixed, calculated from inspector panel edge</td></tr>
+          <tr><td>Z-index</td><td>600 (above canvas, below modals)</td></tr>
+          <tr><td>Border radius</td><td>10px</td></tr>
+          <tr><td>Shadow</td><td>0 8px 30px rgba(0,0,0,0.12)</td></tr>
+        </table>`
+      },
+      {
+        title: '🎨 Visual States',
+        type: 'list',
+        items: [
+          '<b>Closed</b> — Panel hidden, <span class="spec-code">display: none</span>',
+          '<b>Open · No selection</b> — Both dropdowns collapsed, source shows "Select…"',
+          '<b>Source expanded</b> — Source dropdown open showing available contexts grouped under CONTEXTS and FUNCTION LIBRARIES headers',
+          '<b>Source selected, field expanding</b> — Source dropdown closes, field dropdown auto-opens',
+          '<b>Field selected</b> — Both dropdowns show selected values, "Bind" button becomes active (blue)',
+          '<b>Already bound (re-opening)</b> — Pre-selects current source and field, both dropdowns collapsed'
+        ]
+      },
+      {
+        title: '⚠️ Edge Cases',
+        type: 'list',
+        items: [
+          'No context on parent section → shows page-level contexts with an "out of scope" warning banner',
+          'No compatible fields for property type → shows empty state with "No compatible fields" message and explanatory text',
+          'Element inside nested repeater → field list is scoped to the repeater item level with a blue scope breadcrumb header',
+          'Function library selected → field label changes to "Select Function", field names render in monospace',
+          'Function with parameters → after binding, parameter rows appear in the inspector for additional configuration',
+          'Clicking outside the panel → panel closes without binding',
+          'Single available context → auto-selects the source, skipping the first selection step'
+        ]
+      },
+      {
+        title: '🔗 Related Components',
+        type: 'html',
+        content: `<div class="spec-flow">
+          <div class="spec-flow-step">Inspector Property Row</div>
+          <div class="spec-flow-arrow">→</div>
+          <div class="spec-flow-step" style="border-color:var(--acc);color:var(--acc);font-weight:600">Connect Panel (this)</div>
+          <div class="spec-flow-arrow">→</div>
+          <div class="spec-flow-step">Canvas Binding Indicator</div>
+          <div class="spec-flow-arrow">→</div>
+          <div class="spec-flow-step">Context Pill</div>
+        </div>
+        <div class="spec-text" style="margin-top:8px">The panel is triggered from the property row's ⚡ icon in the inspector. On successful binding, it updates the canvas element's visual state (adds <span class="spec-code">.bound</span> class and bind tag) and refreshes the context pill to reflect the new connection.</div>`
+      }
+    ]
+  }
+};
+
+const SPEC_MAP = {
+  'dd': 'connect-value-panel',
+  'dd-body': 'connect-value-panel',
+  'dd-title': 'connect-value-panel',
+};
+
+function getSpecIdForElement(elId) {
+  if (SPEC_MAP[elId]) return SPEC_MAP[elId];
+  const el = document.getElementById(elId);
+  if (el && el.closest('#dd')) return 'connect-value-panel';
+  if (el && el.closest('.dd')) return 'connect-value-panel';
+  return null;
+}
+
+function toggleProductMode() {
+  S.productMode = !S.productMode;
+  const btn = document.getElementById('product-mode-btn');
+  btn.classList.toggle('product-mode-active', S.productMode);
+  document.body.classList.toggle('product-mode', S.productMode);
+  toast(S.productMode ? '📋 Product Mode ON — right-click components to view specs' : 'Product Mode OFF', S.productMode);
+}
+
+function openSpecFromContextMenu() {
+  document.getElementById('canvas-ctx-menu').classList.remove('open');
+  if (_ctxMenuSpecId) {
+    openSpecPage(_ctxMenuSpecId);
+  }
+}
+
+function openSpecPage(specId) {
+  const spec = PRODUCT_SPECS[specId];
+  if (!spec) { toast('No spec found for this component'); return; }
+
+  closeDd();
+  closeEtPanel();
+  S.specPageOpen = true;
+  S.specPageId = specId;
+  S.preSpecPage = S.currentPage;
+
+  document.getElementById('spec-topbar-name').textContent = spec.title;
+  document.getElementById('spec-body').innerHTML = renderSpecContent(spec);
+  updateSpecElementInfo(specId);
+  document.getElementById('spec-page').classList.add('active');
+  document.querySelector('.topbar').style.display = 'none';
+  document.getElementById('action-bar').style.display = 'none';
+  setTimeout(specDemoInit, 100);
+}
+
+function closeSpecPage() {
+  S.specPageOpen = false;
+  specDemoStopPlay();
+  document.getElementById('spec-page').classList.remove('active');
+  document.querySelector('.topbar').style.display = '';
+  document.getElementById('action-bar').style.display = '';
+  S.specPageId = null;
+}
+
+function updateSpecElementInfo(specId) {
+  const el = document.getElementById('spec-topbar-element');
+  const spec = PRODUCT_SPECS[specId];
+  if (!spec) { el.style.display = 'none'; return; }
+
+  let html = '';
+  html += `<span class="spec-topbar-element-icon">⚡</span>`;
+  html += `<span class="spec-topbar-element-name">${spec.component}</span>`;
+  html += `<span class="spec-topbar-element-type">${spec.status}</span>`;
+
+  if (S.sel) {
+    const def = EL_DEFS[S.sel];
+    if (def) {
+      const binding = S.bindings[S.sel + '|Value'] || S.bindings[S.sel + '|Source'];
+      html += `<div style="width:1px;height:14px;background:var(--b2)"></div>`;
+      html += `<span style="font-size:10px;color:var(--t3)">Selected:</span>`;
+      html += `<span style="font-weight:600;color:var(--t1)">${def.name}</span>`;
+      if (binding) {
+        const ctx = findSource(binding.ctxId);
+        html += `<span class="spec-topbar-element-binding">${ctx ? ctx.name : ''} · ${binding.fieldName}</span>`;
+      }
+    }
+  }
+
+  el.innerHTML = html;
+  el.style.display = 'flex';
+}
+
+function renderSpecContent(spec) {
+  let html = `<div class="spec-hero">
+    <h1>${spec.title}</h1>
+    <div class="spec-hero-sub">${spec.component}</div>
+    <div class="spec-meta">
+      <div class="spec-meta-item"><span class="spec-status ${spec.status}">${spec.status.charAt(0).toUpperCase() + spec.status.slice(1)}</span></div>
+      <div class="spec-meta-item">👤 ${spec.owner}</div>
+      <div class="spec-meta-item">📅 ${spec.lastUpdated}</div>
+      <div class="spec-meta-item">v${spec.version}</div>
+    </div>
+  </div>`;
+
+  spec.sections.forEach(sec => {
+    html += `<div class="spec-section">`;
+    html += `<div class="spec-section-title">${sec.title}</div>`;
+
+    if (sec.type === 'text') {
+      html += `<div class="spec-text">${sec.content}</div>`;
+    } else if (sec.type === 'list') {
+      html += `<ul class="spec-list">${sec.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+    } else if (sec.type === 'table') {
+      html += `<table class="spec-table"><thead><tr>${sec.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${sec.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    } else if (sec.type === 'flow') {
+      html += `<div class="spec-flow">${sec.steps.map((s, i) => (i > 0 ? '<div class="spec-flow-arrow">→</div>' : '') + `<div class="spec-flow-step">${s}</div>`).join('')}</div>`;
+    } else if (sec.type === 'html') {
+      html += sec.content;
+    }
+
+    html += `</div>`;
+  });
+
+  return html;
+}
+
+/* ── SPEC DEMO ANIMATION ── */
+const SPEC_DEMO_STEPS = [
+  {
+    caption: '<b>Step 1:</b> User clicks the ⚡ bind icon on the "Value" property row in the inspector',
+    render: function(ctx) {
+      return `<svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <!-- Inspector panel bg -->
+        <rect x="220" y="0" width="240" height="320" rx="0" fill="#f5f5f8" stroke="#e0e0ea"/>
+        <text x="240" y="24" font-size="11" font-family="DM Sans" fill="#1a1a2e" font-weight="600">Properties</text>
+        <rect x="232" y="36" width="216" height="44" rx="6" fill="white" stroke="#e0e0ea"/>
+        <text x="244" y="54" font-size="10" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Value</text>
+        <text x="244" y="70" font-size="10" font-family="DM Sans" fill="#8888a8" font-style="italic">This is a Title</text>
+        <!-- Bind icon with pulse -->
+        <rect x="420" y="44" width="24" height="24" rx="5" fill="#3b82f615" stroke="#3b82f640" stroke-width="1.5">
+          <animate attributeName="stroke-width" values="1.5;3;1.5" dur="1.2s" repeatCount="indefinite"/>
+        </rect>
+        <circle cx="432" cy="56" r="8" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity=".3">
+          <animate attributeName="r" values="8;16;8" dur="1.2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".3;0;.3" dur="1.2s" repeatCount="indefinite"/>
+        </circle>
+        <text x="428" y="60" font-size="12" font-family="DM Sans" fill="#3b82f6">⚡</text>
+        <!-- Cursor -->
+        <path d="M438 64 L438 76 L442 72 L447 78" stroke="#1a1a2e" stroke-width="1.5" fill="#1a1a2e" fill-opacity=".1">
+          <animate attributeName="opacity" values="1;.6;1" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <!-- Canvas hint -->
+        <rect x="10" y="10" width="195" height="300" rx="8" fill="white" stroke="#e0e0ea"/>
+        <text x="30" y="35" font-size="10" font-family="DM Sans" fill="#8888a8">Canvas</text>
+        <rect x="30" y="50" width="155" height="24" rx="4" fill="#f5f5f8"/>
+        <text x="42" y="66" font-size="11" font-family="DM Sans" fill="#4a4a6a">This is a Title</text>
+        <rect x="30" y="82" width="155" height="80" rx="4" fill="#f0f0f5" stroke="#e0e0ea"/>
+        <rect x="30" y="172" width="155" height="16" rx="4" fill="#f5f5f8"/>
+        <rect x="30" y="194" width="100" height="16" rx="4" fill="#f5f5f8"/>
+      </svg>`;
+    }
+  },
+  {
+    caption: '<b>Step 2:</b> The Connect panel opens — source dropdown is ready to select',
+    render: function(ctx) {
+      return `<svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <rect x="220" y="0" width="240" height="320" rx="0" fill="#f5f5f8" stroke="#e0e0ea" opacity=".5"/>
+        <text x="240" y="24" font-size="11" font-family="DM Sans" fill="#1a1a2e" font-weight="600" opacity=".5">Properties</text>
+        <!-- Connect panel -->
+        <rect x="100" y="20" width="240" height="180" rx="10" fill="#f0f0f5" stroke="#c8c8d8" filter="url(#shadow1)"/>
+        <defs><filter id="shadow1" x="-20" y="-10" width="300" height="220"><feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity=".1"/></filter></defs>
+        <rect x="100" y="20" width="240" height="32" rx="10" fill="#e8e8f0"/>
+        <rect x="100" y="42" width="240" height="10" fill="#e8e8f0"/>
+        <text x="116" y="42" font-size="11" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Connect · Value</text>
+        <text x="320" y="42" font-size="12" font-family="DM Sans" fill="#8888a8">✕</text>
+        <text x="116" y="72" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT SOURCE</text>
+        <rect x="112" y="78" width="216" height="30" rx="6" stroke="#c8c8d8" fill="white"/>
+        <text x="124" y="97" font-size="11" font-family="DM Sans" fill="#8888a8">Select…</text>
+        <text x="308" y="97" font-size="9" fill="#8888a8">▾</text>
+        <text x="116" y="126" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT FIELD</text>
+        <rect x="112" y="132" width="216" height="30" rx="6" stroke="#c8c8d8" fill="white" opacity=".5"/>
+        <text x="124" y="151" font-size="11" font-family="DM Sans" fill="#b0b0c8">Pick source first</text>
+        <rect x="112" y="174" width="216" height="22" rx="6" fill="#c8c8d8"/>
+        <text x="184" y="189" font-size="10" font-family="DM Sans" fill="white">✓ Bind</text>
+        <!-- Pulse on source box -->
+        <rect x="112" y="78" width="216" height="30" rx="6" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity=".6">
+          <animate attributeName="opacity" values=".6;.2;.6" dur="1.5s" repeatCount="indefinite"/>
+        </rect>
+        <!-- Canvas dimmed -->
+        <rect x="10" y="10" width="80" height="300" rx="8" fill="white" stroke="#e0e0ea" opacity=".3"/>
+      </svg>`;
+    }
+  },
+  {
+    caption: '<b>Step 3:</b> User opens the source dropdown and selects <b>"Weather App"</b>',
+    render: function(ctx) {
+      return `<svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <rect x="220" y="0" width="240" height="320" rx="0" fill="#f5f5f8" stroke="#e0e0ea" opacity=".5"/>
+        <!-- Connect panel -->
+        <rect x="100" y="20" width="240" height="260" rx="10" fill="#f0f0f5" stroke="#c8c8d8" filter="url(#shadow2)"/>
+        <defs><filter id="shadow2" x="-20" y="-10" width="300" height="300"><feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity=".1"/></filter></defs>
+        <rect x="100" y="20" width="240" height="32" rx="10" fill="#e8e8f0"/>
+        <rect x="100" y="42" width="240" height="10" fill="#e8e8f0"/>
+        <text x="116" y="42" font-size="11" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Connect · Value</text>
+        <text x="320" y="42" font-size="12" font-family="DM Sans" fill="#8888a8">✕</text>
+        <text x="116" y="72" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT SOURCE</text>
+        <rect x="112" y="78" width="216" height="30" rx="6" stroke="#3b82f6" stroke-width="1.5" fill="white"/>
+        <text x="124" y="97" font-size="11" font-family="DM Sans" fill="#4a4a6a">Select…</text>
+        <text x="308" y="96" font-size="9" fill="#3b82f6">▴</text>
+        <!-- Dropdown open -->
+        <text x="118" y="124" font-size="8" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">CONTEXTS</text>
+        <rect x="112" y="129" width="216" height="28" rx="4" fill="#3b82f612" stroke="#3b82f640"/>
+        <text x="126" y="147" font-size="11" font-family="DM Sans" fill="#3b82f6">☁️ Weather App</text>
+        <text x="126" y="158" font-size="9" font-family="DM Sans" fill="#8888a8">Weather App · object</text>
+        <rect x="112" y="162" width="216" height="28" rx="4" fill="transparent"/>
+        <text x="126" y="180" font-size="11" font-family="DM Sans" fill="#4a4a6a">📝 CMS Articles</text>
+        <text x="126" y="191" font-size="9" font-family="DM Sans" fill="#8888a8">CMS Collection · array</text>
+        <text x="118" y="210" font-size="8" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">FUNCTION LIBRARIES</text>
+        <rect x="112" y="215" width="216" height="28" rx="4" fill="transparent"/>
+        <text x="126" y="233" font-size="11" font-family="DM Sans" fill="#4a4a6a">🔧 Formatters</text>
+        <!-- Cursor on Weather App -->
+        <path d="M200 148 L200 160 L204 156 L209 162" stroke="#1a1a2e" stroke-width="1.5" fill="#1a1a2e" fill-opacity=".1"/>
+        <rect x="10" y="10" width="80" height="300" rx="8" fill="white" stroke="#e0e0ea" opacity=".3"/>
+      </svg>`;
+    }
+  },
+  {
+    caption: '<b>Step 4:</b> Source selected — field dropdown auto-opens showing compatible fields',
+    render: function(ctx) {
+      return `<svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <rect x="220" y="0" width="240" height="320" rx="0" fill="#f5f5f8" stroke="#e0e0ea" opacity=".5"/>
+        <!-- Connect panel -->
+        <rect x="100" y="20" width="240" height="270" rx="10" fill="#f0f0f5" stroke="#c8c8d8" filter="url(#shadow3)"/>
+        <defs><filter id="shadow3" x="-20" y="-10" width="300" height="310"><feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity=".1"/></filter></defs>
+        <rect x="100" y="20" width="240" height="32" rx="10" fill="#e8e8f0"/>
+        <rect x="100" y="42" width="240" height="10" fill="#e8e8f0"/>
+        <text x="116" y="42" font-size="11" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Connect · Value</text>
+        <text x="320" y="42" font-size="12" font-family="DM Sans" fill="#8888a8">✕</text>
+        <text x="116" y="72" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT SOURCE</text>
+        <rect x="112" y="78" width="216" height="30" rx="6" stroke="#c8c8d8" fill="#f8f8fc"/>
+        <text x="126" y="97" font-size="11" font-family="DM Sans" fill="#4a4a6a">☁️ Weather App</text>
+        <text x="308" y="97" font-size="9" fill="#8888a8">▾</text>
+        <text x="116" y="126" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT FIELD</text>
+        <rect x="112" y="132" width="216" height="30" rx="6" stroke="#3b82f6" stroke-width="1.5" fill="white"/>
+        <text x="124" y="151" font-size="11" font-family="DM Sans" fill="#8888a8">Select…</text>
+        <text x="308" y="150" font-size="9" fill="#3b82f6">▴</text>
+        <!-- Field dropdown -->
+        <rect x="112" y="168" width="216" height="26" rx="4" fill="transparent"/>
+        <text x="126" y="185" font-size="11" font-family="DM Sans" fill="#4a4a6a">city</text>
+        <text x="286" y="185" font-size="9" font-family="DM Mono" fill="#8888a8" text-anchor="end">string</text>
+        <rect x="112" y="194" width="216" height="26" rx="4" fill="#3b82f608" stroke="#3b82f630"/>
+        <text x="126" y="211" font-size="11" font-family="DM Sans" fill="#3b82f6" font-weight="500">temperature</text>
+        <text x="286" y="211" font-size="9" font-family="DM Mono" fill="#3b82f6" text-anchor="end">number</text>
+        <rect x="112" y="220" width="216" height="26" rx="4" fill="transparent"/>
+        <text x="126" y="237" font-size="11" font-family="DM Sans" fill="#4a4a6a">condition</text>
+        <text x="286" y="237" font-size="9" font-family="DM Mono" fill="#8888a8" text-anchor="end">enum</text>
+        <rect x="112" y="246" width="216" height="26" rx="4" fill="transparent"/>
+        <text x="126" y="263" font-size="11" font-family="DM Sans" fill="#4a4a6a">humidity</text>
+        <text x="286" y="263" font-size="9" font-family="DM Mono" fill="#8888a8" text-anchor="end">number</text>
+        <!-- Cursor on temperature -->
+        <path d="M230 212 L230 224 L234 220 L239 226" stroke="#1a1a2e" stroke-width="1.5" fill="#1a1a2e" fill-opacity=".1"/>
+        <rect x="10" y="10" width="80" height="300" rx="8" fill="white" stroke="#e0e0ea" opacity=".3"/>
+      </svg>`;
+    }
+  },
+  {
+    caption: '<b>Step 5:</b> Field "temperature" selected — <b>Bind button activates</b>',
+    render: function(ctx) {
+      return `<svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <rect x="220" y="0" width="240" height="320" rx="0" fill="#f5f5f8" stroke="#e0e0ea" opacity=".5"/>
+        <!-- Connect panel -->
+        <rect x="100" y="20" width="240" height="190" rx="10" fill="#f0f0f5" stroke="#c8c8d8" filter="url(#shadow4)"/>
+        <defs><filter id="shadow4" x="-20" y="-10" width="300" height="230"><feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity=".1"/></filter></defs>
+        <rect x="100" y="20" width="240" height="32" rx="10" fill="#e8e8f0"/>
+        <rect x="100" y="42" width="240" height="10" fill="#e8e8f0"/>
+        <text x="116" y="42" font-size="11" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Connect · Value</text>
+        <text x="320" y="42" font-size="12" font-family="DM Sans" fill="#8888a8">✕</text>
+        <text x="116" y="72" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT SOURCE</text>
+        <rect x="112" y="78" width="216" height="30" rx="6" stroke="#c8c8d8" fill="#f8f8fc"/>
+        <text x="126" y="97" font-size="11" font-family="DM Sans" fill="#4a4a6a">☁️ Weather App</text>
+        <text x="308" y="97" font-size="9" fill="#8888a8">▾</text>
+        <text x="116" y="126" font-size="9" font-family="DM Mono" fill="#8888a8" letter-spacing="0.5">SELECT FIELD</text>
+        <rect x="112" y="132" width="216" height="30" rx="6" stroke="#3b82f6" stroke-width="1.5" fill="#3b82f608"/>
+        <text x="126" y="151" font-size="11" font-family="DM Sans" fill="#3b82f6">temperature</text>
+        <text x="308" y="151" font-size="9" fill="#8888a8">▾</text>
+        <!-- Bind button active -->
+        <rect x="112" y="176" width="216" height="28" rx="6" fill="#3b82f6">
+          <animate attributeName="fill" values="#3b82f6;#2563eb;#3b82f6" dur="1.5s" repeatCount="indefinite"/>
+        </rect>
+        <text x="168" y="194" font-size="11" font-family="DM Sans" fill="white" font-weight="500">✓ Bind · temperature</text>
+        <!-- Cursor approaching bind -->
+        <path d="M260 200 L260 212 L264 208 L269 214" stroke="#1a1a2e" stroke-width="1.5" fill="#1a1a2e" fill-opacity=".1">
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,-6;0,0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <rect x="10" y="10" width="80" height="300" rx="8" fill="white" stroke="#e0e0ea" opacity=".3"/>
+      </svg>`;
+    }
+  },
+  {
+    caption: '<b>Step 6:</b> Binding confirmed! Canvas element now shows <b>bound data</b> with visual indicators',
+    render: function(ctx) {
+      return `<svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <!-- Canvas -->
+        <rect x="30" y="10" width="260" height="300" rx="8" fill="white" stroke="#e0e0ea"/>
+        <text x="50" y="35" font-size="10" font-family="DM Sans" fill="#8888a8">Canvas</text>
+        <!-- Element with bound state -->
+        <rect x="50" y="50" width="220" height="36" rx="6" fill="white" stroke="#d946a8" stroke-width="1.5" stroke-dasharray="0">
+          <animate attributeName="stroke-dasharray" values="10,5;0,0;0,0" dur="1s" fill="freeze" repeatCount="1"/>
+        </rect>
+        <!-- Bound dot -->
+        <circle cx="60" cy="68" r="4" fill="#d946a8">
+          <animate attributeName="r" values="0;4;4" dur=".6s" fill="freeze"/>
+        </circle>
+        <!-- Bind tag -->
+        <rect x="70" y="53" width="120" height="14" rx="3" fill="#d946a812">
+          <animate attributeName="opacity" values="0;1" dur=".5s" fill="freeze"/>
+        </rect>
+        <text x="76" y="63" font-size="8" font-family="DM Mono" fill="#d946a8" font-weight="600">
+          ☁️ Weather · temperature
+          <animate attributeName="opacity" values="0;1" dur=".5s" fill="freeze"/>
+        </text>
+        <!-- Updated value -->
+        <text x="62" y="80" font-size="13" font-family="DM Sans" fill="#1a1a2e" font-weight="500">"24°C"</text>
+        <!-- Other elements -->
+        <rect x="50" y="100" width="220" height="80" rx="4" fill="#f0f0f5" stroke="#e0e0ea"/>
+        <rect x="50" y="190" width="220" height="16" rx="4" fill="#f5f5f8"/>
+        <rect x="50" y="214" width="140" height="16" rx="4" fill="#f5f5f8"/>
+        <!-- Context pill -->
+        <rect x="20" y="46" width="20" height="94" rx="4" fill="#d946a812" stroke="#d946a835">
+          <animate attributeName="opacity" values="0;1" dur=".5s" fill="freeze"/>
+        </rect>
+        <text x="30" y="96" font-size="8" font-family="DM Sans" fill="#d946a8" transform="rotate(-90,30,96)">☁️ Weather</text>
+        <!-- Inspector showing bound state -->
+        <rect x="310" y="0" width="150" height="320" rx="0" fill="#f5f5f8" stroke="#e0e0ea"/>
+        <text x="322" y="24" font-size="10" font-family="DM Sans" fill="#1a1a2e" font-weight="600">Properties</text>
+        <rect x="318" y="36" width="134" height="50" rx="6" fill="white" stroke="#e0e0ea"/>
+        <text x="326" y="52" font-size="9" font-family="DM Sans" fill="#4a4a6a" font-weight="600">Value</text>
+        <rect x="326" y="58" width="100" height="18" rx="4" fill="#d946a812" stroke="#d946a835"/>
+        <text x="332" y="71" font-size="8" font-family="DM Mono" fill="#d946a8">temperature</text>
+        <rect x="430" y="56" width="16" height="18" rx="3" fill="#d946a812" stroke="#d946a835"/>
+        <text x="434" y="69" font-size="9" fill="#d946a8">⚡</text>
+        <!-- Toast -->
+        <rect x="140" y="268" width="180" height="28" rx="14" fill="#1a1a2e">
+          <animate attributeName="opacity" values="0;1;1;1" dur="2s" fill="freeze"/>
+        </rect>
+        <text x="170" y="286" font-size="10" font-family="DM Sans" fill="#22c55e" font-weight="500">
+          ✓ Bound to temperature
+          <animate attributeName="opacity" values="0;1;1;1" dur="2s" fill="freeze"/>
+        </text>
+      </svg>`;
+    }
+  }
+];
+
+let _specDemoStep = 0;
+let _specDemoTimer = null;
+let _specDemoPlaying = false;
+
+function specDemoInit() {
+  const canvas = document.getElementById('spec-demo-canvas');
+  const timeline = document.getElementById('spec-demo-timeline');
+  if (!canvas || !timeline) return;
+
+  let tlHtml = '';
+  SPEC_DEMO_STEPS.forEach(function(s, i) {
+    if (i > 0) tlHtml += '<div class="spec-demo-line" id="spec-demo-line-' + (i-1) + '"></div>';
+    tlHtml += '<div class="spec-demo-dot" id="spec-demo-dot-' + i + '" onclick="specDemoGoTo(' + i + ')"></div>';
+  });
+  timeline.innerHTML = tlHtml;
+
+  _specDemoStep = 0;
+  specDemoRender();
+}
+
+function specDemoRender() {
+  var canvas = document.getElementById('spec-demo-canvas');
+  var caption = document.getElementById('spec-demo-caption');
+  if (!canvas) return;
+
+  canvas.innerHTML = SPEC_DEMO_STEPS[_specDemoStep].render();
+  if (caption) caption.innerHTML = SPEC_DEMO_STEPS[_specDemoStep].caption;
+
+  SPEC_DEMO_STEPS.forEach(function(s, i) {
+    var dot = document.getElementById('spec-demo-dot-' + i);
+    var line = document.getElementById('spec-demo-line-' + i);
+    if (dot) {
+      dot.className = 'spec-demo-dot' + (i === _specDemoStep ? ' active' : '') + (i < _specDemoStep ? ' done' : '');
+    }
+    if (line) {
+      line.className = 'spec-demo-line' + (i < _specDemoStep ? ' done' : '');
+    }
+  });
+}
+
+function specDemoNext() {
+  if (_specDemoStep < SPEC_DEMO_STEPS.length - 1) {
+    _specDemoStep++;
+    specDemoRender();
+  } else if (_specDemoPlaying) {
+    specDemoStopPlay();
+  }
+}
+
+function specDemoPrev() {
+  if (_specDemoStep > 0) {
+    _specDemoStep--;
+    specDemoRender();
+  }
+}
+
+function specDemoGoTo(idx) {
+  _specDemoStep = idx;
+  specDemoRender();
+}
+
+function specDemoTogglePlay() {
+  if (_specDemoPlaying) {
+    specDemoStopPlay();
+  } else {
+    _specDemoPlaying = true;
+    var btn = document.getElementById('spec-demo-play-btn');
+    if (btn) { btn.textContent = '⏸ Pause'; btn.classList.add('playing'); }
+    if (_specDemoStep >= SPEC_DEMO_STEPS.length - 1) { _specDemoStep = 0; specDemoRender(); }
+    _specDemoTimer = setInterval(specDemoNext, 3000);
+  }
+}
+
+function specDemoStopPlay() {
+  _specDemoPlaying = false;
+  clearInterval(_specDemoTimer);
+  _specDemoTimer = null;
+  var btn = document.getElementById('spec-demo-play-btn');
+  if (btn) { btn.textContent = '▶ Play'; btn.classList.remove('playing'); }
 }
 
 /* ── TOAST ── */
@@ -5748,6 +7571,111 @@ function applyRepBindingToAll(templateKey, propKey, field, ctxId) {
   });
 }
 
+/* ── PARAM DROPDOWN ── */
+function renderDdParam(body, elId, propKey, paramName) {
+  const mainBinding = S.bindings[`${elId}|${propKey}`];
+  const param = mainBinding?.fnParams?.find(p => p.name === paramName);
+  if (!param) return;
+
+  const available = getAvailableCtx(elId, true);
+  const srcId = S.dd.srcId;
+  const fieldName = S.dd.fieldName;
+  const srcOpen = S.dd.openPanel === 'src';
+  const fieldOpen = S.dd.openPanel === 'field';
+  const selectedCtx = srcId ? findSource(srcId) : null;
+
+  if (!S.dd.srcId && available.length === 1) {
+    S.dd.srcId = available[0].id;
+    S.dd.openPanel = 'field';
+  }
+
+  const ctxItems = available.length === 0
+    ? `<div class="dd-notice" style="padding:8px 12px;line-height:1.6">No contexts available.</div>`
+    : available.map(ctx => `
+        <div class="dd-sel-item ${S.dd.srcId===ctx.id?'sel':''}" onclick="ddParamSelSource(event,'${ctx.id}')">
+          <div style="flex:1;min-width:0">
+            <div class="dd-sel-item-name">${ctx.name}</div>
+            <div class="dd-sel-item-sub">${ctx.source} · ${ctx.type}</div>
+          </div>
+        </div>`).join('');
+
+  const srcItems = `<div class="dd-src-section">
+      <div class="dd-src-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg> Data Sources <span class="dd-src-count">${available.length}</span></div>
+      ${ctxItems}
+    </div>`;
+
+  const filteredFields = !selectedCtx ? [] : selectedCtx.fields.filter(f => isCompat(f.type, param.type));
+
+  const fieldItems = !selectedCtx
+    ? `<div class="dd-sel-item" style="opacity:.4;pointer-events:none;padding:8px 10px;font-size:11px;color:var(--t3)">Select a source first</div>`
+    : filteredFields.length === 0
+    ? `<div style="padding:12px 14px;text-align:center">
+        <div style="font-size:22px;margin-bottom:6px">🔍</div>
+        <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">No compatible fields</div>
+        <div style="font-size:10px;color:var(--t3);line-height:1.5">No fields match <span style="font-family:'DM Mono',monospace;color:var(--acc)">${param.type}</span> for this parameter.</div>
+      </div>`
+    : filteredFields.map(f => `<div class="dd-sel-item ${fieldName===f.name?'sel':''}" onclick="ddParamSelField(event,'${f.name}')">
+          <div style="flex:1;min-width:0">
+            <div>${f.name}</div>
+            <div class="dd-sel-item-sub">${f.sample || f.type}</div>
+          </div>
+          <span class="dd-sel-tag">${f.type}</span>
+        </div>`).join('');
+
+  body.innerHTML = `
+    <div style="padding:6px 10px;font-size:9px;color:var(--acc);font-family:'DM Mono',monospace;background:var(--acc-d);border-bottom:1px solid color-mix(in srgb, var(--acc) 20%, transparent)">
+      <span style="text-transform:uppercase;letter-spacing:.5px">⚡ PARAM: ${paramName}</span>
+      <div style="font-family:'DM Sans',sans-serif;font-size:10px;color:var(--t3);margin-top:2px;text-transform:none;letter-spacing:0">${param.description || ''}</div>
+    </div>
+    <div class="dd-selectors">
+      <div class="dd-sel-group">
+        <div class="dd-sel-label">Select Source</div>
+        <div class="dd-sel-box ${S.dd.srcId?'filled':''} ${srcOpen?'open':''}" id="dd-src-box">
+          <div class="dd-sel-trigger ${S.dd.srcId?'has-val':''}" onclick="toggleParamSrcBox(event)">
+            ${S.dd.srcId && selectedCtx
+              ? `<span>${selectedCtx.icon}</span><span>${selectedCtx.name}</span>`
+              : `<span style="color:var(--t3)">Select…</span>`}
+            <span class="dd-sel-chevron">▾</span>
+          </div>
+          <div class="dd-sel-dropdown">${srcItems}</div>
+        </div>
+      </div>
+      <div class="dd-sel-group">
+        <div class="dd-sel-label">Select Field</div>
+        <div class="dd-sel-box ${fieldName?'filled':''} ${fieldOpen?'open':''} ${!S.dd.srcId?'style="opacity:.5;pointer-events:none"':''}" id="dd-field-box">
+          <div class="dd-sel-trigger ${fieldName?'has-val green':''}" onclick="toggleParamFieldBox(event)">
+            ${fieldName ? `<span>${fieldName}</span>` : `<span style="color:var(--t3)">${S.dd.srcId ? 'Select…' :'Pick source first'}</span>`}
+            <span class="dd-sel-chevron">▾</span>
+          </div>
+          <div class="dd-sel-dropdown">${fieldItems}</div>
+        </div>
+      </div>
+    </div>
+    <button class="dd-confirm ${(S.dd.srcId && fieldName)?'show':''}" onclick="confirmParamBind(event)">
+      ✓ Bind · ${paramName}${fieldName ? ` → ${fieldName}` : ''}
+    </button>
+  `;
+}
+
+function toggleParamSrcBox(e) { if (e) e.stopPropagation(); S.dd.openPanel = S.dd.openPanel === 'src' ? null : 'src'; renderDd(); }
+function toggleParamFieldBox(e) { if (e) e.stopPropagation(); if (!S.dd.srcId) return; S.dd.openPanel = S.dd.openPanel === 'field' ? null : 'field'; renderDd(); }
+function ddParamSelSource(e, id) { if (e) e.stopPropagation(); S.dd.srcId = id; S.dd.fieldName = null; S.dd.openPanel = 'field'; renderDd(); }
+function ddParamSelField(e, name) { if (e) e.stopPropagation(); S.dd.fieldName = name; S.dd.openPanel = null; renderDd(); }
+
+function confirmParamBind(e) {
+  if (e) e.stopPropagation();
+  const {elId, propKey, paramName, srcId, fieldName} = S.dd;
+  if (!srcId || !fieldName || !paramName) return;
+  const ctx = findSource(srcId);
+  const field = ctx.fields.find(f => f.name === fieldName);
+  const paramBKey = `${elId}|${propKey}|param:${paramName}`;
+  S.bindings[paramBKey] = {ctxId: srcId, fieldName, sample: field?.sample || ''};
+  closeDd();
+  toast(`✓ ${paramName} → ${ctx.name} · ${fieldName}`, true);
+  updateFnCanvasPreview(elId, propKey);
+  updatePropRowDOM(elId, propKey);
+}
+
 /* ── REPEATER ITEMS DROPDOWN — two-step: context → array field ── */
 function renderDdRepeaterItems(body, elId, srcId) {
   const def = EL_DEFS[elId];
@@ -5778,26 +7706,29 @@ function renderDdRepeaterItems(body, elId, srcId) {
     ? `<div class="dd-notice" style="padding:8px 12px;line-height:1.6">⚠ No context on parent section.<br>Add a context with an array field first.</div>`
     : allContexts.map(ctx => `
         <div class="dd-sel-item ${srcId===ctx.id?'sel':''}" onclick="ddRepSelSource(event,'${ctx.id}')">
-          <span style="font-size:13px">${ctx.icon}</span>
           <div style="flex:1;min-width:0">
-            <div>${ctx.name}</div>
+            <div class="dd-sel-item-name">${ctx.name}</div>
             <div class="dd-sel-item-sub">${ctx.source} · ${ctx.type}</div>
           </div>
         </div>`).join('');
 
   const fnLibSrcItems = FN_LIBS.map(lib => `
         <div class="dd-sel-item ${srcId===lib.id?'sel':''}" onclick="ddRepSelSource(event,'${lib.id}')">
-          <span style="font-size:13px">${lib.icon}</span>
           <div style="flex:1;min-width:0">
-            <div>${lib.name}</div>
+            <div class="dd-sel-item-name">${lib.name}</div>
             <div class="dd-sel-item-sub">${lib.functions.length} functions · ${lib.description}</div>
           </div>
         </div>`).join('');
 
-  const srcItems = `<div style="padding:4px 10px 2px;font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;padding-top:4px">CONTEXTS</div>`
-    + ctxSrcItems
-    + `<div style="padding:4px 10px 2px;font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;border-top:1px solid var(--b1);margin-top:4px;padding-top:8px">FUNCTION LIBRARIES</div>`
-    + fnLibSrcItems;
+  const srcItems = `<div class="dd-src-section">
+      <div class="dd-src-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg> Data Sources <span class="dd-src-count">${allContexts.length}</span></div>
+      ${ctxSrcItems}
+    </div>
+    <div class="dd-src-divider"></div>
+    <div class="dd-src-section">
+      <div class="dd-src-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg> Functions <span class="dd-src-count">${FN_LIBS.length}</span></div>
+      ${fnLibSrcItems}
+    </div>`;
 
   const fieldItems = !selectedCtx
     ? `<div class="dd-sel-item" style="opacity:.4;pointer-events:none;padding:8px 10px;font-size:11px;color:var(--t3)">Select a source first</div>`
@@ -5815,6 +7746,11 @@ function renderDdRepeaterItems(body, elId, srcId) {
           </div>
           <span class="dd-sel-tag">${f.type}</span>
         </div>`).join('');
+
+  const ddRepCanAddField = selectedCtx && (selectedCtx.source === 'CMS' || selectedCtx.source === 'Custom Code') && !isSelectedFn;
+  const ddRepAddFieldBtn = ddRepCanAddField
+    ? `<div class="dd-add-field-btn" onclick="event.stopPropagation();openAddFieldModal('${srcId}')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add field</div>`
+    : '';
 
   body.innerHTML = `
     <div class="dd-selectors">
@@ -5839,7 +7775,7 @@ function renderDdRepeaterItems(body, elId, srcId) {
             ${fieldName ? `<span>${isSelectedFn ? '<span style="font-family:\'DM Mono\',monospace;font-size:11px">' + fieldName + '</span>' : fieldName}</span>` : `<span style="color:var(--t3)">${srcId ? (isSelectedFn ? 'Select function…' : 'Select…') : 'Pick source first'}</span>`}
             <span class="dd-sel-chevron">▾</span>
           </div>
-          <div class="dd-sel-dropdown">${fieldItems}</div>
+          <div class="dd-sel-dropdown">${fieldItems}${ddRepAddFieldBtn}</div>
         </div>
       </div>
     </div>
@@ -5942,14 +7878,18 @@ function renderImgPropRow(elId, propK, isBound, isActiveDd, ctx, b) {
 }
 // Initialize bound classes from S.bindings
 Object.keys(S.bindings).forEach(bkey => {
+  if (bkey.includes('|param:')) return;
   const [elId] = bkey.split('|');
   const domEl = document.getElementById(elId);
   if (!domEl) return;
   if (domEl.classList.contains('c-el')) domEl.classList.add('bound');
   if (domEl.classList.contains('c-repeater') && bkey.endsWith('|Items')) domEl.classList.add('bound');
+  const b = S.bindings[bkey];
+  if (b && b.fnHasParams && b.fnTemplate) updateFnCanvasPreview(elId, bkey.split('|')[1]);
 });
 refreshAllPills();
 updateInspectorToggle();
+initElementDrag();
 
 (function() {
   const canvas = document.getElementById('canvas');
@@ -6088,6 +8028,67 @@ function sfAddRule() {
   sfTempRules.push(sfDialogType === 'sort' ? {field:'', dir:'asc'} : {field:'', condition:'contains', value:''});
   renderSfBody();
 }
+
+/* ── CANVAS PANNING ── */
+(function() {
+  const canvas = document.getElementById('canvas');
+  let isPanning = false;
+  let startX, startY;
+  let panX = 0, panY = 0, savedPanX = 0, savedPanY = 0;
+  let didDrag = false;
+
+  function isCanvasBg(el) {
+    return el === canvas || el.classList.contains('canvas-grid') || el.classList.contains('canvas-inner');
+  }
+
+  function applyPan() {
+    canvas.querySelectorAll('.canvas-inner, .items-page, .item-detail-page').forEach(function(el) {
+      el.style.transform = 'translate(' + panX + 'px, ' + panY + 'px)';
+    });
+  }
+
+  function resetPan() {
+    panX = 0; panY = 0; savedPanX = 0; savedPanY = 0;
+    canvas.querySelectorAll('.canvas-inner, .items-page, .item-detail-page').forEach(function(el) {
+      el.style.transform = '';
+    });
+  }
+  window._resetCanvasPan = resetPan;
+
+  canvas.addEventListener('mousedown', function(e) {
+    if (e.button !== 0 || !isCanvasBg(e.target)) return;
+    isPanning = true;
+    didDrag = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    savedPanX = panX;
+    savedPanY = panY;
+    canvas.classList.add('panning');
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!isPanning) return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true;
+    panX = savedPanX + dx;
+    panY = savedPanY + dy;
+    applyPan();
+  });
+
+  window.addEventListener('mouseup', function() {
+    if (!isPanning) return;
+    isPanning = false;
+    canvas.classList.remove('panning');
+  });
+
+  var origCanvasClick = window.canvasClick;
+  window.canvasClick = function(e) {
+    if (didDrag) { didDrag = false; return; }
+    origCanvasClick(e);
+  };
+})();
 </script>
 
 <!-- SORT/FILTER DIALOG -->
@@ -6152,6 +8153,8 @@ function sfAddRule() {
 </div>
 
 <div class="ctx-menu" id="canvas-ctx-menu">
+  <div class="ctx-menu-item spec" id="ctx-menu-spec" style="display:none" onclick="openSpecFromContextMenu()">📋 Read Product Specification</div>
+  <div class="ctx-menu-sep" id="ctx-menu-spec-sep" style="display:none"></div>
   <div class="ctx-menu-item danger" onclick="removeContextMenuTarget()">🗑 Remove</div>
 </div>
 
