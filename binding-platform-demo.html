@@ -271,9 +271,11 @@ body.product-mode .c-el:hover,body.product-mode .c-section:hover{outline:2px das
 .msb.bound.sel .msb-pill .el-bind-sec:hover{opacity:1;background:rgba(255,255,255,.15)}
 .msb.bound.sel .msb-pill .el-bind-ctx:hover{background:rgba(255,255,255,.15)}
 .msb-view-sel{position:absolute;top:0;right:10px;transform:translateY(-50%);display:none;align-items:center;gap:0;background:var(--sur);border-radius:20px;overflow:hidden;z-index:10;pointer-events:auto;font-size:8px;border:1px solid var(--acc)}
-.msb.bound .msb-view-sel{display:flex;opacity:0;transition:opacity .15s}
-.msb.bound:hover .msb-view-sel{opacity:1}
-.msb.bound.sel .msb-view-sel{opacity:1}
+.msb.bound .msb-view-sel,.msb.msb-disconnected .msb-view-sel{display:flex;opacity:0;transition:opacity .15s}
+.msb.bound:hover .msb-view-sel,.msb.msb-disconnected:hover .msb-view-sel{opacity:1}
+.msb.bound.sel .msb-view-sel,.msb.msb-disconnected.sel .msb-view-sel{opacity:1}
+.msb.msb-disconnected{border-color:var(--b2);border-style:dashed}
+.msb.msb-disconnected.sel{border-color:var(--t3);box-shadow:0 0 0 3px var(--b2)}
 .msb.bound.sel .msb-view-sel{background:var(--acc);border-color:var(--acc)}
 .msb-view-btn{padding:2px 8px;font-size:8px;font-family:'DM Mono',monospace;cursor:pointer;color:var(--acc);transition:.12s;border:none;background:none;opacity:.65}
 .msb-view-btn:hover{opacity:1;background:rgba(108,92,231,.1)}
@@ -2989,7 +2991,7 @@ const EL_DEFS = {
       {id:'hasItems', name:'Has Items', enumValues:['hasItems']},
     ],
     activeView:'hasItems',
-    props:[{k:'Active State',t:'enum'}]},
+    props:[{k:'Active State',t:'states'}]},
   'el-msb-loading-text':  {name:'Loading Text',    type:'Text',   section:'sec-msb', msbParent:'msb-articles', msbView:'loading',  props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-msb-empty-title':   {name:'Empty Title',     type:'Text',   section:'sec-msb', msbParent:'msb-articles', msbView:'empty',    props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-msb-empty-btn':     {name:'Browse Button',   type:'Button', section:'sec-msb', msbParent:'msb-articles', msbView:'empty',    props:[{k:'Label',t:'string'},{k:'Click Action',t:'action'}]},
@@ -3803,7 +3805,7 @@ function renderSettings() {
         `<span draggable="true" ondragstart="msbDragStart(event,'${val}')" style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:${isActive ? 'var(--acc)' : 'var(--acc-d)'};border:1px solid var(--acc);border-radius:10px;font-size:10px;color:${isActive ? '#fff' : 'var(--acc)'};font-family:'DM Mono',monospace;cursor:grab"><svg width="6" height="10" viewBox="0 0 6 10" style="opacity:.5;flex-shrink:0"><circle cx="1.5" cy="1.5" r="1" fill="currentColor"/><circle cx="4.5" cy="1.5" r="1" fill="currentColor"/><circle cx="1.5" cy="5" r="1" fill="currentColor"/><circle cx="4.5" cy="5" r="1" fill="currentColor"/><circle cx="1.5" cy="8.5" r="1" fill="currentColor"/><circle cx="4.5" cy="8.5" r="1" fill="currentColor"/></svg>${val}${mapped.length > 1 ? `<span style="cursor:pointer;opacity:.6;margin-left:2px" onclick="msbUnassign(event,'${v.id}','${val}')">✕</span>` : ''}</span>`
       ).join('');
       return `<div class="msb-drop-zone" data-view-id="${v.id}" onclick="switchMsbView(event,'${v.id}')" ondragover="msbDragOver(event)" ondragleave="msbDragLeave(event)" ondrop="msbDrop(event,'${v.id}')" style="padding:8px 10px;border:2px ${disabled ? 'dashed color-mix(in srgb, var(--acc) 25%, var(--b2))' : isActive ? 'solid var(--acc)' : 'solid var(--b1)'};border-radius:8px;background:${disabled ? 'color-mix(in srgb, var(--acc) 3%, var(--sur))' : isActive ? 'var(--acc-d)' : 'var(--sur2)'};cursor:pointer;transition:border-color .15s,background .15s,opacity .15s">
-        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'};margin-bottom:${disabled ? '0' : '4'}px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${isActive && !disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:var(--acc)">editing</span>' : ''}${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:color-mix(in srgb, var(--acc) 50%, var(--t3))">drag a state here</span>' : ''}</div>
+        <div style="font-size:11px;font-weight:500;color:${disabled ? 'var(--t3)' : isActive ? 'var(--acc)' : 'var(--t1)'};margin-bottom:${disabled ? '0' : chips ? '4' : '0'}px;display:flex;align-items:center;gap:6px">◫ ${v.name} ${isActive && !disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:var(--acc)">editing</span>' : ''}${disabled ? '<span style="font-size:9px;font-weight:400;font-family:\'DM Mono\',monospace;color:color-mix(in srgb, var(--acc) 50%, var(--t3))">won\'t be triggered · drag a state here</span>' : ''}</div>
         ${chips ? `<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${chips}</div>` : ''}
       </div>`;
     }).join('');
@@ -5793,7 +5795,49 @@ function confirmBind(e) {
     updatePropRowDOM(elId, propKey);
   }
   renderEtPanel();
-  if (def?.isMultiState) { refreshMsbState(); renderBody(); }
+  if (def?.isMultiState) {
+    const statesField = ctx.fields.find(f => f.name === fieldName && (f.type === 'enum' || f.type === 'states'));
+    const newEnumVals = statesField?.enumValues || [];
+    const existingViews = def.views || [];
+    existingViews.forEach(v => { v.enumValues = []; });
+    const usedVals = new Set();
+    existingViews.forEach(v => {
+      const nameMatch = newEnumVals.find(val => val.toLowerCase() === v.id.toLowerCase() && !usedVals.has(val));
+      if (nameMatch) { v.enumValues = [nameMatch]; usedVals.add(nameMatch); }
+    });
+    const unmapped = newEnumVals.filter(val => !usedVals.has(val));
+    let unmappedIdx = 0;
+    existingViews.forEach(v => {
+      if (v.enumValues.length === 0 && unmappedIdx < unmapped.length) {
+        v.enumValues = [unmapped[unmappedIdx]]; usedVals.add(unmapped[unmappedIdx]); unmappedIdx++;
+      }
+    });
+    while (unmappedIdx < unmapped.length) {
+      const val = unmapped[unmappedIdx];
+      const newViewId = 'view-' + val;
+      existingViews.push({ id: newViewId, name: val.charAt(0).toUpperCase() + val.slice(1), enumValues: [val] });
+      const msbBody = document.querySelector('#msb-articles .msb-body');
+      if (msbBody) {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'msb-view';
+        newDiv.id = 'msb-view-' + newViewId;
+        newDiv.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:10px;min-height:200px"><div style="font-size:28px;opacity:.25">◫</div><div style="font-size:12px;color:var(--t3)">Empty view — design it in the canvas</div></div>';
+        msbBody.appendChild(newDiv);
+      }
+      unmappedIdx++;
+    }
+    existingViews.forEach((v, i) => {
+      v.name = v.enumValues.length > 0
+        ? v.enumValues[0].charAt(0).toUpperCase() + v.enumValues[0].slice(1)
+        : 'State ' + (i + 1);
+    });
+    if (!existingViews.find(v => v.id === def.activeView && v.enumValues.length > 0)) {
+      const firstActive = existingViews.find(v => v.enumValues.length > 0);
+      if (firstActive) def.activeView = firstActive.id;
+    }
+    def.views = existingViews;
+    refreshMsbState(); refreshMsbCanvasButtons(); renderBody();
+  }
 }
 
 function applyBindingToCanvas(elId, propKey, field, ctxId) {
@@ -5920,7 +5964,8 @@ function isCompat(fieldType, propType) {
   if (propType==='boolean') return fieldType==='boolean';
   if (propType==='url')     return fieldType==='url';
   if (propType==='action')  return fieldType==='action';
-  if (propType==='enum')    return fieldType==='enum';
+  if (propType==='enum')    return fieldType==='enum' || fieldType==='states';
+  if (propType==='states')  return fieldType==='states' || fieldType==='enum';
   return true;
 }
 
@@ -6834,15 +6879,30 @@ function msbResetJoins(e) {
   const bkey = 'msb-articles|Active State';
   const b = S.bindings[bkey];
   const ctx = b ? findSource(b.ctxId) : null;
-  const ctxField = ctx ? ctx.fields.find(f => f.name === b.fieldName && f.type === 'enum') : null;
+  const ctxField = ctx ? ctx.fields.find(f => f.name === b.fieldName && (f.type === 'enum' || f.type === 'states')) : null;
   const enumVals = ctxField?.enumValues || [];
-  def.views = enumVals.map(val => ({
-    id: val,
-    name: val === 'hasItems' ? 'Has Items' : val.charAt(0).toUpperCase() + val.slice(1),
-    enumValues: [val]
-  }));
-  if (!def.views.find(v => v.id === def.activeView)) {
-    def.activeView = def.views[0]?.id;
+  const views = def.views || [];
+  const usedVals = new Set();
+  views.forEach(v => { v.enumValues = []; });
+  views.forEach(v => {
+    const nameMatch = enumVals.find(val => val.toLowerCase() === v.id.toLowerCase() && !usedVals.has(val));
+    if (nameMatch) { v.enumValues = [nameMatch]; usedVals.add(nameMatch); }
+  });
+  const unmappedVals = enumVals.filter(val => !usedVals.has(val));
+  let idx = 0;
+  views.forEach(v => {
+    if (v.enumValues.length === 0 && idx < unmappedVals.length) {
+      v.enumValues = [unmappedVals[idx]]; usedVals.add(unmappedVals[idx]); idx++;
+    }
+  });
+  views.forEach((v, i) => {
+    v.name = v.enumValues.length > 0
+      ? v.enumValues[0].charAt(0).toUpperCase() + v.enumValues[0].slice(1)
+      : 'State ' + (i + 1);
+  });
+  if (!views.find(v => v.id === def.activeView && v.enumValues.length > 0)) {
+    const firstActive = views.find(v => v.enumValues.length > 0);
+    if (firstActive) def.activeView = firstActive.id;
   }
   refreshMsbCanvasButtons();
   renderBody();
@@ -6865,10 +6925,13 @@ function refreshMsbCanvasButtons() {
   if (!viewSel) return;
   const views = def.views || [];
   const activeView = def.activeView;
+  const isBound = !!S.bindings['msb-articles|Active State'];
   viewSel.innerHTML = views.map(v => {
-    const disabled = v.enumValues.length === 0;
+    const mapped = v.enumValues || [];
+    const disabled = isBound && mapped.length === 0;
     const active = v.id === activeView;
-    return `<button class="msb-view-btn ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}" data-view="${v.id}" onclick="switchMsbView(event,'${v.id}')"${disabled ? ' title="No state mapped — won\'t show at runtime"' : ''}>${v.name}</button>`;
+    const label = isBound && mapped.length > 0 ? mapped[0].charAt(0).toUpperCase() + mapped[0].slice(1) : v.name;
+    return `<button class="msb-view-btn ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}" data-view="${v.id}" onclick="switchMsbView(event,'${v.id}')"${disabled ? ' title="Won\'t be triggered — no state mapped"' : ''}>${label}</button>`;
   }).join('');
 }
 
@@ -6880,15 +6943,24 @@ function refreshMsbState() {
   const isBound = !!S.bindings[bkey];
   const msbEl = document.getElementById(msbId);
   if (!msbEl) return;
+  const hasViews = def.views && def.views.length > 0;
+
+  document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
 
   if (isBound) {
     msbEl.classList.add('bound');
-    document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
+    msbEl.classList.remove('msb-disconnected');
     const activeEl = document.getElementById('msb-view-' + def.activeView);
     if (activeEl) activeEl.classList.add('active');
+  } else if (hasViews) {
+    msbEl.classList.remove('bound');
+    msbEl.classList.add('msb-disconnected');
+    const activeEl = document.getElementById('msb-view-' + def.activeView);
+    if (activeEl) activeEl.classList.add('active');
+    refreshMsbCanvasButtons();
   } else {
     msbEl.classList.remove('bound');
-    document.querySelectorAll('#' + msbId + ' .msb-view').forEach(v => v.classList.remove('active'));
+    msbEl.classList.remove('msb-disconnected');
     const unboundEl = document.getElementById('msb-view-unbound');
     if (unboundEl) unboundEl.classList.add('active');
   }
