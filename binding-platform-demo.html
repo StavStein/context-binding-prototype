@@ -2459,7 +2459,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
 <script>
 /* ── DATA ── */
 const CTX_DEFS = [
-  { id:'weather', name:'Weather App', icon:'', type:'object', source:'Weather App', group:'Apps',
+  { id:'weather', name:'Weather App', icon:'', type:'object', source:'Weather App', group:'Custom',
     fields:[
       {name:'city',        type:'string',  sample:'"Tel Aviv"'},
       {name:'temperature', type:'number',  sample:'"24°C"'},
@@ -3084,6 +3084,7 @@ const S = {
   },
   ctxAliases: {},  // {sectionId: {ctxId: aliasName}}
   removedInherited: {},  // {sectionId: [ctxId, ...]} — tracks inherited contexts removed by user
+  cfgValues: {},
   ctxRelationships: {
     'stores-locations': {linkedTo: 'stores-current-item', label: 'Filtered by current product', active: true},
   },
@@ -4739,12 +4740,7 @@ function renderCtxList() {
     }
   });
 
-  const ctxGroupOrder = ['CMS', 'Custom', 'Apps', 'System'];
-  ownCtxs.sort((a, b) => {
-    const ai = ctxGroupOrder.indexOf(a.group || 'Other');
-    const bi = ctxGroupOrder.indexOf(b.group || 'Other');
-    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-  });
+  // Keep insertion order — new contexts appear below existing ones
 
   const showSplit = inheritedCtxs.length > 0;
 
@@ -4948,10 +4944,11 @@ function renderCtxSettings(ctxId) {
 
 function renderCfgRow(cfg, ctxId) {
   if (cfg.input === 'toggle') {
+    const current = S.cfgValues?.[ctxId]?.[cfg.key] || cfg.default;
     return `<div class="ctx-cfg-row">
       <span class="ctx-cfg-lbl">${cfg.label}</span>
       <div class="ctx-cfg-toggle">
-        ${cfg.options.map(o => `<div class="seg-b ${o===cfg.default?'on':''}" onclick="toggleCfgOption(this);markInstanceModified('${ctxId}')">${o}</div>`).join('')}
+        ${cfg.options.map(o => `<div class="seg-b ${o===current?'on':''}" onclick="toggleCfgOption(this,'${ctxId}','${cfg.key}','${o}');markInstanceModified('${ctxId}')">${o}</div>`).join('')}
       </div>
     </div>`;
   }
@@ -4963,10 +4960,45 @@ function renderCfgRow(cfg, ctxId) {
   </div>`;
 }
 
-function toggleCfgOption(el) {
+function toggleCfgOption(el, ctxId, key, value) {
   const siblings = el.parentElement.querySelectorAll('.seg-b');
   siblings.forEach(s => s.classList.remove('on'));
   el.classList.add('on');
+  if (!S.cfgValues) S.cfgValues = {};
+  if (!S.cfgValues[ctxId]) S.cfgValues[ctxId] = {};
+  S.cfgValues[ctxId][key] = value;
+  applyCtxConfig(ctxId, key, value);
+}
+
+function applyCtxConfig(ctxId, key, value) {
+  if (ctxId === 'weather' && key === 'units') {
+    const isFahrenheit = value === '°F';
+    const tempC = 24, feelsC = 26;
+    const temp = isFahrenheit ? Math.round(tempC * 9/5 + 32) : tempC;
+    const feels = isFahrenheit ? Math.round(feelsC * 9/5 + 32) : feelsC;
+    const unit = isFahrenheit ? '°F' : '°C';
+    const ctx = findSource('weather');
+    if (ctx) {
+      const tempField = ctx.fields.find(f => f.name === 'temperature');
+      if (tempField) tempField.sample = '"' + temp + unit + '"';
+      const fmtField = ctx.fields.find(f => f.name === 'formattedTemperature');
+      if (fmtField) fmtField.sample = '"' + temp + unit + ' · feels ' + feels + unit + '"';
+    }
+    const tempEl = document.getElementById('v-el-temp');
+    if (tempEl) tempEl.textContent = temp + unit;
+    const tempEl2 = document.getElementById('v-el-d262-temp');
+    if (tempEl2) tempEl2.textContent = temp + unit;
+    Object.keys(S.bindings).forEach(bkey => {
+      const b = S.bindings[bkey];
+      if (b.ctxId === 'weather' && b.fieldName === 'temperature') {
+        b.sample = '"' + temp + unit + '"';
+      }
+      if (b.ctxId === 'weather' && b.fieldName === 'formattedTemperature') {
+        b.sample = '"' + temp + unit + ' · feels ' + feels + unit + '"';
+      }
+    });
+    updateFnCanvasPreview('el-cond', 'Value');
+  }
 }
 
 function togglePagesPanel(e) {
