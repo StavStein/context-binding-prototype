@@ -1123,6 +1123,14 @@ body.product-mode .c-el:hover,body.product-mode .c-section:hover{outline:2px das
 .cfg-prop-row.disabled{opacity:.4;pointer-events:none}
 .cfg-disabled-wrap{opacity:.4;pointer-events:none}
 
+/* Repeater notice banner */
+.rep-notice{padding:6px 12px;margin:6px 12px 0;background:#fff3cd;color:#856404;font-size:11px;border-radius:6px;font-family:'DM Sans',sans-serif;line-height:1.5;display:none}
+.c-repeater:not(.bound) .rep-notice{display:block}
+/* Orphaned binding state — looks like static content, bindings hidden on canvas */
+.c-el.orphaned .el-bind-tag{display:none !important}
+.c-el.orphaned{opacity:1}
+.c-el.orphaned .bound-dot{display:none}
+
 /* Add Field modal */
 .af-overlay{position:fixed;inset:0;background:#00000060;z-index:800;display:none;align-items:center;justify-content:center}
 .af-overlay.open{display:flex}
@@ -1255,6 +1263,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         <div class="pp-item" onclick="selectPage(this,'Homepage')">📄 Home</div>
         <div class="pp-item" onclick="selectPage(this,'Items (List)')">📄 Items (List)</div>
         <div class="pp-item" onclick="selectPage(this,'Repeater Usecases')">📄 Repeater Usecases</div>
+        <div class="pp-item" onclick="selectPage(this,'Repeater')">↻ Repeater</div>
         <div class="pp-item" onclick="selectPage(this,'Multi-State Box')">◫ Multi-State Box</div>
         <div class="pp-item" onclick="selectPage(this,'Demo')">📄 Demo</div>
         <div class="pp-item active" onclick="selectPage(this,'Demo 26.2')">📄 Demo 26.2</div>
@@ -1697,7 +1706,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         <div class="c-repeater" id="repeater-items" onclick="selEl(event,'repeater-items')" style="margin:0 36px 32px;border-radius:6px">
           <div class="ctx-pill rep-pill" id="pill-repeater-items"></div>
           <div class="c-el-overlay"></div>
-          <div class="rep-header">
+          <div class="rep-header" onclick="selElSettings(event,'repeater-items')">
             <span class="rep-icon">↻</span>
             <span class="rep-label">Repeater</span>
             <span class="rep-count" id="rep-count-items">— not connected</span>
@@ -1906,7 +1915,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-repeater bound" id="repeater-msb-items" onclick="selEl(event,'repeater-msb-items')" style="border-radius:6px">
                 <div class="ctx-pill rep-pill" id="pill-repeater-msb-items"></div>
                 <div class="c-el-overlay"></div>
-                <div class="rep-header">
+                <div class="rep-header" onclick="selElSettings(event,'repeater-msb-items')">
                   <span class="rep-icon">↻</span>
                   <span class="rep-label">Repeater</span>
                   <span class="rep-count" id="rep-count-msb-items">📚 items · 3 items</span>
@@ -1979,7 +1988,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         <div class="c-repeater bound" id="repeater-ruc-articles" onclick="selEl(event,'repeater-ruc-articles')" style="margin:0 24px 24px;border-radius:6px">
           <div class="ctx-pill rep-pill" id="pill-repeater-ruc-articles"></div>
           <div class="c-el-overlay"></div>
-          <div class="rep-header">
+          <div class="rep-header" onclick="selElSettings(event,'repeater-ruc-articles')">
             <span class="rep-icon">↻</span>
             <span class="rep-label">Repeater</span>
             <span class="rep-count" id="rep-count-ruc-articles">3 items</span>
@@ -2043,7 +2052,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         <div class="c-repeater bound" id="repeater-ruc-tags" onclick="selEl(event,'repeater-ruc-tags')" style="margin:0 24px 24px;border-radius:6px">
           <div class="ctx-pill rep-pill" id="pill-repeater-ruc-tags"></div>
           <div class="c-el-overlay"></div>
-          <div class="rep-header">
+          <div class="rep-header" onclick="selElSettings(event,'repeater-ruc-tags')">
             <span class="rep-icon">↻</span>
             <span class="rep-label">Repeater</span>
             <span class="rep-count" id="rep-count-ruc-tags">4 items</span>
@@ -2086,6 +2095,283 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                 <div style="padding:4px 14px;background:var(--acc-d);color:var(--acc);border-radius:20px;font-size:12px;font-weight:500">UX</div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- REPEATER CONCEPT PAGE -->
+    <div class="items-page" id="repeater-concept-page">
+      <div class="page-sel-bar" id="psb-rep" onclick="selectPageEl(event,'page-rep')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg> Page · Repeater</div>
+
+      <!-- Section 1: Connected Repeater (Products) -->
+      <div class="c-section has-ctx" id="sec-rep-connected" onclick="selEl(event,'sec-rep-connected')" style="margin:16px">
+        <div class="ctx-pill" id="pill-sec-rep-connected"></div>
+        <div style="padding:24px 24px 8px">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--t1);margin-bottom:4px">Our Products</div>
+          <div style="font-size:12px;color:var(--t3);margin-bottom:12px">Connected repeater — bound to Products list</div>
+        </div>
+        <div class="c-repeater bound" id="repeater-rep-products" onclick="selEl(event,'repeater-rep-products')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
+          <div class="ctx-pill rep-pill" id="pill-repeater-rep-products"></div>
+          <div class="c-el-overlay"></div>
+          <div class="rep-header" onclick="selElSettings(event,'repeater-rep-products')">
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-rep-products">🛍 Products · 3 items</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-rep-products','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12">
+                <circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="selElSettings(event,'repeater-rep-products')">Connect data →</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
+            <div class="rep-item" id="rep-rp-1" onclick="selEl(event,'rep-rp-1')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
+              <div class="c-el-overlay"></div>
+              <div class="c-el bound" id="el-rp-img-1" onclick="selEl(event,'el-rp-img-1')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#e8d5b7;flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">🛍 Products · image</div></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="c-el bound" id="el-rp-name-1" onclick="selEl(event,'el-rp-name-1')" style="cursor:pointer">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">🛍 Products · name</div></div>
+                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Sunny Day Tee</div>
+                </div>
+                <div class="c-el bound" id="el-rp-price-1" onclick="selEl(event,'el-rp-price-1')" style="cursor:pointer;margin-top:2px">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">🛍 Products · price</div></div>
+                  <div style="font-size:13px;color:var(--acc);font-weight:600">$29.99</div>
+                </div>
+              </div>
+              <div class="c-el bound" id="el-rp-btn-1" onclick="selEl(event,'el-rp-btn-1')" style="cursor:pointer;flex-shrink:0">
+                <div class="c-el-overlay" style="border-radius:20px"></div>
+                <div class="el-tags"><div class="el-type-tag">Button</div></div>
+                <div style="padding:6px 16px;background:var(--acc);color:#fff;border-radius:20px;font-size:12px;font-weight:600">Add to Cart</div>
+              </div>
+            </div>
+            <div class="rep-item" id="rep-rp-2" onclick="selEl(event,'rep-rp-2')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
+              <div class="c-el-overlay"></div>
+              <div class="c-el bound" id="el-rp-img-2" onclick="selEl(event,'el-rp-img-2')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#c4d9e8;flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">🛍 Products · image</div></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="c-el bound" id="el-rp-name-2" onclick="selEl(event,'el-rp-name-2')" style="cursor:pointer">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">🛍 Products · name</div></div>
+                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Cloud Nine Hoodie</div>
+                </div>
+                <div class="c-el bound" id="el-rp-price-2" onclick="selEl(event,'el-rp-price-2')" style="cursor:pointer;margin-top:2px">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">🛍 Products · price</div></div>
+                  <div style="font-size:13px;color:var(--acc);font-weight:600">$59.99</div>
+                </div>
+              </div>
+              <div class="c-el bound" id="el-rp-btn-2" onclick="selEl(event,'el-rp-btn-2')" style="cursor:pointer;flex-shrink:0">
+                <div class="c-el-overlay" style="border-radius:20px"></div>
+                <div class="el-tags"><div class="el-type-tag">Button</div></div>
+                <div style="padding:6px 16px;background:var(--acc);color:#fff;border-radius:20px;font-size:12px;font-weight:600">Add to Cart</div>
+              </div>
+            </div>
+            <div class="rep-item" id="rep-rp-3" onclick="selEl(event,'rep-rp-3')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
+              <div class="c-el-overlay"></div>
+              <div class="c-el bound" id="el-rp-img-3" onclick="selEl(event,'el-rp-img-3')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#333;flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">🛍 Products · image</div></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="c-el bound" id="el-rp-name-3" onclick="selEl(event,'el-rp-name-3')" style="cursor:pointer">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">🛍 Products · name</div></div>
+                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Storm Chaser Vest</div>
+                </div>
+                <div class="c-el bound" id="el-rp-price-3" onclick="selEl(event,'el-rp-price-3')" style="cursor:pointer;margin-top:2px">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">🛍 Products · price</div></div>
+                  <div style="font-size:13px;color:var(--acc);font-weight:600">$44.99</div>
+                </div>
+              </div>
+              <div class="c-el bound" id="el-rp-btn-3" onclick="selEl(event,'el-rp-btn-3')" style="cursor:pointer;flex-shrink:0">
+                <div class="c-el-overlay" style="border-radius:20px"></div>
+                <div class="el-tags"><div class="el-type-tag">Button</div></div>
+                <div style="padding:6px 16px;background:var(--acc);color:#fff;border-radius:20px;font-size:12px;font-weight:600">Add to Cart</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Unconnected Repeater (designable) -->
+      <div class="c-section" id="sec-rep-empty" onclick="selEl(event,'sec-rep-empty')" style="margin:16px">
+        <div class="ctx-pill" id="pill-sec-rep-empty"></div>
+        <div style="padding:24px 24px 8px">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--t1);margin-bottom:4px">My Collection</div>
+          <div style="font-size:12px;color:var(--t3);margin-bottom:12px">Unconnected repeater — fully designable, no blocking CTA</div>
+        </div>
+        <div class="c-repeater" id="repeater-rep-empty" onclick="selEl(event,'repeater-rep-empty')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
+          <div class="ctx-pill rep-pill" id="pill-repeater-rep-empty"></div>
+          <div class="c-el-overlay"></div>
+          <div class="rep-header" onclick="selElSettings(event,'repeater-rep-empty')">
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-rep-empty">— not connected</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-rep-empty','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12">
+                <circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="selElSettings(event,'repeater-rep-empty')">Connect data →</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
+            <div class="rep-item" id="rep-re-1" onclick="selEl(event,'rep-re-1')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
+              <div class="c-el-overlay"></div>
+              <div class="c-el c-el-img" id="el-re-img-1" onclick="selEl(event,'el-re-img-1')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="c-el c-el-text" id="el-re-title-1" onclick="selEl(event,'el-re-title-1')" style="cursor:pointer">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+                  <div id="v-el-re-title-1" style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
+                </div>
+                <div class="c-el c-el-text" id="el-re-desc-1" onclick="selEl(event,'el-re-desc-1')" style="cursor:pointer;margin-top:2px">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+                  <div id="v-el-re-desc-1" style="font-size:12px;color:var(--t3)">Description goes here</div>
+                </div>
+              </div>
+            </div>
+            <div class="rep-item" id="rep-re-2" onclick="selEl(event,'rep-re-2')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
+              <div class="c-el-overlay"></div>
+              <div class="c-el c-el-img" id="el-re-img-2" onclick="selEl(event,'el-re-img-2')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="c-el c-el-text" id="el-re-title-2" onclick="selEl(event,'el-re-title-2')" style="cursor:pointer">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+                  <div id="v-el-re-title-2" style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
+                </div>
+                <div class="c-el c-el-text" id="el-re-desc-2" onclick="selEl(event,'el-re-desc-2')" style="cursor:pointer;margin-top:2px">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+                  <div id="v-el-re-desc-2" style="font-size:12px;color:var(--t3)">Description goes here</div>
+                </div>
+              </div>
+            </div>
+            <div class="rep-item" id="rep-re-3" onclick="selEl(event,'rep-re-3')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
+              <div class="c-el-overlay"></div>
+              <div class="c-el c-el-img" id="el-re-img-3" onclick="selEl(event,'el-re-img-3')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
+                <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="c-el c-el-text" id="el-re-title-3" onclick="selEl(event,'el-re-title-3')" style="cursor:pointer">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+                  <div id="v-el-re-title-3" style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
+                </div>
+                <div class="c-el c-el-text" id="el-re-desc-3" onclick="selEl(event,'el-re-desc-3')" style="cursor:pointer;margin-top:2px">
+                  <div class="c-el-overlay" style="border-radius:4px"></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
+                  <div id="v-el-re-desc-3" style="font-size:12px;color:var(--t3)">Description goes here</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Repeater + External Controls -->
+      <div class="c-section has-ctx" id="sec-rep-controls" onclick="selEl(event,'sec-rep-controls')" style="margin:16px">
+        <div class="ctx-pill" id="pill-sec-rep-controls"></div>
+        <div style="padding:24px 24px 8px">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--t1);margin-bottom:4px">Latest Articles</div>
+          <div style="font-size:12px;color:var(--t3);margin-bottom:12px">Repeater + external controls — search &amp; sort consume the same context</div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 24px 12px;align-items:center">
+          <div class="c-el bound" id="el-rc-search" onclick="selEl(event,'el-rc-search')" style="cursor:pointer;flex:1">
+            <div class="c-el-overlay" style="border-radius:8px"></div>
+            <div class="el-tags"><div class="el-type-tag">Input</div><div class="el-bind-tag" style="background:#e3f2fd;color:#1565c0">🔍 Articles · filter</div></div>
+            <div style="padding:8px 12px;border:1px solid var(--b2);border-radius:8px;font-size:13px;color:var(--t3);background:var(--sur2);font-family:'DM Sans',sans-serif">🔍 Search articles...</div>
+          </div>
+          <div class="c-el bound" id="el-rc-sort" onclick="selEl(event,'el-rc-sort')" style="cursor:pointer;width:140px">
+            <div class="c-el-overlay" style="border-radius:8px"></div>
+            <div class="el-tags"><div class="el-type-tag">Dropdown</div><div class="el-bind-tag" style="background:#e3f2fd;color:#1565c0">↕ Articles · sort</div></div>
+            <div style="padding:8px 12px;border:1px solid var(--b2);border-radius:8px;font-size:13px;color:var(--t1);background:var(--sur2);font-family:'DM Sans',sans-serif;display:flex;justify-content:space-between;align-items:center">Newest ▾</div>
+          </div>
+        </div>
+        <div class="c-repeater bound" id="repeater-rep-articles" onclick="selEl(event,'repeater-rep-articles')" data-no-skeleton="true" style="margin:0 24px 12px;border-radius:6px">
+          <div class="ctx-pill rep-pill" id="pill-repeater-rep-articles"></div>
+          <div class="c-el-overlay"></div>
+          <div class="rep-header" onclick="selElSettings(event,'repeater-rep-articles')">
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-rep-articles">📚 Articles · 3 items</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-rep-articles','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12">
+                <circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="selElSettings(event,'repeater-rep-articles')">Connect data →</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
+            <div class="rep-item" id="rep-rc-1" onclick="selEl(event,'rep-rc-1')" style="padding:12px 16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative">
+              <div class="c-el-overlay"></div>
+              <div class="c-el bound" id="el-rc-title-1" onclick="selEl(event,'el-rc-title-1')" style="cursor:pointer">
+                <div class="c-el-overlay" style="border-radius:4px"></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div style="font-weight:600;font-size:14px;color:var(--t1)">Getting Started with AI Tools</div>
+              </div>
+              <div class="c-el bound" id="el-rc-author-1" onclick="selEl(event,'el-rc-author-1')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el-overlay" style="border-radius:4px"></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div style="font-size:12px;color:var(--t3)">Jane Doe</div>
+              </div>
+            </div>
+            <div class="rep-item" id="rep-rc-2" onclick="selEl(event,'rep-rc-2')" style="padding:12px 16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative">
+              <div class="c-el-overlay"></div>
+              <div class="c-el bound" id="el-rc-title-2" onclick="selEl(event,'el-rc-title-2')" style="cursor:pointer">
+                <div class="c-el-overlay" style="border-radius:4px"></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
+              </div>
+              <div class="c-el bound" id="el-rc-author-2" onclick="selEl(event,'el-rc-author-2')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el-overlay" style="border-radius:4px"></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div style="font-size:12px;color:var(--t3)">John Smith</div>
+              </div>
+            </div>
+            <div class="rep-item" id="rep-rc-3" onclick="selEl(event,'rep-rc-3')" style="padding:12px 16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative">
+              <div class="c-el-overlay"></div>
+              <div class="c-el bound" id="el-rc-title-3" onclick="selEl(event,'el-rc-title-3')" style="cursor:pointer">
+                <div class="c-el-overlay" style="border-radius:4px"></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div style="font-weight:600;font-size:14px;color:var(--t1)">UX Trends for 2025</div>
+              </div>
+              <div class="c-el bound" id="el-rc-author-3" onclick="selEl(event,'el-rc-author-3')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el-overlay" style="border-radius:4px"></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div style="font-size:12px;color:var(--t3)">Alex Rivera</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:8px;padding:0 24px 24px">
+          <div class="c-el bound" id="el-rc-prev" onclick="selEl(event,'el-rc-prev')" style="cursor:pointer">
+            <div class="c-el-overlay" style="border-radius:6px"></div>
+            <div class="el-tags"><div class="el-type-tag">Button</div><div class="el-bind-tag" style="background:#e3f2fd;color:#1565c0">📖 paginate</div></div>
+            <div style="padding:6px 14px;border:1px solid var(--b2);border-radius:6px;font-size:12px;color:var(--t3)">← Prev</div>
+          </div>
+          <div style="display:flex;align-items:center;font-size:12px;color:var(--t2);padding:0 8px">Page 1 of 5</div>
+          <div class="c-el bound" id="el-rc-next" onclick="selEl(event,'el-rc-next')" style="cursor:pointer">
+            <div class="c-el-overlay" style="border-radius:6px"></div>
+            <div class="el-tags"><div class="el-type-tag">Button</div><div class="el-bind-tag" style="background:#e3f2fd;color:#1565c0">📖 paginate</div></div>
+            <div style="padding:6px 14px;border:1px solid var(--b2);border-radius:6px;font-size:12px;color:var(--t3)">Next →</div>
           </div>
         </div>
       </div>
@@ -2153,7 +2439,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
             <div class="c-repeater bound" id="repeater-rel-locations" onclick="selEl(event,'repeater-rel-locations')" style="border-radius:6px">
               <div class="ctx-pill rep-pill" id="pill-repeater-rel-locations"></div>
               <div class="c-el-overlay"></div>
-              <div class="rep-header">
+              <div class="rep-header" onclick="selElSettings(event,'repeater-rel-locations')">
                 <span class="rep-icon">↻</span>
                 <span class="rep-label">Repeater</span>
                 <span class="rep-count" id="rep-count-rel-locations">📍 locations · 3 items</span>
@@ -2554,15 +2840,9 @@ const CTX_DEFS = [
           {name:'tag value',  type:'string',  sample:'"Tech"'},
         ]},
       ]},
-      {name:'title',       type:'string',  sample:'"Article Title"'},
-      {name:'author',      type:'string',  sample:'"Jane Doe"'},
-      {name:'publishedAt', type:'dateTime',sample:'"Jan 15, 2025"'},
-      {name:'category',    type:'string',  sample:'"Tech"'},
-      {name:'thumbnail',   type:'image',   sample:'[img url]'},
-      {name:'readTime',    type:'number',  sample:'"5 min"'},
-      {name:'tags',        type:'array',   sample:'["Tech","AI","Design"]', itemFields:[
-        {name:'tag value',  type:'string',  sample:'"Tech"'},
-      ]},
+      {name:'totalItems',   type:'number',  sample:'24', description:'Total articles in collection'},
+      {name:'currentPage',  type:'number',  sample:'1', description:'Current page number'},
+      {name:'hasMore',      type:'boolean', sample:'true', description:'More items available'},
     ],
     itemActions:[
       {name:'navigateToItem', label:'Navigate to item page', icon:''},
@@ -2629,12 +2909,16 @@ const CTX_DEFS = [
     config:[]},
   { id:'stores', name:'Products', icon:'', type:'list', source:'Wix Stores', group:'Apps',
     fields:[
-      {name:'products',    type:'array',   sample:'[{name, price, …}]'},
-      {name:'name',        type:'string',  sample:'"Yoga Mat"'},
-      {name:'price',       type:'number',  sample:'"$49.99"'},
-      {name:'image',       type:'image',   sample:'[img url]'},
-      {name:'inStock',     type:'boolean', sample:'true'},
-      {name:'description', type:'string',  sample:'"Premium quality…"'},
+      {name:'products', type:'array', sample:'[{name, price, …}]', itemFields:[
+        {name:'name',        type:'string',  sample:'"Yoga Mat"'},
+        {name:'price',       type:'number',  sample:'"$49.99"'},
+        {name:'image',       type:'image',   sample:'[img url]'},
+        {name:'inStock',     type:'boolean', sample:'true'},
+        {name:'description', type:'string',  sample:'"Premium quality…"'},
+      ]},
+      {name:'totalCount',   type:'number',  sample:'42', description:'Total products in collection'},
+      {name:'isLoading',    type:'boolean', sample:'false', description:'Data is loading'},
+      {name:'hasNextPage',  type:'boolean', sample:'true', description:'More pages available'},
     ],
     itemActions:[
       {name:'navigateToItem', label:'Navigate to item page', icon:''},
@@ -2661,13 +2945,15 @@ const CTX_DEFS = [
     ]},
   { id:'stores-locations', name:'Locations', icon:'', type:'list', source:'Wix Stores', group:'Apps',
     fields:[
-      {name:'locations',   type:'array',   sample:'[{storeName, address, …}]'},
-      {name:'storeName',   type:'string',  sample:'"Dizengoff Center"'},
-      {name:'address',     type:'string',  sample:'"50 Dizengoff St, Tel Aviv"'},
-      {name:'city',        type:'string',  sample:'"Tel Aviv"'},
-      {name:'phone',       type:'string',  sample:'"+972-3-555-1234"'},
-      {name:'openHours',   type:'string',  sample:'"9:00–21:00"'},
-      {name:'hasStock',    type:'boolean', sample:'true'},
+      {name:'locations', type:'array', sample:'[{storeName, address, …}]', itemFields:[
+        {name:'storeName',   type:'string',  sample:'"Dizengoff Center"'},
+        {name:'address',     type:'string',  sample:'"50 Dizengoff St, Tel Aviv"'},
+        {name:'city',        type:'string',  sample:'"Tel Aviv"'},
+        {name:'phone',       type:'string',  sample:'"+972-3-555-1234"'},
+        {name:'openHours',   type:'string',  sample:'"9:00–21:00"'},
+        {name:'hasStock',    type:'boolean', sample:'true'},
+      ]},
+      {name:'totalLocations', type:'number', sample:'5', description:'Total store locations'},
     ],
     itemActions:[
       {name:'navigateToItem', label:'Navigate to item page', icon:''},
@@ -2865,6 +3151,13 @@ const FN_DEFS = FN_LIBS.flatMap(lib =>
 
 function findSource(id) {
   return CTX_DEFS.find(c => c.id === id) || S.ctxInstanceDefs.find(c => c.id === id) || FN_DEFS.find(f => f.id === id) || findFnLib(id) || null;
+}
+
+function findCtxOwner(ctxId, sectionId) {
+  if ((S.ctxMap[sectionId] || []).includes(ctxId)) return sectionId;
+  const parentDef = EL_DEFS[sectionId];
+  if (parentDef?.parentPage && (S.ctxMap[parentDef.parentPage] || []).includes(ctxId)) return parentDef.parentPage;
+  return sectionId;
 }
 
 function getScopedFields(ctxId, elId) {
@@ -3113,6 +3406,54 @@ const EL_DEFS = {
   'el-ruc-tag-val-2':    {name:'Tag Value',     type:'Text', section:'sec-ruc-tags', repTemplate:'el-ruc-tag-val', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-ruc-tag-val-3':    {name:'Tag Value',     type:'Text', section:'sec-ruc-tags', repTemplate:'el-ruc-tag-val', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-ruc-tag-val-4':    {name:'Tag Value',     type:'Text', section:'sec-ruc-tags', repTemplate:'el-ruc-tag-val', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  // Repeater Concept page
+  'page-rep':         {name:'Page · Repeater', type:'Page', isPage:true, page:'repeater-concept', props:[]},
+  'sec-rep-connected':   {name:'Section · Connected', type:'Section', isContainer:true, page:'repeater-concept', parentPage:'page-rep', props:[]},
+  'repeater-rep-products':{name:'Repeater',     type:'Repeater', section:'sec-rep-connected', isRepeater:true, props:[{k:'Items',t:'list'}]},
+  'rep-rp-1':  {name:'Item 1', type:'RepItem', section:'sec-rep-connected', isRepItem:true, props:[]},
+  'rep-rp-2':  {name:'Item 2', type:'RepItem', section:'sec-rep-connected', isRepItem:true, props:[]},
+  'rep-rp-3':  {name:'Item 3', type:'RepItem', section:'sec-rep-connected', isRepItem:true, props:[]},
+  'el-rp-img-1':  {name:'Product Image', type:'Image', section:'sec-rep-connected', repTemplate:'el-rp-img', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-rp-img-2':  {name:'Product Image', type:'Image', section:'sec-rep-connected', repTemplate:'el-rp-img', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-rp-img-3':  {name:'Product Image', type:'Image', section:'sec-rep-connected', repTemplate:'el-rp-img', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-rp-name-1': {name:'Product Name',  type:'Text',  section:'sec-rep-connected', repTemplate:'el-rp-name', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-name-2': {name:'Product Name',  type:'Text',  section:'sec-rep-connected', repTemplate:'el-rp-name', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-name-3': {name:'Product Name',  type:'Text',  section:'sec-rep-connected', repTemplate:'el-rp-name', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-price-1':{name:'Price',         type:'Text',  section:'sec-rep-connected', repTemplate:'el-rp-price', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-price-2':{name:'Price',         type:'Text',  section:'sec-rep-connected', repTemplate:'el-rp-price', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-price-3':{name:'Price',         type:'Text',  section:'sec-rep-connected', repTemplate:'el-rp-price', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-btn-1':  {name:'Add to Cart',   type:'Button', section:'sec-rep-connected', repTemplate:'el-rp-btn', props:[{k:'Label',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-btn-2':  {name:'Add to Cart',   type:'Button', section:'sec-rep-connected', repTemplate:'el-rp-btn', props:[{k:'Label',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rp-btn-3':  {name:'Add to Cart',   type:'Button', section:'sec-rep-connected', repTemplate:'el-rp-btn', props:[{k:'Label',t:'string'},{k:'Visible',t:'boolean'}]},
+  'sec-rep-empty':   {name:'Section · Unconnected', type:'Section', isContainer:true, page:'repeater-concept', parentPage:'page-rep', props:[]},
+  'repeater-rep-empty':{name:'Repeater',  type:'Repeater', section:'sec-rep-empty', isRepeater:true, props:[{k:'Items',t:'list'}]},
+  'rep-re-1':  {name:'Item 1', type:'RepItem', section:'sec-rep-empty', isRepItem:true, props:[]},
+  'rep-re-2':  {name:'Item 2', type:'RepItem', section:'sec-rep-empty', isRepItem:true, props:[]},
+  'rep-re-3':  {name:'Item 3', type:'RepItem', section:'sec-rep-empty', isRepItem:true, props:[]},
+  'el-re-img-1':   {name:'Image',   type:'Image', section:'sec-rep-empty', repTemplate:'el-re-img', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-re-img-2':   {name:'Image',   type:'Image', section:'sec-rep-empty', repTemplate:'el-re-img', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-re-img-3':   {name:'Image',   type:'Image', section:'sec-rep-empty', repTemplate:'el-re-img', props:[{k:'Source',t:'image'},{k:'Visible',t:'boolean'}]},
+  'el-re-title-1': {name:'Title',   type:'Text',  section:'sec-rep-empty', repTemplate:'el-re-title', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-re-title-2': {name:'Title',   type:'Text',  section:'sec-rep-empty', repTemplate:'el-re-title', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-re-title-3': {name:'Title',   type:'Text',  section:'sec-rep-empty', repTemplate:'el-re-title', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-re-desc-1':  {name:'Description', type:'Text', section:'sec-rep-empty', repTemplate:'el-re-desc', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-re-desc-2':  {name:'Description', type:'Text', section:'sec-rep-empty', repTemplate:'el-re-desc', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-re-desc-3':  {name:'Description', type:'Text', section:'sec-rep-empty', repTemplate:'el-re-desc', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'sec-rep-controls':   {name:'Section · With Controls', type:'Section', isContainer:true, page:'repeater-concept', parentPage:'page-rep', props:[]},
+  'el-rc-search':  {name:'Search Input', type:'Input',   section:'sec-rep-controls', props:[{k:'Value',t:'string'},{k:'Placeholder',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-sort':    {name:'Sort Dropdown', type:'Dropdown', section:'sec-rep-controls', props:[{k:'Value',t:'string'},{k:'Options',t:'list'},{k:'Visible',t:'boolean'}]},
+  'repeater-rep-articles':{name:'Repeater', type:'Repeater', section:'sec-rep-controls', isRepeater:true, props:[{k:'Items',t:'list'}]},
+  'rep-rc-1':  {name:'Item 1', type:'RepItem', section:'sec-rep-controls', isRepItem:true, props:[]},
+  'rep-rc-2':  {name:'Item 2', type:'RepItem', section:'sec-rep-controls', isRepItem:true, props:[]},
+  'rep-rc-3':  {name:'Item 3', type:'RepItem', section:'sec-rep-controls', isRepItem:true, props:[]},
+  'el-rc-title-1':  {name:'Article Title', type:'Text', section:'sec-rep-controls', repTemplate:'el-rc-title', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-title-2':  {name:'Article Title', type:'Text', section:'sec-rep-controls', repTemplate:'el-rc-title', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-title-3':  {name:'Article Title', type:'Text', section:'sec-rep-controls', repTemplate:'el-rc-title', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-author-1': {name:'Author',        type:'Text', section:'sec-rep-controls', repTemplate:'el-rc-author', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-author-2': {name:'Author',        type:'Text', section:'sec-rep-controls', repTemplate:'el-rc-author', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-author-3': {name:'Author',        type:'Text', section:'sec-rep-controls', repTemplate:'el-rc-author', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-prev':     {name:'Prev Button',   type:'Button', section:'sec-rep-controls', props:[{k:'Label',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-rc-next':     {name:'Next Button',   type:'Button', section:'sec-rep-controls', props:[{k:'Label',t:'string'},{k:'Visible',t:'boolean'}]},
   // Demo page
   'sec-demo-empty':      {name:'Section · Empty',  type:'Section', isContainer:true, page:'demo', parentPage:'page-demo', props:[]},
   'sec-demo-team':       {name:'Section · Team',   type:'Section', isContainer:true, page:'demo', parentPage:'page-demo', props:[]},
@@ -3146,20 +3487,20 @@ const S = {
   tab: 'settings',
   openCats: {context:true, properties:true, visibility:true, systemCtx:false},
   ctxMap: {
-    'page-home':       ['system-identity','system-page-list','system-business-info','system-locations'],
-    'page-demo262':    ['system-identity','system-page-list','system-business-info','system-locations'],
-    'page-items':      ['system-identity','system-page-list','system-business-info','system-locations'],
-    'page-rel-detail': ['stores-current-item','system-identity','system-page-list','system-business-info','system-locations'],
-    'page-ruc':        ['system-identity','system-page-list','system-business-info','system-locations'],
-    'page-msb':        ['system-identity','system-page-list','system-business-info','system-locations'],
-    'page-demo':       ['system-identity','system-page-list','system-business-info','system-locations'],
+    'page-home':       [],
+    'page-demo262':    [],
+    'page-items':      [],
+    'page-rel-detail': ['stores-current-item'],
+    'page-ruc':        [],
+    'page-msb':        [],
+    'page-demo':       [],
     'sec-hero':     ['custom-countdown'],
     'sec-weather':  ['weather'],
     'sec-articles': [],
     'sec-empty':    [],
     'sec-items':       [],
-    'sec-rel-product': ['stores-current-item'],
-    'sec-rel-locations': ['stores-current-item', 'stores-locations'],
+    'sec-rel-product': [],
+    'sec-rel-locations': ['stores-locations'],
     'sec-msb':          ['cms-articles'],
     'sec-ruc-articles': ['cms-articles'],
     'sec-ruc-tags':     ['cms-articles'],
@@ -3168,11 +3509,13 @@ const S = {
     'sec-d262-weather': ['weather'],
     'sec-d262-empty1':  [],
     'sec-d262-empty2':  [],
+    'page-rep':         [],
+    'sec-rep-connected':['stores'],
+    'sec-rep-empty':    [],
+    'sec-rep-controls': ['cms-articles'],
   },
   primaryCtx: {
     'page-rel-detail': ['stores-current-item'],
-    'sec-rel-product': ['stores-current-item'],
-    'sec-rel-locations': ['stores-current-item'],
   },
   ctxAliases: {},  // {sectionId: {ctxId: aliasName}}
   removedInherited: {},  // {sectionId: [ctxId, ...]} — tracks inherited contexts removed by user
@@ -3216,6 +3559,25 @@ const S = {
     'el-ruc-tag-val-2|Value':      {ctxId:'cms-articles',   fieldName:'tag value', sample:'"Tech"'},
     'el-ruc-tag-val-3|Value':      {ctxId:'cms-articles',   fieldName:'tag value', sample:'"Tech"'},
     'el-ruc-tag-val-4|Value':      {ctxId:'cms-articles',   fieldName:'tag value', sample:'"Tech"'},
+    // Repeater Concept page — Connected
+    'repeater-rep-products|Items': {ctxId:'stores', fieldName:'products', sample:'[{name, price, …}]'},
+    'el-rp-img-1|Source':   {ctxId:'stores', fieldName:'image', sample:'[img url]'},
+    'el-rp-img-2|Source':   {ctxId:'stores', fieldName:'image', sample:'[img url]'},
+    'el-rp-img-3|Source':   {ctxId:'stores', fieldName:'image', sample:'[img url]'},
+    'el-rp-name-1|Value':   {ctxId:'stores', fieldName:'name',  sample:'"Yoga Mat"'},
+    'el-rp-name-2|Value':   {ctxId:'stores', fieldName:'name',  sample:'"Yoga Mat"'},
+    'el-rp-name-3|Value':   {ctxId:'stores', fieldName:'name',  sample:'"Yoga Mat"'},
+    'el-rp-price-1|Value':  {ctxId:'stores', fieldName:'price', sample:'"$49.99"'},
+    'el-rp-price-2|Value':  {ctxId:'stores', fieldName:'price', sample:'"$49.99"'},
+    'el-rp-price-3|Value':  {ctxId:'stores', fieldName:'price', sample:'"$49.99"'},
+    // Repeater Concept page — Controls
+    'repeater-rep-articles|Items': {ctxId:'cms-articles', fieldName:'items', sample:'[{title, author, …}]'},
+    'el-rc-title-1|Value':  {ctxId:'cms-articles', fieldName:'title',  sample:'"Article Title"'},
+    'el-rc-title-2|Value':  {ctxId:'cms-articles', fieldName:'title',  sample:'"Article Title"'},
+    'el-rc-title-3|Value':  {ctxId:'cms-articles', fieldName:'title',  sample:'"Article Title"'},
+    'el-rc-author-1|Value': {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
+    'el-rc-author-2|Value': {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
+    'el-rc-author-3|Value': {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
     'el-demo-member-img-1|Source':  {ctxId:'cms-my-team', fieldName:'image',   sample:'[img url]'},
     'el-demo-member-img-2|Source':  {ctxId:'cms-my-team', fieldName:'image',   sample:'[img url]'},
     'el-demo-member-img-3|Source':  {ctxId:'cms-my-team', fieldName:'image',   sample:'[img url]'},
@@ -3268,16 +3630,32 @@ function navToSectionCtx(elId, e) {
   if (e) e.stopPropagation();
   const def = EL_DEFS[elId];
   const sectionId = def?.section || def?.parentPage || elId;
+  if (def?.isRepeater) {
+    const binding = S.bindings[elId + '|Items'];
+    if (binding) {
+      const ownerId = findCtxOwner(binding.ctxId, sectionId);
+      pillNavCtx(ownerId);
+      return;
+    }
+  }
   pillNavCtx(sectionId);
 }
 
-function pillNavCtx(sectionId) {
-  S.sel = sectionId;
+function pillNavCtx(targetId) {
+  S.sel = targetId;
   S.ctxSettingsView = null;
   S.inspectorOpen = true;
   document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
-  const n = document.getElementById(sectionId);
-  if (n) n.classList.add('sel');
+  document.querySelectorAll('.page-sel-bar').forEach(b => b.classList.remove('sel'));
+  const def = EL_DEFS[targetId];
+  if (def?.isPage) {
+    const psbId = 'psb-' + targetId.replace('page-', '');
+    const bar = document.getElementById(psbId);
+    if (bar) bar.classList.add('sel');
+  } else {
+    const n = document.getElementById(targetId);
+    if (n) n.classList.add('sel');
+  }
   S.tab = 'settings';
   S.openCats.context = true;
   renderRP();
@@ -3315,8 +3693,16 @@ function elPillNavCtx(e, elId) {
   S.ctxSettingsView = null;
   S.inspectorOpen = true;
   document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
-  const n = document.getElementById(elId);
-  if (n) n.classList.add('sel');
+  document.querySelectorAll('.page-sel-bar').forEach(b => b.classList.remove('sel'));
+  const def = EL_DEFS[elId];
+  if (def?.isPage) {
+    const psbId = 'psb-' + elId.replace('page-', '');
+    const bar = document.getElementById(psbId);
+    if (bar) bar.classList.add('sel');
+  } else {
+    const n = document.getElementById(elId);
+    if (n) n.classList.add('sel');
+  }
   S.tab = 'settings';
   renderRP();
   renderActionBar();
@@ -3326,7 +3712,7 @@ function buildBindTagHTML(elId, ctxLabel) {
   const def = EL_DEFS[elId];
   const typeName = def ? def.type : 'Element';
   const bindIcon = `<svg class="el-bind-icon" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l-1.2 1.2a2.5 2.5 0 0 1-3.6-3.4L6.4 2.6a2.5 2.5 0 0 1 3.5 0l.1.1"/><path d="M6 10l1.2-1.2a2.5 2.5 0 0 1 3.6 3.4l-1.2 1.2a2.5 2.5 0 0 1-3.5 0l-.1-.1"/></svg>`;
-  return `<span class="el-bind-sec" onclick="elPillNavDesign('${elId}')">${typeName}</span><span class="el-bind-sep"></span><span class="el-bind-ctx" onclick="elPillNavCtx('${elId}')">${bindIcon} ${ctxLabel}</span>`;
+  return `<span class="el-bind-sec" onclick="elPillNavDesign(event,'${elId}')">${typeName}</span><span class="el-bind-sep"></span><span class="el-bind-ctx" onclick="elPillNavCtx(event,'${elId}')">${bindIcon} ${ctxLabel}</span>`;
 }
 
 const ACTION_BAR_ICONS = {
@@ -3660,7 +4046,7 @@ function canvasClick(e) {
 }
 
 function getCurrentPageId() {
-  const map = {'Homepage':'page-home','Demo 26.2':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Multi-State Box':'page-msb','Demo':'page-demo'};
+  const map = {'Homepage':'page-home','Demo 26.2':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Repeater':'page-rep','Multi-State Box':'page-msb','Demo':'page-demo'};
   return map[S.currentPage] || 'page-home';
 }
 
@@ -3731,6 +4117,19 @@ function renderRP() {
 }
 
 function switchTab(t) { S.tab = t; S.ctxSettingsView = null; renderRP(); }
+
+function selElSettings(e, id) {
+  e.stopPropagation();
+  S.sel = id;
+  S.ctxSettingsView = null;
+  S.inspectorOpen = true;
+  document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
+  const n = document.getElementById(id);
+  if (n) n.classList.add('sel');
+  S.tab = 'settings';
+  renderRP();
+  renderActionBar();
+}
 
 function toggleCat(cat) {
   S.openCats[cat] = !S.openCats[cat];
@@ -4022,7 +4421,19 @@ function renderSettings() {
   }
   const mainProps = def.props.filter(p => p.k !== 'Visible');
   const visibleProp = def.props.find(p => p.k === 'Visible');
-  const templateNote = def.repTemplate ? `<div style="font-size:10px;color:var(--acc);font-family:'DM Mono',monospace;padding:0 0 7px;opacity:.8">↳ Binding applies to all 3 items</div>` : '';
+  let templateNote = '';
+  if (def.repTemplate) {
+    const parentRepId = Object.keys(EL_DEFS).find(id => EL_DEFS[id].isRepeater && EL_DEFS[id].section === def.section);
+    const repBound = parentRepId ? !!S.bindings[parentRepId + '|Items'] : false;
+    if (repBound) {
+      templateNote = `<div style="font-size:10px;color:var(--acc);font-family:'DM Mono',monospace;padding:0 0 7px;opacity:.8">↳ Binding applies to all items</div>`;
+    } else {
+      templateNote = `<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;margin-bottom:8px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px">
+        <span style="font-size:14px">⚠️</span>
+        <div style="font-size:10px;color:#856404;line-height:1.4">The parent repeater is not connected to data. Bindings are preserved but <b>inactive</b> — all items will show the same content.</div>
+      </div>`;
+    }
+  }
   const propsHtml = `${templateNote}${mainProps.map(p => renderPropRow(S.sel, p)).join('')}`;
   const visHtml = renderVisibleProp(S.sel, visibleProp);
   return renderSettingsWithCategories(def, propsHtml, visHtml);
@@ -4251,6 +4662,21 @@ function updateCanvasStatic(elId, propKey, val) {
 
 function unbind(elId, propKey, e) {
   e.stopPropagation();
+  const def = EL_DEFS[elId];
+
+  if (def?.isRepeater && propKey === 'Items') {
+    const sectionId = def.section;
+    const innerCount = Object.keys(EL_DEFS).filter(cid => {
+      const cd = EL_DEFS[cid];
+      return cd.section === sectionId && cd.repTemplate && Object.keys(S.bindings).some(bk => bk.startsWith(cid + '|'));
+    }).length;
+    const msg = innerCount > 0
+      ? `Disconnecting the repeater from its data source.\n\n${innerCount} inner element bindings will be preserved — all items will show the same content. Reconnect the repeater to restore per-item data.`
+      : `Disconnect this repeater from its data source?\n\nAll items will show the same placeholder content.`;
+    showConfirm('Disconnect repeater', msg, 'Disconnect', function() { doUnbindRepeater(elId); });
+    return;
+  }
+
   const bkey = `${elId}|${propKey}`;
   const oldBinding = S.bindings[bkey];
   if (oldBinding?.fnHasParams && oldBinding.fnParams) {
@@ -4258,15 +4684,48 @@ function unbind(elId, propKey, e) {
   }
   delete S.bindings[bkey];
   applyBindingToCanvas(elId, propKey, null);
+
   toast('Binding removed');
   updatePropRowDOM(elId, propKey);
-  const def = EL_DEFS[elId];
   if (def?.isMultiState) {
     if (def.views) {
       def.views.forEach((v, i) => { v.name = 'State ' + (i + 1); v.enumValues = []; });
     }
     refreshMsbState(); refreshMsbCanvasButtons(); renderBody();
   }
+}
+
+function doUnbindRepeater(elId) {
+  const def = EL_DEFS[elId];
+  const sectionId = def.section;
+  const bkey = elId + '|Items';
+  delete S.bindings[bkey];
+
+  let boundCount = 0;
+  Object.keys(EL_DEFS).forEach(childId => {
+    const childDef = EL_DEFS[childId];
+    if (childDef.section !== sectionId || !childDef.repTemplate) return;
+    const hasBinding = Object.keys(S.bindings).some(bk => bk.startsWith(childId + '|'));
+    const childDom = document.getElementById(childId);
+    if (childDom) {
+      childDom.classList.remove('orphaned');
+      if (hasBinding) {
+        boundCount++;
+        childDom.classList.add('bound');
+      }
+    }
+  });
+
+  const repEl = document.getElementById(elId);
+  if (repEl) {
+    repEl.classList.remove('bound');
+    const countEl = document.getElementById('rep-count-' + elId.replace('repeater-',''));
+    if (countEl) countEl.textContent = '— not connected';
+    repItemsMakeIdentical(repEl, elId);
+  }
+  toast(boundCount > 0 ? `Repeater disconnected · ${boundCount} bindings preserved` : 'Repeater disconnected');
+  refreshAllPills();
+  renderBody();
 }
 
 function unbindParam(elId, propKey, paramName, e) {
@@ -4398,7 +4857,10 @@ function clearHighlightEls() {
 }
 
 function isPrimaryCtx(ctxId, sectionId) {
-  return (S.primaryCtx[sectionId] || []).includes(ctxId);
+  if ((S.primaryCtx[sectionId] || []).includes(ctxId)) return true;
+  const def = EL_DEFS[sectionId];
+  if (def?.parentPage && (S.primaryCtx[def.parentPage] || []).includes(ctxId)) return true;
+  return false;
 }
 
 function getCtxPillText(sectionId) {
@@ -4446,7 +4908,8 @@ function refreshAllPills() {
     if (binding) {
       const ctx = findSource(binding.ctxId);
       const ctxLabel = ctx ? `Connected · ${binding.fieldName}` : binding.fieldName;
-      pill.innerHTML = buildBindTagHTML(id, ctxLabel);
+      const bindIcon = `<svg class="el-bind-icon" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l-1.2 1.2a2.5 2.5 0 0 1-3.6-3.4L6.4 2.6a2.5 2.5 0 0 1 3.5 0l.1.1"/><path d="M6 10l1.2-1.2a2.5 2.5 0 0 1 3.6 3.4l-1.2 1.2a2.5 2.5 0 0 1-3.5 0l-.1-.1"/></svg>`;
+      pill.innerHTML = `<span class="el-bind-sec" onclick="elPillNavCtx(event,'${id}')">${def.type}</span><span class="el-bind-sep"></span><span class="el-bind-ctx" onclick="elPillNavCtx(event,'${id}')">${bindIcon} ${ctxLabel}</span>`;
     } else {
       pill.innerHTML = '';
     }
@@ -4492,11 +4955,12 @@ function refreshRepeaterSkeletons() {
   Object.keys(EL_DEFS).forEach(id => {
     const def = EL_DEFS[id];
     if (!def.isRepeater) return;
+    const repEl = document.getElementById(id);
+    if (!repEl) return;
+    if (repEl.dataset.noSkeleton) return;
     const sectionId = def.section;
     const hasCtx = (S.ctxMap[sectionId] || []).length > 0;
     const isBound = !!S.bindings[id + '|Items'];
-    const repEl = document.getElementById(id);
-    if (!repEl) return;
 
     const existingOverlay = repEl.querySelector('.rep-skeleton-overlay');
 
@@ -4549,17 +5013,120 @@ function autoBindRepeater(repeaterId, ctxId, fieldName) {
   if (!ctx) return;
   const field = ctx.fields.find(f => f.name === fieldName);
   if (!field) return;
-  const bkey = repeaterId + '|Items';
-  S.bindings[bkey] = { ctxId, fieldName, sample: field.sample };
-  const repEl = document.getElementById(repeaterId);
+  const def = EL_DEFS[repeaterId];
+  if (def?.section) {
+    const staleBindings = getRepStaleBindings(def.section, ctxId);
+    if (staleBindings.length > 0) {
+      const staleCtxIds = [...new Set(staleBindings.map(bk => S.bindings[bk].ctxId))];
+      const staleNames = staleCtxIds.map(id => { const c = findSource(id); return c?.name || id; }).join(', ');
+      const newName = ctx?.name || ctxId;
+      showConfirmTwoActions(
+        'Existing inner bindings',
+        `This repeater has ${staleBindings.length} inner binding${staleBindings.length > 1 ? 's' : ''} connected to "${staleNames}". Connecting to "${newName}" will make those bindings invalid. What would you like to do?`,
+        'Disconnect bindings',
+        function() {
+          staleBindings.forEach(function(bk) { delete S.bindings[bk]; });
+          doRepItemsBind(repeaterId, 'Items', ctxId, fieldName);
+          clearRepInnerBoundState(def.section);
+          toast('✓ Connected to ' + newName + ' · ' + staleBindings.length + ' binding(s) disconnected', true);
+        },
+        'Keep bindings',
+        function() {
+          doRepItemsBind(repeaterId, 'Items', ctxId, fieldName);
+        }
+      );
+      return;
+    }
+  }
+  doRepItemsBind(repeaterId, 'Items', ctxId, fieldName);
+  toast('✓ Repeater connected to ' + ctx.name + ' · ' + fieldName, true);
+}
+
+function getRepStaleBindings(sectionId, newCtxId) {
+  const keys = [];
+  Object.keys(EL_DEFS).forEach(childId => {
+    const d = EL_DEFS[childId];
+    if (d.section !== sectionId || !d.repTemplate) return;
+    Object.keys(S.bindings).forEach(bk => {
+      if (bk.startsWith(childId + '|') && S.bindings[bk].ctxId && S.bindings[bk].ctxId !== newCtxId) keys.push(bk);
+    });
+  });
+  return keys;
+}
+
+function clearRepInnerBoundState(sectionId) {
+  Object.keys(EL_DEFS).forEach(childId => {
+    const d = EL_DEFS[childId];
+    if (d.section !== sectionId || !d.repTemplate) return;
+    const hasAny = Object.keys(S.bindings).some(bk => bk.startsWith(childId + '|'));
+    const dom = document.getElementById(childId);
+    if (dom) {
+      if (hasAny) {
+        dom.classList.add('bound');
+      } else {
+        dom.classList.remove('bound');
+        d.props.forEach(p => {
+          applyBindingToCanvas(childId, p.k, null, null);
+        });
+      }
+    }
+  });
+  refreshAllPills();
+}
+
+function doRepItemsBind(elId, propKey, srcId, fieldName) {
+  const ctx = findSource(srcId);
+  const field = ctx.fields.find(f => f.name === fieldName);
+  if (!field) return;
+  const bkey = elId + '|' + propKey;
+  S.bindings[bkey] = {ctxId: srcId, fieldName, sample: field.sample};
+  const repEl = document.getElementById(elId);
   if (repEl) {
     repEl.classList.add('bound');
-    const countEl = document.getElementById('rep-count-' + repeaterId.replace('repeater-', ''));
-    if (countEl) countEl.textContent = `Connected · ${fieldName} · 3 items`;
+    repItemsRestore(repEl, elId);
+    const countEl = document.getElementById('rep-count-' + elId.replace('repeater-', ''));
+    if (countEl) countEl.textContent = (ctx.icon || '') + ' ' + ctx.name + ' · 3 items';
+  }
+  const def = EL_DEFS[elId];
+  if (def?.section) {
+    Object.keys(EL_DEFS).forEach(childId => {
+      const childDef = EL_DEFS[childId];
+      if (childDef.section !== def.section || !childDef.repTemplate) return;
+      const childDom = document.getElementById(childId);
+      if (childDom) {
+        childDom.classList.remove('orphaned');
+        const hasBinding = Object.keys(S.bindings).some(bk => bk.startsWith(childId + '|'));
+        if (hasBinding) childDom.classList.add('bound');
+        else childDom.classList.remove('bound');
+      }
+    });
   }
   refreshAllPills();
-  if (S.sel) renderRP();
-  toast(`✓ Repeater connected to ${ctx.name} · ${fieldName}`, true);
+  refreshRepeaterSkeletons();
+  renderBody();
+}
+
+function repItemsMakeIdentical(repEl, repeaterId) {
+  if (!S._savedRepItems) S._savedRepItems = {};
+  const items = repEl.querySelectorAll('.rep-item');
+  if (items.length < 2) return;
+  S._savedRepItems[repeaterId] = [];
+  items.forEach((item, i) => {
+    S._savedRepItems[repeaterId][i] = item.innerHTML;
+  });
+  const firstHTML = items[0].innerHTML;
+  for (let i = 1; i < items.length; i++) {
+    items[i].innerHTML = firstHTML;
+  }
+}
+
+function repItemsRestore(repEl, repeaterId) {
+  if (!S._savedRepItems?.[repeaterId]) return;
+  const items = repEl.querySelectorAll('.rep-item');
+  S._savedRepItems[repeaterId].forEach((html, i) => {
+    if (items[i]) items[i].innerHTML = html;
+  });
+  delete S._savedRepItems[repeaterId];
 }
 
 function getFieldTypeIcon(type) {
@@ -4942,6 +5509,12 @@ function renderCtxList() {
         </div>
       </div>`;
   };
+
+  CTX_DEFS.forEach(c => {
+    if (c.group === 'System' && !inheritedCtxs.find(x => x.id === c.id) && !ownCtxs.find(x => x.id === c.id)) {
+      inheritedCtxs.push(c);
+    }
+  });
 
   const inheritedUserCtxs = inheritedCtxs.filter(c => c.group !== 'System');
   const inheritedSystemCtxs = inheritedCtxs.filter(c => c.group === 'System');
@@ -5372,7 +5945,7 @@ const ITEM_DATA = [
 function selectPage(el, name) {
   document.querySelectorAll('.pp-item, .pp-sub').forEach(i => i.classList.remove('active'));
   el.classList.add('active');
-  const pageIcon = name === 'Product Item' ? '🛒' : name === 'Repeater Usecases' ? '↻' : name === 'Multi-State Box' ? '◫' : '📄';
+  const pageIcon = name === 'Product Item' ? '🛒' : name === 'Repeater Usecases' || name === 'Repeater' ? '↻' : name === 'Multi-State Box' ? '◫' : '📄';
   document.querySelector('.page-sel').innerHTML = `<span class="page-sel-name">${pageIcon} ${name}</span> <span class="page-sel-chevron">▾</span>`;
   document.getElementById('pages-panel').classList.remove('open');
 
@@ -5380,6 +5953,7 @@ function selectPage(el, name) {
   const itemsPage = document.getElementById('items-page');
   const itemRelPage = document.getElementById('item-relationship-page');
   const rucPage = document.getElementById('repeater-usecases-page');
+  const repPage = document.getElementById('repeater-concept-page');
   const msbPage = document.getElementById('msb-page');
   const demoPage = document.getElementById('demo-page');
   const demo262Page = document.getElementById('demo262-page');
@@ -5391,6 +5965,7 @@ function selectPage(el, name) {
   itemsPage.classList.remove('active-page');
   itemRelPage.classList.remove('active-page');
   rucPage.classList.remove('active-page');
+  repPage.classList.remove('active-page');
   msbPage.classList.remove('active-page');
 
   if (name === 'Items (List)') {
@@ -5401,6 +5976,8 @@ function selectPage(el, name) {
     renderItemDetail();
   } else if (name === 'Repeater Usecases') {
     rucPage.classList.add('active-page');
+  } else if (name === 'Repeater') {
+    repPage.classList.add('active-page');
   } else if (name === 'Multi-State Box') {
     msbPage.classList.add('active-page');
   } else if (name === 'Demo') {
@@ -5920,8 +6497,18 @@ function removeContextMenuTarget() {
 function openDd(e, elId, propKey) {
   e.stopPropagation();
   const existingBinding = S.bindings[elId + '|' + propKey];
-  const preSrc = existingBinding ? existingBinding.ctxId : null;
-  const preField = existingBinding ? existingBinding.fieldName : null;
+  let preSrc = existingBinding ? existingBinding.ctxId : null;
+  let preField = existingBinding ? existingBinding.fieldName : null;
+  if (!preSrc) {
+    const def = EL_DEFS[elId];
+    if (def?.repTemplate) {
+      const repeaterId = Object.keys(EL_DEFS).find(id => EL_DEFS[id].isRepeater && EL_DEFS[id].section === def.section);
+      if (repeaterId) {
+        const repBinding = S.bindings[repeaterId + '|Items'];
+        if (repBinding) preSrc = repBinding.ctxId;
+      }
+    }
+  }
   S.dd = {open:true, elId, propKey, paramName:null, step:'source', srcId:preSrc, fieldName:preField, openPanel: preSrc && preField ? null : (preSrc ? 'field' : null)};
   const rect = e.currentTarget.getBoundingClientRect();
   const dd = document.getElementById('dd');
@@ -6016,7 +6603,7 @@ function renderDd() {
     : userAvailable.map(ctx => `
         <div class="dd-sel-item ${srcId===ctx.id?'sel':''}" onclick="ddSelSource(event,'${ctx.id}')">
           <div style="flex:1;min-width:0">
-            <div class="dd-sel-item-name">${ctx.name}</div>
+            <div class="dd-sel-item-name" style="display:flex;align-items:center">${ctx.name}${scopeBadge(ctx._scope)}</div>
             <div class="dd-sel-item-sub">${ctx.source} · ${ctx.type}</div>
           </div>
         </div>`).join('');
@@ -6063,31 +6650,51 @@ function renderDd() {
 
   let fieldsToShow = !selectedCtx ? [] : selectedCtx.fields;
   let scopeBreadcrumb = '';
+  let ancestorFields = [];
   if (scopedCtx) {
     fieldsToShow = scopedCtx.fields;
     scopeBreadcrumb = scopedCtx.scope.split('.').join(' › ');
+    ancestorFields = selectedCtx.fields.filter(f => f.type !== 'array');
   }
   const cfgExpType = S.dd.cfgBind?.expectedType || null;
-  const filteredFields = fieldsToShow.filter(f => {
+  const fieldFilter = f => {
     if (isVisibleProp) return f.type === 'boolean';
     if (cfgExpType) return isCompat(f.type, cfgExpType);
     if (prop?.t) return isCompat(f.type, prop.t);
     return true;
-  });
+  };
+  const filteredFields = fieldsToShow.filter(fieldFilter);
+  const filteredAncestorFields = ancestorFields.filter(fieldFilter);
 
   let scopeHeader = '';
+  let ancestorSection = '';
   if (scopedCtx) {
     const listName = scopedCtx.boundFieldName || scopeBreadcrumb;
     const ctxDisplayName = scopedCtx.ctxName || selectedCtx.name;
     scopeHeader = `<div style="padding:6px 10px;font-size:9px;color:var(--acc);font-family:'DM Mono',monospace;background:var(--acc-d);border-bottom:1px solid color-mix(in srgb, var(--acc) 20%, transparent)">
-      <div style="text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px"><span style="font-size:11px">↻</span> SCOPE: ${scopeBreadcrumb}</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:10px;color:var(--t3);margin-top:3px;text-transform:none;letter-spacing:0;line-height:1.5">The repeater is connected to <b style="color:var(--t1)">${ctxDisplayName} › ${listName}</b>. Only fields from each <b style="color:var(--t1)">${listName}</b> item are available here.</div>
+      <div style="text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px"><span style="font-size:11px">↻</span> CURRENT ITEM · ${scopeBreadcrumb}</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:10px;color:var(--t3);margin-top:3px;text-transform:none;letter-spacing:0;line-height:1.5">Fields from each <b style="color:var(--t1)">${listName}</b> item — values change per row.</div>
     </div>`;
+    if (filteredAncestorFields.length > 0) {
+      ancestorSection = `<div style="border-top:1px solid color-mix(in srgb, var(--b2) 60%, transparent);margin-top:2px">
+        <div style="padding:6px 10px;font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;background:color-mix(in srgb, var(--b2) 30%, transparent);border-bottom:1px solid color-mix(in srgb, var(--b2) 40%, transparent)">
+          <div style="text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px"><span style="font-size:11px">↑</span> CONTEXT-LEVEL · ${ctxDisplayName}</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:10px;color:var(--t3);margin-top:3px;text-transform:none;letter-spacing:0;line-height:1.5">Same value across all rows — from the parent context.</div>
+        </div>
+        ${filteredAncestorFields.map(f => `<div class="dd-sel-item ${fieldName===f.name?'sel':''}" onclick="ddSelField(event,'${f.name}')" style="opacity:.85">
+          <div style="flex:1;min-width:0">
+            <div>${f.name}</div>
+            <div class="dd-sel-item-sub">${f.description || f.sample}</div>
+          </div>
+          <span class="dd-sel-tag">${f.type}</span>
+        </div>`).join('')}
+      </div>`;
+    }
   }
 
   const fieldItems = !selectedCtx
     ? `<div class="dd-sel-item" style="opacity:.4;pointer-events:none;padding:8px 10px;font-size:11px;color:var(--t3)">Select a source first</div>`
-    : filteredFields.length === 0
+    : filteredFields.length === 0 && filteredAncestorFields.length === 0
     ? `<div style="padding:12px 14px;text-align:center">
         <div style="font-size:22px;margin-bottom:6px">🔍</div>
         <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:4px">No compatible fields</div>
@@ -6099,7 +6706,7 @@ function renderDd() {
             <div class="dd-sel-item-sub">${f.description || f.sample}</div>
           </div>
           <span class="dd-sel-tag">${f.type}</span>
-        </div>`).join('');
+        </div>`).join('') + ancestorSection;
 
   const ddCanAddField = selectedCtx && (selectedCtx.source === 'CMS' || selectedCtx.source === 'Custom Code') && !isSelectedFn;
   const ddAddFieldBtn = ddCanAddField
@@ -6186,7 +6793,38 @@ function confirmBind(e) {
   }
 
   const ctx = findSource(srcId);
-  const field = ctx.fields.find(f=>f.name===fieldName);
+  const def = EL_DEFS[elId];
+
+  if (def?.isRepeater && propKey === 'Items') {
+    const sectionId = def.section;
+    const staleBindings = getRepStaleBindings(sectionId, srcId);
+    if (staleBindings.length > 0) {
+      const staleCtxIds = [...new Set(staleBindings.map(bk => S.bindings[bk].ctxId))];
+      const staleNames = staleCtxIds.map(id => { const c = findSource(id); return c?.name || id; }).join(', ');
+      const newName = ctx?.name || srcId;
+      closeDd();
+      showConfirmTwoActions(
+        'Existing inner bindings',
+        `This repeater has ${staleBindings.length} inner binding${staleBindings.length > 1 ? 's' : ''} connected to "${staleNames}". Connecting to "${newName}" will make those bindings invalid. What would you like to do?`,
+        'Disconnect bindings',
+        function() {
+          staleBindings.forEach(function(bk) { delete S.bindings[bk]; });
+          doRepItemsBind(elId, propKey, srcId, fieldName);
+          clearRepInnerBoundState(sectionId);
+          toast('✓ Connected to ' + newName + ' · ' + staleBindings.length + ' binding(s) disconnected', true);
+        },
+        'Keep bindings',
+        function() {
+          doRepItemsBind(elId, propKey, srcId, fieldName);
+        }
+      );
+      return;
+    }
+  }
+
+  const elScope = getElementScope(elId);
+  const scopedFields = elScope && elScope.ctxId === srcId ? elScope.fields : null;
+  const field = (scopedFields && scopedFields.find(f=>f.name===fieldName)) || ctx.fields.find(f=>f.name===fieldName);
   const bkey = `${elId}|${propKey}`;
   const bindingData = {ctxId:srcId, fieldName, sample:field.sample};
   if (field.params) {
@@ -6206,7 +6844,6 @@ function confirmBind(e) {
   if (field.params && field.template) {
     updateFnCanvasPreview(elId, propKey);
   }
-  const def = EL_DEFS[elId];
   if (def?.repTemplate) {
     applyRepBindingToAll(def.repTemplate, propKey, field, srcId);
   }
@@ -6363,24 +7000,50 @@ function applyBindingToCanvas(elId, propKey, field, ctxId) {
 /* ── CONTEXT helpers ── */
 const CTX_GROUP_ORDER = {CMS:0, Custom:1, Apps:2, System:3};
 
+function scopeBadge(scope) {
+  const s = 'font-size:9px;padding:1px 5px;border-radius:4px;font-weight:500;margin-left:6px;white-space:nowrap';
+  if (scope === 'section') return `<span style="${s};background:color-mix(in srgb, #10b981 14%, transparent);color:#10b981">Section</span>`;
+  if (scope === 'page') return `<span style="${s};background:color-mix(in srgb, var(--acc) 12%, transparent);color:var(--acc)">Page</span>`;
+  if (scope === 'inherited') return `<span style="${s};background:color-mix(in srgb, var(--t3) 12%, transparent);color:var(--t3)">Inherited</span>`;
+  return '';
+}
+
 function getAvailableCtx(elId, includeUnmodified) {
   const def = EL_DEFS[elId];
   if (!def) return [];
   const isContainerOrPage = def.isContainer || def.isPage;
   const parentId = isContainerOrPage ? elId : def.section;
   if (!parentId) return [];
-  const ids = [...(S.ctxMap[parentId] || [])];
   const parentDef = EL_DEFS[parentId];
+  const isParentPage = parentDef?.isPage;
+  const pageId = parentDef?.parentPage || (isParentPage ? parentId : null);
+
+  const ids = [...(S.ctxMap[parentId] || [])];
   if (parentDef?.parentPage) {
     (S.ctxMap[parentDef.parentPage] || []).forEach(id => {
       if (!ids.includes(id)) ids.push(id);
     });
   }
+  CTX_DEFS.forEach(c => {
+    if (c.group === 'System' && !ids.includes(c.id)) ids.push(c.id);
+  });
+
+  const directIds = new Set(S.ctxMap[parentId] || []);
+  const pageIds = new Set(pageId ? (S.ctxMap[pageId] || []) : []);
+
   return ids
     .map(id => findSource(id))
     .filter(Boolean)
     .filter(c => includeUnmodified || !isUnmodifiedInstance(c.id))
-    .map(c => ({ ...c, _scope: EL_DEFS[parentId]?.name || parentId }))
+    .map(c => {
+      let scope;
+      if (c.group === 'System') scope = 'system';
+      else if (isParentPage) scope = 'page';
+      else if (directIds.has(c.id)) scope = 'section';
+      else if (pageIds.has(c.id)) scope = 'page';
+      else scope = 'inherited';
+      return { ...c, _scope: scope };
+    })
     .sort((a, b) => (CTX_GROUP_ORDER[a.group] ?? 99) - (CTX_GROUP_ORDER[b.group] ?? 99));
 }
 
@@ -6399,22 +7062,25 @@ function isCompat(fieldType, propType) {
 /* ── MODAL (add/remove context — multi-select) ── */
 function openModal(sectionId) {
   const current = S.ctxMap[sectionId] || [];
-  S.modal = {target:sectionId, pending: [...current], initial: [...current]};
+  S.modal = {target:sectionId, pending: [...current], initial: [...current], promotes: []};
   renderModalList();
   checkModalReady();
   document.getElementById('modal').classList.add('open');
 }
 
 function checkModalReady() {
-  const {pending, initial} = S.modal;
-  const changed = pending.length !== initial.length || pending.some(id => !initial.includes(id));
+  const {pending, initial, promotes} = S.modal;
+  const hasPromotes = promotes && promotes.length > 0;
+  const changed = hasPromotes || pending.length !== initial.length || pending.some(id => !initial.includes(id));
   const btn = document.getElementById('modal-ok');
   btn.classList.toggle('ready', changed);
-  // update button label
-  const added = pending.filter(id => !initial.includes(id)).length;
+  const promoteIds = new Set((promotes || []).map(p => p.ctxId));
+  const added = pending.filter(id => !initial.includes(id) && !promoteIds.has(id)).length;
+  const promoted = promotes ? promotes.length : 0;
   const removed = initial.filter(id => !pending.includes(id)).length;
-  if (added || removed) {
+  if (added || removed || promoted) {
     const parts = [];
+    if (promoted) parts.push('↑' + promoted);
     if (added) parts.push('+' + added);
     if (removed) parts.push('-' + removed);
     btn.textContent = 'Apply changes (' + parts.join(' ') + ')';
@@ -6470,24 +7136,54 @@ function renderModalList() {
     grouped[g].push(ctx);
   });
 
+  // When target is a page, find context IDs that child sections already own
+  const pendingPromoteIds = new Set((S.modal.promotes || []).map(p => p.ctxId));
+  const childSectionCtxIds = new Set();
+  if (isPage) {
+    Object.keys(EL_DEFS).forEach(id => {
+      if (EL_DEFS[id].parentPage === target) {
+        (S.ctxMap[id] || []).forEach(cid => {
+          if (!pendingPromoteIds.has(cid)) childSectionCtxIds.add(cid);
+        });
+      }
+    });
+  }
+
   const renderItem = ctx => {
     const isAttached = current.includes(ctx.id);
     const isPending  = pending.includes(ctx.id);
     const isPrimary  = primaries.includes(ctx.id);
+    const isOnPage   = !isPage && pageCtxIds.includes(ctx.id);
+    const isOnChild  = isPage && childSectionCtxIds.has(ctx.id);
+    const isLocked   = isPrimary || isOnPage || isOnChild;
     const willAdd    = !isAttached && isPending;
     const willRemove = isAttached && !isPending;
     const keeping    = isAttached && isPending;
     const cls        = (keeping || willAdd) ? 'attached' : '';
     const checkIcon  = (keeping || willAdd) ? '✓' : '';
+    const childSection = isOnChild ? Object.keys(EL_DEFS).find(id => EL_DEFS[id].parentPage === target && (S.ctxMap[id]||[]).includes(ctx.id)) : null;
+    const childName  = childSection ? (EL_DEFS[childSection]?.name || childSection).replace('Section · ','') : '';
     const badge      = isPrimary  ? `<span style="font-size:10px;color:var(--t3);margin-left:6px;font-weight:400">Page context</span>`
+                     : isOnPage   ? `<span style="font-size:10px;color:var(--acc);margin-left:6px;font-weight:400">Available from page</span>`
+                     : isOnChild  ? `<span style="font-size:10px;color:var(--acc);margin-left:6px;font-weight:400">Already on section "${childName}"</span>`
                      : willRemove ? `<span style="font-size:10px;color:var(--red);margin-left:6px;font-weight:400">Remove</span>`
                      : '';
-    return `<div class="modal-item ${cls}${isPrimary ? ' locked' : ''}" id="mi-${ctx.id}" onclick="${isPrimary ? '' : `toggleModalCtx('${ctx.id}')`}" style="${isPrimary ? 'opacity:.6;cursor:default' : ''}">
+    return isOnChild
+    ? `<div class="modal-item" id="mi-${ctx.id}" style="opacity:.85;cursor:pointer;position:relative;border:1px dashed var(--acc);background:color-mix(in srgb, var(--acc) 5%, transparent)" onclick="promoteCtxToPage('${ctx.id}','${childSection}')"
+        onmouseenter="this.querySelector('.modal-item-tooltip').style.opacity='1'" onmouseleave="this.querySelector('.modal-item-tooltip').style.opacity='0'">
+        <div class="modal-item-tooltip" style="position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);width:230px;padding:8px 10px;background:var(--t1);color:var(--sur);font-size:10px;line-height:1.45;border-radius:6px;z-index:20;font-weight:400;pointer-events:none;box-shadow:0 4px 12px #0003;opacity:0;transition:opacity .15s;white-space:normal;text-align:left">This context type is already on section "${childName}". Promoting it will remove it from the section and make it available to <b>all</b> sections on this page. Existing bindings will keep working.<div style="position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:var(--t1);rotate:45deg"></div></div>
+        <div style="flex:1;min-width:0">
+          <div class="modal-item-name">${ctx.name}${badge}</div>
+          <div class="modal-item-sub">${ctx.type}</div>
+        </div>
+        <div style="font-size:9px;padding:2px 8px;border-radius:4px;background:var(--acc);color:#fff;font-weight:600;white-space:nowrap;flex-shrink:0">Promote to page ↑</div>
+      </div>`
+    : `<div class="modal-item ${cls}${isLocked ? ' locked' : ''}" id="mi-${ctx.id}" onclick="${isLocked ? '' : `toggleModalCtx('${ctx.id}')`}" style="${isLocked ? 'opacity:.6;cursor:default' : ''}">
       <div style="flex:1;min-width:0">
         <div class="modal-item-name">${ctx.name}${badge}</div>
         <div class="modal-item-sub">${ctx.type}</div>
       </div>
-      <div class="modal-check">${isPrimary ? '🔒' : checkIcon}</div>
+      <div class="modal-check">${isPrimary ? '🔒' : isOnPage ? '<span style="font-size:11px">↓</span>' : checkIcon}</div>
     </div>`;
   };
 
@@ -6531,6 +7227,20 @@ function toggleModalCtx(id) {
   else S.modal.pending.push(id);
   renderModalList();
   checkModalReady();
+}
+
+function promoteCtxToPage(ctxId, childSectionId) {
+  const ctx = findSource(ctxId);
+  if (!S.modal.promotes) S.modal.promotes = [];
+  if (!S.modal.promotes.find(p => p.ctxId === ctxId)) {
+    S.modal.promotes.push({ ctxId, fromSection: childSectionId });
+  }
+  if (!S.modal.pending.includes(ctxId)) {
+    S.modal.pending.push(ctxId);
+  }
+  renderModalList();
+  checkModalReady();
+  toast('↑ ' + (ctx?.name || ctxId) + ' will be promoted — click Apply to confirm', true);
 }
 
 function restoreInheritedCtx(ctxId) {
@@ -6782,8 +7492,19 @@ function confirmCtx() {
   }
   S.ctxMap[target] = [...pending];
 
+  // Process promotes — remove context from child sections
+  const promotes = S.modal.promotes || [];
+  promotes.forEach(p => {
+    const secMap = S.ctxMap[p.fromSection];
+    if (secMap) {
+      const idx = secMap.indexOf(p.ctxId);
+      if (idx >= 0) secMap.splice(idx, 1);
+    }
+  });
+
   const added   = pending.filter(id => !prev.includes(id));
   const removed = prev.filter(id => !pending.includes(id));
+  const promoted = promotes.map(p => p.ctxId);
 
   // Auto-bind repeaters when a list context is added to a section with a repeater
   if (added.length > 0) {
@@ -6797,13 +7518,7 @@ function confirmCtx() {
         if (ctx && ctx.type === 'list') {
           const arrayField = ctx.fields.find(f => f.type === 'array');
           if (arrayField) {
-            S.bindings[repeaterInSection + '|Items'] = { ctxId, fieldName: arrayField.name, sample: arrayField.sample };
-            const repEl = document.getElementById(repeaterInSection);
-            if (repEl) {
-              repEl.classList.add('bound');
-              const countEl = document.getElementById('rep-count-' + repeaterInSection.replace('repeater-', ''));
-              if (countEl) countEl.textContent = `Connected · ${arrayField.name} · 3 items`;
-            }
+            autoBindRepeater(repeaterInSection, ctxId, arrayField.name);
             break;
           }
         }
@@ -6814,9 +7529,11 @@ function confirmCtx() {
   // update canvas pill
   refreshAllPills();
 
+  const addedNonPromoted = added.filter(id => !promoted.includes(id));
   const msg = [
-    added.length   ? `✓ Added: ${added.map(id=>findSource(id)?.name||id).join(', ')}` : '',
-    removed.length ? `Removed: ${removed.map(id=>findSource(id)?.name||id).join(', ')}` : '',
+    promoted.length     ? `↑ Promoted: ${promoted.map(id=>findSource(id)?.name||id).join(', ')}` : '',
+    addedNonPromoted.length ? `✓ Added: ${addedNonPromoted.map(id=>findSource(id)?.name||id).join(', ')}` : '',
+    removed.length      ? `Removed: ${removed.map(id=>findSource(id)?.name||id).join(', ')}` : '',
   ].filter(Boolean).join(' · ');
 
   closeModal();
@@ -6946,6 +7663,29 @@ function confirmRemoveCtx(e, ctxId, sectionId) {
   const isInherited = isPrimaryCtx(ctxId, sectionId) && !isPage;
   const boundEls = countBoundElsForCtx(ctxId, sectionId);
 
+  const parentPageId = selDef?.parentPage;
+  const existsAtPageLevel = parentPageId && (S.ctxMap[parentPageId] || []).includes(ctxId);
+
+  if (!isInherited && existsAtPageLevel && boundEls.length > 0) {
+    const msg = 'Remove "' + ctxName + '" from this section?\n\n'
+      + boundEls.length + ' element' + (boundEls.length > 1 ? 's are' : ' is') + ' connected to this context.\n\n'
+      + '"' + ctxName + '" is also available at the page level — bindings can stay connected through inheritance.';
+    showConfirmTwoActions(
+      'Remove context',
+      msg,
+      'Remove & keep bindings',
+      function() {
+        S.ctxMap[sectionId] = (S.ctxMap[sectionId] || []).filter(id => id !== ctxId);
+        refreshAllPills();
+        toast('"' + ctxName + '" removed from section — bindings kept via page');
+        renderBody();
+      },
+      'Remove & disconnect all',
+      function() { doRemoveCtx(ctxId, sectionId); }
+    );
+    return;
+  }
+
   let lines;
   if (isInherited) {
     lines = ['This context is inherited from the page.'];
@@ -6957,8 +7697,9 @@ function confirmRemoveCtx(e, ctxId, sectionId) {
   } else {
     lines = ['Remove "' + ctxName + '" from this section?'];
     if (boundEls.length > 0) {
-      lines.push(boundEls.length + ' binding' + (boundEls.length > 1 ? 's' : '') + ' will be removed:');
+      lines.push('\n⚠ ' + boundEls.length + ' binding' + (boundEls.length > 1 ? 's' : '') + ' will be permanently removed:');
       boundEls.forEach(name => lines.push('  · ' + name));
+      lines.push('\nThis cannot be undone.');
     }
   }
   const msg = lines.join('\n');
@@ -6973,22 +7714,43 @@ function confirmRemoveCtx(e, ctxId, sectionId) {
 
 function doRemoveCtx(ctxId, sectionId) {
   const ctx = findSource(ctxId);
-  // collect keys first, then delete (avoid mutating while iterating)
+
+  Object.keys(EL_DEFS).forEach(id => {
+    const def = EL_DEFS[id];
+    if (!def.isRepeater || def.section !== sectionId) return;
+    const rb = S.bindings[id + '|Items'];
+    if (rb && rb.ctxId === ctxId) {
+      delete S.bindings[id + '|Items'];
+      const repEl = document.getElementById(id);
+      if (repEl) {
+        repEl.classList.remove('bound');
+        repItemsMakeIdentical(repEl, id);
+        const countEl = document.getElementById('rep-count-' + id.replace('repeater-',''));
+        if (countEl) countEl.textContent = '— not connected';
+      }
+    }
+  });
+
   const keysToRemove = Object.keys(S.bindings).filter(bkey => S.bindings[bkey].ctxId === ctxId);
   keysToRemove.forEach(bkey => {
     const [elId, propKey] = bkey.split('|');
     delete S.bindings[bkey];
+    const domEl = document.getElementById(elId);
+    if (domEl) {
+      domEl.classList.remove('bound');
+      domEl.classList.remove('orphaned');
+      const bindTag = domEl.querySelector('.el-bind-tag');
+      if (bindTag) bindTag.textContent = '';
+    }
     applyBindingToCanvas(elId, propKey, null, null);
   });
-  // remove context from section
+
   const currentCtxs = S.ctxMap[sectionId] || [];
   S.ctxMap[sectionId] = currentCtxs.filter(id => id !== ctxId);
-  // clean up instance data if this was a duplicated instance
   if (S.ctxInstanceMeta[ctxId]) {
     delete S.ctxInstanceMeta[ctxId];
     S.ctxInstanceDefs = S.ctxInstanceDefs.filter(c => c.id !== ctxId);
   }
-  // update canvas section
   refreshAllPills();
   toast('"' + (ctx ? ctx.name : ctxId) + '" removed');
   renderBody();
@@ -7048,12 +7810,14 @@ function isUnmodifiedInstance(ctxId) {
 }
 
 let _confirmCallback = null;
-function showConfirm(title, msg, okLabel, onOk, showWarning) {
+function showConfirm(title, msg, okLabel, onOk, showWarning, okStyle) {
   _confirmCallback = onOk;
   document.getElementById('confirm-title').textContent = title;
   document.getElementById('confirm-msg').textContent = msg;
   document.getElementById('confirm-warning').style.display = showWarning ? 'block' : 'none';
-  document.getElementById('confirm-ok-btn').textContent = okLabel;
+  const okBtn = document.getElementById('confirm-ok-btn');
+  okBtn.textContent = okLabel;
+  okBtn.style.background = okStyle === 'blue' ? 'var(--acc)' : 'var(--red)';
   document.getElementById('confirm-modal').classList.add('open');
 }
 function doConfirmOk() {
@@ -7064,7 +7828,36 @@ function doConfirmOk() {
 }
 function cancelConfirm() {
   document.getElementById('confirm-modal').classList.remove('open');
+  document.getElementById('confirm2-modal').classList.remove('open');
   _confirmCallback = null;
+  _confirm2PrimaryCallback = null;
+  _confirm2SecondaryCallback = null;
+}
+
+let _confirm2PrimaryCallback = null;
+let _confirm2SecondaryCallback = null;
+function showConfirmTwoActions(title, msg, primaryLabel, onPrimary, secondaryLabel, onSecondary) {
+  _confirm2PrimaryCallback = onPrimary;
+  _confirm2SecondaryCallback = onSecondary;
+  document.getElementById('confirm2-title').textContent = title;
+  document.getElementById('confirm2-msg').textContent = msg;
+  document.getElementById('confirm2-primary-btn').textContent = primaryLabel;
+  document.getElementById('confirm2-secondary-btn').textContent = secondaryLabel;
+  document.getElementById('confirm2-modal').classList.add('open');
+}
+function doConfirm2Primary() {
+  var cb = _confirm2PrimaryCallback;
+  _confirm2PrimaryCallback = null;
+  _confirm2SecondaryCallback = null;
+  document.getElementById('confirm2-modal').classList.remove('open');
+  if (cb) cb();
+}
+function doConfirm2Secondary() {
+  var cb = _confirm2SecondaryCallback;
+  _confirm2PrimaryCallback = null;
+  _confirm2SecondaryCallback = null;
+  document.getElementById('confirm2-modal').classList.remove('open');
+  if (cb) cb();
 }
 
 /* ── TREE ── */
@@ -7078,14 +7871,15 @@ function renderTree() {
   const isItemsList = S.currentPage === 'Items (List)';
   const isConcept = S.currentPage === 'Product Item';
   const isRuc = S.currentPage === 'Repeater Usecases';
+  const isRep = S.currentPage === 'Repeater';
   const isMsb = S.currentPage === 'Multi-State Box';
   const isDemo = S.currentPage === 'Demo';
   const isDemo262 = S.currentPage === 'Demo 26.2';
-  const sections = isItemsList ? ['sec-items'] : isConcept ? ['sec-rel-product','sec-rel-locations'] : isRuc ? ['sec-ruc-articles','sec-ruc-tags'] : isMsb ? ['sec-msb'] : isDemo ? ['sec-demo-team','sec-demo-empty'] : isDemo262 ? ['sec-d262-weather','sec-d262-empty1','sec-d262-empty2'] : ['sec-hero','sec-weather','sec-articles'];
-  const pageLabel = isItemsList ? 'Items (List)' : isConcept ? 'Product Item' : isRuc ? 'Repeater Usecases' : isMsb ? 'Multi-State Box' : isDemo ? 'Demo' : isDemo262 ? 'Demo 26.2' : 'Home Page';
+  const sections = isItemsList ? ['sec-items'] : isConcept ? ['sec-rel-product','sec-rel-locations'] : isRuc ? ['sec-ruc-articles','sec-ruc-tags'] : isRep ? ['sec-rep-connected','sec-rep-empty','sec-rep-controls'] : isMsb ? ['sec-msb'] : isDemo ? ['sec-demo-team','sec-demo-empty'] : isDemo262 ? ['sec-d262-weather','sec-d262-empty1','sec-d262-empty2'] : ['sec-hero','sec-weather','sec-articles'];
+  const pageLabel = isItemsList ? 'Items (List)' : isConcept ? 'Product Item' : isRuc ? 'Repeater Usecases' : isRep ? 'Repeater' : isMsb ? 'Multi-State Box' : isDemo ? 'Demo' : isDemo262 ? 'Demo 26.2' : 'Home Page';
   const pageIcon = isConcept ? '🛒' : '📄';
 
-  const pageIdMap = {'Home Page':'page-home','Homepage':'page-home','Demo 26.2':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Multi-State Box':'page-msb','Demo':'page-demo'};
+  const pageIdMap = {'Home Page':'page-home','Homepage':'page-home','Demo 26.2':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Repeater':'page-rep','Multi-State Box':'page-msb','Demo':'page-demo'};
   const pageId = pageIdMap[pageLabel] || null;
   const pageCtxIds = pageId ? (S.ctxMap[pageId]||[]) : [];
   const hasDynamicPage = isConcept;
@@ -8227,24 +9021,42 @@ function updatePropRowDOM(elId, propKey) {
 }
 
 /* ── REPEATER: propagate binding to all items ── */
-const ARTICLES_DATA = [{"title": "The Future of AI in Design", "author": "Sarah Chen", "category": "Tech", "readTime": "5 min"}, {"title": "Building Better Products", "author": "Mark Rivera", "category": "Product", "readTime": "8 min"}, {"title": "Design Systems at Scale", "author": "Jane Doe", "category": "Design", "readTime": "6 min"}];
+const REP_SAMPLE_DATA = {
+  'cms-articles': [
+    {title:"The Future of AI in Design", author:"Sarah Chen", category:"Tech", readTime:"5 min", publishedAt:"Jan 15, 2025"},
+    {title:"Building Better Products", author:"Mark Rivera", category:"Product", readTime:"8 min", publishedAt:"Feb 3, 2025"},
+    {title:"Design Systems at Scale", author:"Jane Doe", category:"Design", readTime:"6 min", publishedAt:"Mar 22, 2025"}
+  ],
+  'stores': [
+    {name:"Yoga Mat", price:"$49.99", inStock:"true", description:"Premium quality yoga mat with extra grip"},
+    {name:"Running Shoes", price:"$89.00", inStock:"true", description:"Lightweight shoes for everyday runs"},
+    {name:"Water Bottle", price:"$24.99", inStock:"false", description:"Insulated stainless steel bottle"}
+  ],
+  'stores-locations': [
+    {storeName:"Downtown Flagship", address:"123 Main St, New York", phone:"(212) 555-0100", openHours:"9am–9pm"},
+    {storeName:"Mall of America", address:"456 Shopping Blvd, Minneapolis", phone:"(612) 555-0200", openHours:"10am–8pm"},
+    {storeName:"Beachside Store", address:"789 Ocean Dr, Miami", phone:"(305) 555-0300", openHours:"10am–7pm"}
+  ]
+};
+
+function getRepSampleRow(ctxId, itemIndex) {
+  return (REP_SAMPLE_DATA[ctxId] || [])[itemIndex] || {};
+}
 
 function applyRepBindingToAll(templateKey, propKey, field, ctxId) {
   const ctx = findSource(ctxId);
-  // update all 3 items (item 1 already done by applyBindingToCanvas, but redo for consistency)
   [1,2,3].forEach(i => {
     const elId = templateKey + '-' + i;
     const domEl = document.getElementById(elId);
     if (!domEl) return;
-    const article = ARTICLES_DATA[i-1] || {};
-    const realVal = article[field.name] || field.sample.replace(/^"|"$/g, '');
+    const row = getRepSampleRow(ctxId, i - 1);
+    const realVal = row[field.name] || field.sample.replace(/^"|"$/g, '');
     S.bindings[elId + '|' + propKey] = {ctxId, fieldName: field.name, sample: '"' + realVal + '"'};
     domEl.classList.add('bound');
     const srcTag = document.getElementById('src-' + elId);
     if (srcTag) srcTag.textContent = ctx ? 'Connected · ' + field.name : '';
     const bindTag = domEl.querySelector('.el-bind-tag');
     if (bindTag) bindTag.textContent = ctx ? 'Connected · ' + field.name : '';
-    // update value: text elements use v-{id}, image elements use cimg-{id}
     if (domEl.classList.contains('c-el-img') || domEl.classList.contains('c-el-badge') && false) {
       const cimg = document.getElementById('cimg-' + elId);
       if (cimg) cimg.src = IMG_SKY;
@@ -8285,7 +9097,7 @@ function renderDdParam(body, elId, propKey, paramName) {
     : pUserAvail.map(ctx => `
         <div class="dd-sel-item ${S.dd.srcId===ctx.id?'sel':''}" onclick="ddParamSelSource(event,'${ctx.id}')">
           <div style="flex:1;min-width:0">
-            <div class="dd-sel-item-name">${ctx.name}</div>
+            <div class="dd-sel-item-name" style="display:flex;align-items:center">${ctx.name}${scopeBadge(ctx._scope)}</div>
             <div class="dd-sel-item-sub">${ctx.source} · ${ctx.type}</div>
           </div>
         </div>`).join('');
@@ -8386,14 +9198,7 @@ function confirmParamBind(e) {
 function renderDdRepeaterItems(body, elId, srcId) {
   const def = EL_DEFS[elId];
   const parentId = def?.section;
-  const ids = S.ctxMap[parentId] || [];
-  // all contexts on parent section (any type), excluding unmodified instances
-  const allContexts = ids
-    .map(id => findSource(id))
-    .filter(Boolean)
-    .filter(c => !isUnmodifiedInstance(c.id))
-    .map(c => ({...c, _scope: EL_DEFS[parentId]?.name || parentId}))
-    .sort((a, b) => (CTX_GROUP_ORDER[a.group] ?? 99) - (CTX_GROUP_ORDER[b.group] ?? 99));
+  const allContexts = getAvailableCtx(elId, false);
 
   const fieldName = S.dd.fieldName;
   const srcOpen   = S.dd.openPanel === 'src';
@@ -8417,7 +9222,7 @@ function renderDdRepeaterItems(body, elId, srcId) {
     : rUserCtxs.map(ctx => `
         <div class="dd-sel-item ${srcId===ctx.id?'sel':''}" onclick="ddRepSelSource(event,'${ctx.id}')">
           <div style="flex:1;min-width:0">
-            <div class="dd-sel-item-name">${ctx.name}</div>
+            <div class="dd-sel-item-name" style="display:flex;align-items:center">${ctx.name}${scopeBadge(ctx._scope)}</div>
             <div class="dd-sel-item-sub">${ctx.source} · ${ctx.type}</div>
           </div>
         </div>`).join('');
@@ -8547,19 +9352,38 @@ function ddBindRepeater(e, ctxId, fieldName) {
   const {elId} = S.dd;
   const ctx = findSource(ctxId);
   if (!ctx || !fieldName) return;
-  // bind Items → context + array field
-  const bkey = elId + '|Items';
-  S.bindings[bkey] = {ctxId, fieldName, sample: ''};
-  // update canvas repeater header
-  const domEl = document.getElementById(elId);
-  if (domEl) {
-    domEl.classList.add('bound');
-    const countEl = document.getElementById('rep-count-' + elId.replace('repeater-',''));
-    if (countEl) countEl.textContent = `Connected · ${fieldName} · 3 items`;
+  const def = EL_DEFS[elId];
+  const sectionId = def?.section;
+
+  if (sectionId) {
+    const staleBindings = getRepStaleBindings(sectionId, ctxId);
+    if (staleBindings.length > 0) {
+      const staleCtxIds = [...new Set(staleBindings.map(bk => S.bindings[bk].ctxId))];
+      const staleNames = staleCtxIds.map(id => { const c = findSource(id); return c?.name || id; }).join(', ');
+      const newName = ctx?.name || ctxId;
+      closeDd();
+      showConfirmTwoActions(
+        'Existing inner bindings',
+        `This repeater has ${staleBindings.length} inner binding${staleBindings.length > 1 ? 's' : ''} connected to "${staleNames}". Connecting to "${newName}" will make those bindings invalid. What would you like to do?`,
+        'Disconnect bindings',
+        function() {
+          staleBindings.forEach(function(bk) { delete S.bindings[bk]; });
+          doRepItemsBind(elId, 'Items', ctxId, fieldName);
+          clearRepInnerBoundState(sectionId);
+          toast('✓ Connected to ' + newName + ' · ' + staleBindings.length + ' binding(s) disconnected', true);
+        },
+        'Keep bindings',
+        function() {
+          doRepItemsBind(elId, 'Items', ctxId, fieldName);
+        }
+      );
+      return;
+    }
   }
+
+  doRepItemsBind(elId, 'Items', ctxId, fieldName);
   closeDd();
   toast(`✓ Repeater → ${ctx.name} · ${fieldName}`, true);
-  if (S.sel === elId) renderSettings && renderBody();
 }
 
 function renderImgPropRow(elId, propK, isBound, isActiveDd, ctx, b) {
@@ -8969,6 +9793,22 @@ function sfAddRule() {
     <div class="modal-foot">
       <button class="modal-btn modal-cancel" onclick="cancelConfirm()">Cancel</button>
       <button class="modal-btn" id="confirm-ok-btn" onclick="doConfirmOk()" style="background:var(--red);color:#fff">Remove</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="confirm2-modal" style="z-index:9999" onclick="if(event.target===this)cancelConfirm()">
+  <div class="modal-box" style="width:340px">
+    <div class="modal-head">
+      <div class="modal-title" id="confirm2-title">Confirm</div>
+    </div>
+    <div style="padding:14px 16px 0;font-size:12px;line-height:1.7;color:var(--t2);white-space:pre-line" id="confirm2-msg"></div>
+    <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:8px">
+      <button id="confirm2-primary-btn" onclick="doConfirm2Primary()" style="width:100%;padding:9px 16px;border:1px solid var(--acc);background:var(--acc-d);color:var(--acc);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.12s" onmouseover="this.style.background='var(--acc)';this.style.color='#fff'" onmouseout="this.style.background='var(--acc-d)';this.style.color='var(--acc)'">Keep bindings</button>
+      <button id="confirm2-secondary-btn" onclick="doConfirm2Secondary()" style="width:100%;padding:9px 16px;border:1px solid var(--red,#e84393);background:transparent;color:var(--red,#e84393);border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.12s" onmouseover="this.style.background='var(--red,#e84393)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--red,#e84393)'">Disconnect all</button>
+    </div>
+    <div class="modal-foot" style="justify-content:center">
+      <button class="modal-btn modal-cancel" onclick="cancelConfirm()">Cancel</button>
     </div>
   </div>
 </div>

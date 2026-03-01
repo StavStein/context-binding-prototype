@@ -1,10 +1,62 @@
 # Context — Product Definition
 
-## What is a Context?
+## Core Concepts
 
-A context is a **data source definition** that gets attached to a section on the page, making its fields available for binding to the components inside that section.
+### Provider
 
-A context is **not the data itself** — it describes what data is available: its fields, types, and structure. The actual values are provided at runtime by the context provider (an app, CMS collection, custom code, etc.).
+A data source application or service that exposes data to the editor. A single provider can register **multiple context types**, each representing a different data access point.
+
+Examples of providers:
+- **Wix Stores** — registers Products (list), Current Product (object, primary), Store Locations (list)
+- **CMS** — registers one context type per collection (Articles, Team Members, etc.)
+- **Custom Code** — user-defined context types with custom items
+- **System** — built-in global context types (Identity, Business Info, Page List, Locations)
+
+### Context Type (the definition)
+
+A reusable definition registered by a provider. It describes the **shape** of the data — what items (fields, arrays, functions) are available — but is not yet placed anywhere in the page.
+
+A context type is a **logical component** built on React Context. It has no UI of its own, but exposes shared state and functionality via a hook (e.g., `useProductListContext()`). It includes:
+- **Items** — a flat map of exposed values: fields, arrays, complex objects, functions
+- **Data** — props for configuration in the editor (filters, sorting, limits, etc.)
+- **Resources** — client bundle (runtime), optional editor bundle (mock data)
+
+Think of a context type as a **class** — it defines behavior and structure, but doesn't exist on the page until instantiated. Each context type has a **component type** identifier (e.g., `wixStores.products`) that is unique across the platform.
+
+All context items (fields, functions, metadata) live in a single flat `context.items` map. The categorization into Fields, Item Actions, Context Actions, Metadata, and System Fields is a **product-level UX grouping** — not a technical separation.
+
+#### Data shapes
+
+| Shape | Description | Example |
+|-------|-------------|---------|
+| **list** | A collection of items. Can be connected to a repeater. | Products, Articles, Locations |
+| **object** | A single item with fields. | Business Info, Weather, Current Product |
+
+### Context Instance (the placement)
+
+When a context type is **added to a page or section**, a context instance is created. Each instance has:
+
+| Property | Description | Example |
+|----------|-------------|---------|
+| **Instance ID** | Globally unique identifier for this specific placement | `ctx_a8f3e2`, `ctx_b91c4d` |
+| **Context Type** | Which context type this is an instance of | `wixStores.products` |
+| **Scope** | Where it lives — page or section | Section A |
+| **Configuration** | Instance-specific data props (filters, sort, limits) | filter: featured = true |
+
+The same context type can have **multiple instances** across the page — each with its own unique instance ID and its own configuration.
+
+Example — two instances of the same CMS Articles type:
+
+| Instance ID | Context Type | Scope | Configuration |
+|-------------|-------------|-------|---------------|
+| `ctx_a8f3e2` | `cms.articles` | Section "Featured" | filter: featured = true |
+| `ctx_b91c4d` | `cms.articles` | Section "Latest" | sort: date desc, limit: 5 |
+
+Both share the same items (title, body, author, image, ...) but return different data at runtime because of their configuration.
+
+#### Default instance vs. configured instance
+
+When a user adds a context type to a section for the first time, a **default instance** is created with no custom configuration. If the user duplicates it, a new **configured instance** is created — same context type, new instance ID, ready for different settings.
 
 ### Technical foundation
 
@@ -14,57 +66,62 @@ Technically, a context provider is a **logical component** — it has no UI of i
 - **Client bundle** — runs at runtime, fetches real data
 - **Editor bundle** (optional) — provides mock/sample data for the editor canvas
 
-All context items (fields, functions, metadata) live in a single flat `context.items` map. The categorization into Fields, Item Actions, Context Actions, Metadata, and System Fields is a **product-level UX grouping** — not a technical separation.
-
 ---
 
 ## Scoping
 
-Contexts are **scoped to containers**. A container can be a **page**, a **section**, or any other **container component** (e.g. a Box or a Multi-State Box). When a context is attached to a container, all components inside it can bind their properties to the context's fields. Components outside the container cannot access it.
+The level in the hierarchy where a context instance lives. A context provider can be attached to any container in the component tree:
 
-Contexts **inherit downward** — a context attached to a page is available to all sections and components within that page. A context attached to a section is available to all components within that section.
+| Scope | Meaning |
+|-------|---------|
+| **Page** | Available to all sections and their descendants |
+| **Section** | Available to all elements and containers within that section |
+| **Container** | Available only to elements within that container (e.g., a Box, Multi-State Box) |
+
+The resolution follows standard React Context rules — a child component can access contexts from **all ancestors**, not just the immediate parent. A deeper scope narrows availability; a higher scope widens it.
 
 Multiple contexts can be attached to the same container. A component can bind different properties to different contexts — for example, a Text component binding its `Value` to one context's field and its `Link` to another.
 
+For hierarchy rules governing how instances can be placed, see [context-rules.md](./context-rules.md).
+
 ---
 
-## Context Types
+## Context Sources
 
-| Type | Source | Data shape | Example |
-|------|--------|-----------|---------|
-| **CMS** | Wix CMS collections | `list` — an array of items with shared fields | Articles, My Team, Categories |
-| **Custom** | Developer-defined via custom code | `object` — a single record with known fields | Weather App, UpcomingClassCountdown |
-| **Apps** | Wix apps (Stores, Bookings, etc.) | `list` or `object` | Stores · Current Item, Stores · Locations |
-| **Dynamic Page** | Comes with the dynamic page, cannot be removed | `object` | The current item this page represents (e.g. a specific product, article, or team member) |
-| **System** | Always available at the page level, no user action needed | `object` | Identity (logged-in user info) |
+| Source | Data shape | Example |
+|--------|-----------|---------|
+| **CMS** | `list` — an array of items with shared fields | Articles, My Team, Categories |
+| **Custom Code** | `object` — a single record with known fields | Weather App, UpcomingClassCountdown |
+| **Apps** | `list` or `object` | Stores · Products, Stores · Locations |
+| **Dynamic Page** | `object` — locked to page, URL-driven | The current product, article, or team member |
+| **System** | `object` — always available, no user action | Identity, Business Info |
 
-### System Context
+### System Contexts
 
-System contexts are **always available** — the user doesn't need to add them. They appear at the page level automatically and provide platform-level data that any component on the page can bind to.
+System contexts are **always available** on every page, regardless of page type or configuration. They are not added or removed by the user. They do not occupy a scope — they exist globally.
 
-Examples: Identity (current user info — name, email, login state, role).
+| Context Type | Category | Items |
+|-------------|----------|-------|
+| Identity | object | logged-in status, user name, email, role, avatar |
+| Page List | list | page name, URL, is current |
+| Business Info | object | business name, logo, phone, email, address |
+| Locations | list | location name, address, hours, phone |
 
-**Open question (TBD):** Should system context configuration be **per page** or **per site**? Need to explore use cases — e.g. does a user ever need different Identity settings on different pages, or is it always site-wide?
+In the binding dropdown, system contexts appear in a **collapsed group** at the bottom of the source list. They do not display a scope badge.
 
-### Dynamic Page Context
+### Primary Context (Dynamic Page)
 
-A dynamic page is a page template that renders a different item based on the URL. The **Dynamic Page context** comes with the dynamic page and represents the current item being displayed.
+An `object` context instance that comes built-in with a **dynamic page**. It represents the page's identity — the URL determines which item the provider resolves to at runtime.
 
-For example, a "Product Item" dynamic page displays a specific product. When a visitor navigates to `/products/sunny-day-tee`, the Dynamic Page context provides that product's fields (name, description, image, price, etc.) to all components on the page.
-
-The data source doesn't have to be CMS — it can come from any provider (an app, an external API, etc.).
+- It is **locked** — cannot be removed or moved
+- It always lives at **page scope**
+- Example: on a Product Page, the primary context is an instance of `wixStores.currentProduct` — it defines "which product this page is about"
 
 **Dual nature:**
 - **For components** (binding): behaves as `object` — always a single item. Components bind to fields like `name`, `price`, `image` and receive one value.
-- **For page generation** (configuration): behaves as a filtered list. The user can define filters that determine which items from the source get their own page. Items that don't pass the filter won't have a page generated for them.
+- **For page generation** (configuration): behaves as a filtered list. The user can define filters that determine which items from the source get their own page.
 
 The filter is a **gate at the page-generation level** — it decides which items get a page at all, not which item is shown on a given page. Once a visitor is on the page, the context always resolves to exactly one item.
-
-Key characteristics:
-- Comes with the dynamic page — cannot be removed by the user
-- Type `object` for binding — components always see a single item
-- Has list-level filter configuration — controls which items get their own page
-- The current item is determined by the URL at runtime
 
 ---
 
@@ -253,7 +310,7 @@ Shows attached contexts as cards with:
 - Configuration settings (if available)
 
 ### Binding Dropdown
-When binding a property, only fields from contexts attached to the component's parent section are shown. Fields are filtered by type compatibility.
+When binding a property, fields from all accessible contexts (section, page, system) are shown, resolved by proximity. Fields are filtered by type compatibility. See [context-rules.md](./context-rules.md) for scope resolution priority.
 
 ### Canvas Pills
 Bound components show a pill with the context icon and field name, providing at-a-glance visibility of what's connected to what.
