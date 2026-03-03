@@ -4805,6 +4805,21 @@ function unbind(elId, propKey, e) {
   }
   delete S.bindings[bkey];
   applyBindingToCanvas(elId, propKey, null);
+
+  if (def?.repTemplate) {
+    [1,2,3,4].forEach(i => {
+      const sibId = def.repTemplate + '-' + i;
+      if (sibId === elId) return;
+      const sibBkey = `${sibId}|${propKey}`;
+      const sibBinding = S.bindings[sibBkey];
+      if (sibBinding?.fnHasParams && sibBinding.fnParams) {
+        sibBinding.fnParams.forEach(p => delete S.bindings[`${sibBkey}|param:${p.name}`]);
+      }
+      delete S.bindings[sibBkey];
+      applyBindingToCanvas(sibId, propKey, null);
+    });
+  }
+
   refreshElementBindTags();
 
   toast('Binding removed');
