@@ -56,13 +56,13 @@ Section
 
 **Why:** Two instances of the same type on the same scope would be ambiguous — an element wouldn't know which one to bind to. Containers provide the scoping boundary that makes each instance unambiguous.
 
-### Rule 2 — No same context type across parent-child levels
+### Rule 2 — Shadowing: closest context wins
 
-The same context type cannot have instances at both a parent and child scope (e.g., page + section, section + container).
+The same context type **can** have instances at both a parent and child scope (e.g., page + section, section + container). When this happens, elements bind to the **closest instance** in the hierarchy — the child's instance "shadows" the parent's for its subtree.
 
-If a context type is instantiated at page level, all sections inherit access to it. Adding another instance of the same type to a section creates ambiguity about which instance an element is binding to.
+If a context type is instantiated at page level, all sections inherit access to it. A section can add its own instance of the same type with different configuration (e.g., different filters/sort). Elements in that section will use the section's local instance, while elements in other sections continue using the page-level instance.
 
-**If a section needs a different view of page-level data:** remove the instance from the page and give each section its own configured instance. Or, place the filtered instance inside a **container** within the section, so the page-level instance remains accessible to elements outside that container.
+**When adding a context that already exists on a parent**, the user sees an informational message explaining that the local instance will take priority. The parent's instance is not removed — it remains available to elements outside the child scope.
 
 **Exception — different context types from the same provider:** A primary context (`object`, URL-driven) at page level and a `list` context from the same provider at section level are allowed, because they are different context types serving fundamentally different purposes:
 - Page: `wixStores.currentProduct` (object, primary) — the page's identity
@@ -106,7 +106,7 @@ When an element opens the binding dropdown, available context instances are reso
 
 The binding dropdown shows all available sources from the full ancestry. For elements inside a repeater, item-level fields appear first (scoped to the current repeated item), followed by ancestor contexts.
 
-Since Rule 2 prevents the same context type from having instances at multiple levels, there is never ambiguity about which instance an element is binding to.
+When the same context type exists at multiple levels, elements see only the **closest instance** (proximity resolution). The parent's instance is hidden for elements within the child scope.
 
 ---
 
@@ -129,21 +129,21 @@ What happens when a user attempts each action:
 
 Resolved questions and their decisions.
 
-### Shadowing vs. strict prevention (Rule 2)
-React Context supports "shadowing" — if you nest a provider of the same type inside another, the inner one overrides the outer one for its subtree. This would enable patterns like: "page provides the full product list, a section overrides with a filtered version." But it means two instances of the same type coexist in the ancestry, and the binding dropdown would show both.
+### Shadowing allowed — closest instance wins (Rule 2)
+React Context supports "shadowing" — if you nest a provider of the same type inside another, the inner one overrides the outer one for its subtree. This enables patterns like: "page provides the full product list, a section overrides with a filtered/sorted version."
 
-**Decision: Do not allow shadowing.** Rule 2 strictly prevents the same context type from having instances at multiple hierarchy levels. If a section needs a different view, the user must either reorganize instances or use containers for scoping.
+**Decision: Allow shadowing.** The same context type can exist at multiple hierarchy levels. The **closest instance** (by proximity) is what elements bind to. When adding a context that already exists on a parent, the UI shows an informational message but does not block the action.
 
-**Rationale:** Shadowing creates implicit behavior that's hard to debug — the user may not realize they're binding to a different instance depending on where the element sits. Strict prevention keeps the model predictable.
+**Rationale:** After team discussion, strict prevention was found to be too limiting. Shadowing maps to real use cases (e.g., a section needing a filtered view of page-level data) and follows the natural scoping model. The proximity resolution rule ("closest wins") keeps the behavior predictable.
 
-> **Needs team feedback:** Is strict prevention too limiting? Are there real use cases where shadowing would be necessary?
+**UX safeguards:**
+- When adding a context that already exists on a parent, a message explains: "This section will use its own instance. The page-level instance will be hidden for elements in this section."
+- Promote flow remains available as an alternative to shadowing.
 
 ### Binding target: instance ID or context type?
 When an element binds to a field, does the binding store a reference to the **instance ID** or the **context type**?
 
-**Decision: Bind to context type, resolved by proximity.** Since shadowing is prevented, the nearest ancestor of a given context type is always unambiguous. This makes bindings resilient to reorganization — sections can be moved between pages and bindings survive as long as the target context type exists in the new ancestry.
-
-> **Needs team feedback:** This decision ties to the no-shadowing rule. If shadowing is ever allowed, bindings would need to switch to instance IDs. Is the coupling acceptable?
+**Decision: Bind to context type, resolved by proximity.** The nearest ancestor of a given context type is always resolved by proximity. This makes bindings resilient to reorganization — sections can be moved between pages and bindings survive as long as the target context type exists in the new ancestry. With shadowing, elements automatically pick up the closest instance.
 
 ### Instance removal
 **Decision:** When a context instance is removed, all bindings to it are **deleted**. No orphaned state — clean removal.
