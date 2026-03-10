@@ -219,6 +219,42 @@ Every inner element gets:
 
 ---
 
+## 12. Transitive References — "More by Same Author(s)"
+
+### Dilemma
+On a Book Item page, how to show other books by the same author(s) when a book can have **multiple authors** (multiReference)? This is a transitive relationship: Book → Authors → Authors' Other Books.
+
+### Options
+1. Flatten to a computed field on the page context (e.g., `authorOtherBooks`)
+2. Use a separate Books context with a new filter type
+
+### Decision: **Separate context + new `shares_any` filter condition**
+A new `cms-books-by-author` list context is filtered by:
+- `authors` **shares any with** `⚡ Current Book · authors` — meaning "at least one author overlaps"
+- `title` **≠** `⚡ Current Book` — exclude the current book
+
+### New Filter Condition: `shares_any`
+This condition checks whether two multiReference/array fields share at least one common value. It's the positive counterpart of `not_in` — where `not_in` excludes items present in an array, `shares_any` includes items that share at least one value.
+
+In the filter UI, when `shares_any` is selected, the value dropdown shows array/multiReference fields from the dynamic page context (same behavior as `not_in`).
+
+### Data Model
+```js
+{
+  field: 'authors',
+  condition: 'shares_any',
+  value: 'Current Book · authors',
+  isDynamic: true,
+  dynamicCtxId: 'cms-book-current',
+  dynamicField: 'authors'
+}
+```
+
+### Note on Multiple Authors
+Because `authors` is a multiReference, this naturally handles the case where a book has multiple authors — if **any** of the current book's authors also authored another book, that book appears in the list. For example, if Book X has authors [A, B] and Book Y has authors [B, C], Book Y will appear because they share author B.
+
+---
+
 ## Use Cases Implemented
 
 | Page | UC | What's Shown | Approach |
@@ -232,7 +268,8 @@ Every inner element gets:
 | Book Item | UC6 | Authors (multi-ref) | Repeater bound to `authors` field |
 | Book Item | UC7 | Related books (self-ref) | Repeater bound to `relatedBooks` field |
 | Book Item | UC8 | All other books | Separate context + `not_equals` + `not_in` filters |
-| Author Item | UC9 | Books by author (reverse multi-ref) | Repeater bound to `books` array |
+| Book Item | UC9 | More by same author(s) — transitive | Separate context + `shares_any` + `not_equals` filters |
+| Author Item | UC10 | Books by author (reverse multi-ref) | Repeater bound to `books` array |
 
 ---
 
@@ -247,4 +284,5 @@ Every inner element gets:
 | Inline creation of referenced items | Not started | Create new referenced items from a dropdown |
 | Reverse references scope | Open | Always automatic, or only on item pages? |
 | Self-reference edge cases | Partially addressed | `relatedBooks` works; circular references not fully explored |
+| Transitive references | Addressed | `shares_any` filter enables Book → Authors → Their Books pattern |
 | Drag-and-drop for suggested elements | In progress | Click works; drag-to-canvas has browser compatibility issues |
