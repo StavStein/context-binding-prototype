@@ -3757,6 +3757,72 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
           </div>
         </div>
 
+        <!-- UC 2d: More by Same Author(s) — transitive: Book → Authors → Their Other Books -->
+        <div class="c-section has-ctx" id="sec-ref-bi-byauthor" onclick="selEl(event,'sec-ref-bi-byauthor')">
+          <div class="ctx-pill" id="pill-sec-ref-bi-byauthor"></div>
+          <div class="detail-related-section">
+            <div class="c-el" id="el-ref-bi-byauthor-title" onclick="selEl(event,'el-ref-bi-byauthor-title')" style="cursor:pointer;display:inline-block">
+              <div class="c-el-overlay" style="border-radius:4px"></div>
+              <div class="el-tags"><div class="el-type-tag">Text</div></div>
+              <div class="detail-related-title">More by Same Author</div>
+            </div>
+            <div class="c-repeater bound" id="repeater-ref-bi-byauthor" onclick="selEl(event,'repeater-ref-bi-byauthor')" style="border-radius:6px">
+              <div class="ctx-pill rep-pill" id="pill-repeater-ref-bi-byauthor"></div>
+              <div class="c-el-overlay"></div>
+              <div class="rep-header" onclick="selElSettings(event,'repeater-ref-bi-byauthor')">
+                <span class="rep-icon">↻</span>
+                <span class="rep-label">Repeater</span>
+                <span class="rep-count">📚 items · 2 items</span>
+                <div class="rep-bind-btn" onclick="openDd(event,'repeater-ref-bi-byauthor','Items')" title="Connect to list">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
+                </div>
+              </div>
+              <div class="detail-related-grid">
+                <div class="detail-related-card rep-item" id="rep-ref-bi-ba-1" onclick="selEl(event,'rep-ref-bi-ba-1')">
+                  <div class="c-el-overlay"></div>
+                  <div class="c-el detail-related-thumb bound" id="el-ref-bi-bacover-1" onclick="selEl(event,'el-ref-bi-bacover-1')" style="background:linear-gradient(135deg,#e11d48,#be123c);cursor:pointer">
+                    <div class="c-el-overlay"></div>
+                    <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Books by Same Author · coverImage</div></div>
+                    <svg viewBox="0 0 120 120" fill="none"><rect x="30" y="20" width="60" height="80" rx="3" fill="#fff" opacity=".3"/><text x="60" y="65" font-size="8" text-anchor="middle" fill="#fff" font-family="serif">Emotional</text><text x="60" y="76" font-size="8" text-anchor="middle" fill="#fff" font-family="serif">Design</text></svg>
+                  </div>
+                  <div class="detail-related-info">
+                    <div class="c-el bound" id="el-ref-bi-batitle-1" onclick="selEl(event,'el-ref-bi-batitle-1')" style="cursor:pointer">
+                      <div class="c-el-overlay"></div>
+                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Books by Same Author · title</div></div>
+                      <div class="detail-related-name">Emotional Design</div>
+                    </div>
+                    <div class="c-el bound" id="el-ref-bi-bagenre-1" onclick="selEl(event,'el-ref-bi-bagenre-1')" style="cursor:pointer">
+                      <div class="c-el-overlay"></div>
+                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Books by Same Author · genre</div></div>
+                      <div class="detail-related-price" style="color:var(--t3);font-size:10px">Design · 2003</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="detail-related-card rep-item" id="rep-ref-bi-ba-2" onclick="selEl(event,'rep-ref-bi-ba-2')">
+                  <div class="c-el-overlay"></div>
+                  <div class="c-el detail-related-thumb bound" id="el-ref-bi-bacover-2" onclick="selEl(event,'el-ref-bi-bacover-2')" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);cursor:pointer">
+                    <div class="c-el-overlay"></div>
+                    <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Books by Same Author · coverImage</div></div>
+                    <svg viewBox="0 0 120 120" fill="none"><rect x="30" y="20" width="60" height="80" rx="3" fill="#fff" opacity=".3"/><text x="60" y="65" font-size="8" text-anchor="middle" fill="#fff" font-family="serif">Living with</text><text x="60" y="76" font-size="8" text-anchor="middle" fill="#fff" font-family="serif">Complexity</text></svg>
+                  </div>
+                  <div class="detail-related-info">
+                    <div class="c-el bound" id="el-ref-bi-batitle-2" onclick="selEl(event,'el-ref-bi-batitle-2')" style="cursor:pointer">
+                      <div class="c-el-overlay"></div>
+                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Books by Same Author · title</div></div>
+                      <div class="detail-related-name">Living with Complexity</div>
+                    </div>
+                    <div class="c-el bound" id="el-ref-bi-bagenre-2" onclick="selEl(event,'el-ref-bi-bagenre-2')" style="cursor:pointer">
+                      <div class="c-el-overlay"></div>
+                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Books by Same Author · genre</div></div>
+                      <div class="detail-related-price" style="color:var(--t3);font-size:10px">Design · 2010</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- UC 2c: All Other Books (separate list context) -->
         <div class="c-section has-ctx" id="sec-ref-bi-all" onclick="selEl(event,'sec-ref-bi-all')">
           <div class="ctx-pill" id="pill-sec-ref-bi-all"></div>
@@ -4848,6 +4914,38 @@ const CTX_DEFS = [
         ]},
     ],
     contextActions:[], metadata:[], config:[]},
+  { id:'cms-books-by-author', name:'Books by Same Author', icon:'📚', type:'list', source:'CMS', group:'CMS', itemCount:2,
+    fields:[
+      {name:'items', type:'array', sample:'[{title, coverImage, …}]', itemFields:[
+        {name:'title',         type:'string', sample:'"Emotional Design"'},
+        {name:'coverImage',    type:'image',  sample:'[img url]'},
+        {name:'publishedYear', type:'number', sample:'"2003"'},
+        {name:'genre',         type:'string', sample:'"Design"'},
+        {name:'authors', type:'multiReference', sample:'"Don Norman"',
+          referencedCollection:'cms-authors',
+          refFields:[
+            {name:'name',  type:'string', sample:'"Don Norman"'},
+            {name:'image', type:'image',  sample:'[img url]'},
+            {name:'bio',   type:'string', sample:'"Cognitive scientist…"'},
+          ]},
+      ]},
+    ],
+    itemActions:[
+      {name:'navigateToItem', label:'Navigate to item page', icon:''},
+      {name:'openInEditor',   label:'Open in editor',        icon:''},
+    ],
+    contextActions:[
+      {name:'applyFilters', label:'Apply filters', icon:''},
+      {name:'sort',         label:'Sort',           icon:''},
+      {name:'loadMore',     label:'Load more',      icon:''},
+      {name:'refresh',      label:'Refresh data',   icon:''},
+    ],
+    metadata:[
+      {name:'totalCount',   label:'Total items', type:'number',  sample:'2'},
+      {name:'isLoading',    label:'Is loading',  type:'boolean', sample:'false'},
+      {name:'activeFilters',label:'Active filter count', type:'number', sample:'2'},
+    ],
+    config:[]},
   { id:'cms-book-current', name:'Current Book', icon:'📖', type:'object', source:'CMS', group:'CMS',
     isDynamicPageCtx: true,
     fields:[
@@ -5495,6 +5593,17 @@ const EL_DEFS = {
   'el-ref-bi-rtitle-2':  {name:'Book Title', type:'Text', section:'sec-ref-bi-related', repTemplate:'el-ref-bi-rtitle', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-ref-bi-rinfo-1':   {name:'Book Info', type:'Text', section:'sec-ref-bi-related', repTemplate:'el-ref-bi-rinfo', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-ref-bi-rinfo-2':   {name:'Book Info', type:'Text', section:'sec-ref-bi-related', repTemplate:'el-ref-bi-rinfo', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'sec-ref-bi-byauthor': {name:'Section · More by Same Author', type:'Section', isContainer:true, page:'ref-bi', parentPage:'page-ref-bi', props:[]},
+  'el-ref-bi-byauthor-title': {name:'Section Title', type:'Text', section:'sec-ref-bi-byauthor', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'repeater-ref-bi-byauthor': {name:'Repeater', type:'Repeater', section:'sec-ref-bi-byauthor', isRepeater:true, props:[{k:'Items',t:'list'},{k:'Visible',t:'boolean'},{k:'onItemReady',t:'function'},{k:'onItemRemoved',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
+  'rep-ref-bi-ba-1':     {name:'Book 1', type:'RepItem', section:'sec-ref-bi-byauthor', isRepItem:true, props:[]},
+  'rep-ref-bi-ba-2':     {name:'Book 2', type:'RepItem', section:'sec-ref-bi-byauthor', isRepItem:true, props:[]},
+  'el-ref-bi-bacover-1': {name:'Book Cover', type:'Image', section:'sec-ref-bi-byauthor', repTemplate:'el-ref-bi-bacover', props:[{k:'Source',t:'image'},{k:'Alt Text',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-ref-bi-bacover-2': {name:'Book Cover', type:'Image', section:'sec-ref-bi-byauthor', repTemplate:'el-ref-bi-bacover', props:[{k:'Source',t:'image'},{k:'Alt Text',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-ref-bi-batitle-1': {name:'Book Title', type:'Text', section:'sec-ref-bi-byauthor', repTemplate:'el-ref-bi-batitle', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-ref-bi-batitle-2': {name:'Book Title', type:'Text', section:'sec-ref-bi-byauthor', repTemplate:'el-ref-bi-batitle', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-ref-bi-bagenre-1': {name:'Book Genre', type:'Text', section:'sec-ref-bi-byauthor', repTemplate:'el-ref-bi-bagenre', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  'el-ref-bi-bagenre-2': {name:'Book Genre', type:'Text', section:'sec-ref-bi-byauthor', repTemplate:'el-ref-bi-bagenre', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'sec-ref-bi-all':      {name:'Section · All Books', type:'Section', isContainer:true, page:'ref-bi', parentPage:'page-ref-bi', props:[]},
   'el-ref-bi-all-title': {name:'Section Title', type:'Text', section:'sec-ref-bi-all', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'repeater-ref-bi-all': {name:'Repeater', type:'Repeater', section:'sec-ref-bi-all', isRepeater:true, props:[{k:'Items',t:'list'},{k:'Visible',t:'boolean'},{k:'onItemReady',t:'function'},{k:'onItemRemoved',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
@@ -5590,6 +5699,8 @@ const S = {
     'sec-ref-bi-info':  [],
     'sec-ref-bi-authors': [],
     'sec-ref-bi-related': [],
+    'sec-ref-bi-byauthor': [],
+    'repeater-ref-bi-byauthor': ['cms-books-by-author'],
     'sec-ref-bi-all':   [],
     'repeater-ref-bi-all': ['cms-books-other'],
     'page-ref-ai':      ['cms-author-current'],
@@ -5613,6 +5724,7 @@ const S = {
     'repeater-ref-tmf::cms-team-members-filtered': {isStatic: true, label: 'Filtered by: role (Ref → Roles) = UX Designer', active: true, confirmMsg: 'Team Members will no longer be filtered by role. All team members will be shown instead.', toastOn: 'Filter restored — showing filtered team members', toastOff: 'Filter removed — showing all team members'},
     'cms-team-members-by-role': {linkedTo: 'cms-role-current', label: 'Filtered by: role = ⚡ Current Role', active: true},
     'cms-roles-other': {linkedTo: 'cms-role-current', label: 'Filtered by: roleName ≠ ⚡ Current Role', active: true},
+    'cms-books-by-author': {linkedTo: 'cms-book-current', label: 'Filtered (2): authors ∩ ⚡ Current Book · authors, title ≠ ⚡ Current Book', active: true},
     'cms-books-other': {linkedTo: 'cms-book-current', label: 'Filtered (2): title ≠ ⚡ Current Book, title ∉ ⚡ relatedBooks', active: true},
   },
   ctxInstanceDefs: [],
@@ -5787,6 +5899,13 @@ const S = {
     'el-ref-bi-rcover-2|Source':    {ctxId:'cms-book-current', fieldName:'relatedBooks.coverImage', sample:'[img url]'},
     'el-ref-bi-rtitle-2|Value':      {ctxId:'cms-book-current', fieldName:'relatedBooks.title', sample:'"Lean UX"'},
     'el-ref-bi-rinfo-2|Value':      {ctxId:'cms-book-current', fieldName:'relatedBooks.genre', sample:'"Design"'},
+    'repeater-ref-bi-byauthor|Items': {ctxId:'cms-books-by-author', fieldName:'items', sample:'[{title, coverImage, …}]'},
+    'el-ref-bi-bacover-1|Source':    {ctxId:'cms-books-by-author', fieldName:'coverImage', sample:'[img url]'},
+    'el-ref-bi-batitle-1|Value':     {ctxId:'cms-books-by-author', fieldName:'title', sample:'"Emotional Design"'},
+    'el-ref-bi-bagenre-1|Value':     {ctxId:'cms-books-by-author', fieldName:'genre', sample:'"Design"'},
+    'el-ref-bi-bacover-2|Source':    {ctxId:'cms-books-by-author', fieldName:'coverImage', sample:'[img url]'},
+    'el-ref-bi-batitle-2|Value':     {ctxId:'cms-books-by-author', fieldName:'title', sample:'"Living with Complexity"'},
+    'el-ref-bi-bagenre-2|Value':     {ctxId:'cms-books-by-author', fieldName:'genre', sample:'"Design"'},
     'repeater-ref-bi-all|Items':     {ctxId:'cms-books-other', fieldName:'items', sample:'[{title, coverImage, …}]'},
     'el-ref-bi-allcover-1|Source':   {ctxId:'cms-books-other', fieldName:'coverImage', sample:'[img url]'},
     'el-ref-bi-alltitle-1|Value':    {ctxId:'cms-books-other', fieldName:'title', sample:'"Don\'t Make Me Think"'},
@@ -5831,6 +5950,10 @@ const S = {
     'cms-team-members-filtered': [{field:'role', condition:'equals', value:'UX Designer'}],
     'cms-team-members-by-role': [{field:'role', condition:'equals', value:'Current Role', isDynamic:true, dynamicCtxId:'cms-role-current'}],
     'cms-roles-other': [{field:'roleName', condition:'not_equals', value:'Current Role', isDynamic:true, dynamicCtxId:'cms-role-current'}],
+    'cms-books-by-author': [
+      {field:'authors', condition:'shares_any', value:'Current Book · authors', isDynamic:true, dynamicCtxId:'cms-book-current', dynamicField:'authors'},
+      {field:'title', condition:'not_equals', value:'Current Book', isDynamic:true, dynamicCtxId:'cms-book-current'}
+    ],
     'cms-books-other': [
       {field:'title', condition:'not_equals', value:'Current Book', isDynamic:true, dynamicCtxId:'cms-book-current'},
       {field:'title', condition:'not_in', value:'Current Book · relatedBooks', isDynamic:true, dynamicCtxId:'cms-book-current', dynamicField:'relatedBooks'}
@@ -9305,6 +9428,7 @@ const SUGGESTED_REPEATERS = {
     presets: [
       { id: 'sr-bi-authors',  icon: '✍️', name: 'Authors',        desc: 'Authors of this book (multiReference)', field: 'authors',      existingRepId: 'repeater-ref-bi-authors' },
       { id: 'sr-bi-related',  icon: '📖', name: 'Related Books',   desc: 'Related books (multiReference)',        field: 'relatedBooks', existingRepId: 'repeater-ref-bi-related' },
+      { id: 'sr-bi-byauthor', icon: '📚', name: 'More by Same Author', desc: 'Books sharing an author (transitive)', field: null, separate: true, existingRepId: 'repeater-ref-bi-byauthor' },
       { id: 'sr-bi-all',      icon: '📚', name: 'All Other Books', desc: 'Separate context, filtered ≠ current', field: null, separate: true, existingRepId: 'repeater-ref-bi-all' },
     ]
   },
@@ -15288,7 +15412,7 @@ function sfDirLabel(dir, field) {
 }
 
 function sfConditionLabel(cond) {
-  const map = {contains:'contains',equals:'is',not_equals:'is not',not_in:'is not in',starts_with:'starts with',ends_with:'ends with',greater_than:'greater than',less_than:'less than',is_true:'is True',is_false:'is False'};
+  const map = {contains:'contains',equals:'is',not_equals:'is not',not_in:'is not in',shares_any:'shares any with',starts_with:'starts with',ends_with:'ends with',greater_than:'greater than',less_than:'less than',is_true:'is True',is_false:'is False'};
   return map[cond] || cond;
 }
 
@@ -15389,7 +15513,7 @@ function sfBuildValueInput(rule, selectedFieldName, condition) {
   if (dynCtxs.length > 0) {
     let options = '<option value="">Choose value</option>';
 
-    if (cond === 'not_in') {
+    if (cond === 'not_in' || cond === 'shares_any') {
       options += '<optgroup label="Dynamic field (page context)">';
       dynCtxs.forEach(dc => {
         const arrayFields = dc.fields.filter(f => f.type === 'array' || f.type === 'multiReference');
@@ -15466,6 +15590,7 @@ function sfEditRule(idx) {
       + '<option value="equals"' + (rule.condition === 'equals' ? ' selected' : '') + '>equals</option>'
       + '<option value="not_equals"' + (rule.condition === 'not_equals' ? ' selected' : '') + '>not equals</option>'
       + '<option value="not_in"' + (rule.condition === 'not_in' ? ' selected' : '') + '>is not in</option>'
+      + '<option value="shares_any"' + (rule.condition === 'shares_any' ? ' selected' : '') + '>shares any with</option>'
       + '<option value="starts_with"' + (rule.condition === 'starts_with' ? ' selected' : '') + '>starts with</option>'
       + '<option value="ends_with"' + (rule.condition === 'ends_with' ? ' selected' : '') + '>ends with</option>'
       + '<option value="greater_than"' + (rule.condition === 'greater_than' ? ' selected' : '') + '>greater than</option>'
