@@ -126,7 +126,21 @@ When binding the Items property, the context picker should:
   - In **repeater settings** — message suggesting to promote when context is coupled
   - In **binding dropdown** for external elements — shows the repeater's context with a "Promote to section" action
 
+### ⚠️ Filter ceiling principle (requires R&D approval)
+
+Context-level filters set by the site builder define the **maximum dataset boundary**. When UoU filters are applied at runtime by the site visitor (e.g., search bar, filter dropdown), they operate **within** the context filter — they can only **narrow** the results, never **widen** them.
+
+**Example:** If the builder filtered the context to show only "Tech" articles, a visitor using a UoU search bar can search within Tech articles only — they cannot discover or access articles from other categories.
+
+**Implication for R&D:** The runtime query pipeline must enforce context-level filters as a hard constraint that UoU filters cannot override. The UoU filter is applied **on top of** (intersected with) the context filter — not as a replacement.
+
 > **TBD:** Exact UX for the promote suggestion in the binding dropdown.
+
+### ⚠️ Disconnect confirmation modal
+
+Disconnecting a repeater's "Items" binding is a **high-impact action** — it cascades to all inner element bindings. Unlike most properties (where disconnect is silent), the repeater **should trigger a confirmation modal** before proceeding.
+
+**Open question (R&D + Product):** Is this a **component-level opt-in** (the repeater declares that its disconnect needs confirmation) or should the platform **automatically detect** high-impact disconnects? See [Binding Controller spec — Open TBD #5](binding-platform-demo.html#spec=binding-controller).
 
 ---
 
