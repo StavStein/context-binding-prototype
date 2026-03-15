@@ -50,17 +50,7 @@ async function snap(page, filename) {
 }
 
 async function addCursorAt(page, x, y) {
-  await page.evaluate((cx, cy, svgStr) => {
-    let existing = document.getElementById('fake-cursor');
-    if (existing) existing.remove();
-
-    const div = document.createElement('div');
-    div.id = 'fake-cursor';
-    div.style.cssText = `position:fixed;left:${cx - 16}px;top:${cy - 6}px;z-index:999999;pointer-events:none;`;
-    div.innerHTML = svgStr;
-    document.body.appendChild(div);
-  }, x, y, CURSOR_SVG);
-  await delay(100);
+  // no-op: skip cursor injection
 }
 
 async function addCursorOnElement(page, selector, offX, offY) {
