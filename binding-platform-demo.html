@@ -6243,9 +6243,9 @@ const S = {
     'sec-empty':    [],
     'sec-home-nested': [],
     'repeater-hn-articles': ['cms-articles'],
-    'repeater-hn-tags-1': ['cms-articles'],
-    'repeater-hn-tags-2': ['cms-articles'],
-    'repeater-hn-tags-3': ['cms-articles'],
+    'repeater-hn-tags-1': [],
+    'repeater-hn-tags-2': [],
+    'repeater-hn-tags-3': [],
     'sec-items':       [],
     'repeater-items': [],
     'sec-rel-product': [],
@@ -12495,6 +12495,7 @@ const CTX_GROUP_ORDER = {CMS:0, Custom:1, Apps:2, System:3};
 function scopeBadge(scope) {
   const s = 'font-size:9px;padding:1px 5px;border-radius:4px;font-weight:500;margin-left:6px;white-space:nowrap';
   if (scope === 'repeater') return `<span style="${s};background:color-mix(in srgb, #f59e0b 14%, transparent);color:#d97706">This repeater</span>`;
+  if (scope === 'parent-repeater') return `<span style="${s};background:color-mix(in srgb, #f59e0b 14%, transparent);color:#d97706">Parent repeater</span>`;
   if (scope === 'section') return `<span style="${s};background:color-mix(in srgb, #10b981 14%, transparent);color:#10b981">Section</span>`;
   if (scope === 'page') return `<span style="${s};background:color-mix(in srgb, var(--acc) 12%, transparent);color:var(--acc)">Page</span>`;
   if (scope === 'inherited') return `<span style="${s};background:color-mix(in srgb, var(--t3) 12%, transparent);color:var(--t3)">Inherited</span>`;
@@ -12512,8 +12513,17 @@ function getAvailableCtx(elId, includeUnmodified) {
   const pageId = parentDef?.parentPage || (isParentPage ? parentId : null);
 
   const repIds = new Set();
+  const ancestorRepIds = new Set();
   if (def.isRepeater && def.contextModel === 'on-repeater') {
     (S.ctxMap[elId] || []).forEach(id => repIds.add(id));
+    const elDom = document.getElementById(elId);
+    let ancestorRep = elDom ? elDom.parentElement?.closest('.c-repeater') : null;
+    while (ancestorRep) {
+      (S.ctxMap[ancestorRep.id] || []).forEach(id => ancestorRepIds.add(id));
+      const rb = S.bindings[ancestorRep.id + '|Items'];
+      if (rb && rb.ctxId) ancestorRepIds.add(rb.ctxId);
+      ancestorRep = ancestorRep.parentElement?.closest('.c-repeater') || null;
+    }
   } else if (def.repTemplate || def.isRepItem) {
     Object.keys(EL_DEFS).forEach(rid => {
       const rd = EL_DEFS[rid];
@@ -12531,6 +12541,7 @@ function getAvailableCtx(elId, includeUnmodified) {
   }
 
   const ids = [...repIds];
+  ancestorRepIds.forEach(id => { if (!ids.includes(id)) ids.push(id); });
   (S.ctxMap[parentId] || []).forEach(id => { if (!ids.includes(id)) ids.push(id); });
   if (parentDef?.parentPage) {
     (S.ctxMap[parentDef.parentPage] || []).forEach(id => {
@@ -12552,6 +12563,7 @@ function getAvailableCtx(elId, includeUnmodified) {
       let scope;
       if (c.group === 'System') scope = 'system';
       else if (repIds.has(c.id)) scope = 'repeater';
+      else if (ancestorRepIds.has(c.id)) scope = 'parent-repeater';
       else if (isParentPage) scope = 'page';
       else if (directIds.has(c.id)) scope = 'section';
       else if (pageIds.has(c.id)) scope = 'page';
@@ -14561,8 +14573,8 @@ const PRODUCT_SPECS = {
         type: 'table',
         headers: ['Topic', 'Decision', 'Details'],
         rows: [
-          ['PD-1 · Where context lives', '<span class="spec-status implemented">Repeater can be a provider</span>', 'Contexts <b>can</b> attach directly to the repeater, but the repeater can also consume context from a parent (section/page). Reduces reparenting issues on D&D. Allows 2 repeaters with same context type but different configs on the same section.'],
-          ['PD-2 · Binding panel ("Items")', '<span class="spec-status implemented">Repeater\'s own context = default</span>', 'When binding the "Items" property via the <b>Connect · Value panel</b>, the repeater\'s own context is shown as the default source with scope badge <b>"This repeater"</b>. Parent contexts (section/page) appear as alternatives.'],
+          ['PD-1 · Where context lives', '<span class="spec-status implemented">Repeater can be a provider</span>', 'Contexts <b>can</b> attach directly to the repeater, but the repeater can also consume context from a parent (section/page). Reduces reparenting issues on D&D. Allows 2 repeaters with same context type but different configs on the same section.<br><br><b>Promote</b> is a <b>move</b> operation — when promoting a repeater\'s context to the section, the context is <b>removed</b> from the repeater and placed on the section. The repeater then inherits it from the section scope.'],
+          ['PD-2 · Binding panel ("Items")', '<span class="spec-status implemented">Repeater\'s own context = default</span>', 'When binding the "Items" property via the <b>Connect · Value panel</b>, the repeater\'s own context is shown as the default source with scope badge <b>"This repeater"</b>. Parent contexts (section/page) appear as alternatives.<br><br>For <b>nested repeaters</b> (a repeater inside another repeater), contexts from ancestor repeaters are also available. These show the scope badge <b>"Parent repeater"</b> to distinguish them from the nested repeater\'s own context.'],
           ['PD-3 · Auto-bind', '<span class="spec-status implemented">Automatic</span>', '"Items" property auto-binds to the context\'s array field when a list context is attached — unless "Items" is already bound to another context.'],
           ['PD-4 · Copy & Paste', '<span class="spec-status implemented">Smart duplication</span>', 'Coupled context → <b>duplicated</b> (new instance). Parent context → <b>not duplicated</b> (binding references parent). Paste out of context → disconnected (<span class="spec-tbd">TBD</span> editor experience).'],
           ['PD-5 · Drag & Drop', '<span class="spec-status in-progress">Partial</span>', 'Coupled context moves with repeater. Inherited context: <span class="spec-tbd">TBD</span> — user must choose: copy to new section / promote to page / disconnect.'],
@@ -14571,6 +14583,7 @@ const PRODUCT_SPECS = {
           ['PD-8 · Canvas indication: unbound "Items"', '<span class="spec-tbd">TBD</span>', 'Two different states look identical on canvas — the repeater shows 3 placeholder items in both cases:<br><br>• <b>Context attached, "Items" unbound</b> — context exists on the repeater (or parent), but "Items" is not connected to any array. The user needs to <b>bind "Items"</b>.<br>• <b>No context at all</b> — repeater has no context. The user needs to <b>add a context first</b>, then bind "Items".<br><br>The canvas indication must <b>distinguish between these two states</b> so the user knows what action to take. Currently described as a single "not connected" indication (Flows 6 & 7), but in practice the entry point and messaging should differ:<br>• With context → direct to "Items" binding panel<br>• Without context → direct to context attachment first<br><br><span class="spec-tbd">TBD</span>: exact visual differentiation — separate messages, different CTA labels, or a single flow that detects context availability and adapts.'],
           ['PD-9 · "Items" bound to a different context', '<span class="spec-tbd">TBD</span>', 'The repeater can have a context attached to it (e.g., <b>CMS Articles</b>) while "Items" is bound to a <b>different</b> context from a parent scope (e.g., <b>CMS Products</b> on the section). This is a valid state — but potentially confusing:<br><br>• The Context section in the repeater settings shows <b>CMS Articles</b><br>• The "Items" binding chip shows <b>CMS Products · items</b><br>• The canvas displays Products data, not Articles<br><br>The user may assume the attached context is what "feeds" the repeater, when in fact it\'s a different source entirely. The attached context is still available for inner elements to bind to (context-level fields), but the <b>list data</b> comes from elsewhere.<br><br><span class="spec-tbd">TBD</span>: How to communicate this clearly:<br>• Should the settings panel highlight the mismatch? (e.g., a note: "Items is connected to a different context")<br>• Should the "Items" chip in Properties show the source context with a scope badge to distinguish it from the attached context?<br>• Should the canvas indication reflect the actual data source, not just the attached context?'],
           ['PD-10 · Promote via binding panel', '<span class="spec-tbd">TBD</span>', 'When a context lives on a repeater and is used by its "Items" binding — the <b>binding panel</b> (Connect · Value) should offer that context as a source to <b>all components on the page</b>, not just those inside the repeater.<br><br>The user would see the repeater\'s context in the source dropdown with a scope badge (e.g., <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:color-mix(in srgb, var(--acc) 12%, transparent);color:var(--acc);font-family:DM Mono,monospace">Repeater</span>) and an inline <b>promote</b> action. Selecting it would automatically promote the context to the section (or page) level so it becomes available in the broader scope.<br><br>This enables a common pattern: user connects a repeater to data, then wants an external element (e.g., a title, a filter control) to access the same context — without manually promoting first.<br><br><span class="spec-tbd">TBD (R&D)</span>: Can scope resolution surface repeater-level contexts to elements outside the repeater? Does promote need to happen <b>before</b> or <b>during</b> the bind action?'],
+          ['PD-12 · Nested repeaters', '<span class="spec-status implemented">Implemented</span>', 'A repeater can be placed inside another repeater item — e.g., a tags repeater inside each article item. The inner repeater:<br><br>• Does <b>not need its own context</b> — it consumes the parent repeater\'s context (scope badge: <b>"Parent repeater"</b>)<br>• Can optionally have its own context attached (same <code>contextModel: on-repeater</code> capability)<br>• Binds "Items" to a <b>nested array field</b> (e.g., <code>items › tags</code>). The field dropdown shows hierarchy paths for nested arrays<br>• Each instance can have a <b>different item count</b> per parent item (e.g., 3 tags, 2 tags, 4 tags)<br>• Inner elements see the sub-array\'s own fields (e.g., <code>tag value</code>), not the parent\'s top-level fields<br><br><b>Disconnect / reconnect:</b> Disconnecting the inner repeater cascades to all inner bindings. All instances normalize to 3 default items. Reconnecting restores original per-item counts and bindings.<br><br><b>Promote:</b> Promote is a <b>move</b> operation — the context is removed from the repeater and placed on the section. The repeater then inherits from the section.<br><br><b>Visual behavior:</b> Nested repeaters have a transparent border by default. Border appears on hover, direct selection, or child selection — avoiding visual clutter in deeply nested layouts.'],
           ['PD-11 · Context filter = hard ceiling for UoU', '<span class="spec-tbd">Requires R&D OK</span>', 'Context-level filters set by the site builder define the <b>maximum dataset boundary</b>. When UoU filters are applied at runtime by the site visitor (e.g., search bar, filter dropdown), they operate <b>within</b> the context filter — they can only <b>narrow</b> the results, never <b>widen</b> them.<br><br><b>Example:</b> Builder filters context to "Tech" articles only → visitor uses a UoU search bar → visitor can search <b>within Tech articles only</b> — cannot discover or access articles from other categories.<br><br><b>Security principle:</b> The context filter is a hard boundary that the site visitor cannot bypass. The builder maintains full control over what data is exposed.<br><br><b>R&D implication:</b> The runtime query pipeline must enforce context-level filters as a <b>hard constraint</b> — UoU filters are intersected with (applied on top of) the context filter, never replace it. This must be guaranteed regardless of the UoU filter implementation (client-side, server-side, or hybrid).<br><br><span class="spec-tbd">Requires R&D sign-off</span> on the query pipeline architecture to confirm this constraint is enforced.'],
         ]
       },
@@ -14872,7 +14885,8 @@ const PRODUCT_SPECS = {
           ['Zero items returned (editor)', 'When repeater is connected but query returns 0 items — editor shows "0 items returned" indication. Repeater remains selectable and editable. See Flow 9.', '<span class="spec-status planned">Planned</span>'],
           ['Zero items returned (live site)', 'When repeater is connected but returns 0 items on the live site — repeater collapses and takes up no space. See Flow 9.', '<span class="spec-status planned">Planned</span>'],
           ['Drag & drop (reparenting)', 'Coupled context moves with repeater. Inherited context: <span class="spec-tbd">TBD</span> — choose copy / promote to page / disconnect.', '<span class="spec-status in-progress">In Progress</span>'],
-          ['Live site behavior (unbound)', 'What to show when repeater is unbound on live site — collapse, placeholder, or hide.', '<span class="spec-status planned">Planned</span>']
+          ['Live site behavior (unbound)', 'What to show when repeater is unbound on live site — collapse, placeholder, or hide.', '<span class="spec-status planned">Planned</span>'],
+          ['Nested repeaters', 'Repeater inside a repeater — inner repeater consumes parent context (badge: "Parent repeater"), binds to nested array fields, supports per-item variable count. Promote = move. See PD-12.', '<span class="spec-status implemented">Implemented</span>']
         ]
       },
       {
