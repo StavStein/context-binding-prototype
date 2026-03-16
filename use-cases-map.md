@@ -126,6 +126,8 @@ Each use case follows this structure:
 | C12 | I want to bind a repeater to a nested array (e.g. tags, reviews) | `Array binding` `Sub-context` | ✅ |
 | C13 | I want to use a repeater with A/B alternating layout pattern | `Repeater` `A/B pattern` | ⬜ |
 | C14 | I want a repeater inside a repeater (nested lists) | `Nested repeater` `Repeater in repeater` | ✅ |
+| C15a | I want to understand what happens when a bound repeater has 0 items (empty collection) | `Empty collection` `0 items` `Collapsed` | ✅ |
+| C15b | I want to understand what happens when a filter returns 0 results (items exist but none match) | `Filtered empty` `0 results` `Collapsed` | ✅ |
 
 ### Repeater Operations
 
@@ -345,7 +347,7 @@ Each use case follows this structure:
 |------|-------|---------|------------|----------------|
 | **A** — Data Sources | 17 | 6 | 5 | 6 |
 | **B** — Binding | 26 | 14 | 4 | 8 |
-| **C** — Repeater & List Renderers | 21 | 6 | 2 | 13 |
+| **C** — Repeater & List Renderers | 23 | 8 | 2 | 13 |
 | **D** — Configuration | 11 | 3 | 3 | 5 |
 | **E** — References | 8 | 8 | 0 | 0 |
 | **F** — Functions & Actions | 11 | 4 | 0 | 7 |
@@ -359,7 +361,7 @@ Each use case follows this structure:
 | **N** — Write Mode & Forms | 7 | 0 | 0 | 7 |
 | **O** — Custom Components & Dev | 5 | 0 | 0 | 5 |
 | **P** — CMS-Specific | 2 | 0 | 0 | 2 |
-| **TOTAL** | **166** | **61** | **19** | **86** |
+| **TOTAL** | **168** | **63** | **19** | **86** |
 
 ---
 
@@ -371,7 +373,7 @@ Each use case follows this structure:
 
 ### Key Takeaway
 
-**61 out of 166 use cases are prototyped (~37%), with 19 partially done.**
+**63 out of 168 use cases are prototyped (~38%), with 19 partially done.**
 
 Entire untouched areas:
 - **N — Write Mode & Forms** (7 use cases) — data collection, form submission, input validation, update records

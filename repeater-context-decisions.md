@@ -66,6 +66,22 @@ When binding the Items property, the context picker should:
 - If the repeater uses a parent context → also accessible via section settings → context configuration
 - Applies only to the **main records array** (e.g., `items`). Other arrays (e.g., nested `tags`) are not affected by context-level sort/filter
 
+### Page Size vs. Display Limit
+
+These are two independent controls:
+
+| | **Page Size** | **Display Limit** |
+|---|---|---|
+| **Belongs to** | Context instance | Repeater |
+| **What it controls** | How many items are fetched per pagination batch | How many items are shown in total |
+| **Configured in** | Context settings panel | Repeater settings → "Show limited number of items" |
+| **Example** | 36 items per scroll batch | Show only top 3 |
+| **Affects UoU pagination** | Yes — determines batch size for infinite scroll / load more | No — hard cap regardless of pagination |
+
+**Example:** A context has 1,000 records with page size = 36 and infinite scroll enabled. The repeater has "Show limited number" = 3. The user sees exactly 3 items — no further scrolling loads more. The page size remains 36 on the context (relevant if another repeater consumes the same context without a display limit).
+
+The repeater settings panel shows a **read-only preview** of the context's page size, filter, and sort. To change them, the user clicks "Edit context settings" which opens the context configuration panel.
+
 ---
 
 ## 7. Array Binding
@@ -95,6 +111,14 @@ A repeater inside a repeater item — e.g., a tags repeater inside each article 
 - After disconnect: all inner repeaters normalize to **3 default placeholder items** (the standard empty state)
 - A yellow warning appears **only on the first (template) inner repeater**: "Repeater is not connected to data. Connect Items to an array."
 - The full state (DOM, bindings, per-item counts) is saved on disconnect and **restored on reconnect** — the user gets back exactly what they had before
+- **Outer repeater disconnect cascades to inner repeaters:** When the outer repeater's Items is disconnected, all inner repeaters also disconnect — including their own Items binding — since the inner array field (e.g., `tags`) comes from the same context. All items become identical placeholders. Inner repeater pills are cleared, elements reset to default, and styles are preserved. Reconnecting the outer repeater restores the full nested state
+
+**Field path display:**
+- Inside a repeater, bound fields show their **full array path** in the property panel and canvas bind tags
+- Item-level fields are prefixed with the array name: `items.title`, `items.thumbnail`, `tags.tag value`
+- Context-level fields (e.g., `totalItems`) are shown **without a prefix** — they are not scoped to the array
+- The inner repeater's Items binding also shows the path relative to its parent: `items.tags` (since `tags` is a sub-array of `items`)
+- This convention applies to all display locations: property panel chips, canvas bind tags, repeater pills, image controller, and alt text
 
 **Visual behavior:**
 - Nested repeaters have a **transparent border by default** — they don't clutter the canvas
@@ -173,3 +197,20 @@ Disconnecting a repeater's "Items" binding is a **high-impact action** — it ca
 ## 12. System Contexts
 
 System contexts (User, Site, Router) appear **only at page level** — not on sections or repeaters. Always available, cannot be removed.
+
+---
+
+## 13. Field Path Display in Repeaters
+
+**Decision: Item-level fields display their full array path.**
+
+When an element inside a repeater is bound to a field from the repeater's array, the display name includes the array prefix:
+- `items.title`, `items.thumbnail`, `items.author` — for fields inside the main records array
+- `tags.tag value` — for fields inside a sub-array (nested repeater)
+- `totalItems` — context-level fields show **no prefix** (they are not scoped to an array)
+
+The inner repeater's Items chip shows the path relative to the parent: `items.tags` (since `tags` is a sub-array of `items`).
+
+**Applies to:** property panel chips, canvas bind tags, repeater pills, image Source & Alt text, and repeater item count labels.
+
+**Rationale:** This makes it clear which fields come from the repeater's array iteration (per-item) vs. which come from the context itself (shared). The plural form (`items.`) was chosen because it matches the field hierarchy in the context definition.

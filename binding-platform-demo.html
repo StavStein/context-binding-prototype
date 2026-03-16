@@ -628,8 +628,8 @@ body.product-mode #modal.has-spec{outline-offset:2px}
 .rep-grid{display:flex;flex-direction:column;gap:16px;padding:20px}
 .rep-item{border:1.5px solid var(--b2);border-radius:10px;overflow:visible;cursor:pointer;position:relative;
   display:flex;gap:20px;padding:20px;background:var(--sur2);transition:border-color .15s}
-.rep-item:hover{border-color:var(--b3)}
-.rep-item.sel{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-d)}
+.rep-item:hover{border-color:var(--b3) !important}
+.rep-item.sel{border-color:var(--acc) !important;box-shadow:0 0 0 3px var(--acc-d)}
 .rep-thumb{width:140px;height:140px;flex-shrink:0;border-radius:7px;overflow:hidden;padding:0 !important}
 .rep-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .rep-meta{display:flex;gap:8px;align-items:center;margin-top:2px}
@@ -1491,11 +1491,11 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
     </div>
     <div class="sep"></div>
     <div class="page-sel-wrap">
-      <div class="page-sel" onclick="togglePagesPanel(event)"><span class="page-sel-name">📄 Demo 26.2 (home)</span> <span class="page-sel-chevron">▾</span></div>
+      <div class="page-sel" onclick="togglePagesPanel(event)"><span class="page-sel-name">📄 Home Page</span> <span class="page-sel-chevron">▾</span></div>
       <div class="pages-panel" id="pages-panel">
-        <div class="pp-item active" onclick="selectPage(this,'Demo 26.2 (home)')">📄 Demo 26.2 (home)</div>
+        <div class="pp-item active" onclick="selectPage(this,'Home Page')">📄 Home Page</div>
         <div class="pp-group">Repeater · Context Placement</div>
-        <div class="pp-sub" onclick="selectPage(this,'Option A · On Repeater')">Ⓐ On Repeater</div>
+        <div class="pp-sub" onclick="selectPage(this,'Repeaters')">↻ Repeaters</div>
         <div class="pp-item" onclick="selectPage(this,'Multi-State Box')">◫ Multi-State Box</div>
         <div class="pp-group">Item Pages (Dynamic)</div>
         <div class="pp-sub" onclick="selectPage(this,'Product Item')">🛒 Product Item</div>
@@ -2213,18 +2213,18 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                     <div class="c-el-overlay"></div>
                     <div class="c-el bound" id="el-msb-item-thumb-1" onclick="selEl(event,'el-msb-item-thumb-1')" style="cursor:pointer;flex-shrink:0">
                       <div class="c-el-overlay" style="border-radius:6px"></div>
-                      <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · thumbnail</div></div>
+                      <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · items.thumbnail</div></div>
                       <div style="width:56px;height:56px;border-radius:6px;background:var(--b1);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--t3)">🖼</div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0">
                       <div class="c-el bound" id="el-msb-item-title-1" onclick="selEl(event,'el-msb-item-title-1')" style="cursor:pointer">
                         <div class="c-el-overlay" style="border-radius:4px"></div>
-                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                         <div style="font-size:14px;font-weight:600;color:var(--t1)">Getting Started with AI Tools</div>
                       </div>
                       <div class="c-el bound" id="el-msb-item-author-1" onclick="selEl(event,'el-msb-item-author-1')" style="cursor:pointer">
                         <div class="c-el-overlay" style="border-radius:4px"></div>
-                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                         <div style="font-size:11px;color:var(--t3)">Jane Doe</div>
                       </div>
                     </div>
@@ -2233,18 +2233,18 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                     <div class="c-el-overlay"></div>
                     <div class="c-el bound" id="el-msb-item-thumb-2" onclick="selEl(event,'el-msb-item-thumb-2')" style="cursor:pointer;flex-shrink:0">
                       <div class="c-el-overlay" style="border-radius:6px"></div>
-                      <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · thumbnail</div></div>
+                      <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · items.thumbnail</div></div>
                       <div style="width:56px;height:56px;border-radius:6px;background:var(--b1);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--t3)">🖼</div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0">
                       <div class="c-el bound" id="el-msb-item-title-2" onclick="selEl(event,'el-msb-item-title-2')" style="cursor:pointer">
                         <div class="c-el-overlay" style="border-radius:4px"></div>
-                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                         <div style="font-size:14px;font-weight:600;color:var(--t1)">Design Systems at Scale</div>
                       </div>
                       <div class="c-el bound" id="el-msb-item-author-2" onclick="selEl(event,'el-msb-item-author-2')" style="cursor:pointer">
                         <div class="c-el-overlay" style="border-radius:4px"></div>
-                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                        <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                         <div style="font-size:11px;color:var(--t3)">John Smith</div>
                       </div>
                     </div>
@@ -2286,12 +2286,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay"></div>
               <div class="c-el bound" id="el-ruc-art-title-1" onclick="selEl(event,'el-ruc-art-title-1')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                 <div style="font-weight:600;font-size:14px;color:var(--t1)">Getting Started with AI Tools</div>
               </div>
               <div class="c-el bound" id="el-ruc-art-author-1" onclick="selEl(event,'el-ruc-art-author-1')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                 <div style="font-size:12px;color:var(--t3)">Jane Doe</div>
               </div>
             </div>
@@ -2299,12 +2299,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay"></div>
               <div class="c-el bound" id="el-ruc-art-title-2" onclick="selEl(event,'el-ruc-art-title-2')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                 <div style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
               </div>
               <div class="c-el bound" id="el-ruc-art-author-2" onclick="selEl(event,'el-ruc-art-author-2')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                 <div style="font-size:12px;color:var(--t3)">John Smith</div>
               </div>
             </div>
@@ -2312,12 +2312,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay"></div>
               <div class="c-el bound" id="el-ruc-art-title-3" onclick="selEl(event,'el-ruc-art-title-3')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                 <div style="font-weight:600;font-size:14px;color:var(--t1)">UX Trends for 2025</div>
               </div>
               <div class="c-el bound" id="el-ruc-art-author-3" onclick="selEl(event,'el-ruc-art-author-3')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                 <div style="font-size:12px;color:var(--t3)">Alex Rivera</div>
               </div>
             </div>
@@ -2350,7 +2350,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay" style="border-radius:20px"></div>
               <div class="c-el bound" id="el-ruc-tag-val-1" onclick="selEl(event,'el-ruc-tag-val-1')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:20px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                 <div style="padding:4px 14px;background:var(--acc-d);color:var(--acc);border-radius:20px;font-size:12px;font-weight:500">Tech</div>
               </div>
             </div>
@@ -2358,7 +2358,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay" style="border-radius:20px"></div>
               <div class="c-el bound" id="el-ruc-tag-val-2" onclick="selEl(event,'el-ruc-tag-val-2')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:20px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                 <div style="padding:4px 14px;background:var(--acc-d);color:var(--acc);border-radius:20px;font-size:12px;font-weight:500">AI</div>
               </div>
             </div>
@@ -2366,7 +2366,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay" style="border-radius:20px"></div>
               <div class="c-el bound" id="el-ruc-tag-val-3" onclick="selEl(event,'el-ruc-tag-val-3')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:20px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                 <div style="padding:4px 14px;background:var(--acc-d);color:var(--acc);border-radius:20px;font-size:12px;font-weight:500">Design</div>
               </div>
             </div>
@@ -2374,7 +2374,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay" style="border-radius:20px"></div>
               <div class="c-el bound" id="el-ruc-tag-val-4" onclick="selEl(event,'el-ruc-tag-val-4')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:20px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                 <div style="padding:4px 14px;background:var(--acc-d);color:var(--acc);border-radius:20px;font-size:12px;font-weight:500">UX</div>
               </div>
             </div>
@@ -2604,12 +2604,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay"></div>
               <div class="c-el bound" id="el-rc-title-1" onclick="selEl(event,'el-rc-title-1')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                 <div style="font-weight:600;font-size:14px;color:var(--t1)">Getting Started with AI Tools</div>
               </div>
               <div class="c-el bound" id="el-rc-author-1" onclick="selEl(event,'el-rc-author-1')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                 <div style="font-size:12px;color:var(--t3)">Jane Doe</div>
               </div>
             </div>
@@ -2617,12 +2617,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay"></div>
               <div class="c-el bound" id="el-rc-title-2" onclick="selEl(event,'el-rc-title-2')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                 <div style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
               </div>
               <div class="c-el bound" id="el-rc-author-2" onclick="selEl(event,'el-rc-author-2')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                 <div style="font-size:12px;color:var(--t3)">John Smith</div>
               </div>
             </div>
@@ -2630,12 +2630,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="c-el-overlay"></div>
               <div class="c-el bound" id="el-rc-title-3" onclick="selEl(event,'el-rc-title-3')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                 <div style="font-weight:600;font-size:14px;color:var(--t1)">UX Trends for 2025</div>
               </div>
               <div class="c-el bound" id="el-rc-author-3" onclick="selEl(event,'el-rc-author-3')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
-                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                 <div style="font-size:12px;color:var(--t3)">Alex Rivera</div>
               </div>
             </div>
@@ -2660,7 +2660,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
 
     <!-- OPTION A: CONTEXT ON REPEATER -->
     <div class="items-page" id="option-a-page">
-      <div class="page-sel-bar" id="psb-opta" onclick="selectPageEl(event,'page-opta')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg> Ⓐ Context on Repeater</div>
+      <div class="page-sel-bar" id="psb-opta" onclick="selectPageEl(event,'page-opta')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg> Page · Repeaters</div>
       <div style="padding:12px 20px;background:linear-gradient(135deg,#fff7e6,#fff3cd);border-bottom:1px solid #ffc107;font-size:11px;line-height:1.6;color:#856404">
         <b>Option A:</b> The context (data source) lives <b>on the repeater</b>. Sort, filter, and page size are configured in the repeater settings. To enable UoU interactions (external controls), the context must be <b>promoted</b> to the parent section.
       </div>
@@ -2674,73 +2674,74 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         </div>
         <div class="c-repeater bound" id="repeater-opta-prebound" onclick="selEl(event,'repeater-opta-prebound')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
           <div class="ctx-pill rep-pill" id="pill-repeater-opta-prebound"></div>
+          <div class="c-el-overlay"></div>
           <div class="rep-header" onclick="selElSettings(event,'repeater-opta-prebound')">
-            <div class="rep-header-name">↻ Repeater</div>
-            <div class="rep-header-meta">
-              <span class="rep-count" id="rep-count-opta-prebound">📚 Articles · items · 12 items</span>
-              <svg class="rep-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <path d="M9 18l6-6-6-6"/>
-              </svg>
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-opta-prebound">12 items</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-opta-prebound','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
             </div>
           </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="repNoticeAction(event,'repeater-opta-prebound')">Connect data →</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
             <div class="rep-item" id="rep-opta-pb-1" onclick="selEl(event,'rep-opta-pb-1')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:flex-start">
               <div class="c-el-overlay"></div>
-              <div class="c-el bound c-el-img" id="el-opta-pb-thumb-1" onclick="selEl(event,'el-opta-pb-thumb-1')" style="cursor:pointer;width:80px;height:60px;border-radius:6px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center">
-                <div class="c-el-overlay" style="border-radius:6px"></div>
+              <div class="c-el c-el-img bound" id="el-opta-pb-thumb-1" onclick="selEl(event,'el-opta-pb-thumb-1')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#e0d4f5;flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--b2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=260&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block" alt="Article thumbnail">
               </div>
               <div style="flex:1;min-width:0">
-                <div class="c-el bound" id="el-opta-pb-title-1" onclick="selEl(event,'el-opta-pb-title-1')" style="cursor:pointer">
+                <div class="c-el c-el-text bound" id="el-opta-pb-title-1" onclick="selEl(event,'el-opta-pb-title-1')" style="cursor:pointer">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-weight:600;font-size:14px;color:var(--t1)">The Future of AI in Design</div>
+                  <div id="v-el-opta-pb-title-1" style="font-weight:600;font-size:14px;color:var(--t1)">The Future of AI in Design</div>
                 </div>
-                <div class="c-el bound" id="el-opta-pb-author-1" onclick="selEl(event,'el-opta-pb-author-1')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el c-el-text bound" id="el-opta-pb-author-1" onclick="selEl(event,'el-opta-pb-author-1')" style="cursor:pointer;margin-top:4px">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-size:12px;color:var(--t3)">Sarah Chen</div>
+                  <div id="v-el-opta-pb-author-1" style="font-size:12px;color:var(--t3)">Sarah Chen</div>
                 </div>
               </div>
             </div>
             <div class="rep-item" id="rep-opta-pb-2" onclick="selEl(event,'rep-opta-pb-2')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:flex-start">
               <div class="c-el-overlay"></div>
-              <div class="c-el bound c-el-img" id="el-opta-pb-thumb-2" onclick="selEl(event,'el-opta-pb-thumb-2')" style="cursor:pointer;width:80px;height:60px;border-radius:6px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center">
-                <div class="c-el-overlay" style="border-radius:6px"></div>
+              <div class="c-el c-el-img bound" id="el-opta-pb-thumb-2" onclick="selEl(event,'el-opta-pb-thumb-2')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#e0d4f5;flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--b2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=260&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block" alt="Article thumbnail">
               </div>
               <div style="flex:1;min-width:0">
-                <div class="c-el bound" id="el-opta-pb-title-2" onclick="selEl(event,'el-opta-pb-title-2')" style="cursor:pointer">
+                <div class="c-el c-el-text bound" id="el-opta-pb-title-2" onclick="selEl(event,'el-opta-pb-title-2')" style="cursor:pointer">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Building Better Products</div>
+                  <div id="v-el-opta-pb-title-2" style="font-weight:600;font-size:14px;color:var(--t1)">Building Better Products</div>
                 </div>
-                <div class="c-el bound" id="el-opta-pb-author-2" onclick="selEl(event,'el-opta-pb-author-2')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el c-el-text bound" id="el-opta-pb-author-2" onclick="selEl(event,'el-opta-pb-author-2')" style="cursor:pointer;margin-top:4px">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-size:12px;color:var(--t3)">Mark Rivera</div>
+                  <div id="v-el-opta-pb-author-2" style="font-size:12px;color:var(--t3)">Mark Rivera</div>
                 </div>
               </div>
             </div>
             <div class="rep-item" id="rep-opta-pb-3" onclick="selEl(event,'rep-opta-pb-3')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:flex-start">
               <div class="c-el-overlay"></div>
-              <div class="c-el bound c-el-img" id="el-opta-pb-thumb-3" onclick="selEl(event,'el-opta-pb-thumb-3')" style="cursor:pointer;width:80px;height:60px;border-radius:6px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center">
-                <div class="c-el-overlay" style="border-radius:6px"></div>
+              <div class="c-el c-el-img bound" id="el-opta-pb-thumb-3" onclick="selEl(event,'el-opta-pb-thumb-3')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#e0d4f5;flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--b2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=260&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block" alt="Article thumbnail">
               </div>
               <div style="flex:1;min-width:0">
-                <div class="c-el bound" id="el-opta-pb-title-3" onclick="selEl(event,'el-opta-pb-title-3')" style="cursor:pointer">
+                <div class="c-el c-el-text bound" id="el-opta-pb-title-3" onclick="selEl(event,'el-opta-pb-title-3')" style="cursor:pointer">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
+                  <div id="v-el-opta-pb-title-3" style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
                 </div>
-                <div class="c-el bound" id="el-opta-pb-author-3" onclick="selEl(event,'el-opta-pb-author-3')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el c-el-text bound" id="el-opta-pb-author-3" onclick="selEl(event,'el-opta-pb-author-3')" style="cursor:pointer;margin-top:4px">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-size:12px;color:var(--t3)">Jane Doe</div>
+                  <div id="v-el-opta-pb-author-3" style="font-size:12px;color:var(--t3)">Jane Doe</div>
                 </div>
               </div>
             </div>
@@ -2757,74 +2758,71 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         </div>
         <div class="c-repeater" id="repeater-opta-blank" onclick="selEl(event,'repeater-opta-blank')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
           <div class="ctx-pill rep-pill" id="pill-repeater-opta-blank"></div>
+          <div class="c-el-overlay"></div>
           <div class="rep-header" onclick="selElSettings(event,'repeater-opta-blank')">
-            <div class="rep-header-name">↻ Repeater</div>
-            <div class="rep-header-meta">
-              <span class="rep-count" id="rep-count-opta-blank">— not connected</span>
-              <svg class="rep-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <path d="M9 18l6-6-6-6"/>
-              </svg>
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-opta-blank">— not connected</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-opta-blank','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
             </div>
           </div>
-          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="selElSettings(event,'repeater-opta-blank')">Connect data →</span></div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="repNoticeAction(event,'repeater-opta-blank')">Connect data →</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
             <div class="rep-item" id="rep-opta-bl-1" onclick="selEl(event,'rep-opta-bl-1')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
               <div class="c-el-overlay"></div>
-              <div class="c-el c-el-img" id="el-opta-bl-thumb-1" onclick="selEl(event,'el-opta-bl-thumb-1')" style="cursor:pointer;width:60px;height:60px;border-radius:6px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;display:flex;align-items:center;justify-content:center">
-                <div class="c-el-overlay" style="border-radius:6px"></div>
+              <div class="c-el c-el-img" id="el-opta-bl-thumb-1" onclick="selEl(event,'el-opta-bl-thumb-1')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--b2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
               </div>
-              <div style="flex:1">
-                <div class="c-el" id="el-opta-bl-title-1" onclick="selEl(event,'el-opta-bl-title-1')" style="cursor:pointer">
+              <div style="flex:1;min-width:0">
+                <div class="c-el c-el-text" id="el-opta-bl-title-1" onclick="selEl(event,'el-opta-bl-title-1')" style="cursor:pointer">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
+                  <div id="v-el-opta-bl-title-1" style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
                 </div>
-                <div class="c-el" id="el-opta-bl-desc-1" onclick="selEl(event,'el-opta-bl-desc-1')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el c-el-text" id="el-opta-bl-desc-1" onclick="selEl(event,'el-opta-bl-desc-1')" style="cursor:pointer;margin-top:2px">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-size:12px;color:var(--t3)">Description goes here</div>
+                  <div id="v-el-opta-bl-desc-1" style="font-size:12px;color:var(--t3)">Description goes here</div>
                 </div>
               </div>
             </div>
             <div class="rep-item" id="rep-opta-bl-2" onclick="selEl(event,'rep-opta-bl-2')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
               <div class="c-el-overlay"></div>
-              <div class="c-el c-el-img" id="el-opta-bl-thumb-2" onclick="selEl(event,'el-opta-bl-thumb-2')" style="cursor:pointer;width:60px;height:60px;border-radius:6px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;display:flex;align-items:center;justify-content:center">
-                <div class="c-el-overlay" style="border-radius:6px"></div>
+              <div class="c-el c-el-img" id="el-opta-bl-thumb-2" onclick="selEl(event,'el-opta-bl-thumb-2')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--b2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
               </div>
-              <div style="flex:1">
-                <div class="c-el" id="el-opta-bl-title-2" onclick="selEl(event,'el-opta-bl-title-2')" style="cursor:pointer">
+              <div style="flex:1;min-width:0">
+                <div class="c-el c-el-text" id="el-opta-bl-title-2" onclick="selEl(event,'el-opta-bl-title-2')" style="cursor:pointer">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
+                  <div id="v-el-opta-bl-title-2" style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
                 </div>
-                <div class="c-el" id="el-opta-bl-desc-2" onclick="selEl(event,'el-opta-bl-desc-2')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el c-el-text" id="el-opta-bl-desc-2" onclick="selEl(event,'el-opta-bl-desc-2')" style="cursor:pointer;margin-top:2px">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-size:12px;color:var(--t3)">Description goes here</div>
+                  <div id="v-el-opta-bl-desc-2" style="font-size:12px;color:var(--t3)">Description goes here</div>
                 </div>
               </div>
             </div>
             <div class="rep-item" id="rep-opta-bl-3" onclick="selEl(event,'rep-opta-bl-3')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:center">
               <div class="c-el-overlay"></div>
-              <div class="c-el c-el-img" id="el-opta-bl-thumb-3" onclick="selEl(event,'el-opta-bl-thumb-3')" style="cursor:pointer;width:60px;height:60px;border-radius:6px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;display:flex;align-items:center;justify-content:center">
-                <div class="c-el-overlay" style="border-radius:6px"></div>
+              <div class="c-el c-el-img" id="el-opta-bl-thumb-3" onclick="selEl(event,'el-opta-bl-thumb-3')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:var(--sur2);border:1px solid var(--b1);flex-shrink:0;overflow:hidden">
+                <div class="c-el-overlay" style="border-radius:8px"></div>
                 <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag"></div></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--b2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
               </div>
-              <div style="flex:1">
-                <div class="c-el" id="el-opta-bl-title-3" onclick="selEl(event,'el-opta-bl-title-3')" style="cursor:pointer">
+              <div style="flex:1;min-width:0">
+                <div class="c-el c-el-text" id="el-opta-bl-title-3" onclick="selEl(event,'el-opta-bl-title-3')" style="cursor:pointer">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
+                  <div id="v-el-opta-bl-title-3" style="font-weight:600;font-size:14px;color:var(--t1)">Item Title</div>
                 </div>
-                <div class="c-el" id="el-opta-bl-desc-3" onclick="selEl(event,'el-opta-bl-desc-3')" style="cursor:pointer;margin-top:4px">
+                <div class="c-el c-el-text" id="el-opta-bl-desc-3" onclick="selEl(event,'el-opta-bl-desc-3')" style="cursor:pointer;margin-top:2px">
                   <div class="c-el-overlay" style="border-radius:4px"></div>
                   <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                  <div style="font-size:12px;color:var(--t3)">Description goes here</div>
+                  <div id="v-el-opta-bl-desc-3" style="font-size:12px;color:var(--t3)">Description goes here</div>
                 </div>
               </div>
             </div>
@@ -2853,54 +2851,113 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
         </div>
         <div class="c-repeater bound" id="repeater-opta-uou" onclick="selEl(event,'repeater-opta-uou')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
           <div class="ctx-pill rep-pill" id="pill-repeater-opta-uou"></div>
+          <div class="c-el-overlay"></div>
           <div class="rep-header" onclick="selElSettings(event,'repeater-opta-uou')">
-            <div class="rep-header-name">↻ Repeater</div>
-            <div class="rep-header-meta">
-              <span class="rep-count" id="rep-count-opta-uou">📚 Articles · items · 12 items</span>
-              <svg class="rep-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <path d="M9 18l6-6-6-6"/>
-              </svg>
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-opta-uou">12 items</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-opta-uou','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
             </div>
           </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="repNoticeAction(event,'repeater-opta-uou')">Connect data →</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
             <div class="rep-item" id="rep-opta-uou-1" onclick="selEl(event,'rep-opta-uou-1')" style="padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative">
               <div class="c-el-overlay"></div>
-              <div class="c-el bound" id="el-opta-uou-title-1" onclick="selEl(event,'el-opta-uou-title-1')" style="cursor:pointer">
+              <div class="c-el c-el-text bound" id="el-opta-uou-title-1" onclick="selEl(event,'el-opta-uou-title-1')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
                 <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                <div style="font-weight:600;font-size:14px;color:var(--t1)">The Future of AI in Design</div>
+                <div id="v-el-opta-uou-title-1" style="font-weight:600;font-size:14px;color:var(--t1)">The Future of AI in Design</div>
               </div>
-              <div class="c-el bound" id="el-opta-uou-author-1" onclick="selEl(event,'el-opta-uou-author-1')" style="cursor:pointer;margin-top:4px">
+              <div class="c-el c-el-text bound" id="el-opta-uou-author-1" onclick="selEl(event,'el-opta-uou-author-1')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
                 <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                <div style="font-size:12px;color:var(--t3)">Sarah Chen</div>
+                <div id="v-el-opta-uou-author-1" style="font-size:12px;color:var(--t3)">Sarah Chen</div>
               </div>
             </div>
             <div class="rep-item" id="rep-opta-uou-2" onclick="selEl(event,'rep-opta-uou-2')" style="padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative">
               <div class="c-el-overlay"></div>
-              <div class="c-el bound" id="el-opta-uou-title-2" onclick="selEl(event,'el-opta-uou-title-2')" style="cursor:pointer">
+              <div class="c-el c-el-text bound" id="el-opta-uou-title-2" onclick="selEl(event,'el-opta-uou-title-2')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
                 <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                <div style="font-weight:600;font-size:14px;color:var(--t1)">Building Better Products</div>
+                <div id="v-el-opta-uou-title-2" style="font-weight:600;font-size:14px;color:var(--t1)">Building Better Products</div>
               </div>
-              <div class="c-el bound" id="el-opta-uou-author-2" onclick="selEl(event,'el-opta-uou-author-2')" style="cursor:pointer;margin-top:4px">
+              <div class="c-el c-el-text bound" id="el-opta-uou-author-2" onclick="selEl(event,'el-opta-uou-author-2')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
                 <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                <div style="font-size:12px;color:var(--t3)">Mark Rivera</div>
+                <div id="v-el-opta-uou-author-2" style="font-size:12px;color:var(--t3)">Mark Rivera</div>
               </div>
             </div>
             <div class="rep-item" id="rep-opta-uou-3" onclick="selEl(event,'rep-opta-uou-3')" style="padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative">
               <div class="c-el-overlay"></div>
-              <div class="c-el bound" id="el-opta-uou-title-3" onclick="selEl(event,'el-opta-uou-title-3')" style="cursor:pointer">
+              <div class="c-el c-el-text bound" id="el-opta-uou-title-3" onclick="selEl(event,'el-opta-uou-title-3')" style="cursor:pointer">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
                 <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                <div style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
+                <div id="v-el-opta-uou-title-3" style="font-weight:600;font-size:14px;color:var(--t1)">Design Systems at Scale</div>
               </div>
-              <div class="c-el bound" id="el-opta-uou-author-3" onclick="selEl(event,'el-opta-uou-author-3')" style="cursor:pointer;margin-top:4px">
+              <div class="c-el c-el-text bound" id="el-opta-uou-author-3" onclick="selEl(event,'el-opta-uou-author-3')" style="cursor:pointer;margin-top:4px">
                 <div class="c-el-overlay" style="border-radius:4px"></div>
                 <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag"></div></div>
-                <div style="font-size:12px;color:var(--t3)">Jane Doe</div>
+                <div id="v-el-opta-uou-author-3" style="font-size:12px;color:var(--t3)">Jane Doe</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Empty Collection — 0 Items -->
+      <div class="c-section" id="sec-opta-zero" onclick="selEl(event,'sec-opta-zero')" style="margin:16px">
+        <div class="ctx-pill" id="pill-sec-opta-zero"></div>
+        <div style="padding:24px 24px 4px">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--t1);margin-bottom:4px">Empty Collection <span style="display:inline-block;background:#fef3cd;color:#856404;font-size:9px;padding:1px 6px;border-radius:3px;font-weight:600;vertical-align:middle;margin-left:4px">COLLAPSED ON LIVE SITE</span></div>
+          <div style="font-size:11px;color:var(--t3);margin-bottom:12px">Bound to a collection that has 0 items. On the live site this repeater is completely hidden.</div>
+        </div>
+        <div class="c-repeater bound" id="repeater-opta-zero" onclick="selEl(event,'repeater-opta-zero')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
+          <div class="ctx-pill rep-pill" id="pill-repeater-opta-zero"></div>
+          <div class="c-el-overlay"></div>
+          <div class="rep-header" onclick="selElSettings(event,'repeater-opta-zero')">
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-opta-zero">0 items</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-opta-zero','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
+            </div>
+          </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="repNoticeAction(event,'repeater-opta-zero')">Connect data →</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
+            <div style="padding:32px 16px;text-align:center;color:var(--t3);font-size:12px;font-family:'DM Sans',sans-serif;border:1px dashed var(--b1);border-radius:8px;background:var(--b0)">
+              <div style="font-size:20px;margin-bottom:6px;opacity:.4">📭</div>
+              <div>No items to display</div>
+              <div style="font-size:10px;margin-top:4px;opacity:.6">This collection is empty</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Filtered — No Results (0 of 12) -->
+      <div class="c-section" id="sec-opta-filtered" onclick="selEl(event,'sec-opta-filtered')" style="margin:16px">
+        <div class="ctx-pill" id="pill-sec-opta-filtered"></div>
+        <div style="padding:24px 24px 4px">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--t1);margin-bottom:4px">Filtered — No Results <span style="display:inline-block;background:#fef3cd;color:#856404;font-size:9px;padding:1px 6px;border-radius:3px;font-weight:600;vertical-align:middle;margin-left:4px">COLLAPSED ON LIVE SITE</span></div>
+          <div style="font-size:11px;color:var(--t3);margin-bottom:12px">Bound to Articles (12 items) with a filter that returns 0 results. On the live site this repeater is collapsed (hidden).</div>
+        </div>
+        <div class="c-repeater bound" id="repeater-opta-filtered" onclick="selEl(event,'repeater-opta-filtered')" data-no-skeleton="true" style="margin:0 24px 24px;border-radius:6px">
+          <div class="ctx-pill rep-pill" id="pill-repeater-opta-filtered"></div>
+          <div class="c-el-overlay"></div>
+          <div class="rep-header" onclick="selElSettings(event,'repeater-opta-filtered')">
+            <span class="rep-icon">↻</span>
+            <span class="rep-label">Repeater</span>
+            <span class="rep-count" id="rep-count-opta-filtered">0 of 12 items</span>
+            <div class="rep-bind-btn" onclick="openDd(event,'repeater-opta-filtered','Items')" title="Connect to list">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
+            </div>
+          </div>
+          <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="repNoticeAction(event,'repeater-opta-filtered')">Connect data →</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
+            <div style="padding:32px 16px;text-align:center;color:var(--t3);font-size:12px;font-family:'DM Sans',sans-serif;border:1px dashed var(--b1);border-radius:8px;background:var(--b0)">
+              <div style="font-size:20px;margin-bottom:6px;opacity:.4">🔍</div>
+              <div>No results</div>
+              <div style="font-size:10px;margin-top:4px;opacity:.6">Try adjusting your filters — 12 items in this collection</div>
             </div>
           </div>
         </div>
@@ -3317,12 +3374,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="items-card-body">
                 <div class="c-el bound" id="el-ref-tm-name-1" onclick="selEl(event,'el-ref-tm-name-1')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                   <div class="items-card-title">Riley Carter</div>
                 </div>
                 <div class="c-el bound" id="el-ref-tm-role-1" onclick="selEl(event,'el-ref-tm-role-1')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · role › roleName</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.role › roleName</div></div>
                   <div class="items-card-desc" style="color:var(--acc);font-weight:500;font-size:12px">🎨 UX Designer</div>
                 </div>
               </div>
@@ -3337,12 +3394,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="items-card-body">
                 <div class="c-el bound" id="el-ref-tm-name-2" onclick="selEl(event,'el-ref-tm-name-2')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                   <div class="items-card-title">Jordan Lee</div>
                 </div>
                 <div class="c-el bound" id="el-ref-tm-role-2" onclick="selEl(event,'el-ref-tm-role-2')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · role › roleName</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.role › roleName</div></div>
                   <div class="items-card-desc" style="color:var(--acc);font-weight:500;font-size:12px">💻 Developer</div>
                 </div>
               </div>
@@ -3357,12 +3414,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="items-card-body">
                 <div class="c-el bound" id="el-ref-tm-name-3" onclick="selEl(event,'el-ref-tm-name-3')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                   <div class="items-card-title">Sam Nakamura</div>
                 </div>
                 <div class="c-el bound" id="el-ref-tm-role-3" onclick="selEl(event,'el-ref-tm-role-3')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · role › roleName</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.role › roleName</div></div>
                   <div class="items-card-desc" style="color:var(--acc);font-weight:500;font-size:12px">📊 PM</div>
                 </div>
               </div>
@@ -3398,12 +3455,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="items-card-body" style="padding:16px">
                 <div class="c-el bound" id="el-ref-tmf-name-1" onclick="selEl(event,'el-ref-tmf-name-1')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                   <div class="items-card-title">Riley Carter</div>
                 </div>
                 <div class="c-el bound" id="el-ref-tmf-role-1" onclick="selEl(event,'el-ref-tmf-role-1')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · role › roleName</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.role › roleName</div></div>
                   <div class="items-card-desc" style="color:var(--acc);font-size:11px">🎨 UX Designer</div>
                 </div>
               </div>
@@ -3413,12 +3470,12 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
               <div class="items-card-body" style="padding:16px">
                 <div class="c-el bound" id="el-ref-tmf-name-2" onclick="selEl(event,'el-ref-tmf-name-2')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                   <div class="items-card-title">Morgan Blake</div>
                 </div>
                 <div class="c-el bound" id="el-ref-tmf-role-2" onclick="selEl(event,'el-ref-tmf-role-2')" style="cursor:pointer">
                   <div class="c-el-overlay"></div>
-                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · role › roleName</div></div>
+                  <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.role › roleName</div></div>
                   <div class="items-card-desc" style="color:var(--acc);font-size:11px">🎨 UX Designer</div>
                 </div>
               </div>
@@ -3599,7 +3656,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                   <div class="detail-related-info">
                     <div class="c-el bound" id="el-ref-ri-mbname-1" onclick="selEl(event,'el-ref-ri-mbname-1')" style="cursor:pointer">
                       <div class="c-el-overlay"></div>
-                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                       <div class="detail-related-name">Riley Carter</div>
                     </div>
                     <div class="c-el bound" id="el-ref-ri-mbemail-1" onclick="selEl(event,'el-ref-ri-mbemail-1')" style="cursor:pointer">
@@ -3619,7 +3676,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                   <div class="detail-related-info">
                     <div class="c-el bound" id="el-ref-ri-mbname-2" onclick="selEl(event,'el-ref-ri-mbname-2')" style="cursor:pointer">
                       <div class="c-el-overlay"></div>
-                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · name</div></div>
+                      <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">👥 Team Members · items.name</div></div>
                       <div class="detail-related-name">Morgan Blake</div>
                     </div>
                     <div class="c-el bound" id="el-ref-ri-mbemail-2" onclick="selEl(event,'el-ref-ri-mbemail-2')" style="cursor:pointer">
@@ -4218,7 +4275,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
 
     <!-- DEMO 26.2 PAGE -->
     <div class="canvas-inner" id="demo262-page">
-      <div class="page-sel-bar" id="psb-demo262" onclick="selectPageEl(event,'page-demo262')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg> Page · Demo 26.2 (home)</div>
+      <div class="page-sel-bar" id="psb-demo262" onclick="selectPageEl(event,'page-demo262')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg> Page · Home Page</div>
 
       <!-- Section: Weather (connected to Weather App) -->
       <div class="c-section has-ctx" id="sec-d262-weather" onclick="selEl(event,'sec-d262-weather')">
@@ -4354,25 +4411,26 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="12" height="12"><circle cx="4.5" cy="3.5" r="2"/><circle cx="11.5" cy="12.5" r="2"/><path d="M4.5 5.5C4.5 9 11.5 7 11.5 10.5"/></svg>
               </div>
             </div>
+            <div class="rep-notice">Not connected to data — all items show the same placeholder content. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="repNoticeAction(event,'repeater-hn-articles')">Connect data →</span></div>
             <div style="display:flex;flex-direction:column;gap:8px;padding:8px">
               <!-- Item 1 -->
               <div class="rep-item" id="rep-hn-1" onclick="selEl(event,'rep-hn-1')" style="display:flex;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--b1);cursor:pointer;position:relative;align-items:flex-start">
                 <div class="c-el-overlay"></div>
                 <div class="c-el c-el-img bound" id="el-hn-thumb-1" onclick="selEl(event,'el-hn-thumb-1')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#e0d4f5;flex-shrink:0;overflow:hidden">
                   <div class="c-el-overlay" style="border-radius:8px"></div>
-                  <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · thumbnail</div></div>
-                  <div style="width:100%;height:100%;background:linear-gradient(135deg,#e0d4f5,#a78bfa);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">📝</span></div>
+                  <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · items.thumbnail</div></div>
+                  <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=260&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block" alt="Article thumbnail">
                 </div>
                 <div style="flex:1;min-width:0">
                   <div class="c-el c-el-text bound" id="el-hn-title-1" onclick="selEl(event,'el-hn-title-1')" style="cursor:pointer">
                     <div class="c-el-overlay" style="border-radius:4px"></div>
-                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                     <span class="src-tag" id="src-el-hn-title-1"></span>
                     <div style="font-weight:600;font-size:14px;color:var(--t1)">AI in Design Systems</div>
                   </div>
                   <div class="c-el c-el-text bound" id="el-hn-author-1" onclick="selEl(event,'el-hn-author-1')" style="cursor:pointer;margin-top:2px">
                     <div class="c-el-overlay" style="border-radius:4px"></div>
-                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                     <span class="src-tag" id="src-el-hn-author-1"></span>
                     <div style="font-size:12px;color:var(--t3)">Jane Doe</div>
                   </div>
@@ -4392,7 +4450,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-1-1" onclick="selEl(event,'el-hn-tv-1-1')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">Tech</div>
                         </div>
                       </div>
@@ -4400,7 +4458,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-1-2" onclick="selEl(event,'el-hn-tv-1-2')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">AI</div>
                         </div>
                       </div>
@@ -4408,7 +4466,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-1-3" onclick="selEl(event,'el-hn-tv-1-3')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">Design</div>
                         </div>
                       </div>
@@ -4421,19 +4479,19 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                 <div class="c-el-overlay"></div>
                 <div class="c-el c-el-img bound" id="el-hn-thumb-2" onclick="selEl(event,'el-hn-thumb-2')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#d4f5e0;flex-shrink:0;overflow:hidden">
                   <div class="c-el-overlay" style="border-radius:8px"></div>
-                  <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · thumbnail</div></div>
-                  <div style="width:100%;height:100%;background:linear-gradient(135deg,#d4f5e0,#4ade80);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">📐</span></div>
+                  <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · items.thumbnail</div></div>
+                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=260&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block" alt="Article thumbnail">
                 </div>
                 <div style="flex:1;min-width:0">
                   <div class="c-el c-el-text bound" id="el-hn-title-2" onclick="selEl(event,'el-hn-title-2')" style="cursor:pointer">
                     <div class="c-el-overlay" style="border-radius:4px"></div>
-                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                     <span class="src-tag" id="src-el-hn-title-2"></span>
                     <div style="font-weight:600;font-size:14px;color:var(--t1)">Modern CSS Patterns</div>
                   </div>
                   <div class="c-el c-el-text bound" id="el-hn-author-2" onclick="selEl(event,'el-hn-author-2')" style="cursor:pointer;margin-top:2px">
                     <div class="c-el-overlay" style="border-radius:4px"></div>
-                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                     <span class="src-tag" id="src-el-hn-author-2"></span>
                     <div style="font-size:12px;color:var(--t3)">Alex Rivera</div>
                   </div>
@@ -4453,7 +4511,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-2-1" onclick="selEl(event,'el-hn-tv-2-1')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">CSS</div>
                         </div>
                       </div>
@@ -4461,7 +4519,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-2-2" onclick="selEl(event,'el-hn-tv-2-2')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">Frontend</div>
                         </div>
                       </div>
@@ -4474,19 +4532,19 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                 <div class="c-el-overlay"></div>
                 <div class="c-el c-el-img bound" id="el-hn-thumb-3" onclick="selEl(event,'el-hn-thumb-3')" style="cursor:pointer;width:64px;height:64px;border-radius:8px;background:#d4e8f5;flex-shrink:0;overflow:hidden">
                   <div class="c-el-overlay" style="border-radius:8px"></div>
-                  <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · thumbnail</div></div>
-                  <div style="width:100%;height:100%;background:linear-gradient(135deg,#d4e8f5,#60a5fa);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">♿</span></div>
+                  <div class="el-tags"><div class="el-type-tag">Image</div><div class="el-bind-tag">📚 Articles · items.thumbnail</div></div>
+                  <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=260&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block" alt="Article thumbnail">
                 </div>
                 <div style="flex:1;min-width:0">
                   <div class="c-el c-el-text bound" id="el-hn-title-3" onclick="selEl(event,'el-hn-title-3')" style="cursor:pointer">
                     <div class="c-el-overlay" style="border-radius:4px"></div>
-                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · title</div></div>
+                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.title</div></div>
                     <span class="src-tag" id="src-el-hn-title-3"></span>
                     <div style="font-weight:600;font-size:14px;color:var(--t1)">Building for Accessibility</div>
                   </div>
                   <div class="c-el c-el-text bound" id="el-hn-author-3" onclick="selEl(event,'el-hn-author-3')" style="cursor:pointer;margin-top:2px">
                     <div class="c-el-overlay" style="border-radius:4px"></div>
-                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · author</div></div>
+                    <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · items.author</div></div>
                     <span class="src-tag" id="src-el-hn-author-3"></span>
                     <div style="font-size:12px;color:var(--t3)">Sam Chen</div>
                   </div>
@@ -4506,7 +4564,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-3-1" onclick="selEl(event,'el-hn-tv-3-1')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">A11y</div>
                         </div>
                       </div>
@@ -4514,7 +4572,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-3-2" onclick="selEl(event,'el-hn-tv-3-2')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">UX</div>
                         </div>
                       </div>
@@ -4522,7 +4580,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-3-3" onclick="selEl(event,'el-hn-tv-3-3')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">React</div>
                         </div>
                       </div>
@@ -4530,7 +4588,7 @@ html.dark .code-highlight-line{background:#313244;border-left-color:#f9e2af}
                         <div class="c-el-overlay" style="border-radius:20px"></div>
                         <div class="c-el bound" id="el-hn-tv-3-4" onclick="selEl(event,'el-hn-tv-3-4')" style="cursor:pointer">
                           <div class="c-el-overlay" style="border-radius:20px"></div>
-                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags · tag value</div></div>
+                          <div class="el-tags"><div class="el-type-tag">Text</div><div class="el-bind-tag">📚 Articles · tags.tag value</div></div>
                           <div style="padding:2px 7px;background:var(--acc-d);color:var(--acc);border-radius:12px;font-size:10px;font-weight:500;line-height:1.4">Design</div>
                         </div>
                       </div>
@@ -4961,6 +5019,28 @@ const CTX_DEFS = [
     ],
     config:[
     ]},
+  { id:'cms-empty-collection', name:'Empty Collection', icon:'', type:'list', source:'CMS', group:'CMS', itemCount:0,
+    fields:[
+      {name:'itemsStatus', type:'states', sample:'"empty"', enumValues:['loading','empty','hasItems']},
+      {name:'loadState', type:'states', sample:'"ready"', enumValues:['loading','ready']},
+      {name:'displayState', type:'states', sample:'"noItems"', enumValues:['loading','noItems','noResults','hasItems']},
+      {name:'items', type:'array', sample:'[]', itemFields:[
+        {name:'title', type:'string', sample:'"Title"'},
+        {name:'author', type:'string', sample:'"Author"'},
+        {name:'thumbnail', type:'image', sample:'[img url]'},
+      ]},
+      {name:'totalItems', type:'number', sample:'0'},
+    ],
+    itemActions:[],
+    contextActions:[
+      {name:'refresh', label:'Refresh data', icon:''},
+    ],
+    metadata:[
+      {name:'totalCount', label:'Total items', type:'number', sample:'0'},
+      {name:'currentCount', label:'Items on page', type:'number', sample:'0'},
+      {name:'isLoading', label:'Is loading', type:'boolean', sample:'false'},
+    ],
+    config:[]},
   { id:'stores-current-item', name:'Current Item', icon:'', type:'object', source:'Wix Stores', group:'Apps',
     description:'The product currently being viewed on a dynamic product page. Provides all product fields — name, price, images, description, inventory status, and variants.',
     isDynamicPageCtx: true,
@@ -5782,7 +5862,7 @@ const EL_DEFS = {
   'el-art-time-2': {name:'Read Time',    type:'Text',    section:'sec-articles', repTemplate:'el-art-time', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-art-time-3': {name:'Read Time',    type:'Text',    section:'sec-articles', repTemplate:'el-art-time', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'page-home':    {name:'Page · Home', type:'Page', isPage:true, page:'home', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
-  'page-demo262': {name:'Page · Demo 26.2 (home)', type:'Page', isPage:true, page:'demo262', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
+  'page-demo262': {name:'Page · Home Page', type:'Page', isPage:true, page:'demo262', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   'page-items':   {name:'Page · Items (List)', type:'Page', isPage:true, page:'items-list', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   'page-ruc':     {name:'Page · Repeater Usecases', type:'Page', isPage:true, page:'repeater-usecases', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   'page-msb':     {name:'Page · Multi-State Box', type:'Page', isPage:true, page:'msb', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
@@ -5992,7 +6072,7 @@ const EL_DEFS = {
   'el-d262-temp':        {name:'Temperature',       type:'Text',    section:'sec-d262-weather', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-d262-cond':        {name:'Condition',          type:'Text',    section:'sec-d262-weather', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   // Option A: Context on Repeater
-  'page-opta':           {name:'Ⓐ Context on Repeater', type:'Page', isPage:true, page:'option-a', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
+  'page-opta':           {name:'Page · Repeaters', type:'Page', isPage:true, page:'option-a', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   'sec-opta-prebound':   {name:'Section · Pre-bound', type:'Section', isContainer:true, page:'option-a', parentPage:'page-opta', props:[]},
   'repeater-opta-prebound':{name:'Repeater', type:'Repeater', section:'sec-opta-prebound', isRepeater:true, contextModel:'on-repeater', props:[{k:'Items',t:'list'},{k:'Visible',t:'boolean'},{k:'onItemReady',t:'function'},{k:'onItemRemoved',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   'rep-opta-pb-1':       {name:'Article 1', type:'RepItem', section:'sec-opta-prebound', isRepItem:true, props:[]},
@@ -6034,6 +6114,12 @@ const EL_DEFS = {
   'el-opta-uou-author-1':{name:'Author', type:'Text', section:'sec-opta-uou', repTemplate:'el-opta-uou-author', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-opta-uou-author-2':{name:'Author', type:'Text', section:'sec-opta-uou', repTemplate:'el-opta-uou-author', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
   'el-opta-uou-author-3':{name:'Author', type:'Text', section:'sec-opta-uou', repTemplate:'el-opta-uou-author', props:[{k:'Value',t:'string'},{k:'Visible',t:'boolean'}]},
+  // Section 4: Empty Collection (0 items)
+  'sec-opta-zero':        {name:'Section · Empty Collection', type:'Section', isContainer:true, page:'option-a', parentPage:'page-opta', props:[]},
+  'repeater-opta-zero':   {name:'Repeater', type:'Repeater', section:'sec-opta-zero', isRepeater:true, contextModel:'on-repeater', props:[{k:'Items',t:'list'},{k:'Visible',t:'boolean'},{k:'onItemReady',t:'function'},{k:'onItemRemoved',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
+  // Section 5: Filtered — No Results
+  'sec-opta-filtered':    {name:'Section · Filtered No Results', type:'Section', isContainer:true, page:'option-a', parentPage:'page-opta', props:[]},
+  'repeater-opta-filtered':{name:'Repeater', type:'Repeater', section:'sec-opta-filtered', isRepeater:true, contextModel:'on-repeater', props:[{k:'Items',t:'list'},{k:'Visible',t:'boolean'},{k:'onItemReady',t:'function'},{k:'onItemRemoved',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   // Option B: Context on Parent
   'page-optb':           {name:'Ⓑ Context on Parent', type:'Page', isPage:true, page:'option-b', props:[{k:'onClick',t:'function'},{k:'onDblClick',t:'function'},{k:'onMouseIn',t:'function'},{k:'onMouseOut',t:'function'},{k:'onViewportEnter',t:'function'},{k:'onViewportLeave',t:'function'}]},
   'sec-optb-prebound':   {name:'Section · Pre-bound', type:'Section', isContainer:true, page:'option-b', parentPage:'page-optb', props:[]},
@@ -6276,6 +6362,10 @@ const S = {
     'repeater-opta-blank':[],
     'sec-opta-uou':     [],
     'repeater-opta-uou':['cms-articles'],
+    'sec-opta-zero':        [],
+    'repeater-opta-zero':   ['cms-empty-collection'],
+    'sec-opta-filtered':    [],
+    'repeater-opta-filtered':['cms-articles'],
     'sec-optb-prebound':['cms-articles'],
     'sec-optb-blank':   [],
     'sec-optb-uou':     ['cms-articles'],
@@ -6346,9 +6436,9 @@ const S = {
     'el-hn-author-1|Value': {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
     'el-hn-author-2|Value': {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
     'el-hn-author-3|Value': {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
-    'el-hn-thumb-1|Source': {ctxId:'cms-articles', fieldName:'thumbnail', sample:'[img url]'},
-    'el-hn-thumb-2|Source': {ctxId:'cms-articles', fieldName:'thumbnail', sample:'[img url]'},
-    'el-hn-thumb-3|Source': {ctxId:'cms-articles', fieldName:'thumbnail', sample:'[img url]'},
+    'el-hn-thumb-1|Source': {ctxId:'cms-articles', fieldName:'thumbnail', sample:'"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=260&fit=crop"'},
+    'el-hn-thumb-2|Source': {ctxId:'cms-articles', fieldName:'thumbnail', sample:'"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=260&fit=crop"'},
+    'el-hn-thumb-3|Source': {ctxId:'cms-articles', fieldName:'thumbnail', sample:'"https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=260&fit=crop"'},
     'repeater-hn-tags-1|Items': {ctxId:'cms-articles', fieldName:'tags', sample:'["Tech","AI","Design"]'},
     'repeater-hn-tags-2|Items': {ctxId:'cms-articles', fieldName:'tags', sample:'["CSS","Frontend"]'},
     'repeater-hn-tags-3|Items': {ctxId:'cms-articles', fieldName:'tags', sample:'["A11y","UX","React","Design"]'},
@@ -6427,9 +6517,9 @@ const S = {
     'el-opta-pb-author-1|Value':   {ctxId:'cms-articles', fieldName:'author', sample:'"Sarah Chen"'},
     'el-opta-pb-author-2|Value':   {ctxId:'cms-articles', fieldName:'author', sample:'"Mark Rivera"'},
     'el-opta-pb-author-3|Value':   {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
-    'el-opta-pb-thumb-1|Source':   {ctxId:'cms-articles', fieldName:'thumbnail', sample:'[img url]'},
-    'el-opta-pb-thumb-2|Source':   {ctxId:'cms-articles', fieldName:'thumbnail', sample:'[img url]'},
-    'el-opta-pb-thumb-3|Source':   {ctxId:'cms-articles', fieldName:'thumbnail', sample:'[img url]'},
+    'el-opta-pb-thumb-1|Source':   {ctxId:'cms-articles', fieldName:'thumbnail', sample:'"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=260&fit=crop"'},
+    'el-opta-pb-thumb-2|Source':   {ctxId:'cms-articles', fieldName:'thumbnail', sample:'"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=260&fit=crop"'},
+    'el-opta-pb-thumb-3|Source':   {ctxId:'cms-articles', fieldName:'thumbnail', sample:'"https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=260&fit=crop"'},
     'repeater-opta-uou|Items':     {ctxId:'cms-articles', fieldName:'items', sample:'[{title, author, …}]'},
     'el-opta-uou-title-1|Value':   {ctxId:'cms-articles', fieldName:'title', sample:'"The Future of AI in Design"'},
     'el-opta-uou-title-2|Value':   {ctxId:'cms-articles', fieldName:'title', sample:'"Building Better Products"'},
@@ -6437,6 +6527,10 @@ const S = {
     'el-opta-uou-author-1|Value':  {ctxId:'cms-articles', fieldName:'author', sample:'"Sarah Chen"'},
     'el-opta-uou-author-2|Value':  {ctxId:'cms-articles', fieldName:'author', sample:'"Mark Rivera"'},
     'el-opta-uou-author-3|Value':  {ctxId:'cms-articles', fieldName:'author', sample:'"Jane Doe"'},
+    // Section 4: Empty Collection (0 items)
+    'repeater-opta-zero|Items':     {ctxId:'cms-empty-collection', fieldName:'items', sample:'[]'},
+    // Section 5: Filtered — No Results
+    'repeater-opta-filtered|Items': {ctxId:'cms-articles', fieldName:'items', sample:'[{title, author, …}]'},
     // Option B: Context on Parent — pre-bound
     'repeater-optb-prebound|Items':{ctxId:'cms-articles', fieldName:'items', sample:'[{title, author, …}]'},
     'el-optb-pb-title-1|Value':    {ctxId:'cms-articles', fieldName:'title', sample:'"The Future of AI in Design"'},
@@ -6562,7 +6656,7 @@ const S = {
   specPageOpen: false,
   specPageId: null,
   preSpecPage: null,
-  currentPage: 'Demo 26.2 (home)',
+  currentPage: 'Home Page',
   currentItemIdx: 0,
   sortRules: {
     'cms-articles': [{field:'title', dir:'asc'}, {field:'readTime', dir:'desc'}],
@@ -6757,7 +6851,7 @@ function renderActionBar() {
 
 
 function exitTextEditing() {
-  const prev = document.querySelector('.val[contenteditable="true"]');
+  const prev = document.querySelector('[id^="v-"][contenteditable="true"]') || document.querySelector('.val[contenteditable="true"]');
   if (!prev) return;
   const elId = prev.id.replace('v-', '');
   const def = EL_DEFS[elId];
@@ -6766,6 +6860,7 @@ function exitTextEditing() {
   S.staticValues[tpl + '|Value'] = val;
   prev.removeEventListener('input', onInlineInput);
   prev.removeEventListener('keydown', onInlineKeydown);
+  prev.removeEventListener('blur', onInlineBlur);
   prev.contentEditable = 'false';
   prev.closest('.c-el-text')?.classList.remove('editing');
   prev.closest('.c-el')?.classList.remove('editing');
@@ -7042,6 +7137,15 @@ function startInlineEdit(elId) {
   }
   valEl.addEventListener('input', onInlineInput);
   valEl.addEventListener('keydown', onInlineKeydown);
+  valEl.addEventListener('blur', onInlineBlur);
+}
+
+function onInlineBlur(e) {
+  setTimeout(() => {
+    const active = document.activeElement;
+    if (active && active.contentEditable === 'true') return;
+    exitTextEditing();
+  }, 80);
 }
 
 function onInlineInput(e) {
@@ -7076,7 +7180,9 @@ function onInlineKeydown(e) {
 }
 
 function canvasClick(e) {
-  if (e.target === document.getElementById('canvas') || e.target.classList.contains('canvas-grid') || e.target.classList.contains('canvas-inner')) {
+  const t = e.target;
+  const isDropdown = t.closest('.dd-sel-item') || t.closest('.dd-wrap');
+  if (!isDropdown) {
     exitTextEditing();
     closeLinkPanel();
     closeEtPanel();
@@ -7089,7 +7195,7 @@ function canvasClick(e) {
 }
 
 function getCurrentPageId() {
-  const map = {'Homepage':'page-home','Demo 26.2 (home)':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Repeater':'page-rep','Multi-State Box':'page-msb','Option A · On Repeater':'page-opta','Option B · On Parent':'page-optb','Demo':'page-demo','Team Members List':'page-ref-tm','Team Member Item':'page-ref-tmi','Role Item':'page-ref-ri','Book Item':'page-ref-bi','Author Item':'page-ref-ai'};
+  const map = {'Homepage':'page-home','Home Page':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Repeater':'page-rep','Multi-State Box':'page-msb','Repeaters':'page-opta','Option B · On Parent':'page-optb','Demo':'page-demo','Team Members List':'page-ref-tm','Team Member Item':'page-ref-tmi','Role Item':'page-ref-ri','Book Item':'page-ref-bi','Author Item':'page-ref-ai'};
   return map[S.currentPage] || 'page-home';
 }
 
@@ -7140,7 +7246,7 @@ function renderRP() {
   const def = EL_DEFS[S.sel];
   if (!def) return;
 
-  const tabs = def.isRepItem ? ['Settings'] : def.isPage ? ['Design','Settings'] : def.isMultiState ? ['Design','Settings'] : ['Design','Animations','Settings'];
+  const tabs = def.isRepItem ? ['Design','Settings'] : def.isPage ? ['Design','Settings'] : def.isMultiState ? ['Design','Settings'] : ['Design','Animations','Settings'];
   if (!tabs.map(t=>t.toLowerCase()).includes(S.tab)) S.tab = 'settings';
 
   rp.innerHTML = `
@@ -7206,8 +7312,52 @@ function renderBody() {
 function renderDesign() {
   const def = EL_DEFS[S.sel];
   if (def && def.isPage) return renderDesignPage();
+  if (def && def.isRepItem) return renderDesignRepItem();
   if (def && def.type === 'Image') return renderDesignImage();
   return renderDesignDefault();
+}
+
+function renderDesignRepItem() {
+  const collapsible = (label, extra) => `
+    <div class="ps" style="padding:0">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer">
+        <span style="font-size:13px;font-weight:600;color:var(--t1)">${label}</span>
+        <span style="display:flex;align-items:center;gap:6px">${extra || ''}<span style="font-size:10px;color:var(--t3)">▸</span></span>
+      </div>
+    </div>`;
+  return `
+  <div class="ps">
+    <div class="ps-lbl">Size</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:4px;border:1px solid var(--b1);border-radius:6px;padding:4px 8px">
+          <span style="font-size:11px;color:var(--t3);font-weight:500">W</span>
+          <input class="d-inp" value="380" style="width:100%;border:none;padding:0;font-size:12px">
+          <span style="font-size:10px;color:var(--t3)">px*</span>
+        </div>
+      </div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:4px;border:1px solid var(--b1);border-radius:6px;padding:4px 8px">
+          <span style="font-size:11px;color:var(--t3);font-weight:500">H</span>
+          <input class="d-inp" value="183" style="width:100%;border:none;padding:0;font-size:12px">
+          <span style="font-size:10px;color:var(--t3)">px*</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--t3);padding-right:4px"><span style="font-size:9px">···</span></div>
+  </div>
+  <div class="ps">
+    <div class="ps-lbl">Responsive behavior</div>
+    <div style="border:1px solid var(--b1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+      <span style="font-size:12px;color:var(--t1)">Scale proportionally</span>
+      <span style="font-size:10px;color:var(--t3)">⌄</span>
+    </div>
+  </div>
+  ${collapsible('Design')}
+  ${collapsible('Layout')}
+  ${collapsible('Position', '<span style="font-size:10px;color:var(--t3);cursor:help" title="Positioning options">ⓘ</span>')}
+  ${collapsible('Adjust')}
+  ${collapsible('Cursor')}`;
 }
 
 function renderDesignPage() {
@@ -7331,9 +7481,31 @@ function renderAnims() {
 }
 
 /* ── REPEATER PAGINATION HELPERS ── */
+function getRepPagKey(repId) {
+  const def = EL_DEFS[repId];
+  return (def && def.repTemplate) ? def.repTemplate : repId;
+}
 function getRepPag(repId) {
-  if (!S.repPagination[repId]) S.repPagination[repId] = {mode:'scroll', showLimit:false, limit:36, infoBannerDismissed:false};
-  return S.repPagination[repId];
+  const key = getRepPagKey(repId);
+  if (!S.repPagination[key]) S.repPagination[key] = {mode:'scroll', showLimit:false, limit:36, infoBannerDismissed:false};
+  return S.repPagination[key];
+}
+function getEffectiveItemCount(repId, ctxItemCount) {
+  const key = getRepPagKey(repId);
+  const p = S.repPagination?.[key];
+  const total = ctxItemCount || 3;
+  if (p?.showLimit && p.limit < total) return p.limit;
+  return total;
+}
+function formatRepCountLabel(repId, ctxId, fieldLabel) {
+  const ctx = findSource(ctxId);
+  if (!ctx) return '— not connected';
+  const total = ctx.itemCount || 3;
+  const effective = getEffectiveItemCount(repId, total);
+  const icon = ctx.icon || '📦';
+  const name = resolveCtxName(ctxId);
+  const suffix = effective < total ? `${effective} of ${total} items` : `${effective} items`;
+  return fieldLabel ? `${icon} ${name} · ${fieldLabel} · ${suffix}` : `${icon} ${name} · ${suffix}`;
 }
 function setRepPagMode(repId, mode) {
   const p = getRepPag(repId);
@@ -7341,9 +7513,26 @@ function setRepPagMode(repId, mode) {
   renderBody();
   refreshRepLoadMoreButton(repId);
 }
+function syncRepSiblings(repId) {
+  const def = EL_DEFS[repId];
+  if (def && def.repTemplate) {
+    Object.keys(EL_DEFS).forEach(id => {
+      if (EL_DEFS[id].repTemplate === def.repTemplate) {
+        syncRepVisualItems(id);
+        updateRepCountLabel(id);
+      }
+    });
+    const parentRepId = document.getElementById(repId)?.parentElement?.closest('.c-repeater')?.id;
+    if (parentRepId) syncRepVisualItems(parentRepId);
+  } else {
+    syncRepVisualItems(repId);
+    updateRepCountLabel(repId);
+  }
+}
 function toggleRepShowLimit(repId) {
   const p = getRepPag(repId);
   p.showLimit = !p.showLimit;
+  syncRepSiblings(repId);
   renderBody();
 }
 function setRepLimit(repId, val) {
@@ -7351,7 +7540,16 @@ function setRepLimit(repId, val) {
   const max = 1000;
   p.limit = Math.max(1, Math.min(max, parseInt(val) || 1));
   if (p.limit >= 100 && p.mode === 'scroll') p.infoBannerDismissed = false;
+  syncRepSiblings(repId);
   renderBody();
+}
+function updateRepCountLabel(repId) {
+  const b = S.bindings[repId + '|Items'];
+  if (!b) return;
+  const countEl = document.getElementById('rep-count-' + repId.replace('repeater-',''));
+  if (!countEl) return;
+  const dfn = displayFieldName(repId, {fieldName: b.fieldName});
+  countEl.textContent = formatRepCountLabel(repId, b.ctxId, dfn);
 }
 function dismissRepInfoBanner(repId) {
   const p = getRepPag(repId);
@@ -7407,7 +7605,8 @@ function renderSettingsRepeaterOnRepeater(def) {
   let ctxSummaryHtml = '';
   if (b && ctx) {
     const p = getRepPag(repId);
-    const showInfoBanner = p.mode === 'scroll' && p.showLimit && p.limit >= 100 && !p.infoBannerDismissed;
+    const isNestedField = !ctx.fields.some(f => f.name === b.fieldName && (f.type === 'array' || f.type === 'multiReference'));
+    const showInfoBanner = !isNestedField && p.mode === 'scroll' && p.showLimit && p.limit >= 100 && !p.infoBannerDismissed;
 
     const infoBannerHtml = showInfoBanner ? `
           <div style="margin-top:8px;padding:8px 10px;background:color-mix(in srgb, var(--acc) 6%, transparent);border:1px solid color-mix(in srgb, var(--acc) 20%, transparent);border-radius:8px;display:flex;gap:8px;align-items:flex-start">
@@ -7416,6 +7615,29 @@ function renderSettingsRepeaterOnRepeater(def) {
             <span style="font-size:11px;color:var(--t3);cursor:pointer;flex-shrink:0;padding:2px" onclick="event.stopPropagation();dismissRepInfoBanner('${repId}')">✕</span>
           </div>` : '';
 
+    if (isNestedField) {
+      ctxSummaryHtml = `<div class="rp-cat ${S.openCats.repconfig ? 'open' : ''}" id="rp-cat-repconfig">
+        <div class="rp-cat-head" onclick="toggleCat('repconfig')">
+          <span class="rp-cat-chevron">›</span>
+          <span class="rp-cat-title">Pagination, Filter & Sort</span>
+        </div>
+        <div class="rp-cat-body">
+          <div style="padding:10px 12px;background:var(--sur2);border:1px solid var(--b1);border-radius:8px;margin-bottom:10px">
+            <div style="font-size:11px;color:var(--t2);line-height:1.6">This repeater shows a list that lives <b>inside</b> each item (like tags on an article). It's not its own data source, so there's nothing to paginate, filter, or sort here — the parent controls all of that. You can still limit how many are shown.</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0">
+            <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px">Show limited number of items <span style="font-size:10px;color:var(--t3);cursor:help" title="Limit how many items from this nested list are shown on each parent item.">ⓘ</span></span>
+            <div class="tog ${p.showLimit?'on':''}" onclick="toggleRepShowLimit('${repId}')" style="transform:scale(.8)"></div>
+          </div>
+          ${p.showLimit ? `
+          <div style="margin-top:4px;display:flex;align-items:center;gap:10px;padding:2px 0">
+            <input type="range" min="1" max="100" value="${p.limit}" oninput="setRepLimit('${repId}',this.value)" style="flex:1;accent-color:var(--acc);height:4px">
+            <input type="number" min="1" max="100" value="${p.limit}" onchange="setRepLimit('${repId}',this.value)" style="width:52px;padding:4px 6px;border:1px solid var(--b1);border-radius:6px;font-size:12px;font-family:'DM Mono',monospace;text-align:center;background:var(--bg);color:var(--t1)">
+          </div>` : ''}
+          ${p.showLimit ? `<div style="display:flex;justify-content:space-between;padding:4px 0;margin-top:6px;font-size:11px"><span style="color:var(--t3)">Display limit</span><span style="color:var(--t1);font-weight:600">${p.limit} items</span></div>` : ''}
+        </div>
+      </div>`;
+    } else {
     ctxSummaryHtml = `<div class="rp-cat ${S.openCats.repconfig ? 'open' : ''}" id="rp-cat-repconfig">
         <div class="rp-cat-head" onclick="toggleCat('repconfig')">
           <span class="rp-cat-chevron">›</span>
@@ -7434,7 +7656,7 @@ function renderSettingsRepeaterOnRepeater(def) {
             </div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;margin-top:10px">
-            <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px">Show limited number of items <span style="font-size:10px;color:var(--t3);cursor:help" title="Cap the number of items shown per load. Max 100 for infinite scroll, up to 1000 with load more button.">ⓘ</span></span>
+            <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px">Show limited number of items <span style="font-size:10px;color:var(--t3);cursor:help" title="Cap the total number of items displayed. Independent of the context's page size — this limits what the repeater shows, not how data is fetched.">ⓘ</span></span>
             <div class="tog ${p.showLimit?'on':''}" onclick="toggleRepShowLimit('${repId}')" style="transform:scale(.8)"></div>
           </div>
           ${p.showLimit ? `
@@ -7443,8 +7665,10 @@ function renderSettingsRepeaterOnRepeater(def) {
             <input type="number" min="1" max="${p.mode==='scroll'?100:1000}" value="${p.limit}" onchange="setRepLimit('${repId}',this.value)" style="width:52px;padding:4px 6px;border:1px solid var(--b1);border-radius:6px;font-size:12px;font-family:'DM Mono',monospace;text-align:center;background:var(--bg);color:var(--t1)">
           </div>
           ${infoBannerHtml}` : ''}
+          ${p.showLimit ? `<div style="display:flex;justify-content:space-between;padding:4px 0;margin-top:6px;font-size:11px"><span style="color:var(--t3)">Display limit</span><span style="color:var(--t1);font-weight:600">${p.limit} items</span></div>` : ''}
           <div style="border:1px solid var(--b1);border-radius:8px;padding:10px 12px;margin-top:10px">
-            <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Items per load</span><span style="color:var(--t1);font-weight:600">${p.limit}</span></div>
+            <div style="font-size:10px;color:var(--t3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Context settings preview</div>
+            <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Page size</span><span style="color:var(--t1);font-weight:600">${S.cfgValues?.[b.ctxId]?.pageSize || '36'}</span></div>
             <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Filter</span><span style="color:var(--t1);font-weight:600">${(S.filterRules[b.ctxId]||[]).length > 0 ? (S.filterRules[b.ctxId].length + ' filter' + (S.filterRules[b.ctxId].length > 1 ? 's' : '')) : 'None'}</span></div>
             <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Sort</span><span style="color:var(--t1);font-weight:600">${(S.sortRules[b.ctxId]||[]).length > 0 ? (S.sortRules[b.ctxId].length + ' sort rule' + (S.sortRules[b.ctxId].length > 1 ? 's' : '')) : 'None'}</span></div>
             <div style="margin-top:8px;text-align:center">
@@ -7453,6 +7677,7 @@ function renderSettingsRepeaterOnRepeater(def) {
           </div>
         </div>
       </div>`;
+    }
   }
 
   const promoteHtml = ctxCount > 0 && !isPromoted
@@ -7491,7 +7716,7 @@ function renderSettingsRepeaterOnRepeater(def) {
               ${b && ctx
                 ? `<div class="prop-bound-chip prop-bound-detail" style="display:flex">
                     <span class="prop-bound-ctx" onclick="navToSectionCtx('${repId}',event)">${ctx.icon} ${resolveCtxName(ctx.id)}</span>
-                    <span class="prop-bound-field">${b.fieldName}<span class="chip-x" onclick="unbind('${repId}','Items',event)">✕</span></span>
+                    <span class="prop-bound-field">${displayFieldName(repId, b)}<span class="chip-x" onclick="unbind('${repId}','Items',event)">✕</span></span>
                   </div>`
                 : `<span style="font-size:11px;color:var(--t3);font-style:italic">Connect to an array field →</span>`}
             </div>
@@ -7844,8 +8069,8 @@ function connectRepCtxFromParent(repId, ctxId) {
   const repEl = document.getElementById(repId);
   if (repEl) repEl.classList.add('bound');
   const countEl = document.getElementById('rep-count-' + repId.replace('repeater-',''));
-  if (countEl) countEl.textContent = `${ctx.icon || '📦'} ${resolveCtxName(ctx.id)} · ${firstArray} · ${ctx.itemCount || 3} items`;
   S.bindings[repId + '|Items'] = {ctxId, fieldName: firstArray, sample:'[{...}]'};
+  if (countEl) countEl.textContent = formatRepCountLabel(repId, ctxId, firstArray);
   syncRepVisualItems(repId);
   const notice = repEl?.querySelector('.rep-notice');
   if (notice) notice.style.display = 'none';
@@ -7862,8 +8087,8 @@ function connectRepCtxNew(repId) {
     const repEl = document.getElementById(repId);
     if (repEl) repEl.classList.add('bound');
     const countEl = document.getElementById('rep-count-' + repId.replace('repeater-',''));
-    if (countEl) { const ac = findSource('cms-articles'); countEl.textContent = '📚 Articles · items · ' + (ac?.itemCount || 3) + ' items'; }
     S.bindings[repId + '|Items'] = {ctxId:'cms-articles', fieldName:'items', sample:'[{title, author, …}]'};
+    if (countEl) countEl.textContent = formatRepCountLabel(repId, 'cms-articles', 'items');
     syncRepVisualItems(repId);
     const notice = repEl?.querySelector('.rep-notice');
     if (notice) notice.style.display = 'none';
@@ -7926,7 +8151,8 @@ function renderSettings() {
     let ctxSummaryHtml = '';
     if (b && ctx) {
       const p = getRepPag(S.sel);
-      const showInfoBanner = p.mode === 'scroll' && p.showLimit && p.limit >= 100 && !p.infoBannerDismissed;
+      const isNestedField = !ctx.fields.some(f => f.name === b.fieldName && (f.type === 'array' || f.type === 'multiReference'));
+      const showInfoBanner = !isNestedField && p.mode === 'scroll' && p.showLimit && p.limit >= 100 && !p.infoBannerDismissed;
 
       const infoBannerHtml = showInfoBanner ? `
             <div style="margin-top:8px;padding:8px 10px;background:color-mix(in srgb, var(--acc) 6%, transparent);border:1px solid color-mix(in srgb, var(--acc) 20%, transparent);border-radius:8px;display:flex;gap:8px;align-items:flex-start">
@@ -7935,6 +8161,29 @@ function renderSettings() {
               <span style="font-size:11px;color:var(--t3);cursor:pointer;flex-shrink:0;padding:2px" onclick="event.stopPropagation();dismissRepInfoBanner('${S.sel}')">✕</span>
             </div>` : '';
 
+      if (isNestedField) {
+        ctxSummaryHtml = `<div class="rp-cat ${S.openCats.repconfig ? 'open' : ''}" id="rp-cat-repconfig">
+          <div class="rp-cat-head" onclick="toggleCat('repconfig')">
+            <span class="rp-cat-chevron">›</span>
+            <span class="rp-cat-title">Pagination, Filter & Sort</span>
+          </div>
+          <div class="rp-cat-body">
+            <div style="padding:10px 12px;background:var(--sur2);border:1px solid var(--b1);border-radius:8px;margin-bottom:10px">
+              <div style="font-size:11px;color:var(--t2);line-height:1.6">This repeater shows a list that lives <b>inside</b> each item (like tags on an article). It's not its own data source, so there's nothing to paginate, filter, or sort here — the parent controls all of that. You can still limit how many are shown.</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0">
+              <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px">Show limited number of items <span style="font-size:10px;color:var(--t3);cursor:help" title="Limit how many items from this nested list are shown on each parent item.">ⓘ</span></span>
+              <div class="tog ${p.showLimit?'on':''}" onclick="toggleRepShowLimit('${S.sel}')" style="transform:scale(.8)"></div>
+            </div>
+            ${p.showLimit ? `
+            <div style="margin-top:4px;display:flex;align-items:center;gap:10px;padding:2px 0">
+              <input type="range" min="1" max="100" value="${p.limit}" oninput="setRepLimit('${S.sel}',this.value)" style="flex:1;accent-color:var(--acc);height:4px">
+              <input type="number" min="1" max="100" value="${p.limit}" onchange="setRepLimit('${S.sel}',this.value)" style="width:52px;padding:4px 6px;border:1px solid var(--b1);border-radius:6px;font-size:12px;font-family:'DM Mono',monospace;text-align:center;background:var(--bg);color:var(--t1)">
+            </div>` : ''}
+            ${p.showLimit ? `<div style="display:flex;justify-content:space-between;padding:4px 0;margin-top:6px;font-size:11px"><span style="color:var(--t3)">Display limit</span><span style="color:var(--t1);font-weight:600">${p.limit} items</span></div>` : ''}
+          </div>
+        </div>`;
+      } else {
       ctxSummaryHtml = `<div class="rp-cat ${S.openCats.repconfig ? 'open' : ''}" id="rp-cat-repconfig">
           <div class="rp-cat-head" onclick="toggleCat('repconfig')">
             <span class="rp-cat-chevron">›</span>
@@ -7953,7 +8202,7 @@ function renderSettings() {
               </div>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;margin-top:10px">
-              <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px">Show limited number of items <span style="font-size:10px;color:var(--t3);cursor:help" title="Cap the number of items shown per load. Max 100 for infinite scroll, up to 1000 with load more button.">ⓘ</span></span>
+              <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px">Show limited number of items <span style="font-size:10px;color:var(--t3);cursor:help" title="Cap the total number of items displayed. Independent of the context's page size — this limits what the repeater shows, not how data is fetched.">ⓘ</span></span>
               <div class="tog ${p.showLimit?'on':''}" onclick="toggleRepShowLimit('${S.sel}')" style="transform:scale(.8)"></div>
             </div>
             ${p.showLimit ? `
@@ -7962,8 +8211,10 @@ function renderSettings() {
               <input type="number" min="1" max="${p.mode==='scroll'?100:1000}" value="${p.limit}" onchange="setRepLimit('${S.sel}',this.value)" style="width:52px;padding:4px 6px;border:1px solid var(--b1);border-radius:6px;font-size:12px;font-family:'DM Mono',monospace;text-align:center;background:var(--bg);color:var(--t1)">
             </div>
             ${infoBannerHtml}` : ''}
+            ${p.showLimit ? `<div style="display:flex;justify-content:space-between;padding:4px 0;margin-top:6px;font-size:11px"><span style="color:var(--t3)">Display limit</span><span style="color:var(--t1);font-weight:600">${p.limit} items</span></div>` : ''}
             <div style="border:1px solid var(--b1);border-radius:8px;padding:10px 12px;margin-top:10px">
-              <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Items per load</span><span style="color:var(--t1);font-weight:600">${p.limit}</span></div>
+              <div style="font-size:10px;color:var(--t3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Context settings preview</div>
+              <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Page size</span><span style="color:var(--t1);font-weight:600">${S.cfgValues?.[b.ctxId]?.pageSize || '36'}</span></div>
               <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Filter</span><span style="color:var(--t1);font-weight:600">${(S.filterRules[b.ctxId]||[]).length > 0 ? (S.filterRules[b.ctxId].length + ' filter' + (S.filterRules[b.ctxId].length > 1 ? 's' : '')) : 'None'}</span></div>
               <div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px"><span style="color:var(--t3)">Sort</span><span style="color:var(--t1);font-weight:600">${(S.sortRules[b.ctxId]||[]).length > 0 ? (S.sortRules[b.ctxId].length + ' sort rule' + (S.sortRules[b.ctxId].length > 1 ? 's' : '')) : 'None'}</span></div>
               <div style="margin-top:8px;text-align:center">
@@ -7972,6 +8223,7 @@ function renderSettings() {
             </div>
           </div>
         </div>`;
+      }
     }
 
     return `${repCtxHtml}
@@ -7989,7 +8241,7 @@ function renderSettings() {
                 ${b && ctx
                   ? `<div class="prop-bound-chip prop-bound-detail" style="display:flex">
                       <span class="prop-bound-ctx" onclick="navToSectionCtx('${S.sel}',event)">${ctx.icon} ${resolveCtxName(ctx.id)}</span>
-                      <span class="prop-bound-field">${b.fieldName}<span class="chip-x" onclick="unbind('${S.sel}','Items',event)">✕</span></span>
+                      <span class="prop-bound-field">${displayFieldName(S.sel, b)}<span class="chip-x" onclick="unbind('${S.sel}','Items',event)">✕</span></span>
                     </div>`
                   : `<span style="font-size:11px;color:var(--t3);font-style:italic">Connect to an array field →</span>`}
               </div>
@@ -8309,7 +8561,7 @@ function renderImageSettings(elId, def, templateNote, visibleProp) {
           ${linkBound && linkCtx
             ? `<div class="prop-bound-chip prop-bound-detail">
                 <span class="prop-bound-ctx" onclick="navToSectionCtx('${elId}',event)">${linkCtx.icon} ${linkCtx.name}</span>
-                <span class="prop-bound-field">${linkB.fieldName}<span class="chip-x" onclick="unbind('${elId}','Links to',event)">✕</span></span>
+                <span class="prop-bound-field">${displayFieldName(elId, linkB)}<span class="chip-x" onclick="unbind('${elId}','Links to',event)">✕</span></span>
               </div>`
             : `<span style="display:flex;align-items:center;gap:6px">${linkIcon}<input class="prop-static" placeholder="Choose a link" readonly style="cursor:default"></span>`}
         </div></div>
@@ -8325,7 +8577,7 @@ function renderImageSettings(elId, def, templateNote, visibleProp) {
   const srcCtx = srcBound ? findSource(srcB.ctxId) : null;
   const altStaticVal = S.staticValues[`${elId}|Alt Text`] || '';
   if (srcBound && srcCtx) {
-    const altFieldName = srcB.fieldName + ' / alt';
+    const altFieldName = displayFieldName(elId, srcB) + ' / alt';
     accessHtml += `<div class="prop-wrap" id="alt-text-wrap-${elId}">
       <div class="prop-key" style="display:flex;align-items:center;gap:4px">Alt text <span style="font-size:10px;color:var(--t3);cursor:help" title="Auto-populated from bound image object">ⓘ</span></div>
       <div class="prop-row bound" style="border-radius:8px">
@@ -8450,7 +8702,7 @@ function renderPropRow(elId, prop) {
                    oninput="onStaticInput('${elId}','${prop.k}',this.value)">
             ${isBound && ctx ? `<div class="prop-bound-chip prop-bound-detail">
               <span class="prop-bound-ctx" onclick="navToSectionCtx('${elId}',event)">${ctx.icon} ${resolveCtxName(ctx.id)}</span>
-              <span class="prop-bound-field">${b.fieldName}<span class="chip-x" onclick="unbind('${elId}','${prop.k}',event)">✕</span></span>
+              <span class="prop-bound-field">${displayFieldName(elId, b)}<span class="chip-x" onclick="unbind('${elId}','${prop.k}',event)">✕</span></span>
             </div>` : `<span class="prop-bound-chip"><span class="chip-x" onclick="unbind('${elId}','${prop.k}',event)">✕</span></span>`}
           </div>
         </div>
@@ -8481,7 +8733,7 @@ function renderFnParams(elId, propKey, binding) {
     if (isBoundCtx && pCtx) {
       innerHtml = `<div class="prop-bound-chip prop-bound-detail" style="display:flex">
         <span class="prop-bound-ctx" onclick="navToSectionCtx('${elId}',event)">${pCtx.icon} ${pCtx.name}</span>
-        <span class="prop-bound-field">${pb.fieldName}<span class="chip-x" onclick="unbindParam('${elId}','${propKey}','${p.name}',event)">✕</span></span>
+        <span class="prop-bound-field">${displayFieldName(elId, pb)}<span class="chip-x" onclick="unbindParam('${elId}','${propKey}','${p.name}',event)">✕</span></span>
       </div>`;
     } else {
       innerHtml = `<input class="fn-param-input${isStatic ? ' has-value' : ''}" type="text" value="${staticVal}" placeholder="Type value or connect →" oninput="setParamStatic('${elId}','${propKey}','${p.name}',this.value)" onblur="onParamBlur('${elId}','${propKey}')" onkeydown="if(event.key==='Enter'){this.blur()}" />`;
@@ -8527,7 +8779,7 @@ function renderVisibleProp(elId, prop) {
             <div class="prop-val">
               <div class="prop-bound-chip prop-bound-detail" style="display:flex">
                 <span class="prop-bound-ctx" onclick="navToSectionCtx('${elId}',event)">${ctx.icon} ${resolveCtxName(ctx.id)}</span>
-                <span class="prop-bound-field">${b.fieldName}<span class="chip-x" onclick="unbind('${elId}','Visible',event)">✕</span></span>
+                <span class="prop-bound-field">${displayFieldName(elId, b)}<span class="chip-x" onclick="unbind('${elId}','Visible',event)">✕</span></span>
               </div>
             </div>
           </div>
@@ -8575,7 +8827,7 @@ function renderEventHandlerProp(elId, propKey) {
             <div class="prop-val">
               <div class="prop-bound-chip prop-bound-detail" style="display:flex">
                 <span class="prop-bound-ctx" onclick="navToSectionCtx('${elId}',event)">${ctx.icon} ${resolveCtxName(ctx.id)}</span>
-                <span class="prop-bound-field">${b.fieldName}<span class="chip-x" onclick="unbind('${elId}','${propKey}',event)">✕</span></span>
+                <span class="prop-bound-field">${displayFieldName(elId, b)}<span class="chip-x" onclick="unbind('${elId}','${propKey}',event)">✕</span></span>
               </div>
             </div>
           </div>
@@ -8626,6 +8878,30 @@ function renderEventHandlers(elId, def) {
     </div>
     <div class="rp-cat-body">${rows}</div>
   </div>`;
+}
+
+function displayFieldName(elId, binding) {
+  if (!binding?.fieldName) return '';
+  const elDom = document.getElementById(elId);
+  const parentRep = elDom?.classList?.contains('c-repeater')
+    ? elDom.parentElement?.closest('.c-repeater')
+    : elDom?.closest('.c-repeater');
+  if (!parentRep) return binding.fieldName;
+  const repB = S.bindings[parentRep.id + '|Items'];
+  if (!repB) return binding.fieldName;
+  const ctx = findSource(repB.ctxId);
+  if (!ctx) return binding.fieldName;
+  function _deep(fields, name) {
+    for (const f of fields) {
+      if (f.name === name) return f;
+      if (f.itemFields) { const r = _deep(f.itemFields, name); if (r) return r; }
+    }
+    return null;
+  }
+  const arr = _deep(ctx.fields, repB.fieldName);
+  if (!arr?.itemFields) return binding.fieldName;
+  if (_deep(arr.itemFields, binding.fieldName)) return `${repB.fieldName}.${binding.fieldName}`;
+  return binding.fieldName;
 }
 
 function propPlaceholder(key) {
@@ -8746,6 +9022,12 @@ function unbind(elId, propKey, e) {
   }
 }
 
+function getRepContainer(repEl) {
+  return repEl.querySelector(':scope > [style*="flex-wrap:wrap"]') ||
+         repEl.querySelector(':scope > [style*="flex-direction:column"]') ||
+         repEl.querySelector(':scope > .rep-grid');
+}
+
 function doUnbindRepeater(elId) {
   const def = EL_DEFS[elId];
   const sectionId = def.section;
@@ -8764,7 +9046,7 @@ function doUnbindRepeater(elId) {
   allRepIds.forEach(repId => {
     const repDom = document.getElementById(repId);
     if (!repDom) return;
-    const container = repDom.querySelector('[style*="flex-wrap:wrap"]') || repDom.querySelector('[style*="flex-direction:column"]') || repDom.querySelector('.rep-grid');
+    const container = getRepContainer(repDom);
     if (container) S._savedNestedRepState[repId] = container.innerHTML;
     const itemsBk = repId + '|Items';
     if (S.bindings[itemsBk]) savedBindings[itemsBk] = JSON.parse(JSON.stringify(S.bindings[itemsBk]));
@@ -8806,13 +9088,49 @@ function doUnbindRepeater(elId) {
   });
 
   const firstRepDom = document.getElementById(allRepIds[0]);
-  const firstContainer = firstRepDom ? (firstRepDom.querySelector('[style*="flex-wrap:wrap"]') || firstRepDom.querySelector('[style*="flex-direction:column"]') || firstRepDom.querySelector('.rep-grid')) : null;
+  const firstContainer = firstRepDom ? getRepContainer(firstRepDom) : null;
   let templateItemHTML = '';
   if (firstContainer) {
     const firstItem = firstContainer.querySelector(':scope > .rep-item');
     if (firstItem) {
-      const cEl = firstItem.querySelector('.c-el');
-      if (cEl) applyBindingToCanvas(cEl.id, 'Value', null);
+      firstItem.querySelectorAll('.c-el').forEach(cel => {
+        cel.classList.remove('bound');
+        const bt = cel.querySelector('.el-bind-tag');
+        if (bt) bt.textContent = '';
+        if (cel.classList.contains('c-el-img')) {
+          const img = cel.querySelector('img');
+          if (img) img.src = IMG_PLACEHOLDER;
+        } else {
+          const vEl = findValEl(cel.id);
+          if (vEl) {
+            const tpl = EL_DEFS[cel.id]?.repTemplate || cel.id;
+            vEl.textContent = S.staticValues[tpl + '|Value'] || propPlaceholder('Value');
+          }
+        }
+      });
+      firstItem.querySelectorAll('.c-repeater').forEach(innerRep => {
+        innerRep.classList.remove('bound');
+        const pill = innerRep.querySelector('.rep-pill');
+        if (pill) pill.innerHTML = '';
+        const bindBtn = innerRep.querySelector('.rep-bind-btn');
+        if (bindBtn) bindBtn.style.display = '';
+        const ic = getRepContainer(innerRep);
+        if (ic) {
+          const innerFirst = ic.querySelector(':scope > .rep-item');
+          if (innerFirst) {
+            innerFirst.querySelectorAll('.c-el').forEach(cel => {
+              cel.classList.remove('bound');
+              const vEl = findValEl(cel.id);
+              if (vEl) { vEl.textContent = 'Set value...'; vEl.classList.add('static'); }
+              const bt = cel.querySelector('.el-bind-tag');
+              if (bt) bt.textContent = '';
+            });
+            ic.innerHTML = innerFirst.outerHTML + innerFirst.outerHTML + innerFirst.outerHTML;
+          }
+        }
+        const cntEl = document.getElementById('rep-count-' + innerRep.id.replace('repeater-',''));
+        if (cntEl) cntEl.textContent = '— not connected';
+      });
       templateItemHTML = firstItem.outerHTML;
     }
   }
@@ -8823,7 +9141,7 @@ function doUnbindRepeater(elId) {
     repDom.classList.remove('bound');
     const countEl = document.getElementById('rep-count-' + repId.replace('repeater-',''));
     if (countEl) countEl.textContent = '— not connected';
-    const container = repDom.querySelector('[style*="flex-wrap:wrap"]') || repDom.querySelector('[style*="flex-direction:column"]') || repDom.querySelector('.rep-grid');
+    const container = getRepContainer(repDom);
     if (container && templateItemHTML) {
       container.innerHTML = templateItemHTML + templateItemHTML + templateItemHTML;
     }
@@ -9037,7 +9355,7 @@ function refreshAllPills() {
     if (!pill) return;
     const binding = S.bindings[id + '|Items'];
     if (binding) {
-      const ctxLabel = `${resolveCtxName(binding.ctxId)} · ${binding.fieldName}`;
+      const ctxLabel = `${resolveCtxName(binding.ctxId)} · ${displayFieldName(id, binding)}`;
       const bindIcon = `<svg class="el-bind-icon" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l-1.2 1.2a2.5 2.5 0 0 1-3.6-3.4L6.4 2.6a2.5 2.5 0 0 1 3.5 0l.1.1"/><path d="M6 10l1.2-1.2a2.5 2.5 0 0 1 3.6 3.4l-1.2 1.2a2.5 2.5 0 0 1-3.5 0l-.1-.1"/></svg>`;
       pill.innerHTML = `<span class="el-bind-sec" onclick="elPillNavCtx(event,'${id}')">${def.type}</span><span class="el-bind-sep"></span><span class="el-bind-ctx" onclick="elPillNavCtx(event,'${id}')">${bindIcon} ${ctxLabel}</span>`;
     } else {
@@ -9062,6 +9380,23 @@ function refreshAllPills() {
   });
   refreshElementBindTags();
   refreshRepeaterSkeletons();
+}
+
+function refreshAllBindTagText() {
+  Object.keys(S.bindings).forEach(bk => {
+    const [elId, pk] = bk.split('|');
+    if (pk === 'Items' || pk === 'Active State') return;
+    if (pk?.startsWith('param:')) return;
+    const b = S.bindings[bk];
+    if (!b?.ctxId || !b?.fieldName) return;
+    const domEl = document.getElementById(elId);
+    if (!domEl) return;
+    const bindTag = domEl.querySelector('.el-bind-tag');
+    if (!bindTag) return;
+    const ctxName = resolveCtxName(b.ctxId);
+    const dfn = displayFieldName(elId, b);
+    bindTag.innerHTML = buildBindTagHTML(elId, `${ctxName} · ${dfn}`);
+  });
 }
 
 function refreshElementBindTags() {
@@ -9244,7 +9579,7 @@ function doRepItemsBind(elId, propKey, srcId, fieldName) {
   allRepIds.forEach(repId => {
     const repDom = document.getElementById(repId);
     if (!repDom) return;
-    const container = repDom.querySelector('[style*="flex-wrap:wrap"]') || repDom.querySelector('[style*="flex-direction:column"]') || repDom.querySelector('.rep-grid');
+    const container = getRepContainer(repDom);
     if (container) container.querySelectorAll('.rep-unconnected-warn').forEach(el => el.remove());
     if (container && savedStates[repId]) {
       container.innerHTML = savedStates[repId];
@@ -9272,7 +9607,7 @@ function doRepItemsBind(elId, propKey, srcId, fieldName) {
     if (!repDom) return;
     repDom.classList.add('bound');
     const countEl = document.getElementById('rep-count-' + repId.replace('repeater-', ''));
-    if (countEl) countEl.textContent = (ctx.icon || '') + ' ' + resolveCtxName(ctx.id) + ' · ' + (ctx.itemCount || 3) + ' items';
+    if (countEl) countEl.textContent = formatRepCountLabel(repId, ctx.id);
 
     Object.keys(EL_DEFS).forEach(childId => {
       const childDef = EL_DEFS[childId];
@@ -9353,14 +9688,26 @@ function syncRepVisualItems(repeaterId) {
   if (!repEl) return;
   const bkey = repeaterId + '|Items';
   const b = S.bindings[bkey];
-  const container = repEl.querySelector('[style*="flex-direction:column"]') || repEl.querySelector('.rep-grid');
+  const container = getRepContainer(repEl) || repEl.querySelector('[style*="flex-direction:column"]') || repEl.querySelector('.rep-grid');
   if (!container) return;
   const realItems = container.querySelectorAll(':scope > .rep-item:not(.rep-visual-clone)');
   const baseCount = realItems.length || 3;
   container.querySelectorAll('.rep-visual-clone').forEach(el => el.remove());
+  realItems.forEach(ri => { ri.style.display = ''; ri.classList.remove('rep-hidden-by-limit'); });
   if (!b) return;
   const ctx = findSource(b.ctxId);
-  const targetCount = ctx?.itemCount || baseCount;
+  const isNested = !!repEl.parentElement?.closest('.c-repeater');
+  let targetCount = isNested ? baseCount : (ctx?.itemCount || baseCount);
+  const pagKey = getRepPagKey(repeaterId);
+  const pag = S.repPagination?.[pagKey];
+  if (pag?.showLimit && pag.limit < targetCount) targetCount = pag.limit;
+  if (targetCount < baseCount) {
+    for (let i = targetCount; i < baseCount; i++) {
+      realItems[i].style.display = 'none';
+      realItems[i].classList.add('rep-hidden-by-limit');
+    }
+    return;
+  }
   if (targetCount <= baseCount) return;
   const def = EL_DEFS[repeaterId];
   const sectionId = def?.section;
@@ -9376,22 +9723,34 @@ function syncRepVisualItems(repeaterId) {
     const clone = templateItem.cloneNode(true);
     clone.classList.add('rep-visual-clone');
     clone.removeAttribute('id');
-    clone.style.pointerEvents = 'none';
     clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
     clone.querySelectorAll('[onclick]').forEach(el => el.removeAttribute('onclick'));
-    clone.querySelectorAll('.c-el-overlay').forEach(el => el.remove());
+    clone.querySelectorAll('.sel').forEach(el => el.classList.remove('sel'));
+    clone.querySelectorAll('.editing').forEach(el => el.classList.remove('editing'));
+    clone.querySelectorAll('.child-sel').forEach(el => el.classList.remove('child-sel'));
+    clone.classList.remove('sel', 'editing', 'child-sel');
     clone.querySelectorAll('.el-tags').forEach(el => el.remove());
     clone.querySelectorAll('.ctx-pill').forEach(el => el.remove());
     clone.querySelectorAll('.rep-unconnected-warn').forEach(el => el.remove());
+    const tplItemId = templateItem.id;
+    if (tplItemId) {
+      clone.style.cursor = 'pointer';
+      clone.addEventListener('click', function(e) { e.stopPropagation(); selEl(e, tplItemId); });
+    }
     const templateEls = templateItem.querySelectorAll('.c-el');
     const cloneEls = clone.querySelectorAll('.c-el');
     cloneEls.forEach((cel, idx) => {
-      cel.style.pointerEvents = 'auto';
       cel.style.cursor = 'pointer';
       const tplEl = templateEls[idx];
       if (tplEl && tplEl.id) {
         cel.addEventListener('click', function(e) { e.stopPropagation(); selEl(e, tplEl.id); });
       }
+    });
+    clone.querySelectorAll('.c-repeater').forEach(innerRep => {
+      innerRep.style.cursor = 'pointer';
+      innerRep.querySelectorAll('.rep-item').forEach(ri => {
+        ri.style.cursor = 'pointer';
+      });
     });
     if (sampleData.length > 0) {
       const row = sampleData[i % sampleData.length];
@@ -9410,7 +9769,7 @@ function syncRepVisualItems(repeaterId) {
             const img = clnEl.querySelector('img');
             if (img && row[bind.fieldName] !== '[img url]') img.src = row[bind.fieldName];
           } else {
-            const valDiv = clnEl.querySelector('.val') || clnEl.querySelector('div[style]') || clnEl.querySelector('span');
+            const valDiv = clnEl.querySelector('.val') || Array.from(clnEl.children).reverse().find(ch => ch.tagName === 'DIV' && !ch.classList.contains('c-el-overlay') && !ch.classList.contains('el-tags') && !ch.classList.contains('bound-dot') && !ch.classList.contains('src-tag')) || clnEl.querySelector('span:not(.src-tag)');
             if (valDiv) valDiv.textContent = row[bind.fieldName].replace(/^"|"$/g, '');
           }
         });
@@ -10395,7 +10754,7 @@ const ITEM_DATA = [
 function selectPage(el, name) {
   document.querySelectorAll('.pp-item, .pp-sub').forEach(i => i.classList.remove('active'));
   el.classList.add('active');
-  const pageIcon = name === 'Product Item' ? '🛒' : name === 'Repeater Usecases' || name === 'Repeater' ? '↻' : name === 'Multi-State Box' ? '◫' : name.startsWith('Option A') ? 'Ⓐ' : name.startsWith('Option B') ? 'Ⓑ' : name === 'Team Members List' ? '👥' : name === 'Team Member Item' ? '👤' : name === 'Role Item' ? '🏷' : name === 'Book Item' ? '📖' : name === 'Author Item' ? '✍️' : '📄';
+  const pageIcon = name === 'Product Item' ? '🛒' : name === 'Repeater Usecases' || name === 'Repeater' ? '↻' : name === 'Multi-State Box' ? '◫' : name === 'Repeaters' ? '↻' : name.startsWith('Option B') ? 'Ⓑ' : name === 'Team Members List' ? '👥' : name === 'Team Member Item' ? '👤' : name === 'Role Item' ? '🏷' : name === 'Book Item' ? '📖' : name === 'Author Item' ? '✍️' : '📄';
   document.querySelector('.page-sel').innerHTML = `<span class="page-sel-name">${pageIcon} ${name}</span> <span class="page-sel-chevron">▾</span>`;
   document.getElementById('pages-panel').classList.remove('open');
 
@@ -10445,7 +10804,7 @@ function selectPage(el, name) {
     repPage.classList.add('active-page');
   } else if (name === 'Multi-State Box') {
     msbPage.classList.add('active-page');
-  } else if (name === 'Option A · On Repeater') {
+  } else if (name === 'Repeaters') {
     optAPage.classList.add('active-page');
   } else if (name === 'Option B · On Parent') {
     optBPage.classList.add('active-page');
@@ -10461,7 +10820,7 @@ function selectPage(el, name) {
     aiPage.classList.add('active-page');
   } else if (name === 'Demo') {
     demoPage.classList.remove('hidden-page');
-  } else if (name === 'Demo 26.2 (home)') {
+  } else if (name === 'Home Page') {
     demo262Page.classList.remove('hidden-page');
   } else {
     homePage.classList.remove('hidden-page');
@@ -10471,7 +10830,7 @@ function selectPage(el, name) {
   document.querySelectorAll('.sel').forEach(n => n.classList.remove('sel'));
   renderRP();
   refreshAllPills();
-  setTimeout(() => { refreshRepeaterSkeletons(); refreshAllRepLoadMoreButtons(); }, 50);
+  setTimeout(() => { refreshRepeaterSkeletons(); refreshAllRepLoadMoreButtons(); refreshAllBindTagText(); }, 50);
 }
 
 function navItem(dir) {
@@ -12388,25 +12747,27 @@ function applyBindingToCanvas(elId, propKey, field, ctxId) {
     // Repeater items binding — update the count pill and header
     if (propKey === 'Items') {
       const countEl = document.getElementById('rep-count-' + elId.replace('repeater-',''));
-      const boundCtx = findSource(srcId);
-      if (countEl) countEl.textContent = `${ctxName} · ${field.name} · ${boundCtx?.itemCount || 3} items`;
+      const dfn = displayFieldName(elId, {fieldName: field.name});
+      if (countEl) countEl.textContent = formatRepCountLabel(elId, srcId, dfn);
       syncRepVisualItems(elId);
       return;
     }
+
+    const dfn = displayFieldName(elId, {fieldName: field.name});
 
     if (propKey === 'Visible') {
       domEl.style.outline = '2px dashed var(--grn)';
       const svgEl = domEl.querySelector('svg');
       if (svgEl) svgEl.style.opacity = '0.35';
       const bindTag = domEl.querySelector('.el-bind-tag');
-      const ctxLabel = `${ctxName} · ${field.name}`;
+      const ctxLabel = `${ctxName} · ${dfn}`;
       if (bindTag) bindTag.innerHTML = buildBindTagHTML(elId, ctxLabel);
       return;
     }
 
     if (valEl) {
       const bindTag = domEl.querySelector('.el-bind-tag');
-      const ctxLabel = `${ctxName} · ${field.name}`;
+      const ctxLabel = `${ctxName} · ${dfn}`;
       if (bindTag) bindTag.innerHTML = buildBindTagHTML(elId, ctxLabel);
       valEl.textContent = field.sample.replace(/^"|"$/g, '');
       if (domEl.classList.contains('c-el-text')) {
@@ -12417,7 +12778,7 @@ function applyBindingToCanvas(elId, propKey, field, ctxId) {
       if (valEl.classList.contains('static')) valEl.classList.remove('static');
     } else if (!domEl.classList.contains('c-el-img') && !domEl.querySelector('.c-el-btn')) {
       const bindTag = domEl.querySelector('.el-bind-tag');
-      const ctxLabel = `${ctxName} · ${field.name}`;
+      const ctxLabel = `${ctxName} · ${dfn}`;
       if (bindTag) bindTag.innerHTML = buildBindTagHTML(elId, ctxLabel);
       const textDiv = [...domEl.children].find(ch => !ch.classList.contains('c-el-overlay') && !ch.classList.contains('el-tags') && ch.tagName === 'DIV');
       if (textDiv) textDiv.textContent = field.sample.replace(/^"|"$/g, '');
@@ -12425,9 +12786,19 @@ function applyBindingToCanvas(elId, propKey, field, ctxId) {
 
     if (domEl.classList.contains('c-el-img')) {
       const cimgEl = document.getElementById('cimg-' + elId) || domEl.querySelector('img');
-      if (cimgEl) cimgEl.src = IMG_SKY;
+      if (cimgEl) {
+        const def2 = EL_DEFS[elId];
+        const tplKey = def2?.repTemplate || elId;
+        const sibIds = Object.keys(EL_DEFS).filter(id => EL_DEFS[id].repTemplate === tplKey);
+        const imgIdx = Math.max(0, sibIds.indexOf(elId));
+        const parentRep = domEl.closest('.c-repeater');
+        const repB = parentRep ? S.bindings[parentRep.id + '|Items'] : null;
+        const row = repB ? getRepSampleRow(repB.ctxId, imgIdx) : {};
+        const rowImg = row[field.name];
+        cimgEl.src = (rowImg && rowImg !== '[img url]' && rowImg.startsWith('http')) ? rowImg : ARTICLE_IMAGES[imgIdx % ARTICLE_IMAGES.length];
+      }
       const imgBindTag = domEl.querySelector('.el-bind-tag');
-      const ctxLabel = `${ctxName} · ${field.name}`;
+      const ctxLabel = `${ctxName} · ${dfn}`;
       if (imgBindTag) imgBindTag.innerHTML = buildBindTagHTML(elId, ctxLabel);
     }
 
@@ -13802,17 +14173,17 @@ function renderTree() {
   const isRep = S.currentPage === 'Repeater';
   const isMsb = S.currentPage === 'Multi-State Box';
   const isDemo = S.currentPage === 'Demo';
-  const isDemo262 = S.currentPage === 'Demo 26.2 (home)';
+  const isDemo262 = S.currentPage === 'Home Page';
   const isRefTm = S.currentPage === 'Team Members List';
   const isRefTmi = S.currentPage === 'Team Member Item';
   const isRefRi = S.currentPage === 'Role Item';
   const isRefBi = S.currentPage === 'Book Item';
   const isRefAi = S.currentPage === 'Author Item';
   const sections = isItemsList ? ['sec-items'] : isConcept ? ['sec-rel-product','sec-rel-locations'] : isRuc ? ['sec-ruc-articles','sec-ruc-tags'] : isRep ? ['sec-rep-connected','sec-rep-empty','sec-rep-controls'] : isMsb ? ['sec-msb'] : isDemo ? ['sec-demo-team','sec-demo-empty'] : isDemo262 ? ['sec-d262-weather','sec-d262-empty1','sec-home-nested','sec-d262-empty2'] : isRefTm ? ['sec-ref-tm'] : isRefTmi ? ['sec-ref-tmi-info','sec-ref-tmi-role','sec-ref-tmi-members','sec-ref-tmi-members-b'] : isRefRi ? ['sec-ref-ri-info','sec-ref-ri-members','sec-ref-ri-members-b','sec-ref-ri-others'] : isRefBi ? ['sec-ref-bi-info','sec-ref-bi-authors','sec-ref-bi-related','sec-ref-bi-byauthor','sec-ref-bi-all'] : isRefAi ? ['sec-ref-ai-info','sec-ref-ai-books'] : ['sec-hero','sec-weather','sec-articles'];
-  const pageLabel = isItemsList ? 'Items (List)' : isConcept ? 'Product Item' : isRuc ? 'Repeater Usecases' : isRep ? 'Repeater' : isMsb ? 'Multi-State Box' : isDemo ? 'Demo' : isDemo262 ? 'Demo 26.2 (home)' : isRefTm ? 'Team Members List' : isRefTmi ? 'Team Member Item' : isRefRi ? 'Role Item' : isRefBi ? 'Book Item' : isRefAi ? 'Author Item' : 'Home Page';
+  const pageLabel = isItemsList ? 'Items (List)' : isConcept ? 'Product Item' : isRuc ? 'Repeater Usecases' : isRep ? 'Repeater' : isMsb ? 'Multi-State Box' : isDemo ? 'Demo' : isDemo262 ? 'Home Page' : isRefTm ? 'Team Members List' : isRefTmi ? 'Team Member Item' : isRefRi ? 'Role Item' : isRefBi ? 'Book Item' : isRefAi ? 'Author Item' : 'Homepage';
   const pageIcon = isConcept ? '🛒' : (isRefTm || isRefTmi) ? '👥' : (isRefRi) ? '🏷' : (isRefBi) ? '📖' : (isRefAi) ? '✍️' : '📄';
 
-  const pageIdMap = {'Home Page':'page-home','Homepage':'page-home','Demo 26.2 (home)':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Repeater':'page-rep','Multi-State Box':'page-msb','Option A · On Repeater':'page-opta','Option B · On Parent':'page-optb','Demo':'page-demo','Team Members List':'page-ref-tm','Team Member Item':'page-ref-tmi','Role Item':'page-ref-ri','Book Item':'page-ref-bi','Author Item':'page-ref-ai'};
+  const pageIdMap = {'Homepage':'page-home','Home Page':'page-demo262','Items (List)':'page-items','Product Item':'page-rel-detail','Repeater Usecases':'page-ruc','Repeater':'page-rep','Multi-State Box':'page-msb','Repeaters':'page-opta','Option B · On Parent':'page-optb','Demo':'page-demo','Team Members List':'page-ref-tm','Team Member Item':'page-ref-tmi','Role Item':'page-ref-ri','Book Item':'page-ref-bi','Author Item':'page-ref-ai'};
   const pageId = pageIdMap[pageLabel] || null;
   const pageCtxIds = pageId ? (S.ctxMap[pageId]||[]) : [];
   const hasDynamicPage = isConcept || isRefTmi || isRefRi || isRefBi || isRefAi;
@@ -14578,12 +14949,14 @@ const PRODUCT_SPECS = {
           ['PD-3 · Auto-bind', '<span class="spec-status implemented">Automatic</span>', '"Items" property auto-binds to the context\'s array field when a list context is attached — unless "Items" is already bound to another context.'],
           ['PD-4 · Copy & Paste', '<span class="spec-status implemented">Smart duplication</span>', 'Coupled context → <b>duplicated</b> (new instance). Parent context → <b>not duplicated</b> (binding references parent). Paste out of context → disconnected (<span class="spec-tbd">TBD</span> editor experience).'],
           ['PD-5 · Drag & Drop', '<span class="spec-status in-progress">Partial</span>', 'Coupled context moves with repeater. Inherited context: <span class="spec-tbd">TBD</span> — user must choose: copy to new section / promote to page / disconnect.'],
-          ['PD-6 · Sort, Filter & Page Size', '<span class="spec-status implemented">On context instance</span>', 'Sort, filter, and page size are always configured on the <b>context instance</b>, not on the repeater itself. The repeater settings link to the context configuration panel for the context bound to "Items". These settings apply only to the <b>main records array</b> — other arrays exposed by the same context (e.g., tags, categories) are not affected.<br><br><b>⚠️ Context filter = hard ceiling:</b> Filters set on the context by the site builder define the <b>maximum dataset boundary</b>. When UoU (User-on-User) filters are added at runtime by the site visitor (e.g., via a search bar or filter dropdown), they can only <b>narrow down</b> the results — they <b>cannot expose items</b> that were excluded by the context-level filter. The context filter acts as a security and data boundary that the visitor cannot bypass.<br><br><span class="spec-tbd">TBD</span>: how to distinguish between the records array and other arrays in the context schema.'],
+          ['PD-6 · Sort, Filter & Page Size', '<span class="spec-status implemented">On context instance</span>', 'Sort, filter, and page size are always configured on the <b>context instance</b>, not on the repeater itself. The repeater settings show a <b>read-only preview</b> of the context\'s page size, filter, and sort, with a link to open the context configuration panel.<br><br><b>Page Size vs. Display Limit — two independent controls:</b><br>• <b>Page size</b> (context-level) — how many items are fetched per pagination batch (e.g., 36 per scroll). Configured in context settings.<br>• <b>Display limit</b> (repeater-level) — "Show limited number of items" caps the total visible items regardless of pagination (e.g., top 3). Configured in repeater settings.<br><br><b>Example:</b> Context has 1,000 records, page size = 36, infinite scroll. Repeater display limit = 3. The user sees 3 items with no further scrolling. The page size remains 36 on the context for other consumers.<br><br><b>⚠️ Context filter = hard ceiling:</b> Filters set on the context by the site builder define the <b>maximum dataset boundary</b>. When UoU (User-on-User) filters are added at runtime by the site visitor (e.g., via a search bar or filter dropdown), they can only <b>narrow down</b> the results — they <b>cannot expose items</b> that were excluded by the context-level filter. The context filter acts as a security and data boundary that the visitor cannot bypass.<br><br><span class="spec-tbd">TBD</span>: how to distinguish between the records array and other arrays in the context schema.'],
           ['PD-7 · Array binding', '<span class="spec-status implemented">Any array</span>', '"Items" can bind to <b>any array field</b> exposed by the context. There are two types of arrays:<br>• <b>Records array</b> — the main collection (e.g., articles, products). All context configuration (sort, filter, page size) applies to this array.<br>• <b>Item-level array</b> — a field on each record (e.g., tags, images). No configuration — it\'s just a nested value on the item.<br><br>Inside the repeater, elements can bind to:<br>• <b>Item fields</b> — from the current array item (different value per row)<br>• <b>Context fields</b> — from the context itself (same value across all rows, e.g., totalItems)<br><br><span class="spec-tbd">TBD</span>: whether each repeater item will be exposed as a <b>sub-context</b> — giving inner elements a scoped context for the current item.'],
           ['PD-8 · Canvas indication: unbound "Items"', '<span class="spec-tbd">TBD</span>', 'Two different states look identical on canvas — the repeater shows 3 placeholder items in both cases:<br><br>• <b>Context attached, "Items" unbound</b> — context exists on the repeater (or parent), but "Items" is not connected to any array. The user needs to <b>bind "Items"</b>.<br>• <b>No context at all</b> — repeater has no context. The user needs to <b>add a context first</b>, then bind "Items".<br><br>The canvas indication must <b>distinguish between these two states</b> so the user knows what action to take. Currently described as a single "not connected" indication (Flows 6 & 7), but in practice the entry point and messaging should differ:<br>• With context → direct to "Items" binding panel<br>• Without context → direct to context attachment first<br><br><span class="spec-tbd">TBD</span>: exact visual differentiation — separate messages, different CTA labels, or a single flow that detects context availability and adapts.'],
           ['PD-9 · "Items" bound to a different context', '<span class="spec-tbd">TBD</span>', 'The repeater can have a context attached to it (e.g., <b>CMS Articles</b>) while "Items" is bound to a <b>different</b> context from a parent scope (e.g., <b>CMS Products</b> on the section). This is a valid state — but potentially confusing:<br><br>• The Context section in the repeater settings shows <b>CMS Articles</b><br>• The "Items" binding chip shows <b>CMS Products · items</b><br>• The canvas displays Products data, not Articles<br><br>The user may assume the attached context is what "feeds" the repeater, when in fact it\'s a different source entirely. The attached context is still available for inner elements to bind to (context-level fields), but the <b>list data</b> comes from elsewhere.<br><br><span class="spec-tbd">TBD</span>: How to communicate this clearly:<br>• Should the settings panel highlight the mismatch? (e.g., a note: "Items is connected to a different context")<br>• Should the "Items" chip in Properties show the source context with a scope badge to distinguish it from the attached context?<br>• Should the canvas indication reflect the actual data source, not just the attached context?'],
           ['PD-10 · Promote via binding panel', '<span class="spec-tbd">TBD</span>', 'When a context lives on a repeater and is used by its "Items" binding — the <b>binding panel</b> (Connect · Value) should offer that context as a source to <b>all components on the page</b>, not just those inside the repeater.<br><br>The user would see the repeater\'s context in the source dropdown with a scope badge (e.g., <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:color-mix(in srgb, var(--acc) 12%, transparent);color:var(--acc);font-family:DM Mono,monospace">Repeater</span>) and an inline <b>promote</b> action. Selecting it would automatically promote the context to the section (or page) level so it becomes available in the broader scope.<br><br>This enables a common pattern: user connects a repeater to data, then wants an external element (e.g., a title, a filter control) to access the same context — without manually promoting first.<br><br><span class="spec-tbd">TBD (R&D)</span>: Can scope resolution surface repeater-level contexts to elements outside the repeater? Does promote need to happen <b>before</b> or <b>during</b> the bind action?'],
-          ['PD-12 · Nested repeaters', '<span class="spec-status implemented">Implemented</span>', 'A repeater can be placed inside another repeater item — e.g., a tags repeater inside each article item. The inner repeater:<br><br>• Does <b>not need its own context</b> — it consumes the parent repeater\'s context (scope badge: <b>"Parent repeater"</b>)<br>• Can optionally have its own context attached (same <code>contextModel: on-repeater</code> capability)<br>• Binds "Items" to a <b>nested array field</b> (e.g., <code>items › tags</code>). The field dropdown shows hierarchy paths for nested arrays<br>• Each instance can have a <b>different item count</b> per parent item (e.g., 3 tags, 2 tags, 4 tags)<br>• Inner elements see the sub-array\'s own fields (e.g., <code>tag value</code>), not the parent\'s top-level fields<br><br><b>Disconnect / reconnect:</b> Disconnecting the inner repeater cascades to all inner bindings. All instances normalize to 3 default items. Reconnecting restores original per-item counts and bindings.<br><br><b>Promote:</b> Promote is a <b>move</b> operation — the context is removed from the repeater and placed on the section. The repeater then inherits from the section.<br><br><b>Visual behavior:</b> Nested repeaters have a transparent border by default. Border appears on hover, direct selection, or child selection — avoiding visual clutter in deeply nested layouts.'],
+          ['PD-12 · Nested repeaters', '<span class="spec-status implemented">Implemented</span>', 'A repeater can be placed inside another repeater item — e.g., a tags repeater inside each article item. The inner repeater:<br><br>• Does <b>not need its own context</b> — it consumes the parent repeater\'s context (scope badge: <b>"Parent repeater"</b>)<br>• Can optionally have its own context attached (same <code>contextModel: on-repeater</code> capability)<br>• Binds "Items" to a <b>nested array field</b> (e.g., <code>items › tags</code>). The field dropdown shows hierarchy paths for nested arrays<br>• Each instance can have a <b>different item count</b> per parent item (e.g., 3 tags, 2 tags, 4 tags)<br>• Inner elements see the sub-array\'s own fields (e.g., <code>tag value</code>), not the parent\'s top-level fields<br><br><b>Disconnect / reconnect:</b> Disconnecting the inner repeater cascades to all inner bindings. All instances normalize to 3 default items. Reconnecting restores original per-item counts and bindings.<br><br><b>Outer disconnect cascades inward:</b> When the <b>outer</b> repeater\'s Items is disconnected, inner repeaters also disconnect — including their own Items binding — since the nested array comes from the same context. All items become identical placeholders with inner repeaters in empty state. Styles are preserved. Reconnecting the outer repeater restores the full nested state.<br><br><b>Field path display:</b> Inside a repeater, bound fields show the <b>full array path</b> — e.g., <code>items.title</code>, <code>items.thumbnail</code>, <code>tags.tag value</code>. Context-level fields (e.g., <code>totalItems</code>) have no prefix. The inner repeater\'s Items shows <code>items.tags</code> (relative to parent). This applies to property panel chips, canvas bind tags, repeater pills, and image controller.<br><br><b>Promote:</b> Promote is a <b>move</b> operation — the context is removed from the repeater and placed on the section. The repeater then inherits from the section.<br><br><b>Visual behavior:</b> Nested repeaters have a transparent border by default. Border appears on hover, direct selection, or child selection — avoiding visual clutter in deeply nested layouts.'],
+          ['PD-13 · Field path display in repeaters', '<span class="spec-status implemented">Implemented</span>', 'When an element inside a repeater is bound to an <b>item-level field</b>, the property panel and canvas bind tag show the <b>full array path</b> — e.g., <code>items.title</code>, <code>items.thumbnail</code>. This disambiguates item-scoped fields from context-level fields (e.g., <code>totalItems</code>) which appear <b>without a prefix</b>.<br><br>For nested repeaters, inner fields show their own array prefix: <code>tags.tag value</code>. The inner repeater\'s Items chip shows <code>items.tags</code> (the sub-array relative to the parent).<br><br><b>Applies to:</b> property panel chips (all component types), canvas bind tags, repeater pills, image Source & Alt text, and repeater item count labels.'],
+          ['PD-14 · Empty state — 0 items / 0 results', '<span class="spec-status implemented">Implemented</span>', 'When a repeater is bound to data but the result set is <b>empty</b>, the repeater enters a <b>collapsed</b> state on the live site — it is completely hidden from visitors. No items render, no space is reserved.<br><br><b>Two distinct scenarios with different messaging:</b><br><br>1. <b>Empty collection (0 items)</b> — the data source itself has no records.<br>&nbsp;&nbsp;• Header count: <code>0 items</code><br>&nbsp;&nbsp;• Empty state: "No items to display" + "This collection is empty"<br>&nbsp;&nbsp;• Context: <code>cms-empty-collection</code> with <code>itemCount: 0</code><br><br>2. <b>Filtered to 0 results</b> — the collection has items (e.g., 12) but the active filter returns nothing.<br>&nbsp;&nbsp;• Header count: <code>0 of 12 items</code><br>&nbsp;&nbsp;• Empty state: "No results" + "Try adjusting your filters — 12 items in this collection"<br>&nbsp;&nbsp;• The distinction helps visitors understand whether the collection is genuinely empty or if their filters are too narrow.<br><br><b>On the editor canvas:</b> The repeater still renders its header, pill, and binding UI — but the items area shows a <b>dashed placeholder box</b> with the appropriate message and icon. This lets the builder preview the empty state and understand the behavior without switching to live preview.<br><br><b>On the live site:</b> The entire repeater is <b>collapsed (hidden)</b>. No header, no empty state message, no reserved space. The site visitor sees nothing. This is the default behavior — builders who want a visible "No results" message should use a <b>Multi-State Box</b> bound to the context\'s <code>displayState</code> field (with states: <code>loading</code>, <code>noItems</code>, <code>noResults</code>, <code>hasItems</code>).'],
           ['PD-11 · Context filter = hard ceiling for UoU', '<span class="spec-tbd">Requires R&D OK</span>', 'Context-level filters set by the site builder define the <b>maximum dataset boundary</b>. When UoU filters are applied at runtime by the site visitor (e.g., search bar, filter dropdown), they operate <b>within</b> the context filter — they can only <b>narrow</b> the results, never <b>widen</b> them.<br><br><b>Example:</b> Builder filters context to "Tech" articles only → visitor uses a UoU search bar → visitor can search <b>within Tech articles only</b> — cannot discover or access articles from other categories.<br><br><b>Security principle:</b> The context filter is a hard boundary that the site visitor cannot bypass. The builder maintains full control over what data is exposed.<br><br><b>R&D implication:</b> The runtime query pipeline must enforce context-level filters as a <b>hard constraint</b> — UoU filters are intersected with (applied on top of) the context filter, never replace it. This must be guaranteed regardless of the UoU filter implementation (client-side, server-side, or hybrid).<br><br><span class="spec-tbd">Requires R&D sign-off</span> on the query pipeline architecture to confirm this constraint is enforced.'],
         ]
       },
@@ -14886,7 +15259,9 @@ const PRODUCT_SPECS = {
           ['Zero items returned (live site)', 'When repeater is connected but returns 0 items on the live site — repeater collapses and takes up no space. See Flow 9.', '<span class="spec-status planned">Planned</span>'],
           ['Drag & drop (reparenting)', 'Coupled context moves with repeater. Inherited context: <span class="spec-tbd">TBD</span> — choose copy / promote to page / disconnect.', '<span class="spec-status in-progress">In Progress</span>'],
           ['Live site behavior (unbound)', 'What to show when repeater is unbound on live site — collapse, placeholder, or hide.', '<span class="spec-status planned">Planned</span>'],
-          ['Nested repeaters', 'Repeater inside a repeater — inner repeater consumes parent context (badge: "Parent repeater"), binds to nested array fields, supports per-item variable count. Promote = move. See PD-12.', '<span class="spec-status implemented">Implemented</span>']
+          ['Nested repeaters', 'Repeater inside a repeater — inner repeater consumes parent context (badge: "Parent repeater"), binds to nested array fields, supports per-item variable count. Outer disconnect cascades inward. Field paths show array prefix (items.title). Promote = move. See PD-12.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Field path display', 'Item-level fields show full array path (items.title, tags.tag value). Context-level fields show no prefix. Applies to property panel, canvas tags, pills, and image controller. See PD-13.', '<span class="spec-status implemented">Implemented</span>'],
+          ['Empty state (0 items / 0 results)', 'Two scenarios: empty collection (0 items — "No items to display") and filtered to 0 (e.g., 0 of 12 — "No results, try adjusting your filters"). On live site: repeater is collapsed (hidden). On canvas: dashed placeholder with message. See PD-14.', '<span class="spec-status implemented">Implemented</span>']
         ]
       },
       {
@@ -16720,20 +17095,34 @@ function updatePropRowDOM(elId, propKey) {
 }
 
 /* ── REPEATER: propagate binding to all items ── */
+const ARTICLE_IMAGES = [
+  "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=260&fit=crop",
+  "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&h=260&fit=crop",
+];
 const REP_SAMPLE_DATA = {
   'cms-articles': [
-    {title:"The Future of AI in Design", author:"Sarah Chen", category:"Tech", readTime:"5 min", publishedAt:"Jan 15, 2025"},
-    {title:"Building Better Products", author:"Mark Rivera", category:"Product", readTime:"8 min", publishedAt:"Feb 3, 2025"},
-    {title:"Design Systems at Scale", author:"Jane Doe", category:"Design", readTime:"6 min", publishedAt:"Mar 22, 2025"},
-    {title:"Why Accessibility Matters", author:"Lena Park", category:"Design", readTime:"4 min", publishedAt:"Apr 10, 2025"},
-    {title:"Scaling Microservices", author:"David Kim", category:"Tech", readTime:"7 min", publishedAt:"May 1, 2025"},
-    {title:"The Art of Prototyping", author:"Emma Wilson", category:"Product", readTime:"3 min", publishedAt:"May 18, 2025"},
-    {title:"Mobile-First Strategy", author:"Carlos Ruiz", category:"Design", readTime:"6 min", publishedAt:"Jun 5, 2025"},
-    {title:"Data-Driven Decisions", author:"Priya Sharma", category:"Product", readTime:"9 min", publishedAt:"Jun 22, 2025"},
-    {title:"Component Libraries 101", author:"Tom Baker", category:"Tech", readTime:"5 min", publishedAt:"Jul 8, 2025"},
-    {title:"User Research Methods", author:"Aisha Johnson", category:"Design", readTime:"7 min", publishedAt:"Jul 25, 2025"},
-    {title:"Performance Optimization", author:"Mike Zhang", category:"Tech", readTime:"10 min", publishedAt:"Aug 12, 2025"},
-    {title:"Design Tokens Deep Dive", author:"Nina Patel", category:"Design", readTime:"4 min", publishedAt:"Sep 1, 2025"},
+    {title:"The Future of AI in Design", author:"Sarah Chen", category:"Tech", readTime:"5 min", publishedAt:"Jan 15, 2025", thumbnail:ARTICLE_IMAGES[0]},
+    {title:"Building Better Products", author:"Mark Rivera", category:"Product", readTime:"8 min", publishedAt:"Feb 3, 2025", thumbnail:ARTICLE_IMAGES[1]},
+    {title:"Design Systems at Scale", author:"Jane Doe", category:"Design", readTime:"6 min", publishedAt:"Mar 22, 2025", thumbnail:ARTICLE_IMAGES[2]},
+    {title:"Why Accessibility Matters", author:"Lena Park", category:"Design", readTime:"4 min", publishedAt:"Apr 10, 2025", thumbnail:ARTICLE_IMAGES[3]},
+    {title:"Scaling Microservices", author:"David Kim", category:"Tech", readTime:"7 min", publishedAt:"May 1, 2025", thumbnail:ARTICLE_IMAGES[4]},
+    {title:"The Art of Prototyping", author:"Emma Wilson", category:"Product", readTime:"3 min", publishedAt:"May 18, 2025", thumbnail:ARTICLE_IMAGES[5]},
+    {title:"Mobile-First Strategy", author:"Carlos Ruiz", category:"Design", readTime:"6 min", publishedAt:"Jun 5, 2025", thumbnail:ARTICLE_IMAGES[6]},
+    {title:"Data-Driven Decisions", author:"Priya Sharma", category:"Product", readTime:"9 min", publishedAt:"Jun 22, 2025", thumbnail:ARTICLE_IMAGES[7]},
+    {title:"Component Libraries 101", author:"Tom Baker", category:"Tech", readTime:"5 min", publishedAt:"Jul 8, 2025", thumbnail:ARTICLE_IMAGES[8]},
+    {title:"User Research Methods", author:"Aisha Johnson", category:"Design", readTime:"7 min", publishedAt:"Jul 25, 2025", thumbnail:ARTICLE_IMAGES[9]},
+    {title:"Performance Optimization", author:"Mike Zhang", category:"Tech", readTime:"10 min", publishedAt:"Aug 12, 2025", thumbnail:ARTICLE_IMAGES[10]},
+    {title:"Design Tokens Deep Dive", author:"Nina Patel", category:"Design", readTime:"4 min", publishedAt:"Sep 1, 2025", thumbnail:ARTICLE_IMAGES[11]},
   ],
   'stores': [
     {name:"Yoga Mat", price:"$49.99", inStock:"true", description:"Premium quality yoga mat with extra grip"},
@@ -16745,6 +17134,7 @@ const REP_SAMPLE_DATA = {
     {storeName:"Mall of America", address:"456 Shopping Blvd, Minneapolis", phone:"(612) 555-0200", openHours:"10am–8pm"},
     {storeName:"Beachside Store", address:"789 Ocean Dr, Miami", phone:"(305) 555-0300", openHours:"10am–7pm"}
   ],
+  'cms-empty-collection': [],
   'cms-my-team': [
     {name:"Riley Carter", role:"Content Crafter", tagline:"Weaving words into wonders", image:"[img url]"},
     {name:"Maya Ramirez", role:"Analytics Ace", tagline:"Decoding the data jungle", image:"[img url]"},
@@ -16851,7 +17241,10 @@ function applyRepBindingToAll(templateKey, propKey, field, ctxId) {
     if (bindTag) bindTag.textContent = ctx ? 'Connected · ' + field.name : '';
     if (domEl.classList.contains('c-el-img') || domEl.classList.contains('c-el-badge') && false) {
       const cimg = document.getElementById('cimg-' + elId) || domEl.querySelector('img');
-      if (cimg) cimg.src = IMG_SKY;
+      if (cimg) {
+        const imgVal = realVal && realVal !== '[img url]' && realVal.startsWith('http') ? realVal : ARTICLE_IMAGES[idx % ARTICLE_IMAGES.length];
+        cimg.src = imgVal;
+      }
     } else {
       const valEl = findValEl(elId);
       if (valEl) {
@@ -17232,7 +17625,7 @@ function renderImgPropRow(elId, propK, isBound, isActiveDd, ctx, b) {
   var blur = isBound ? 'filter:blur(2px) brightness(.7)' : '';
   var ctxIcon = (ctx && ctx.icon) ? ctx.icon : '';
   var ctxName = (ctx && ctx.id) ? resolveCtxName(ctx.id) : '';
-  var fieldName = (b && b.fieldName) ? b.fieldName : '';
+  var fieldName = (b && b.fieldName) ? displayFieldName(elId, b) : '';
 
   var chipHtml = isBound
     ? '<div style="position:absolute;inset:0;display:flex;align-items:flex-start;padding:4px">'
