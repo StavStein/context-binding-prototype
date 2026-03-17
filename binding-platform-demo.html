@@ -753,7 +753,7 @@ body.product-mode #modal.has-spec{outline-offset:2px}
 .prop-row.active-bind{border-color:var(--acc);background:var(--acc-d)}
 
 .prop-main{flex:1;min-width:0;padding:5px 10px 6px}
-.prop-row.value-preview .prop-main{background:var(--sur);border:none}
+.prop-row.value-preview:not(.bound) .prop-main{background:var(--sur);border:none}
 .prop-val{display:flex;align-items:center;gap:5px;min-height:18px}
 .prop-static{background:transparent;border:none;outline:none;color:var(--t1);font-size:12px;font-family:'DM Sans',sans-serif;width:100%}
 .prop-static::placeholder{color:var(--t3);font-style:italic}
@@ -1239,11 +1239,16 @@ body.product-mode #modal.has-spec{outline-offset:2px}
 .et-panel-preview.empty{color:var(--t3);font-style:italic;border-left-color:var(--b1)}
 .et-panel-input-wrap.bound .et-panel-preview-wrap{display:none}
 .et-panel-bound-tag{display:none;flex:1;min-width:0;padding:6px 10px;background:var(--grn-d);border:1px solid var(--grn-b);border-radius:8px;align-items:center;gap:6px;cursor:default}
+.et-panel-bound-tag.et-panel-bound-detail{flex-direction:column;align-items:flex-start;gap:3px;padding:8px 10px;background:var(--grn-d);border:1px solid var(--grn-b);border-radius:8px}
 .et-panel-input-wrap.bound .et-panel-bound-tag{display:flex}
-.et-panel-bound-tag-ctx{font-size:10px;color:var(--t3);font-family:'DM Mono',monospace;white-space:nowrap}
+.et-panel-bound-tag-ctx{font-size:10px;color:var(--t3);letter-spacing:.3px;font-family:'DM Sans',sans-serif;white-space:nowrap;cursor:pointer;transition:color .12s}
+.et-panel-bound-tag-ctx:hover{color:var(--acc);text-decoration:underline}
 .et-panel-bound-tag-field{font-size:11px;padding:2px 7px;background:#fce4ec;color:#e84393;border-radius:10px;font-weight:600;font-family:'DM Mono',monospace;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .et-panel-bound-tag-x{font-size:10px;cursor:pointer;opacity:.7;transition:opacity .12s}
 .et-panel-bound-tag-x:hover{opacity:1}
+.et-panel-edit-source{display:flex;align-items:center;gap:4px;padding:2px 0 0;font-size:10px;color:var(--t3);font-style:italic}
+.et-panel-edit-link{color:var(--acc);cursor:pointer;font-style:normal;text-decoration:underline}
+.et-panel-edit-link:hover{opacity:.9}
 .et-panel-bind{width:32px;height:32px;border:1px solid var(--b2);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t3);transition:.15s;flex-shrink:0;background:var(--sur2)}
 .et-panel-bind:hover{color:var(--acc);border-color:var(--acc-b);background:var(--acc-d)}
 .et-panel-bind.bound{color:var(--grn);border-color:var(--grn-b);background:var(--grn-d)}
@@ -7008,6 +7013,26 @@ function renderEtPanel() {
   const previewText = previewRaw || 'No content yet';
   const previewEmpty = !previewRaw;
 
+  const displayField = valueBind ? displayFieldName(elId, valueBind) : '';
+
+  let editSourceHtml = '';
+  if (valueBind && valueCtx) {
+    const isFunction = valueBind.ctxId.startsWith('lib-') || valueBind.fnHasParams;
+    const src = valueCtx.source;
+    if (isFunction) {
+      const fnLibName = getFnLibName(valueBind.ctxId);
+      editSourceHtml = `<div class="et-panel-edit-source"><span style="font-size:9px">ƒ</span> Defined in code — <span class="et-panel-edit-link" onclick="openCtxSource(event,'${valueBind.ctxId}')" title="Open ${fnLibName} code file">open source file</span></div>`;
+    } else if (src === 'Custom Code') {
+      editSourceHtml = `<div class="et-panel-edit-source"><span style="font-size:9px">ƒ</span> Defined in code — <span class="et-panel-edit-link" onclick="openCodeEditor(event,'${valueBind.ctxId}')">open source file</span></div>`;
+    } else if (src === 'CMS') {
+      editSourceHtml = `<div class="et-panel-edit-source"><span class="et-panel-edit-link" onclick="event.stopPropagation()">📝 Edit in CMS</span></div>`;
+    } else if (src === 'System') {
+      editSourceHtml = '';
+    } else {
+      editSourceHtml = `<div class="et-panel-edit-source"><span class="et-panel-edit-link" onclick="event.stopPropagation()">📝 Edit in ${src}</span></div>`;
+    }
+  }
+
   let html = '';
 
   html += `<div class="et-panel-row">
@@ -7017,14 +7042,15 @@ function renderEtPanel() {
         <span class="et-panel-preview-label">On stage</span>
         <div class="et-panel-preview${previewEmpty ? ' empty' : ''}">${previewText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
       </div>
-      <div class="et-panel-bound-tag">
-        <span class="et-panel-bound-tag-ctx">${valueCtx ? valueCtx.name : ''}</span>
-        <span class="et-panel-bound-tag-field">${valueBind ? valueBind.fieldName : ''}<span class="et-panel-bound-tag-x" onclick="etPanelUnbind('${elId}','Value',event)">✕</span></span>
+      <div class="et-panel-bound-tag et-panel-bound-detail">
+        <span class="et-panel-bound-tag-ctx" ${valueCtx && isFnLibCtx(valueBind.ctxId) ? `title="Open ${getFnLibName(valueBind.ctxId)} code file" style="cursor:default"` : valueCtx ? `onclick="navToSectionCtx('${elId}',event)"` : ''}>${valueCtx ? valueCtx.icon + ' ' + resolveCtxName(valueCtx.id) : ''}</span>
+        <span class="et-panel-bound-tag-field">${displayField}<span class="et-panel-bound-tag-x" onclick="etPanelUnbind('${elId}','Value',event)">✕</span></span>
       </div>
       <div class="et-panel-bind ${valueBind ? 'bound' : ''}" onclick="etPanelConnect('${elId}','Value',event)" title="Connect to data">
         ${bindSvg}
       </div>
     </div>
+    ${editSourceHtml}
   </div>`;
 
   if (valueBind?.fnHasParams && valueBind.fnParams) {
@@ -7219,14 +7245,15 @@ function startInlineEdit(elId) {
   if (!domEl || !valEl) return;
   const bkey = elId + '|Value';
   const currentVal = S.staticValues[bkey] || '';
-  if (!currentVal) valEl.textContent = '';
+  const displayText = valEl.textContent.trim();
+  const isPlaceholder = !currentVal && (!displayText || displayText === propPlaceholder('Value'));
+  if (isPlaceholder) valEl.textContent = '';
   domEl.classList.add('editing');
   valEl.contentEditable = 'true';
   valEl.focus();
   if (valEl.textContent) {
     const range = document.createRange();
     range.selectNodeContents(valEl);
-    range.collapse(false);
     const sel = window.getSelection();
     sel.removeAllRanges();
     sel.addRange(range);
@@ -8796,8 +8823,10 @@ function renderPropRow(elId, prop) {
   const isTextValue = EL_DEFS[elId]?.type === 'Text' && prop.k === 'Value';
   const previewRaw = staticVal || '';
   const previewDisplay = previewRaw ? previewRaw.replace(/</g,'&lt;').replace(/>/g,'&gt;') : 'No content yet';
-  const staticFieldHtml = isTextValue
+  const staticFieldHtml = isTextValue && !isBound
     ? `<div class="prop-preview-wrap"><span class="prop-preview-label">On stage</span><div class="prop-static-preview${previewRaw ? '' : ' empty'}">${previewDisplay}</div></div>`
+    : isTextValue && isBound
+    ? ''
     : `<input class="prop-static" placeholder="${propPlaceholder(prop.k)}" value="${staticVal}"
              oninput="onStaticInput('${elId}','${prop.k}',this.value)">`;
 

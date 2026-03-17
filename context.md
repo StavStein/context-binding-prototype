@@ -261,6 +261,7 @@ Binding connects a **component property** to a **data source** — a context fie
 | State | Appearance | Behavior |
 |-------|-----------|----------|
 | **Unbound** | Text input visible, bind button (snake icon) to the right | User can type a static value |
+| **Unbound (Text Value)** | Read-only "On stage" preview showing current stage content, bind button to the right | Content is edited directly on the stage (inline editing), not in the panel |
 | **Bound** | Pink chip replaces the input: source name + field name, ✕ to unbind | Static input hidden, canvas shows sample/live data |
 | **Active** | Bind button highlighted, dropdown open | User is selecting a source/field |
 
@@ -332,17 +333,35 @@ Clicking ✕ on a bound chip:
 
 ### Edit content entry point
 
-When a property is bound, an "edit content" link appears below the binding chip, adapting to the source type:
+When a property is bound, an "edit content" link appears below the binding chip, adapting to the source type. This link appears in both the **Settings panel** and the **Edit Text mini panel**.
 
 | Source type | Link text | Behavior |
 |-------------|----------|----------|
 | **CMS** | `📝 Edit in CMS` | Opens the CMS collection editor |
 | **Wix Apps** | `📝 Edit in [App name]` | Opens the app's dashboard |
-| **Custom Code** | `ƒ Computed value — edit in code` | Informational (gray, italic) — value is derived |
-| **Function Library** | `ƒ Computed value — edit in code` | Informational (gray, italic) — value is derived |
+| **Custom Code** | `ƒ Defined in code — open source file` | Opens the source code file |
+| **Function Library** | `ƒ Defined in code — open source file` | Opens the source code file |
 | **System** | — | No link shown |
 
 This provides a clear path from a bound property to the place where the actual content can be edited, while making it explicit when a value is computed and cannot be directly edited.
+
+### Text element: Edit Text behavior
+
+The **Edit Text** action in the floating action bar adapts based on binding state:
+
+| Value state | Edit Text action | Behavior |
+|-------------|-----------------|----------|
+| **Bound** | Opens **Edit Text mini panel** | Shows bound chip (source + field + ✕) with source link. Same content as Settings panel Value row |
+| **Unbound** | Starts **inline editing** on the stage | Text becomes editable directly on the canvas |
+
+**Unbinding from the mini panel** (clicking ✕ on the chip):
+- Closes the mini panel
+- Shows a toast: "Binding removed. You can edit the text directly on the stage."
+- The action bar remains visible; next "Edit Text" click will start inline editing
+
+**Text Value in Settings panel:**
+- When unbound: shows a read-only "On stage" preview of the current stage content (not an input field)
+- When bound: shows the standard bound chip (source name + field name + ✕) with source link below
 
 ### Image settings panel
 

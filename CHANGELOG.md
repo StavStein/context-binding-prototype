@@ -5,6 +5,29 @@
 
 ---
 
+## 2026-03-17
+
+### Update — Text component: read-only preview, Edit Text conditional behavior
+
+#### Text Value: preview instead of input
+- **Settings panel & Edit Text mini panel** — Text Value property now shows a read-only "On stage" preview (with left accent line) instead of an editable input field. Content is edited directly on the stage via inline editing, not through the panel.
+- When bound, the preview is replaced by the standard bound chip (source + field + ✕), matching all other property rows.
+
+#### Edit Text: conditional behavior
+- **Bound** → "Edit Text" in the action bar opens the **mini panel** showing bound chip + source link.
+- **Unbound** → "Edit Text" starts **inline editing** directly on the stage.
+
+#### Edit Text mini panel: parity with Settings
+- Mini panel now shows the same bound chip layout as Settings: icon + context name, field name with object path (e.g., `items.title`), and source link below (CMS / App / Code).
+
+#### Unbind flow
+- Unbinding from the mini panel closes it and shows a toast: "Binding removed. You can edit the text directly on the stage."
+
+#### Action bar visibility
+- Action bar now stays visible whenever an element is selected, including when the Settings panel is open.
+
+---
+
 ## 2026-03-12
 
 ### Update — V2 demo screenshots, pen design refresh, and Figma export pipeline
