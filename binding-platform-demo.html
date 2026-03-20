@@ -7025,11 +7025,11 @@ function renderEtPanel() {
     } else if (src === 'Custom Code') {
       editSourceHtml = `<div class="et-panel-edit-source"><span style="font-size:9px">ƒ</span> Defined in code — <span class="et-panel-edit-link" onclick="openCodeEditor(event,'${valueBind.ctxId}')">open source file</span></div>`;
     } else if (src === 'CMS') {
-      editSourceHtml = `<div class="et-panel-edit-source"><span class="et-panel-edit-link" onclick="event.stopPropagation()">📝 Edit in CMS</span></div>`;
+      editSourceHtml = `<div class="et-panel-edit-source"><span class="et-panel-edit-link" onclick="event.stopPropagation()">📝 Edit in Dashboard</span></div>`;
     } else if (src === 'System') {
       editSourceHtml = '';
     } else {
-      editSourceHtml = `<div class="et-panel-edit-source"><span class="et-panel-edit-link" onclick="event.stopPropagation()">📝 Edit in ${src}</span></div>`;
+      editSourceHtml = `<div class="et-panel-edit-source"><span class="et-panel-edit-link" onclick="event.stopPropagation()">📝 Edit in Dashboard</span></div>`;
     }
   }
 
@@ -8812,11 +8812,11 @@ function renderPropRow(elId, prop) {
         <span style="font-size:9px">ƒ</span> Defined in code — <span style="color:var(--acc);cursor:pointer;font-style:normal;text-decoration:underline" onclick="openCodeEditor(event,'${b.ctxId}')">open source file</span>
       </div>`;
     } else if (src === 'CMS') {
-      editSourceHtml = `<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in CMS</span></div>`;
+      editSourceHtml = `<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in Dashboard</span></div>`;
     } else if (src === 'System') {
       editSourceHtml = '';
     } else {
-      editSourceHtml = `<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in ${src}</span></div>`;
+      editSourceHtml = `<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in Dashboard</span></div>`;
     }
   }
 
@@ -10283,6 +10283,46 @@ function getPageSectionsForSection(sectionId) {
   return result;
 }
 
+function findNavTargetForInheritedCtx(ctxId, selElId) {
+  const def = EL_DEFS[selElId];
+  if (!def) return null;
+  const secId = def.section;
+  if (secId && (S.ctxMap[secId] || []).includes(ctxId)) return secId;
+  let pp = def.parentPage;
+  if (!pp && def.isRepeater && secId) {
+    const sd = EL_DEFS[secId];
+    if (sd?.parentPage) pp = sd.parentPage;
+  }
+  if (pp && (S.ctxMap[pp] || []).includes(ctxId)) return pp;
+  if (def.isRepeater && def.contextModel === 'on-repeater') {
+    const repDom = document.getElementById(selElId);
+    let ancestor = repDom ? repDom.parentElement?.closest('.c-repeater') : null;
+    while (ancestor) {
+      if ((S.ctxMap[ancestor.id] || []).includes(ctxId)) return ancestor.id;
+      const rb = S.bindings[ancestor.id + '|Items'];
+      if (rb && rb.ctxId === ctxId) return ancestor.id;
+      ancestor = ancestor.parentElement?.closest('.c-repeater');
+    }
+  }
+  return pp || secId;
+}
+
+function navToInheritedCtxOwner(targetId) {
+  if (!targetId || !EL_DEFS[targetId]) return;
+  S.sel = targetId;
+  S.ctxSettingsView = null;
+  S.inspectorOpen = true;
+  updateSelectionVisual(targetId);
+  S.tab = 'settings';
+  S.openCats.context = true;
+  renderRP();
+  renderActionBar();
+  const d = EL_DEFS[targetId];
+  if (d && d.isRepeater) toast('Parent repeater — Context tab');
+  else if (d && d.isPage) toast('Viewing page-level context');
+  else toast('Parent section — Context tab');
+}
+
 function renderCtxList() {
   const selDef = EL_DEFS[S.sel];
   const ctxTarget = (selDef && selDef.isMultiState) ? selDef.section : S.sel;
@@ -10329,6 +10369,25 @@ function renderCtxList() {
         if (c) { inheritedCtxs.push(c); seenInherited.add(id); }
       }
     });
+  }
+
+  if (!isPage && isRepeater && selDef.contextModel === 'on-repeater') {
+    const repDom = document.getElementById(ctxTarget);
+    let ancestor = repDom ? repDom.parentElement?.closest('.c-repeater') : null;
+    while (ancestor) {
+      (S.ctxMap[ancestor.id] || []).forEach(id => {
+        if (!ctxIds.includes(id) && !seenInherited.has(id)) {
+          const c = findSource(id);
+          if (c) { inheritedCtxs.push(c); seenInherited.add(id); }
+        }
+      });
+      const rb = S.bindings[ancestor.id + '|Items'];
+      if (rb && rb.ctxId && !ctxIds.includes(rb.ctxId) && !seenInherited.has(rb.ctxId)) {
+        const c = findSource(rb.ctxId);
+        if (c) { inheritedCtxs.push(c); seenInherited.add(rb.ctxId); }
+      }
+      ancestor = ancestor.parentElement?.closest('.c-repeater');
+    }
   }
 
   // Keep insertion order — new contexts appear below existing ones
@@ -10422,10 +10481,11 @@ function renderCtxList() {
   let parentNote = '';
   if (!isPage && inheritedUserCtxs.length > 0) {
     parentNote = `<div class="ctx-parent-note-wrap">
-      <div class="ctx-parent-note-label">Also available from parent containers <span class="cfg-info" style="position:relative;top:-1px">?<span class="cfg-info-tip">These data sources are connected to a parent container (section or page) and are inherited by all elements inside, including this one. Click to navigate to the parent.</span></span></div>
+      <div class="ctx-parent-note-label">Also available from parent containers <span class="cfg-info" style="position:relative;top:-1px">?<span class="cfg-info-tip">These data sources are connected to a parent (section, page, or parent repeater) and are inherited by elements inside, including this one. Click to jump to where that context is attached.</span></span></div>
       ${inheritedUserCtxs.map(c => {
-        const ctxOwner = sectionId && (S.ctxMap[sectionId] || []).includes(c.id) ? sectionId : parentPageId;
-        return `<div class="ctx-parent-note-item" onclick="navToPageCtx('${ctxOwner || parentPageId}')">
+        const navT = findNavTargetForInheritedCtx(c.id, S.sel) || parentPageId || sectionId || '';
+        const safeNav = String(navT).replace(/'/g, "\\'");
+        return `<div class="ctx-parent-note-item" onclick="navToInheritedCtxOwner('${safeNav}')">
           <span>${c.icon} ${resolveCtxName(c.id)}</span><span class="ctx-parent-note-arrow">→</span>
         </div>`;
       }).join('')}
@@ -10450,6 +10510,7 @@ function renderCtxList() {
   if (isPage) {
     const pageCtxs = userCtxs.filter(c => isPrimaryCtx(c.id, S.sel));
     const attachedCtxs = userCtxs.filter(c => !isPrimaryCtx(c.id, S.sel));
+    const isDynamicPage = pageCtxs.length > 0 && pageCtxs.some(c => c.isDynamicPageCtx);
     const pgOpen = S.openCats.pageCtx !== false;
     const attOpen = S.openCats.attachedCtx !== false;
 
@@ -10457,7 +10518,7 @@ function renderCtxList() {
       <div style="border-bottom:1px solid var(--b1)">
         <div style="display:flex;align-items:center;gap:6px;padding:11px 14px 0;cursor:pointer" onclick="S.openCats.pageCtx=!S.openCats.pageCtx;renderBody()">
           <span style="font-size:10px;color:var(--t3);transition:transform .15s;display:inline-block;transform:rotate(${pgOpen?'90':'0'}deg)">›</span>
-          <span class="ps-lbl" style="padding:0;flex:1;font-size:11px">Page Context</span>
+          <span class="ps-lbl" style="padding:0;flex:1;font-size:11px">${isDynamicPage ? 'Dynamic page context' : 'Page Context'}</span>
         </div>
         ${pgOpen ? `<div style="padding:0 0 8px">${pageCtxs.map(renderCtxCard).join('')}</div>` : ''}
       </div>` : '';
@@ -18510,9 +18571,9 @@ function renderImgPropRow(elId, propK, isBound, isActiveDd, ctx, b) {
       editSourceHtml = '<div style="display:flex;align-items:center;gap:4px;padding:2px 0 0;font-size:10px;color:var(--t3);font-style:italic">'
         + '<span style="font-size:9px">ƒ</span> Defined in code — <span style="color:var(--acc);cursor:pointer;font-style:normal;text-decoration:underline" onclick="openCodeEditor(event,\'' + b.ctxId + '\')">open source file</span></div>';
     } else if (src === 'CMS') {
-      editSourceHtml = '<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in CMS</span></div>';
+      editSourceHtml = '<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in Dashboard</span></div>';
     } else if (src !== 'System') {
-      editSourceHtml = '<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in ' + src + '</span></div>';
+      editSourceHtml = '<div style="padding:2px 0 0"><span style="font-size:10px;color:var(--acc);cursor:pointer" onclick="event.stopPropagation()">📝 Edit in Dashboard</span></div>';
     }
   }
 
