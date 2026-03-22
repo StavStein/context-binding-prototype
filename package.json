@@ -18,6 +18,7 @@
   "homepage": "https://github.com/StavStein/Context-Binding-Product-Prototype#readme",
   "description": "",
   "devDependencies": {
+    "@wix/design-system": "^1.260.0",
     "playwright": "^1.58.2",
     "puppeteer": "^24.37.5"
   }
